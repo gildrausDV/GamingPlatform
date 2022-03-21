@@ -2,6 +2,8 @@ let started = false;
 let ended = false;
 
 var timerInterval;
+var timerInterval1;
+var write;
 
 function join() {
     if(ended = true) {
@@ -16,6 +18,7 @@ function join() {
     timerInterval = setInterval(function start_end() {
         //join();
         ended = true;
+        //alert();
         document.getElementById("notification").innerText = "";
         clearInterval(timerInterval);
     }, 1500);

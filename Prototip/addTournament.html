@@ -4,12 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>addTournament</title>
     <link rel="stylesheet" href="addTournament.css">
 </head>
 <body>
-    <div class="header">HEADER</div>
-    <div class="center">CENTER</div>
-    <div class="footer">FOOTER</div>
+    <div class="header">
+        <div class="notification"><h1 id="notification"></h1></div>
+    </div>
+    <div class="center">
+        <div class="addTournament_form">
+            <div id="tournament_form">
+                <br><br>
+                <label for="tournament_game">Choose game:</label>
+                <select name="games" id="games">
+                    <option value="superMario">SuperMario</option>
+                    <option value="Bricks">Bricks</option>
+                </select>
+                <br><br>
+                <label for="max_players"> Number of players:</label>
+                <input type="text" id="max_players" name="may_players">
+                <br><br>
+                <label for="date"> Date:</label>
+                <input type="text" id="date" name="date">
+                <br><br>
+                <label for="time"> Starting time:</label>
+                <input type="text" id="time" name="time">
+                <br><br>
+                <input type="submit" value="Add tournament" class="submit" id="myButton" onclick="addTournament1();fn2();">
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <button id="back" onclick="back()">Back</button>
+        <button id="signOut" onclick="signOut_page()">Sign out</button>
+    </div>
+    <script type="text/javascript" src="addTournament.js"></script>
+    <!--<script type="text/javascript" src="test.js"></script>-->
 </body>
 </html>
