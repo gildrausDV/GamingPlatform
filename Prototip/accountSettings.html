@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="accountSettings.css">
 </head>
 <body>
-    <div class="header"></div>
+    <div class="header">
+        <div class="notification">
+            <h1 id="notification"></h1>
+        </div>
+    </div>
     <div class="center">
         <div class="left"><img src="images/superMario.jpg"></div>
         <div class="right">
@@ -16,18 +20,18 @@
                 <table>
                     <tr>
                         <td>Username: </td>
-                        <td><input type="text"></td>
+                        <td><input type="text" value="SuperMario"></td>
                     </tr>
                     <tr>
                         <td>Password: </td>
-                        <td><input type="password"></td>
+                        <td><input type="password" value="123"></td>
                     </tr>
                     <tr>
-                        <td>Date: </td>
-                        <td><input type="date"></td>
+                        <td>Date(mm/dd/yyyy): </td>
+                        <td><input type="date" value="2022-03-03"></td>
                     </tr>
                 </table>
-                <button>Save</button>
+                <button onclick="save()">Save</button>
                 <br>
             </div>
         </div>
@@ -36,5 +40,6 @@
         <button id="back" onclick="back()">Back</button>
         <button id="signOut" onclick="signOut_page()">Sign out</button>
     </div>
+    <script src="accountSettings.js"></script>
 </body>
 </html>

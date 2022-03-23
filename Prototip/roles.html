@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roles</title>
+    <link rel="stylesheet" href="roles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="notification">
+            <h1 id="notification"></h1>
+        </div>
+    </div>
+    <div class="center">
+        <div class="form">
+            <div class="left">
+                Enter username: 
+                <input type="text">
+            </div>
+            <div class="right">
+                <h1>Set role: </h1>
+                <button onclick="save()">Administrator</button>
+                <button onclick="save()">moderator</button>
+                <br><br>
+                <hr>
+                <h1>Remove role: </h1>
+                <button onclick="save()">Administrator</button>
+                <button onclick="save()">moderator</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <button id="back" onclick="back()">Back</button>
+        <button id="signOut" onclick="signOut()">Sign out</button>
+    </div>
+    <script src="roles.js"></script>
+</body>
+</html>

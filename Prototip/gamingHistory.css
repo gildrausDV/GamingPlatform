@@ -47,3 +47,7 @@ body {
 #back {
     float: left;
 }
+
+#register {
+    float: right;
+}

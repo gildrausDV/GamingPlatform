@@ -70,10 +70,10 @@ body {
     border: 5px solid gray;
 }
 
-#back {
+#changeGame {
     float: left;
 }
 
-#signOut {
+#backToGames {
     float: right;
 }
