@@ -46,9 +46,10 @@ body {
 }
 
 .right {
-    width: 350px;
+    width: 345px;
     float: left;
     margin-top: 15%;
+    margin-right: 5px;
 }
 
 .footer {

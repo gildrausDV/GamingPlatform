@@ -44,8 +44,8 @@ body {
 
 .form {
     width: 55%;
-    height: 140px;
-    margin-top: 30%;
+    height: 170px;
+    margin-top: 20%;
     /*margin-left: 10%;*/
     margin-right: 30%;
     float:right;
@@ -76,7 +76,7 @@ body {
 .footer button {
     width: 7%;
     height: 50px;
-    margin: 100px 0px 0px 0px;
+    margin: 50px 0px 0px 0px;
 }
 
 #back {

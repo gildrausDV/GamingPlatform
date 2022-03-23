@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add level</title>
+    <link rel="stylesheet" href="addLevel.css">
+    <script src="addLevel.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="notification">
+            <h1 id="notification"></h1>
+        </div>
+    </div>
+    <div class="center">
+        <div class="left">
+            <div class="top">
+                <h1>Instructions: </h1>
+                <p>Enter speed of the ball (number between 0 and 1, 0.5 by default), number of rows (default is 1 row) and number of bricks per row (6 by default).</p>
+                <br><br><br>
+            </div>
+            <div class="bottom">
+                <h1>Example: </h1>
+                <div class="example"><table>
+                    <tr>
+                        <td>Speed: </td>
+                        <td>0.5</td>
+                    </tr>
+                    <tr>
+                        <td>Number of brick rows: </td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Number of bricks per row: </td>
+                        <td>6</td>
+                    </tr>
+                </table></div>
+                <div><img src="images/table.png"></div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="form"><table>
+                <tr>
+                    <td>Speed: </td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>Number of brick rows: </td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>Number of bricks per row: </td>
+                    <td><input type="text"></td>
+                </tr>
+            </table></div>
+            <button onclick="addLevel()">Add level</button>
+        </div>
+    </div>
+    <div class="footer">
+        <button id="back" onclick="back()">Back</button>
+        <button id="signOut" onclick="signOut_page()">Sign out</button>
+    </div>
+</body>
+</html>
