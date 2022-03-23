@@ -1,5 +1,5 @@
 body {
-    background-image: url(images/cloud.jpg);
+    background-image: url(images/cloud.png);
 }
 
 #gameSelecet {
@@ -21,6 +21,7 @@ body {
 }
 
 .center img {
+    width: 300px;
     margin: -80px 0px 0px 0px;
 }
 
