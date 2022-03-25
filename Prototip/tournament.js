@@ -25,10 +25,10 @@ function join() {
 }
 
 function back() {
-    location.href = "index.html";
+    location.href = "play.html";
 }
 function signOut_page() {
-    location.href = "index.html";
+    location.href = "sign.html";
 }
 function addTournament() {
     location.href = "addTournament.html";
