@@ -1,3 +1,5 @@
+// Autor: Dimitrije Vujčić
+
 function changeGame() {
     location.href = "gamingHistory.html";
 }

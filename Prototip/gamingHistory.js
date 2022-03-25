@@ -1,3 +1,5 @@
+// Autor: Dimitrije Vujčić
+
 function back() {
     location.href = "play.html";
 }

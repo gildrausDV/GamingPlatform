@@ -1,3 +1,5 @@
+// Autor: Dimitrije Vujčić
+
 let started = false;
 let ended = false;
 
