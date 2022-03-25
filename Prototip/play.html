@@ -4,9 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="playStyle.css">
 </head>
-<body>
-    Play
+<body onload="init()">
+    <div class="header">
+        <img src="images/superMario.jpg" alt="" id="user">
+        <div class="menu">
+            <button id="tableButton" onclick="game1()"><img src="images/table.png" alt=""></button>
+            <!--<button><img src="images/superMario.jpg" alt=""></button>
+            <button><img src="images/superMario.jpg" alt=""></button>
+            <button><img src="images/superMario.jpg" alt=""></button>
+            <button><img src="images/superMario.jpg" alt=""></button>
+            <button><img src="images/superMario.jpg" alt=""></button>-->
+        </div>
+        <!--<div class="dropdown">
+            <button class="dropbtn"><img src="images/options.png" alt="" id="options"></button>
+            <div class="dropdown-content">
+              <a href="#">Link 1</a>
+              <a href="#">Link 2</a>
+              <a href="#">Link 3</a>
+            </div>
+        </div>-->
+        <button><img src="images/options.png" alt="" id="options"></button>
+        <button><img src="images/notification1.png" alt=""></button>
+    </div>
+    <div class="game">
+        <div class="left">
+            
+        </div>
+        <div class="center" id="center">
+            <!--<canvas id="my-canvas"></canvas>-->
+            <img src="images/chooseGame.png" alt="">
+        </div>
+        <div class="right">
+            
+        </div>
+    </div>
+    <div class="footer">
+        <button onclick="addLevel()"> Add level</button>
+        <button onclick="tournament()">Tournaments</button>
+        <button>Start</button>
+        <button>Pause</button>
+        <button id="signOut" onclick="signOut_page()">Sign out</button>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

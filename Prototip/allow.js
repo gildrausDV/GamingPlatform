@@ -1,13 +1,7 @@
-// Autor: Dimitrije Vujčić
+var started = false;
+var ended = false;
 
-let started = false;
-let ended = false;
-
-var timerInterval;
-var timerInterval1;
-var write;
-
-function join() {
+function save() {
     if(ended = true) {
         ended = false;
         started = false;
@@ -16,22 +10,17 @@ function join() {
         return;
     }
     started = true;
-    document.getElementById("notification").innerText = "You have successfully joined the tournament!";
+    document.getElementById("notification").innerText = "Changes saved!";
     timerInterval = setInterval(function start_end() {
-        //join();
         ended = true;
-        //alert();
         document.getElementById("notification").innerText = "";
         clearInterval(timerInterval);
     }, 1500);
 }
 
 function back() {
-    location.href = "play.html";
+    location.href = "play.html"
 }
 function signOut_page() {
     location.href = "sign.html";
-}
-function addTournament() {
-    location.href = "addTournament.html";
 }

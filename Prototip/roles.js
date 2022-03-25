@@ -5,7 +5,7 @@ function back() {
 }
 
 function signOut() {
-    location.href = "index.html";
+    location.href = "sign.html";
 }
 
 var started = false;

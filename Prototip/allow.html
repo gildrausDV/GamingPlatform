@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allow/block user</title>
+    <link rel="stylesheet" href="allow.css">
+</head>
+<body>
+    <div class="header">
+        <div class="notification">
+            <h1 id="notification"></h1>
+        </div>
+    </div>
+    <div class="inputScreen">
+        <div class="input">
+            <br><br><br><br>
+            <h1>Allow/block user</h1>
+            <hr>
+            <br>
+            <label for="fname" color="red"> Username:</label>
+            <input type="text" id="fname" name="fname"><br><br>
+            <input type="radio" id="html" name="fav_language" value="Allow">Allow&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" id="html" name="fav_language" value="Block">Block
+            <br><br><br>
+            <input type="submit" value="OK" class="submit" id="myButton" onclick="save()">
+            <br><br><br>
+            
+        </div>
+    </div>
+    <div class="footer">
+        <br><br><br><br>
+        <button id="back" onclick="back()">Back</button>
+        <button id="signOut" onclick="signOut_page()">Sign out</button>
+    </div>
+    <script type="text/javascript" src="allow.js"></script>
+</body>
+</html>
+</html>
