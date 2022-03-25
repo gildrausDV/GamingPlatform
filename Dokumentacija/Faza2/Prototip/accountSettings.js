@@ -19,3 +19,10 @@ function save() {
         clearInterval(timerInterval);
     }, 1500);
 }
+
+function back() {
+    location.href="play.html";
+}
+function signOut_page() {
+    location.href="sign.html";
+}

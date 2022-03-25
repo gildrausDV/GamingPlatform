@@ -14,6 +14,28 @@ let loaded = false;
 let ball_x = 780; // random horizontal position
 let ball_y = 300; // random horizontal position
 
+var activities = document.getElementById("selector");
+var last;
+
+activities.addEventListener("change", function() {
+    if(activities.value == "1") {
+        acc();
+    } else if(activities.value == "2") {
+        r();
+    } else if(activities.value == "3") {
+        h();
+    }
+});
+
+function acc() {
+    location.href = "accountSettings.html";
+}
+function h() {
+    location.href = "history.html";
+}
+function r() {
+    location.href = "roles.html";
+}
 function back() {
     location.href = "play.html"
 }
