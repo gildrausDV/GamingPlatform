@@ -24,9 +24,19 @@ activities.addEventListener("change", function() {
         r();
     } else if(activities.value == "3") {
         h();
+    } else if(activities.value == "4") {
+        top_playersG();
+    } else if(activities.value == "5") {
+        top_players();
     }
 });
 
+function top_playersG() {
+    location.href = "topPlayersG.html";
+}
+function top_players() {
+    location.href = "gamingHistory.html";
+}
 function acc() {
     location.href = "accountSettings.html";
 }
