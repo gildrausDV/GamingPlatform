@@ -1,3 +1,5 @@
+/*Autor: Bogdan Jovanović*/
+
 let startTime;
 let elapsedTime = 0;
 

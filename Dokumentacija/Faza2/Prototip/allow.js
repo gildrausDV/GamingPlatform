@@ -1,3 +1,5 @@
+/* Autor: Bogdan Jovanović */
+
 var started = false;
 var ended = false;
 
