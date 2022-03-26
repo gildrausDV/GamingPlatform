@@ -163,7 +163,7 @@ function Table(length) {
     this.diffX = 30;
 
     this.move = function(left, right) {
-        if(started == false || paused == true) return;
+        /*if(started == false || paused == true) return;
         if(left == true) {
             this.x -= this.diffX;
             if(this.x < 0) this.x = 0;
@@ -171,7 +171,7 @@ function Table(length) {
             this.x += this.diffX;
             if(this.x > 1350) this.x = 1350;
         }
-        this.draw();
+        this.draw();*/
     }
 
     this.draw = function() {
@@ -199,7 +199,7 @@ function Ball(radius, speed) {
     this.yDirection = (_random < 0.5) ? (1) : (-1); // random first x direction
 
     this.move = function() {
-        if(started == false || paused == true) return;
+        /*if(started == false || paused == true) return;
         var nextX = this.x + (this.xDirection * this.xSpeed); // predict next x position
         var nextY = this.y + (this.yDirection * this.ySpeed); // predict next y position
 
@@ -234,7 +234,7 @@ function Ball(radius, speed) {
         }
 
         this.x += this.xDirection * this.xSpeed; // update x
-        this.y += this.yDirection * this.ySpeed; // update y
+        this.y += this.yDirection * this.ySpeed; // update y */
     }
 
     this.draw = function() {
