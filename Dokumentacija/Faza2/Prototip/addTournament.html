@@ -40,7 +40,37 @@
         <button id="back" onclick="back()">Back</button>
         <button id="signOut" onclick="signOut_page()">Sign out</button>
     </div>
-    <script type="text/javascript" src="addTournament.js"></script>
+    <script>
+        var started = false;
+        var ended = false;
+
+        function addTournament1() {
+            if(ended = true) {
+                ended = false;
+                started = false;
+            }
+            if(started == true) {
+                return;
+            }
+            started = true;
+            if(document.getElementById("games").value == "" || document.getElementById("max_players").value == "" || document.getElementById("date").value == "" || document.getElementById("time").value == "") {
+                document.getElementById("notification").innerText = "Please provide necessary information.";
+            } else
+                document.getElementById("notification").innerText = "You have successfully added a tournament!";
+            timerInterval = setInterval(function start_end() {
+                ended = true;
+                document.getElementById("notification").innerText = "";
+                clearInterval(timerInterval);
+            }, 1500);
+        }
+
+        function back() {
+            location.href = "tournament.html";
+        }
+        function signOut_page() {
+            location.href = "index.html";
+        }
+    </script>
     <!--<script type="text/javascript" src="test.js"></script>-->
 </body>
 </html>

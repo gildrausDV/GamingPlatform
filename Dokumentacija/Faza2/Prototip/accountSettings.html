@@ -20,13 +20,13 @@
         <div class="right">
             <div class="form">
                 <table>
-                    <tr>
+                    <!--<tr>
                         <td>Username: </td>
                         <td><input type="text" value="SuperMario"></td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <td>Password: </td>
-                        <td><input type="password" value="123"></td>
+                        <td><input type="password" id="pass" value="123"></td>
                     </tr>
                     <tr>
                         <td>Date(mm/dd/yyyy): </td>
@@ -46,6 +46,36 @@
         <button id="back" onclick="back()">Back</button>
         <button id="signOut" onclick="signOut_page()">Sign out</button>
     </div>
-    <script src="accountSettings.js"></script>
+    <script>
+        var started = false;
+        var ended = false;
+
+        function save() {
+            if(ended = true) {
+                ended = false;
+                started = false;
+            }
+            if(started == true) {
+                return;
+            }
+            started = true;
+            if(document.getElementById("pass").value.length < 5) 
+                document.getElementById("notification").innerText = "Password too short!";
+            else
+                document.getElementById("notification").innerText = "Changes saved!";
+            timerInterval = setInterval(function start_end() {
+                ended = true;
+                document.getElementById("notification").innerText = "";
+                clearInterval(timerInterval);
+            }, 1500);
+        }
+
+        function back() {
+            location.href="play.html";
+        }
+        function signOut_page() {
+            location.href="sign.html";
+        }
+    </script>
 </body>
 </html>

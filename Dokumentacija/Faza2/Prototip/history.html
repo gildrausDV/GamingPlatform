@@ -55,7 +55,15 @@
             </div>
         </div>
         <br><br><br>
-        <script src="history.js"></script>
+        <script>
+            function changeGame() {
+                location.href = "changeGame.html";
+            }
+
+            function backToGames() {
+                location.href = "play.html";
+            }
+        </script>
     </div>
     <div class="footer">
         <button id="change" onclick="changeGame()">Change game</button>

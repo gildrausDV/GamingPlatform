@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add level</title>
     <link rel="stylesheet" href="addLevel.css">
-    <script src="addLevel.js"></script>
 </head>
 <body>
     <div class="header">
@@ -64,5 +63,33 @@
         <button id="back" onclick="back()">Back</button>
         <button id="signOut" onclick="signOut_page()">Sign out</button>
     </div>
+    <script>
+        var started = false;
+        var ended = false;
+
+        function addLevel() {
+            if(ended = true) {
+                ended = false;
+                started = false;
+            }
+            if(started == true) {
+                return;
+            }
+            started = true;
+            document.getElementById("notification").innerText = "New level successfully added!";
+            timerInterval = setInterval(function start_end() {
+                ended = true;
+                document.getElementById("notification").innerText = "";
+                clearInterval(timerInterval);
+            }, 1500);
+        }
+
+        function back() {
+            location.href="play.html";
+        }
+        function signOut_page() {
+            location.href="sign.html";
+        }
+    </script>
 </body>
 </html>

@@ -11,19 +11,22 @@
 </head>
 <body>
     <div class="screen">
+        <div class="notification"><h1 id="notification"></h1></div>
         <div class="inputScreen">
             <div class="input">
                 <h1>Register</h1>
                 <label for="fname" color="red"> Forename:</label>
                 <input type="text" id="fname" name="fname"><br><br>
-                <label for="fname" color="red"> Surname:</label>
-                <input type="text" id="fname" name="fname"><br><br>
-                <label for="fname" color="red"> Email:</label>
-                <input type="text" id="fname" name="fname"><br><br>
-                <label for="fname" color="red"> Username:</label>
-                <input type="text" id="fname" name="fname"><br><br>
-                <label for="lname"> Password:</label>
-                <input type="password" id="lname" name="lname"><br><br>
+                <label for="sname" color="red"> Surname:</label>
+                <input type="text" id="sname" name="fname"><br><br>
+                <label for="email" color="red"> Email:</label>
+                <input type="text" id="email" name="fname"><br><br>
+                <label for="username" color="red"> Username:</label>
+                <input type="text" id="username" name="fname"><br><br>
+                <label for="password"> Password:</label>
+                <input type="password" id="password" name="lname"><br><br>
+                <label for="cPassword"> Confirm password:</label>
+                <input type="password" id="cPassword" name="lname"><br><br>
                 <input type="submit" value="Register" class="submit" id="myButton1">
                 <br><br><br>
                 <div class="play">
@@ -42,7 +45,21 @@
 </body>
 <script type="text/javascript">
     document.getElementById("myButton1").onclick = function () {
-        location.href = "sign.html";
+        let name = document.getElementById("fname").value;
+        let sname = document.getElementById("sname").value;
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+        let cPassword = document.getElementById("cPassword").value;
+        let email = document.getElementById("email").value;
+
+        if(name == "" || sname == "" || username == "" || password == "" || cPassword == "" || email == "") 
+            document.getElementById("notification").innerText = "Please provide necessary information";
+        else if(password.length < 5)
+            document.getElementById("notification").innerText = "Password too short";
+        else if(password != cPassword)
+            document.getElementById("notification").innerText = "Passwords do not match";
+        else
+            document.getElementById("notification").innerText = "Registration successful!";
     };
 </script>
 </html>

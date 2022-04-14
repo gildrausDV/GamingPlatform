@@ -11,6 +11,7 @@
 </head>
 <body>
     <div class="screen">
+        <div class="notification"><h1 id="notification"></h1></div>
         <div class="inputScreen">
             <div class="input">
                 <h1>Sign in</h1>
@@ -33,6 +34,16 @@
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script>
+        function signIn() {
+            let user = document.getElementById("fname").value;
+            let pass = document.getElementById("lname").value;
+            if(user == "" || pass == "") {
+                document.getElementById("notification").innerText = "Username or password is not valid!";
+            }
+            else location.href = "play.html";
+        }
+
+    </script>
 </body>
 </html>
