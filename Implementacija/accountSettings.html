@@ -1,0 +1,81 @@
+<!--Autor: Dimitrije Vujčić-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings</title>
+    <link rel="stylesheet" href="accountSettings.css">
+</head>
+<body>
+    <div class="header">
+        <div class="notification">
+            <h1 id="notification"></h1>
+        </div>
+    </div>
+    <div class="center">
+        <div class="left"><img src="images/superMario.jpg"></div>
+        <div class="right">
+            <div class="form">
+                <table>
+                    <tr>
+                        <td>Username: </td>
+                        <td><input type="text" value="SuperMario"></td>
+                    </tr>
+                    <tr>
+                        <td>Password: </td>
+                        <td><input type="password" id="pass" value="123"></td>
+                    </tr>
+                    <tr>
+                        <td>Date(mm/dd/yyyy): </td>
+                        <td><input type="date" value="2022-03-03"></td>
+                    </tr>
+                    <tr>
+                        <td>Picture: </td>
+                        <td><input class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple /></td>
+                    </tr>
+                </table>
+                <button onclick="save()">Save</button>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <button id="back" onclick="back()">Back</button>
+        <button id="signOut" onclick="signOut_page()">Sign out</button>
+    </div>
+    <script>
+        var started = false;
+        var ended = false;
+
+        function save() {
+            if(ended = true) {
+                ended = false;
+                started = false;
+            }
+            if(started == true) {
+                return;
+            }
+            started = true;
+            if(document.getElementById("pass").value.length < 3) 
+                document.getElementById("notification").innerText = "Password too short!";
+            else
+                document.getElementById("notification").innerText = "Changes saved!";
+            timerInterval = setInterval(function start_end() {
+                ended = true;
+                document.getElementById("notification").innerText = "";
+                clearInterval(timerInterval);
+            }, 1500);
+        }
+
+        function back() {
+            location.href="play.html";
+        }
+        function signOut_page() {
+            location.href="sign.html";
+        }
+    </script>
+</body>
+</html>

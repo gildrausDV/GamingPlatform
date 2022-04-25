@@ -1,0 +1,350 @@
+<!-- Autor: Bogdan Jovanović -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game 1</title>
+    <link rel="stylesheet" href="playStyle.css">
+</head>
+<body onload="init()">
+    <div class="header">
+        <img src="images/superMario.jpg" alt="" id="user">
+        <div class="menu">
+            <button id="tableButton" onclick="game1()"><img src="images/table.png" alt=""></button>
+            <!--<button><img src="images/superMario.jpg" alt=""></button>
+            <button><img src="images/superMario.jpg" alt=""></button>
+            <button><img src="images/superMario.jpg" alt=""></button>
+            <button><img src="images/superMario.jpg" alt=""></button>
+            <button><img src="images/superMario.jpg" alt=""></button>-->
+        </div>
+        <!--<button><img src="images/options.png" alt="" id="options"></button>
+        <button><img src="images/notification1.png" alt=""></button>-->
+        <div class="select">
+            <select id="selector" name="dropdown" class="dropdown">
+                <option value="0" class="black_opt" selected></option>
+                <option value="1" class="black_opt">Account settings</option>
+                <option value="2" class="black_opt">Roles</option>
+                <option value="3" class="black_opt">History</option>
+                <option value="4" class="black_opt">Top players (global)</option>
+                <option value="5" class="black_opt">Top players</option>
+                <option value="6" class="black_opt">Allow/block</option>
+            </select>
+        </div>
+    </div>
+    <div class="game">
+        <div class="left">
+            <div class="list">
+                <br>
+                <h1>TOP 10</h1>
+                <table class="lista_poena">
+                <tr>
+                    <th>Username</th>
+                    <th>Points</th>
+                </tr>
+                <tr>
+                    <td>Gildraus</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>JBog00</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>KockaAdmiralac</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>Simple</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>Vukasin</td>
+                    <td>50</td>
+                </tr>
+            </table>
+            </div>
+        </div>
+        <div class="center" id="center">
+            <canvas id="my-canvas"></canvas>
+        </div>
+        <div class="right">
+            <div class="points">
+                <br>
+                <h3>GAME STATISTICS</h3>
+                <br><br>
+                <div>
+                    <span class="level">Level: </span>
+                    <span class="level" id="level_display">1</span>
+                </div>
+                <br>
+                <div>
+                    <span class="time">Time: </span>
+                    <span class="time" id="time_display">00:00:00</span>
+                </div>
+                <br>
+                <div>
+                    <span class="points">Points: </span>
+                    <span class="points" id="point_display">0</span>
+                </div>
+                <br><br><br><br><br>
+                <div>
+                    <span class="maxLevel">Max level reached: </span>
+                    <span class="maxLevel" id="maxLevel_display">0</span>
+                </div>
+                <br>
+                <div>
+                    <span class="maxPoints">Max points achived: </span>
+                    <span class="maxPoints" id="maxPoints_display">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <button onclick="addLevel()">Add level</button>
+        <button onclick="tournament()">Tournaments</button>
+        <button onclick="start()">Start</button>
+        <button onclick="pause()">Pause</button>
+        <button id="signOut" onclick="signOut_page()">Sign out</button>
+    </div>
+    <script>
+        let startTime;
+        let elapsedTime = 0;
+
+        let hh = 0;
+        let mm = 0;
+        let ss = 0;
+
+        let started = false;
+        let paused = false;
+        let ended = true;
+
+        let loaded = false;
+
+        let ball_x = 780; // random horizontal position
+        let ball_y = 300; // random horizontal position
+
+        var activities = document.getElementById("selector");
+        var last;
+
+        activities.addEventListener("change", function() {
+            if(activities.value == "1") {
+                acc();
+            } else if(activities.value == "2") {
+                r();
+            } else if(activities.value == "3") {
+                h();
+            } else if(activities.value == "4") {
+                top_playersG();
+            } else if(activities.value == "5") {
+                top_players();
+            } else if(activities.value == "6") {
+                allow_block();
+            }
+        });
+        
+        function allow_block() {
+            location.href = "allow.html"
+        }
+        function top_playersG() {
+            location.href = "topPlayersG.html";
+        }
+        function top_players() {
+            location.href = "gamingHistory.html";
+        }
+        function acc() {
+            location.href = "accountSettings.html";
+        }
+        function h() {
+            location.href = "history.html";
+        }
+        function r() {
+            location.href = "roles.html";
+        }
+        function back() {
+            location.href = "play.html"
+        }
+        function tournament() {
+            location.href = "tournament.html";
+        }
+        function addLevel() {
+            location.href = "addLevel.html";
+        }
+        function signIn() {
+            location.href = "play.html";
+        }
+        function signOut_page() {
+            location.href = "sign.html";
+        }
+        function game1() {
+            location.href = "game1.html";
+        }
+        function chooseGamePage() {
+            location.href = "play.html";
+        }
+        function addLevel() {
+            location.href = "addLevel.html";
+        }
+        function print_time(txt) {
+            document.getElementById("time_display").innerHTML = txt;
+        }
+
+        timerInterval = setInterval(function printTime() {
+            if(started == false || paused == true) return;
+            ss++;
+            if(ss == 60) {
+                mm++;
+                ss = 0;
+            }
+            if(mm == 60) {
+                hh++;
+                mm = 0;
+            }
+            let h = "" + hh;
+            let m = "" + mm;
+            let s = "" + ss;
+            if(h.length == 1) h = "0" + hh;
+            if(m.length == 1) m = "0" + mm;
+            if(s.length == 1) s = "0" + ss;
+            
+            print_time(h + ":" + m + ":" + s);
+        }, 1000);
+
+        function pause() {
+            if(paused == false) paused = true;
+            else paused = false;
+        }
+
+        function start() {
+            ss = 0; mm = 0; hh = 0; print_time("00:00:00");
+            if(loaded == false) {
+                loaded = true;
+                //document.getElementById("center").innerHTML = "<canvas id=\"my-canvas\"></canvas>"
+            }
+            if(ended == true) {
+                for(let i = 0; i < numOfBricks; ++i) bricks[i].destroyed = false;
+                table.x = 700;
+                table.y = 650;
+                ball.x = ball_x;
+                ball.y = ball_y;
+            }
+            started = true;
+            ended = false;
+        }
+
+        //canvas properties
+        var canvas = document.getElementById("my-canvas");
+        var context = canvas.getContext("2d");
+
+        //animation things
+        var fps = 60;
+        var updateTime = 1000 / fps;
+
+        //easy variables for easy coding life
+        var _PI = Math.PI;
+        var _sin = Math.sin;
+        var _cos = Math.cos;
+        var _random = Math.random;
+        var oneDegreeOnRadian = _PI / 180;
+
+        // ball
+        var ball;
+        var table;
+        let bricks = [];
+        let numOfBricks = 0;
+
+        function Brick(length) {
+            if(bricks.length == 0) this.x = 2;
+            else this.x = bricks[bricks.length - 1].x + length + 2;
+            this.y = 0;
+            this.length = length;
+            this.destroyed = false;
+
+            this.draw = function() {
+                if(this.destroyed) return;
+                context.fillStyle = "tomato"; // ball color
+                context.beginPath();
+                context.rect(this.x, this.y, length, 50);
+                context.closePath();
+                context.fill();
+            }
+        }
+
+
+        function Table(length) {
+
+            this.x = 700;
+            this.y = 650;
+            this.length = length;
+
+            this.diffX = 30;
+
+            this.draw = function() {
+                context.fillStyle = "tomato"; // ball color
+                context.beginPath();
+                context.rect(this.x, this.y, length, 50);
+                context.closePath();
+                context.fill();
+            }
+        }
+
+        //Our bouncing ball class
+        function Ball(radius, speed) {
+            this.radius = (radius) ? (radius) : (20); // ball size
+            this.x = ball_x;
+            this.y = ball_y;
+
+            this.draw = function() {
+                context.fillStyle = "tomato"; // ball color
+                context.beginPath();
+                context.arc(this.x, this.y, this.radius, 0, _PI * 2, false); // draw circle
+                context.closePath();
+                context.fill(); // draw ball on canvas
+            }
+        }
+
+        function clear() {
+            context.clearRect(0, 0, canvas.width, canvas.height); // clear canvas
+        }
+
+        function update() {
+            ball.move(); // move ball
+        }
+
+        function draw() {
+            ball.draw();
+            table.draw();
+            for(let i = 0; i < numOfBricks; ++i) bricks[i].draw();
+        }
+
+        function animate() {
+            clear();
+            //update();
+            draw();
+        }
+
+        // update canvas size when resizing window 
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        //initialize canvas
+        function init() {
+            window.addEventListener('resize', resizeCanvas, false);
+            resizeCanvas();
+            ball = new Ball(50, 10);
+            table = new Table(200);
+            numOfBricks = 6;
+            for(let i = 0; i < numOfBricks; ++i)
+                bricks.push(new Brick(253));
+            //run animation
+            //setInterval(function() {
+                animate();
+            //}, updateTime);
+        }
+    </script>
+</body>
+</html>

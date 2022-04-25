@@ -1,0 +1,73 @@
+<!-- Autor: Dimitrije Vujčić -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roles</title>
+    <link rel="stylesheet" href="roles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="notification">
+            <h1 id="notification"></h1>
+        </div>
+    </div>
+    <div class="center">
+        <div class="form">
+            <div class="left">
+                Enter username: 
+                <input type="text" id="username">
+            </div>
+            <div class="right">
+                <h1>Set role: </h1>
+                <button onclick="save()">Administrator</button>
+                <button onclick="save()">moderator</button>
+                <br><br>
+                <hr>
+                <h1>Remove role: </h1>
+                <button onclick="save()">Administrator</button>
+                <button onclick="save()">moderator</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <button id="back" onclick="back()">Back</button>
+        <button id="signOut" onclick="signOut()">Sign out</button>
+    </div>
+    <script>
+        function back() {
+            location.href = "play.html";
+        }
+
+        function signOut() {
+            location.href = "sign.html";
+        }
+
+        var started = false;
+        var ended = false;
+
+        function save() {
+            if(ended = true) {
+                ended = false;
+                started = false;
+            }
+            if(started == true) {
+                return;
+            }
+            started = true;
+            if(document.getElementById("username").value == "") 
+            document.getElementById("notification").innerText = "Username does not exist!";
+            else
+                document.getElementById("notification").innerText = "Role changed successfully!";
+            timerInterval = setInterval(function start_end() {
+                ended = true;
+                document.getElementById("notification").innerText = "";
+                clearInterval(timerInterval);
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

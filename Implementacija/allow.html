@@ -1,0 +1,78 @@
+<!-- Autor: Bogdan Jovanović -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allow/block user</title>
+    <link rel="stylesheet" href="allow.css">
+</head>
+<body>
+    <div class="header">
+        <div class="notification">
+            <h1 id="notification"></h1>
+        </div>
+    </div>
+    <div class="inputScreen">
+        <div class="input">
+            <br><br><br><br>
+            <h1>Allow/block user</h1>
+            <hr>
+            <br>
+            <label for="fname" color="red"> Username:</label>
+            <input type="text" id="fname" name="fname"><br><br>
+            <input type="radio" id="html1" name="fav_language" value="Allow" checked>Allow&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" id="html2" name="fav_language" value="Block">Block
+            <br><br><br>
+            <input type="submit" value="OK" class="submit" id="myButton" onclick="save()">
+            <br><br><br>
+            
+        </div>
+    </div>
+    <div class="footer">
+        <br><br><br><br>
+        <button id="back" onclick="back()">Back</button>
+        <button id="signOut" onclick="signOut_page()">Sign out</button>
+    </div>
+    <script>
+        var started = false;
+        var ended = false;
+
+        function save() {
+            if(ended = true) {
+                ended = false;
+                started = false;
+            }
+            if(started == true) {
+                return;
+            }
+            started = true;
+            if(document.getElementById("fname").value != "") {
+                if(document.getElementById("html1").checked) 
+                    document.getElementById("notification").innerText = "Access enabled!";
+                else if(document.getElementById("html2").checked) 
+                    document.getElementById("notification").innerText = "Access disabled!";
+                else
+                    document.getElementById("notification").innerText = "Changes saved!";
+            }
+            else
+                document.getElementById("notification").innerText = "Username is not valid!";
+            timerInterval = setInterval(function start_end() {
+                ended = true;
+                document.getElementById("notification").innerText = "";
+                clearInterval(timerInterval);
+            }, 1500);
+        }
+
+        function back() {
+            location.href = "play.html"
+        }
+        function signOut_page() {
+            location.href = "sign.html";
+        }
+    </script>
+</body>
+</html>
+</html>

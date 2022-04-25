@@ -1,0 +1,44 @@
+<!-- Autor: Dimitrije Vujčić -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GamingHistory</title>
+    <link rel="stylesheet" href="gamingHistory.css">
+</head>
+<body>
+    <div class="header">
+        
+    </div>
+    <div class="center">
+        <div id="gameSelect"><h1>Select game: </h1></div>
+        <br><br><br>
+        <table class="center">
+            <tr>
+                <td><a href="history.html"><img src="images/superMario.jpg"></a></td>
+                <td><a href="history.html"><img src="images/sonic1.png"></a></td>
+                <td><a href="history.html"><img src="images/kirby.jpg"></a></td>
+                <td><a href="history.html"><img src="images/rayman.png"></a></td>
+                <td><a href="history.html"><img src="images/pikachu.png"></a></td>
+                <!--<td><a href="history.html"><img src="images/superMario.jpg"></a></td>-->
+            </tr>
+        </table>
+    </div>
+    <div class="footer">
+        <button id="back" onclick="back()">Back</button>
+        <button id="register" onclick="register()">Register</button>
+    </div>
+    <script>
+        function back() {
+            location.href = "play.html";
+        }
+
+        function register() {
+            location.href = "register.html";
+        }
+    </script>
+</body>
+</html>
