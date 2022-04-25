@@ -1,0 +1,82 @@
+/* Autor: Bogdan Jovanović */
+
+body {
+    background-image: url('images/cloud.png');
+}
+
+p {
+    font-weight: bold;
+    color: red;
+}
+
+#notification {
+    background-color: black;
+    opacity: 0.8;
+    color: white;
+    text-align: center;
+}
+
+.notification {
+    background-color: black;
+    opacity: 0.8;
+    width: 100%;
+    height: 37px;
+}
+
+.screen {
+    background-image: url('images/cloud.png');
+    background-color: lightgray;
+    width: 100%;
+    height: 700px;
+}
+
+.inputScreen {
+    /*background-image: url('images/bricks.png');*/
+    background-image: url('images/black1.jpg');
+    opacity: 0.95;
+    width: 400px;
+    height: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.input label {
+    color: white;
+    font-weight: bold;
+}
+
+.input h1 {
+    color: white;
+}
+
+.input_footer1 {
+    color: white;
+    display: flex;
+}
+
+.input_footer2 {
+    color: white;
+    display: flex;
+}
+
+.play {
+    float: left;
+    margin: 0px 0px 0px -10px;
+}
+
+.register {
+    float: right;
+}
+
+.input {
+    position: absolute;
+    top: 45%;
+    left: 53%;
+    transform: translate(-50%, -50%);
+}
+
+.submit {
+    margin: 0px 0px 0px 60px;
+}
