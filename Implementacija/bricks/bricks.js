@@ -47,6 +47,11 @@ var start_data;
 var started = false;
 var points = 0;
 var time = 0;
+var end = false;
+
+function start() {
+    started = true;
+}
 
 document.addEventListener('keydown', (event) => {
     var name = event.key;
@@ -92,6 +97,8 @@ function Coin(x, y) {
     this.collected = false;
 
     this.draw = function() {
+        
+        
         if(this.collected) return;
         context.fillStyle = "gold";
         context.beginPath();
@@ -196,20 +203,14 @@ function clear() {
 
 function update() {
     rayman.move();
-    if(checkCoin()) {
-        //alert();
-    }
     for(let i = 0; i < numOfFireBalls; ++i)
         fireBalls[i].move();
-    if(checkFireBalls()) {
-        alert();
-    }
 }
 
 function draw() {
+    rayman.draw();
     for(let i = 0; i < numOfCoins; ++i) 
         coins[i].draw();
-    rayman.draw();
     for(let i = 0; i < numOfFireBalls; ++i)
         fireBalls[i].draw();
 
@@ -251,7 +252,7 @@ function draw() {
 
 function animate() {
     clear();
-    update();
+    update(); 
     draw();
 }
 
@@ -260,26 +261,52 @@ function resizeCanvas() {
     canvas.height = window.innerHeight;
 }
 
+var loaded = false;
+
 function init() {
     update_list();
     canvas = document.getElementById("my-canvas");
     context = canvas.getContext("2d");
     window.addEventListener('resize', resizeCanvas, false);
     resizeCanvas();
-    rayman = new Rayman();
-    for(let i = 0; i < numOfFireBalls; ++i)
-        fireBalls.push(new FireBall());
+    
+    //alert("nova mapa");
+    //load_map();
+
     interval = setInterval(function() {
-        if(game_end()) {
+        if(!started || game_end()) {
+            //alert("nova mapa");
+            started = true;
+            for(let i = 0; i < coins.length; ++i)
+                coins[i].collected = false;
             load_map();
         }
-        animate();
+        else if(started && !end && loaded) animate();
     }, 15);
+
+    /*interval = setInterval(function() {
+        if(started || game_end()) {
+            alert("nova mapa");
+            for(let i = 0; i < coins.length; ++i)
+                coins[i].collected = false;
+            alert("load map");
+            load_map();
+            create_map();
+            alert("asd");
+        }
+        else if(started && !end) animate();
+        //else alert(started + " " + end);
+    }, 15);*/
 }
 
 function game_end() {
-    if(started == false) {
-        started = true;
+
+    if(!loaded) return false;
+
+    checkCoin();
+
+    if(numOfFireBalls > 0 && checkFireBalls()) {
+        loaded = false;
         return true;
     }
 
@@ -290,7 +317,12 @@ function game_end() {
             break;
         }
     }
-    //if(allCollected) alert();
+
+    if(numOfCoins > 0 && allCollected) {
+        //alert("No coins...");
+        loaded = false;
+        return true;
+    }
 
     return false;
 }
@@ -307,8 +339,10 @@ function load_map() {
             if( !('error' in obj) ) {
                 if(obj.result == false) {
                     alert("GAME END");
+                    end = true;
                     update_list();
                     // upisi poene u bazu
+                    send_data();
                 } else {
                     //alert(obj.result);
                     start_data = JSON.parse(obj.result);
@@ -316,8 +350,11 @@ function load_map() {
                     c = start_data.cols;
                     numOfCoins = start_data.coins.length;
                     numOfFireBalls = start_data.wood.length;
-                    //alert(start_data);
                     create_map();
+                    animate();
+                    //alert("animate numOfCoins: " + coins.length);
+                    loaded = true;
+                    //alert(numOfFireBalls);
                 }
             }
             else {
@@ -340,13 +377,30 @@ function create_map() {
     cell_w = w / cols;
     cell_h = h / rows;
 
+    coins = [];
+    fireBalls = [];
+
+    num = 0;
+    num_c = 0;
+
+    rayman = new Rayman();
+    this.x = 10;
+    this.y = 275;
+    nextX = 10;
+    nextY = 275;
+
     // make coins
+    //alert("make coins");
     for(let i = 0; i < numOfCoins; ++i)
         coins.push(new Coin(start_data.coins[i].x * cell_w + cell_w / 4, start_data.coins[i].y * cell_h + cell_h / 5));
 
+    //alert("make fireballs " + numOfFireBalls);
     // make fire balls
     for(let i = 0; i < numOfFireBalls; ++i)
         fireBalls.push(new FireBall(cell_w * start_data.wood[i].y + cell_w, start_data.wood[i].direction));
+    
+    //alert(fireBalls.length);
+    //alert("created");
 }
 
 function update_list() {
@@ -418,7 +472,7 @@ function update_list() {
 function send_data() {
     jQuery.ajax({
         type: "POST",
-        url: 'rayman_.php',
+        url: 'bricks_.php',
         //dataType: 'json',
         data: {functionname: 'save_data', arguments: [time, points, level - 1]},
         //data: {functionname: 'save_data', arguments: points},
@@ -479,6 +533,7 @@ function checkFireBalls() {
         //if(coin_y_start <= rayman.y + 100 && rayman.y + 100 <= coin_y_end)
         //    alert("321");
         if(coin_x_start <= rayman.x + 0.6 * rayman.width && rayman.x + 0.6 * rayman.width <= coin_x_end && coin_y_start <= rayman.y + 0.6 * rayman.height && rayman.y + 0.6 * rayman.height <= coin_y_end) {
+            alert("FireBall")
             return true;
         }
     }
