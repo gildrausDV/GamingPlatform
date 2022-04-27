@@ -14,12 +14,14 @@ var c = 0;
 var canvas;// = document.getElementById("my-canvas");
 var context;// = canvas.getContext("2d");
 
-var nextX = 10;
+var nextX = 0;
 var nextY = 275;
 var rayman;
 var coin;
 var coins = [];
 
+var img_p = new Image();
+img_p.src = "../images/drvce.png";
 var img = new Image();
 img.src = "../images/bird3.png";
 var img_c = new Image();
@@ -92,7 +94,8 @@ document.addEventListener('keydown', (event) => {
         img.src = "../images/bird3.png";
         right = true;
     } else if(name == "ArrowUp") {
-        curr_limit += limit;
+        //curr_limit += limit;
+        cnt_jump = 0;
         up = true;
     }/* else if(name == "ArrowDown") {
         if(down) return;
@@ -130,7 +133,8 @@ function Coin(x, y) {
         if(this.collected) return;
         context.fillStyle = "gold";
         context.beginPath();
-        context.drawImage(img_c, this.x, this.y, this.width, this.height);
+        //context.drawImage(img_c, this.x * cell_w + cell_w / 4, this.y * cell_h + cell_h / 5, this.width, this.height);
+        context.drawImage(img_c, this.x * cell_w + cell_w / 4, this.y * cell_h + cell_h / 5, cell_w / 1.5, cell_h / 1.5);
         //context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
         context.closePath();
         context.fill();
@@ -146,10 +150,10 @@ function FireBall(x, dir) {
     this.radius = arr_r[num];
     //this.inc = 0.5 - Math.random();
     //if(this.inc < 0) this.inc = -5;
-    //else this.inc = 5;
+    //else this.inc = 5; fireBalls.push(new FireBall(cell_w * start_data.wood[i].y + cell_w, start_data.wood[i].direction));
 
-    this.width = 150;
-    this.height = 200;
+    this.width = cell_w;
+    this.height = cell_h * 1.5;
 
     if(dir == "up") this.inc = -5;
     else this.inc = 5;
@@ -162,7 +166,7 @@ function FireBall(x, dir) {
         let img_fb;
         if(this.inc < 0) img_fb = img_fb1;
         else img_fb = img_fb2;
-        context.drawImage(img_fb, this.x, this.y, 150, 200);
+        context.drawImage(img_fb, cell_w * this.x, this.y, this.width, this.height);
         context.closePath();
         context.fill();
     }
@@ -180,8 +184,8 @@ function Rayman() {
     this.x = 0;
     this.y = 0;
 
-    this.width = 115;
-    this.height = 150;
+    this.width = cell_w * 1.5;//220;
+    this.height = cell_h * 1.5;//260;
 
     this.move = function() {
         this.left();
@@ -195,7 +199,7 @@ function Rayman() {
     this.left = function() {
         if(!left) return;
         nextX -= 9;
-        if(nextX < 0) nextX = 0;
+        if(nextX < -50) nextX = -50;
     }
 
     this.right = function() {
@@ -207,7 +211,7 @@ function Rayman() {
     this.up = function() {
         if(!up) return;
         cnt_jump++;
-        if(cnt_jump < curr_limit) {
+        if(cnt_jump < limit) {
             nextY -= 12;
         }
         else {
@@ -215,8 +219,8 @@ function Rayman() {
             cnt_jump = 0;
             curr_limit = 0;
         }
-        if(nextY < 0) {
-            nextY = 0;
+        if(nextY < -75) {
+            nextY = -75;
             up = false;
             cnt_jump = 0;
             curr_limit = 0;
@@ -226,15 +230,23 @@ function Rayman() {
     this.down = function() {
         if(up) return;
         nextY += 12;
-        if(nextY > window.innerHeight - 150) {
-            nextY = window.innerHeight - 150;
+        if(nextX < cell_w / 3 && nextY > window.innerHeight - 200) {
+            nextY = window.innerHeight - 200;
+        }
+        if(nextY > window.innerHeight - 100) {
+            nextY = window.innerHeight - 100;
+            end = true;
+            send_data();
+            update_list();
+            animate();
+            clearInterval(timeInterval);
         }
     }
 
     this.draw = function() {
         context.beginPath();
         // context.drawImage(img, this.x, this.y, 115, 150);
-        context.drawImage(img, this.x, this.y, 220, 260);
+        context.drawImage(img, this.x, this.y, this.width, this.height);
         context.closePath();
     }
 }
@@ -255,6 +267,14 @@ function draw() {
         coins[i].draw();
     for(let i = 0; i < numOfFireBalls; ++i)
         fireBalls[i].draw();
+
+    context.fillStyle = "gold";
+    context.beginPath();
+    //context.drawImage(img_c, this.x * cell_w + cell_w / 4, this.y * cell_h + cell_h / 5, this.width, this.height);
+    context.drawImage(img_p, -cell_w, window.innerHeight - 200 + rayman.height / 2.5, cell_w * 2, cell_h);
+    //context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+    context.closePath();
+    context.fill();
 
     let w = canvas.width;
     let h = canvas.height;
@@ -302,9 +322,27 @@ function animate() {
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
+    let w = canvas.width;
+    let h = canvas.height;
+    let rows = r;
+    let cols = c;
+    cell_w = w / cols;
+    cell_h = h / rows;
+
+    if(rayman != undefined) {
+        rayman.width = cell_w * 1.5;
+        rayman.height = cell_h * 1.5;
+    }
+    for(let i = 0; i < numOfFireBalls; ++i) {
+        fireBalls[i].width = cell_w;
+        fireBalls[i].height = cell_h * 1.5;
+    }
+    
 }
 
 var loaded = false;
+var wait = false;
 
 function init() {
     update_list();
@@ -321,8 +359,10 @@ function init() {
                 coins[i].collected = false;
             load_map();
             document.getElementById("level_display").innerText = level;
+            wait = true;
+            setTimeout(function() {wait = false; up = false;}, 500);
         }
-        else if(!end && loaded) animate();
+        else if(!end && loaded && !wait) animate();
     }, 15);
 }
 
@@ -332,10 +372,10 @@ function game_end() {
 
     checkCoin();
 
-    //if(numOfFireBalls > 0 && checkFireBalls()) {
-    //    loaded = false;
-     //   return true;
-    //}
+    if(numOfFireBalls > 0 && checkFireBalls()) {
+        loaded = false;
+        return true;
+    }
 
     let allCollected = true;
     for(let i = 0; i < numOfCoins; ++i) {
@@ -414,18 +454,18 @@ function create_map() {
     rayman = new Rayman();
     this.x = 10;
     this.y = 275;
-    nextX = 10;
-    nextY = 275;
+    nextX = -50;
+    nextY = window.innerHeight - 200;
 
     // make coins
     //alert("make coins");
     for(let i = 0; i < numOfCoins; ++i)
-        coins.push(new Coin(start_data.coins[i].x * cell_w + cell_w / 4, start_data.coins[i].y * cell_h + cell_h / 5));
+        coins.push(new Coin(start_data.coins[i].x, start_data.coins[i].y));
 
     //alert("make fireballs " + numOfFireBalls);
     // make fire balls
     for(let i = 0; i < numOfFireBalls; ++i)
-        fireBalls.push(new FireBall(cell_w * start_data.wood[i].y + cell_w, start_data.wood[i].direction));
+        fireBalls.push(new FireBall(start_data.wood[i].y, start_data.wood[i].direction));
     
     //alert(fireBalls.length);
     //alert("created");
@@ -526,18 +566,35 @@ function send_data() {
 function checkCoin() {
     for(let i = 0; i < numOfCoins; ++i) {
         let coin = coins[i];
-        // this.x * cell_w + cell_w / 2 - this.width / 2
-        let coin_x_start = coin.x + cell_w / 2 - 2 * coin.width;
-        let coin_x_end = coin.x + cell_w / 2 + coin.width;
-        let coin_y_start = coin.y + cell_h / 2 - coin.height;
-        let coin_y_end = coin.y + cell_h / 2 + coin.height;
+        let coin_x_start = coin.x * cell_w;
+        let coin_x_end = coin_x_start + cell_w / 1.3;
+        let coin_y_start = coin.y * cell_h;
+        let coin_y_end = coin_y_start + cell_h / 1.3;
         if(coin.collected) continue;
         //alert(coin_x_start + " " + rayman.x + " " + coin_x_end);
-        /*if(coin_x_start <= rayman.x && rayman.x <= coin_x_end)
-            alert(coin.x + " " + coin.y);
+        // context.drawImage(img_c, this.x * cell_w + cell_w / 4, this.y * cell_h + cell_h / 5, cell_w / 1.5, cell_h / 1.5);
+        /*if(coin_x_start <= rayman.x && rayman.x <= coin_x_end) 
+            alert(coin_x_start + " " + coin_x_end + " " + coin.x + " " + coin.y);
         if(coin_y_start <= rayman.y + 100 && rayman.y + 100 <= coin_y_end)
-            alert("321");*/
+            alert(coin_x_start + " " + coin_x_end);
         if(coin_x_start <= rayman.x + 0.6 * rayman.width && rayman.x + 0.6 * rayman.width <= coin_x_end && coin_y_start <= rayman.y + 0.6 * rayman.height && rayman.y + 0.6 * rayman.height <= coin_y_end) {
+            coin.collected = true;
+            points += 5;
+            document.getElementById("point_display").innerText = points;
+            audio.play();
+            return true;
+        }*/
+        let rayman_x_start = rayman.x + rayman.width / 2;
+        let rayman_x_end = rayman.x + rayman.width / 2;
+        let rayman_y_start = rayman.y + rayman.height / 2;
+        let rayman_y_end = rayman.y + rayman.height / 2;
+        //if(coin_x_start <= rayman_x_start && rayman_x_start <= coin_x_end || coin_x_start <= rayman_x_end && rayman_x_end <= coin_x_end) 
+        //    alert(coin_x_start + " " + coin_x_end + " " + rayman_x_start + " " + rayman_x_end);
+        //if(coin_y_start <= rayman_y_start && rayman_y_start <= coin_y_end || coin_y_start <= rayman_y_end && rayman_y_end <= coin_y_end)
+        //    alert(coin_x_start + " " + coin_x_end);
+        let bool_x = coin_x_start <= rayman_x_start && rayman_x_start <= coin_x_end || coin_x_start <= rayman_x_end && rayman_x_end <= coin_x_end;
+        let bool_y = coin_y_start <= rayman_y_start && rayman_y_start <= coin_y_end || coin_y_start <= rayman_y_end && rayman_y_end <= coin_y_end;
+        if(bool_x && bool_y) {
             coin.collected = true;
             points += 5;
             document.getElementById("point_display").innerText = points;
@@ -551,18 +608,39 @@ function checkCoin() {
 function checkFireBalls() {
     for(let i = 0; i < numOfFireBalls; ++i) {
         let coin = fireBalls[i];
-        // this.x * cell_w + cell_w / 2 - this.width / 2
-        let coin_x_start = coin.x + cell_w / 2 - coin.width;
+
+        /*let coin_x_start = coin.x + cell_w / 2 - coin.width;
         let coin_x_end = coin.x + cell_w / 2 + coin.width;
         let coin_y_start = coin.y + cell_h / 2 - coin.height / 2;
-        let coin_y_end = coin.y + cell_h / 2 + coin.height / 2;
-        //alert(coin_x_start + " " + rayman.x + " " + coin_x_end);
-        //if(coin_x_start <= rayman.x && rayman.x <= coin_x_end)
-        //    alert(coin.x + " " + coin.y);
-        //if(coin_y_start <= rayman.y + 100 && rayman.y + 100 <= coin_y_end)
-        //    alert("321");
-        if(coin_x_start <= rayman.x + 0.6 * rayman.width && rayman.x + 0.6 * rayman.width <= coin_x_end && coin_y_start <= rayman.y + 0.6 * rayman.height && rayman.y + 0.6 * rayman.height <= coin_y_end) {
-            //alert("FireBall")
+        let coin_y_end = coin.y + cell_h / 2 + coin.height / 2;*/
+
+        /*let coin_x_start = coin.x * cell_w + cell_w;
+        let coin_x_end = coin_x_start + 150;
+        let coin_y_start = coin.y;
+        let coin_y_end = coin_y_start + 125;*/
+
+        let coin_x_start = coin.x * cell_w;
+        let coin_x_end = coin_x_start + cell_w / 1.3;
+        let coin_y_start = coin.y + cell_h / 3;
+        let coin_y_end = coin_y_start + cell_h / 1.2;
+
+        let rayman_x_start = rayman.x + rayman.width / 2;
+        let rayman_x_end = rayman.x + rayman.width / 2;
+        let rayman_y_start = rayman.y + rayman.height / 2;
+        let rayman_y_end = rayman.y + rayman.height / 2;
+        //if(coin_x_start <= rayman_x_start && rayman_x_start <= coin_x_end || coin_x_start <= rayman_x_end && rayman_x_end <= coin_x_end) 
+        //    alert(coin_x_start + " " + coin_x_end + " " + rayman_x_start + " " + rayman_x_end);
+        //if(coin_y_start <= rayman_y_start && rayman_y_start <= coin_y_end || coin_y_start <= rayman_y_end && rayman_y_end <= coin_y_end)
+        //    alert(coin_x_start + " " + coin_x_end);
+        let bool_x = coin_x_start <= rayman_x_start && rayman_x_start <= coin_x_end || coin_x_start <= rayman_x_end && rayman_x_end <= coin_x_end;
+        //if(bool_x) 
+        //    alert(coin_y_start + " " + coin_y_end);
+        let bool_y = coin_y_start <= rayman_y_start && rayman_y_start <= coin_y_end || coin_y_start <= rayman_y_end && rayman_y_end <= coin_y_end;
+
+        //if(bool_y)
+        //    alert(coin_y_start + " < " + rayman_y_start + ", " + rayman_y_end + " < " + coin_y_end);
+
+        if(bool_x && bool_y) {
             end = true;
             send_data();
             update_list();
@@ -570,6 +648,21 @@ function checkFireBalls() {
             clearInterval(timeInterval);
             return true;
         }
+
+        //alert(coin_x_start + " " + rayman.x + " " + coin_x_end);
+        //if(coin_x_start <= rayman.x && rayman.x <= coin_x_end)
+        //    alert(coin.x + " " + coin.y);
+        //if(coin_y_start <= rayman.y + 100 && rayman.y + 100 <= coin_y_end)
+        //    alert("321");
+        /*if(coin_x_start <= rayman.x + 0.6 * rayman.width && rayman.x + 0.6 * rayman.width <= coin_x_end && coin_y_start <= rayman.y + 0.6 * rayman.height && rayman.y + 0.6 * rayman.height <= coin_y_end) {
+            //alert("FireBall")
+            end = true;
+            send_data();
+            update_list();
+            animate();
+            clearInterval(timeInterval);
+            return true;
+        }*/
     }
     return false;
 }
