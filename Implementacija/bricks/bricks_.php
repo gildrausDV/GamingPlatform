@@ -33,7 +33,7 @@
             $result->points = $points;
 
             //$sql = "SELECT  FROM playedgame WHERE ID_game = $game_id";
-            $sql = "SELECT username, points FROM `playedgame` INNER JOIN `user` WHERE ID_game = 1 ORDER BY points DESC LIMIT 10";
+            $sql = "SELECT username, points FROM `playedgame` INNER JOIN `user` WHERE ID_game = 2 ORDER BY points DESC LIMIT 10";
             $resultList = $conn->query($sql);
             $list = [];
 

@@ -21,7 +21,7 @@ var coin;
 var coins = [];
 
 var img = new Image();
-img.src = "../images/rayman01.png";
+img.src = "../images/bird3.png";
 var img_c = new Image();
 img_c.src = "../images/coin.png";
 var img_fb1 = new Image();
@@ -48,6 +48,11 @@ var started = false;
 var points = 0;
 var time = 0;
 var end = false;
+var lost = false;
+
+let cnt_jump = 0;
+let limit = 25;
+let curr_limit = 0;
 
 var timeInterval;
 
@@ -80,19 +85,19 @@ document.addEventListener('keydown', (event) => {
     var name = event.key;
     if(name == "ArrowLeft") {
         if(left) return;
-        img.src = "../images/rayman02.png";
+        img.src = "../images/bird3.png";
         left = true;
     } else if(name == "ArrowRight") {
         if(right) return;
-        img.src = "../images/rayman01.png";
+        img.src = "../images/bird3.png";
         right = true;
     } else if(name == "ArrowUp") {
-        if(up) return;
+        curr_limit += limit;
         up = true;
-    } else if(name == "ArrowDown") {
+    }/* else if(name == "ArrowDown") {
         if(down) return;
         down = true;
-    }
+    }*/
 }, false);
 
 document.addEventListener('keyup', (event) => {
@@ -101,11 +106,11 @@ document.addEventListener('keyup', (event) => {
         left = false;
     } else if(name == "ArrowRight") {
         right = false;
-    } else if(name == "ArrowUp") {
+    } /*else if(name == "ArrowUp") {
         up = false;
-    } else if(name == "ArrowDown") {
+    }*//* else if(name == "ArrowDown") {
         down = false;
-    }
+    }*/
 }, false);
 
 function Coin(x, y) {
@@ -201,12 +206,25 @@ function Rayman() {
 
     this.up = function() {
         if(!up) return;
-        nextY -= 12;
-        if(nextY < 0) nextY = 0;
+        cnt_jump++;
+        if(cnt_jump < curr_limit) {
+            nextY -= 12;
+        }
+        else {
+            up = false;
+            cnt_jump = 0;
+            curr_limit = 0;
+        }
+        if(nextY < 0) {
+            nextY = 0;
+            up = false;
+            cnt_jump = 0;
+            curr_limit = 0;
+        }
     }
 
     this.down = function() {
-        if(!down) return;
+        if(up) return;
         nextY += 12;
         if(nextY > window.innerHeight - 150) {
             nextY = window.innerHeight - 150;
@@ -215,7 +233,8 @@ function Rayman() {
 
     this.draw = function() {
         context.beginPath();
-        context.drawImage(img, this.x, this.y, 115, 150);
+        // context.drawImage(img, this.x, this.y, 115, 150);
+        context.drawImage(img, this.x, this.y, 220, 260);
         context.closePath();
     }
 }
@@ -313,10 +332,10 @@ function game_end() {
 
     checkCoin();
 
-    if(numOfFireBalls > 0 && checkFireBalls()) {
-        loaded = false;
-        return true;
-    }
+    //if(numOfFireBalls > 0 && checkFireBalls()) {
+    //    loaded = false;
+     //   return true;
+    //}
 
     let allCollected = true;
     for(let i = 0; i < numOfCoins; ++i) {
@@ -543,7 +562,12 @@ function checkFireBalls() {
         //if(coin_y_start <= rayman.y + 100 && rayman.y + 100 <= coin_y_end)
         //    alert("321");
         if(coin_x_start <= rayman.x + 0.6 * rayman.width && rayman.x + 0.6 * rayman.width <= coin_x_end && coin_y_start <= rayman.y + 0.6 * rayman.height && rayman.y + 0.6 * rayman.height <= coin_y_end) {
-            alert("FireBall")
+            //alert("FireBall")
+            end = true;
+            send_data();
+            update_list();
+            animate();
+            clearInterval(timeInterval);
             return true;
         }
     }
