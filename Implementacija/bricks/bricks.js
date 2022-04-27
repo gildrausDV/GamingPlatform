@@ -49,8 +49,31 @@ var points = 0;
 var time = 0;
 var end = false;
 
+var timeInterval;
+
 function start() {
     started = true;
+    end = false;
+    points = 0;
+    level = 0;
+    time = 0;
+    document.getElementById("time_display").innerText = "00:00:00";
+
+    timeInterval = setInterval(function () {
+        time++;
+        let t = time;
+        let ss = t % 60;
+        t = Math.floor(t / 60);
+        let mm = t % 60;
+        t = Math.floor(t / 60);
+        let hh = t % 60;
+        if(ss < 10) ss = "0" + ss;
+        if(mm < 10) mm = "0" + mm;
+        if(hh < 10) hh = "0" + hh;
+        let txt = hh + ":" + mm + ":" + ss;
+        //alert(txt);
+        document.getElementById("time_display").innerText = txt;
+    }, 1000);
 }
 
 document.addEventListener('keydown', (event) => {
@@ -252,6 +275,7 @@ function draw() {
 
 function animate() {
     clear();
+    if(end) return;
     update(); 
     draw();
 }
@@ -269,34 +293,18 @@ function init() {
     context = canvas.getContext("2d");
     window.addEventListener('resize', resizeCanvas, false);
     resizeCanvas();
-    
-    //alert("nova mapa");
-    //load_map();
 
     interval = setInterval(function() {
-        if(!started || game_end()) {
-            //alert("nova mapa");
-            started = true;
-            for(let i = 0; i < coins.length; ++i)
-                coins[i].collected = false;
-            load_map();
-        }
-        else if(started && !end && loaded) animate();
-    }, 15);
-
-    /*interval = setInterval(function() {
         if(started || game_end()) {
-            alert("nova mapa");
+            //alert("nova mapa");
+            started = false;
             for(let i = 0; i < coins.length; ++i)
                 coins[i].collected = false;
-            alert("load map");
             load_map();
-            create_map();
-            alert("asd");
+            document.getElementById("level_display").innerText = level;
         }
-        else if(started && !end) animate();
-        //else alert(started + " " + end);
-    }, 15);*/
+        else if(!end && loaded) animate();
+    }, 15);
 }
 
 function game_end() {
@@ -338,11 +346,12 @@ function load_map() {
         success: function (obj, textstatus) {
             if( !('error' in obj) ) {
                 if(obj.result == false) {
-                    alert("GAME END");
+                    //alert("GAME END");
                     end = true;
-                    update_list();
-                    // upisi poene u bazu
                     send_data();
+                    update_list();
+                    animate();
+                    clearInterval(timeInterval);
                 } else {
                     //alert(obj.result);
                     start_data = JSON.parse(obj.result);
@@ -416,6 +425,7 @@ function update_list() {
 
         success: function (obj, textstatus) {
             if( !('error' in obj) ) {
+                //alert("update_list: " + obj.result);
                 maxLvlPts = JSON.parse(obj.result);
                 //alert(1);
                 //alert(JSON.stringify(obj.result));

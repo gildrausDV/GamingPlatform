@@ -81,7 +81,7 @@
             //$sql = "SELECT MAX(ID) FROM user";
             //$id_g = $conn->query($sql)->fetch_assoc()['ID'] + 1;
             
-            $sql = "INSERT INTO `playedgame`(`timePlayed`, `points`, `ID_user`, `ID_game`, `maxLevel`, `on_tournament`) VALUES ('$time','$points','$id','1', '$level', 'false')";
+            $sql = "INSERT INTO `playedgame`(`timePlayed`, `points`, `ID_user`, `ID_game`, `maxLevel`, `on_tournament`) VALUES ('$time','$points','$id','2', '$level', 'false')";
             $conn->query($sql);
 
             $conn->close();
