@@ -21,7 +21,7 @@
             $coin = trim($coin, '[');
             $coin = trim($coin, ']');
             $coin = explode(",", $coin);
-            $js_coins = $js_coins."{\"x\": $coin[0], \"y\": $coin[1]}";
+            $js_coins = $js_coins."{\"x\": $coin[1], \"y\": $coin[0]}";
             if($i != count($coins) - 1) $js_coins = $js_coins.", ";
         }
         $js_coins = $js_coins."]";
@@ -33,7 +33,7 @@
             $fTree = trim($fTree, '[');
             $fTree = trim($fTree, ']');
             $fTree = explode(",", $fTree);
-            $js_trees = $js_trees."{\"x\": $fTree[0], \"y\": $fTree[1], \"len\": $fTree[2], \"height\": $fTree[3]}";
+            $js_trees = $js_trees."{\"x\": $fTree[1], \"y\": $fTree[0], \"len\": $fTree[2], \"height\": $fTree[3]}";
             if($i != count($fTrees) - 1) $js_trees = $js_trees.", ";
         }
         $js_trees = $js_trees."]";
