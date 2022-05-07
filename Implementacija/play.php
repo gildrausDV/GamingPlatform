@@ -9,59 +9,179 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="playStyle.css">
+    <!--<link rel="stylesheet" href="playStyle.css">-->
+    <link rel="stylesheet" href="bootstrap/bootstrap-5.1.3-dist/css/bootstrap.min.css">
+    <script src="bootstrap/bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
+    <style>
+        #logo, #logo1, #logo2, #logo3 {
+            width: 50px;
+            height: 50px;
+            border: 5px solid black;
+        }
+        #logo1, #logo2, #logo3 {
+            max-width: 60px;
+            max-height: 60px;
+            border: 5px solid black;
+            /*margin-left: 15px;*/
+        }
+        #logo:hover, #logo1:hover, #logo2:hover, #logo3:hover {
+            border: 0px;
+        }
+        .logo_link {
+            margin-left: 15px;
+        }
+        .nav-link {
+            color: white;
+        }
+        .n {
+            display: flex;
+            justify-content: space-between;
+        }
+        .levo {
+            display: flex;
+            float: left;
+            align-items: center;
+        }
+        .desno {
+            display: flex;
+            float: right;
+            align-items: center;
+        }
+        .bg-clouds {
+            background-image: url('images/cloud.png');
+            /*height: 1000px;*/
+            /*width: 100%;
+            margin: 0px;
+            padding: 0 !important;*/
+        }
+        .game-info {
+            text-align: center;
+            color: white;
+            background-color: black;
+            opacity: 0.8;
+            border: 5px solid lightgray;
+            min-height: 500px;
+        }
+        .game-info:hover {
+            border: 5px solid gray;
+        }
+        .no-padding {
+            padding: 0 !important;
+        }
+        .games {
+            text-align: center;
+            justify-content: center;
+            /*background-color: lightgray;*/
+            /*opacity: 0.8;*/
+            border: 5px solid lightgray;
+            height: 80px;
+            margin-bottom: 10px;
+            /*min-width: 150px;*/
+        }
+        #bg-start {
+            margin-left: 5%;
+            width: 90%;
+            /*height: 500px;*/
+            border: 5px solid lightgray;
+        }
+    </style>
 </head>
 <body onload="init()">
-    <div class="header">
-        <img src="images/superMario.jpg" alt="" id="user">
-        <div class="menu">
-            <button id="tableButton" onclick="game1()"><img src="images/table.png" alt=""></button>
-            <!--<button><img src="images/superMario.jpg" alt=""></button>
-            <button><img src="images/superMario.jpg" alt=""></button>
-            <button><img src="images/superMario.jpg" alt=""></button>
-            <button><img src="images/superMario.jpg" alt=""></button>
-            <button><img src="images/superMario.jpg" alt=""></button>-->
-        </div>
-        <!--<div class="dropdown">
-            <button class="dropbtn"><img src="images/options.png" alt="" id="options"></button>
-            <div class="dropdown-content">
-              <a href="#">Link 1</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
+<div class="container-fluid bg-clouds">
+        <div class="row no-padding">
+            <div class="col-sm-12 no-padding">
+                <nav class="navbar navbar-expand-sm bg-dark n">
+                    <div class="levo">
+                        <a href="#" class="navbar-brand logo_link">
+                            <img src="images/superMario.jpg" alt="logo" id="logo" class="rounded-pill">
+                        </a>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    Tournaments
+                                </a>
+                            </li>
+                            <li class="nav-item" style="width: 85px;">
+                                <a href="#" class="nav-link">
+                                    Add level
+                                </a>
+                            </li>
+                            <li class="nav-item" style="width: 135px;">
+                                <a href="#" class="nav-link">
+                                    Account settings
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    Allow/block
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    History
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" style="width: 75px;">
+                                    Roles
+                                </a>
+                            </li>
+                            <li>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Top players lists</button>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-item">
+                                            <a href="#">Top players (global)</a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a href="#">Top players for game</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="desno">
+                        <!--<a href="#" class="nav-link" id="signOut">
+                            Sign out
+                        </a>-->
+                        <button type="button" class="btn btn- bg-danger" style="margin-right: 10px;">Sign out</button>
+                    </div>
+                </nav>
             </div>
-        </div>-->
-        <!--<button><img src="images/options.png" alt="" id="options"></button>-->
-        <!--<button><img src="images/notification1.png" alt=""></button>-->
-        <div class="select">
-            <select id="selector" name="dropdown" class="dropdown">
-                <option value="0" class="black_opt" selected></option>
-                <option value="1" class="black_opt">Account settings</option>
-                <option value="2" class="black_opt">Roles</option>
-                <option value="3" class="black_opt">History</option>
-                <option value="4" class="black_opt">Top players (global)</option>
-                <option value="5" class="black_opt">Top players</option>
-                <option value="6" class="black_opt">Allow/block</option>
-            </select>
         </div>
-    </div>
-    <div class="game">
-        <div class="left">
-            
+        <div class="row">
+            <div class="offset-md-4 col-md-4 mt-4">
+                <nav class="navbar navbar-expand-sm c bg-dark games">
+                    <a href="#" class="navbar-brand">
+                        <img src="images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
+                    </a>
+                    <a href="#" class="navbar-brand">
+                        <img src="images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
+                    </a>
+                    <a href="#" class="navbar-brand">
+                        <img src="images/pikachu.png" alt="logo" id="logo3" class="rounded-pill">
+                    </a>
+                </nav>
+            </div>
         </div>
-        <div class="center" id="center">
-            <!--<canvas id="my-canvas"></canvas>-->
-            <img src="images/chooseGame.png" alt="">
+        <div class="row">
+            <div class="col-sm-2 game-info">
+                
+            </div>
+            <div class="col-sm-8">
+                <img src="images/welcome.png" alt="bg-start" id="bg-start">
+            </div>
+            <div class="col-sm-2 game-info">
+                
+            </div>
         </div>
-        <div class="right">
-            
+        <div class="row">
+            <div class="col-sm-12">
+                <br><br><br><br>
+            </div>
         </div>
-    </div>
-    <div class="footer">
-        <button onclick="addLevel()"> Add level</button>
-        <button onclick="tournament()">Tournaments</button>
-        <button>Start</button>
-        <button>Pause</button>
-        <button id="signOut" onclick="signOut_page()">Sign out</button>
     </div>
     <script>
         let startTime;
