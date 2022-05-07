@@ -58,6 +58,16 @@ let curr_limit = 0;
 
 var timeInterval;
 
+//document.getElementById("my-canvas").addEventListener('click', function() { alert(); }, false);
+
+//document.getElementsByClassName("game-info").addEventListener('click', function() { alert(); }, false);
+
+/*document.getElementById("my-canvas").click(function () {
+    alert();
+    //document.getElementById("my-canvas").style.backgroundImage = "../images/bg.png";
+    //load_map();
+});*/
+
 function start() {
     started = true;
     end = false;
@@ -65,7 +75,7 @@ function start() {
     level = 0;
     time = 0;
     document.getElementById("time_display").innerText = "00:00:00";
-
+    
     timeInterval = setInterval(function () {
         time++;
         let t = time;
@@ -347,6 +357,10 @@ var wait = false;
 function init() {
     update_list();
     canvas = document.getElementById("my-canvas");
+    canvas.addEventListener('click', function() { 
+        start();
+        $("#my-canvas").css("background-image", 'url("../images/bg.jpg")');
+     }, false);
     context = canvas.getContext("2d");
     window.addEventListener('resize', resizeCanvas, false);
     resizeCanvas();
@@ -411,6 +425,7 @@ function load_map() {
                     update_list();
                     animate();
                     clearInterval(timeInterval);
+                    $("#my-canvas").css("background-image", 'url("../images/bg_start.png")');
                 } else {
                     //alert(obj.result);
                     start_data = JSON.parse(obj.result);
@@ -503,7 +518,7 @@ function update_list() {
                 //document.getElementById("lista_poena").innerText = "" + maxLvlPts.list;
                 var table = document.getElementById("lista_poena");
                 table.innerText = "";
-                // Create an empty <tr> element and add it to the 1st position of the table:
+                /*// Create an empty <tr> element and add it to the 1st position of the table:
                 var row = table.insertRow(0);
 
                 // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
@@ -512,18 +527,24 @@ function update_list() {
 
                 // Add some text to the new cells:
                 cell1.innerHTML = "Username";
-                cell2.innerHTML = "Points";
+                cell2.innerHTML = "Points";*/
+
+                var row = $("<th></th>");
+                var cell1 = $("<td>Username</td>").css("float", "left");
+                var cell2 = $("<td>Points</td>").css("float", "right");
+                row.append(cell1).append(cell2);
+                $("#lista_poena").append(row);
 
                 for(let i = 1; i <= maxLvlPts.list.length; ++i) {
-                    var row = table.insertRow(i);
+                    var row = $("<tr></tr>").css("text-align", "center");
 
                     // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-                    var cell1 = row.insertCell(0);
-                    var cell2 = row.insertCell(1);
+                    var cell1 = $("<td>" + maxLvlPts.list[i - 1].username + "</td>").css("float", "left");
+                    var cell2 = $("<td>" + maxLvlPts.list[i - 1].points + "</td>").css("float", "right");
 
-                    // Add some text to the new cells:
-                    cell1.innerHTML = maxLvlPts.list[i - 1].username;
-                    cell2.innerHTML = maxLvlPts.list[i - 1].points;
+
+                    row.append(cell1).append(cell2);
+                    $("#lista_poena").append(row);
                 }
 
             }
@@ -550,7 +571,7 @@ function send_data() {
             if( !('error' in obj) ) {
                 v = JSON.parse(obj.result);
                 //alert(v + "???");
-                update_data();
+                //update_data();
             }
             else {
                 console.log(obj.error);
