@@ -9,7 +9,7 @@
     <title>Add level</title>
     <link rel="stylesheet" href="../bootstrap/bootstrap-5.1.3-dist/css/bootstrap.min.css">
     <script src="../bootstrap/bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="rayman_addLevel.css">
+    <link rel="stylesheet" href="flappyBird_addLevel.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
@@ -96,64 +96,64 @@
                     <div class="left">
                         <div class="top">
                             <h1>Instructions: </h1>
-                            <p>Rayman is trying to collect as many coins as possible. Create a map by entering number of coins(at least 1, less than 5), their positions like in the example below, number of floating trees and their positions like in the example below. <br>
-                            <h3 style="color: red">Coin position format: [pos_x, pos_y]<br> Floating tree position format: [pos_x, pos_y, length]</h3><hr>
-                                Note: Rayman always spawns in lower left corner, can move left, right and jump 2 cells. 
+                            <p>Rayman is trying to collect as many coins as possible. Create a map by entering number of coins(at least 1, less than 5), their positions like in the example below, number of fire balls and their positions like in the example below. <br>
+                            <h3 style="color: red">Coin position format: [pos_x, pos_y]<br> Fire ball position format: [pos_y, direction]</h3><hr>
+                                Note: Rayman always spawns in the 0th column centered by height and can move in all directions.
                             </p>
-                            <!--<br><br><br>-->
+                            <br><br><br>
                         </div>
                         <div class="bottom">
                             <h1>Example: </h1>
                             <div class="example">
                                 <br>
                                 <table>
-                                  <tr>
-                                      <td>Number of rows: 7</td>
-                                      <td rowspan="4"><img src="images/level_map.png"></td>
-                                  </tr>
-                                  <tr>
-                                      <td>Number of columns: 7</td>
-                                  </tr>
-                                  <tr>
-                                      <td>Positions of coins:  [3, 2], [4, 3]</td>
-                                  </tr>
-                                  <tr>
-                                      <td>Positions of floating trees: [1,1,2], [3,3,2], [4,1,2], [5,5,2]</td>
-                                  </tr>
+                                    <tr>
+                                        <td>Number of rows: 5</td>
+                                        <td rowspan="4"><img src="../images/level_map.png"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Number of columns: 5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Positions of coins:  [2, 5]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Positions of floating trees: [1,down], [3,up], [4,down]</td>
+                                    </tr>
                                 </table>
                                 <!--<span>
-                                <p>
-                                    Number of rows: 7 <br>
-                                    Number of columns: 7 <br>
-                                    Number of coins: 2 <br>
-                                    Positions of coins:  [3, 2], [4, 3] <br>
-                                    Number of floating trees: 6 <br>
-                                    Positions of floating trees: [1,1,2], [3,3,2], [4,1,2], [5,5,2] <br><br><br>
-                                </p>
+                                    <p>
+                                    Number of rows: 5 <br>
+                                    Number of columns: 10 <br>
+                                    Number of coins: 1 <br>
+                                    Positions of coins:  [2, 5] <br>
+                                    Number of fire balls: 3 <br>
+                                    Positions of floating trees: [1,down], [3,up], [4,down] <br><br><br>
+                                    </p>
                                 </span>
-                                <span><img src="images/level_map.png"></span>-->
+                                <span><img src="../images/level_map.png"></span>-->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12">
-                <div> 
+                <div>
                     <div class="right">
                         <div class="form">
                             <form method="post">
                                 <label for="numRows"> Number of rows:</label>
                                 <input type="text" id="numRows" name="numRows" value="5"><br><br>
                                 <label for="numCols"> Number of columns:</label>
-                                <input type="text" id="numCols" name="numCols" value="5"><br><br>
+                                <input type="text" id="numCols" name="numCols" value="10"><br><br>
                                 <label for="numR"> Number of coins:</label>
-                                <input type="text" id="numC" name="numC" value="2"><br><br>
+                                <input type="text" id="numC" name="numC" value="1"><br><br>
                                 <label for="posC"> Positions of coins:</label>
-                                <textarea name="posC" id="posC" cols="30" rows="5">[1,1], [2,2]</textarea><br><br>
-                                <label for="numFT"> Number of floating trees:</label>
-                                <input type="text" id="numFT" name="numFT" value="2"><br><br>
-                                <label for="fTrees"> Positions of floating trees:</label>
-                                <textarea name="posFT" id="fTrees" cols="30" rows="5">[1,1,2,1], [2,2,2,1]</textarea><br><br>
+                                <textarea name="posC" id="posC" cols="30" rows="5">[1,1]</textarea><br><br>
+                                <label for="numFT"> Number of fire balls:</label>
+                                <input type="text" id="numFT" name="numFT" value="3"><br><br>
+                                <label for="fTrees"> Positions of fire balls:</label>
+                                <textarea name="posFT" id="fTrees" cols="30" rows="5">[1,down], [3,up], [4,down]</textarea><br><br>
                                 <input type="submit" value="Add level" class="submit" id="myButton" name="button1">
                             </form>
                         </div>

@@ -9,10 +9,10 @@
     <title>Flappy bird</title>
     <link rel="stylesheet" href="../bootstrap/bootstrap-5.1.3-dist/css/bootstrap.min.css">
     <script src="../bootstrap/bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="bricks.css">
+    <link rel="stylesheet" href="flappyBird.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="bricks.js"></script>
+    <script src="flappyBird.js"></script>
 </head>
 <body onload="init()">
     <div class="container-fluid bg-clouds">

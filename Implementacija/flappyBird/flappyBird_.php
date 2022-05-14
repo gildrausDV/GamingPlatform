@@ -96,7 +96,7 @@
         return $result;
     }
 
-    function bricks_game_data($level) {
+    function flappyBird_game_data($level) {
         $servername = "localhost";
         $username = "root";
         $password = "";
@@ -109,7 +109,7 @@
             if ($conn->connect_error)
                 die("Connection failed: " . $conn->connect_error);
             
-            $sql = "SELECT game.ID FROM game WHERE game.Name = 'Bricks'";
+            $sql = "SELECT game.ID FROM game WHERE game.Name = 'flappyBird'";
             $game = $conn->query($sql);
             
             if($game->num_rows == 0 || $game->num_rows > 1) $game = false;
@@ -146,8 +146,8 @@
     if( !isset($aResult['error']) ) {
 
         switch($_POST['functionname']) {
-            case 'bricks_game_data':
-                $aResult['result'] = bricks_game_data(intval($_POST['arguments']));
+            case 'flappyBird_game_data':
+                $aResult['result'] = flappyBird_game_data(intval($_POST['arguments']));
                 break;
             case 'save_data':
                 $aResult['result'] = save_data(intval($_POST['arguments'][0]), intval($_POST['arguments'][1]), intval($_POST['arguments'][2]));

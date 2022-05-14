@@ -5,6 +5,7 @@ let hh = 0;
 let mm = 0;
 let ss = 0;
 
+let s = false;
 let started = false;
 let paused = false;
 let ended = true;
@@ -52,6 +53,7 @@ function start() {
         print_time(s_hh + ":" + s_mm + ":" + s_ss);
     }, 1000);
     started = true;
+    s = true;
     ended = false;
 }
 
@@ -291,7 +293,7 @@ function clear() {
 }
 
 function update() {
-    rayman.move();
+    if(rayman) rayman.move();
     if(checkCoin()) {
         //coin.collected = true;
         //nextX = 10;
@@ -331,7 +333,8 @@ function draw() {
 
 function animate() {
     clear();
-    if(started) update();
+    if(!started || ended) return;
+    update();
     draw();
 }
 
@@ -346,10 +349,22 @@ function resizeCanvas() {
 }
 
 function game_end() {
-    if(numOfCoins == 0) return false;
+    //(coins);
+    if(numOfCoins == 0) {
+        //loaded = false;
+        return false;
+    }
     if(timeLeft == 0) return true;
-    for(let i = 0; i < numOfCoins; ++i)
-        if(!coins[i].collected) return false;
+    let txt = "";
+    for(let i = 0; i < coins.length; ++i) {
+        txt += coins[i].collected;
+        if(!coins[i].collected) {
+            //loaded = false;
+            return false;
+        }
+    }
+    if(coins == []) alert("ZASTO PRAZNO??");
+    //alert("GAME END12334" + " " + txt);
     return true;
 }
 
@@ -409,7 +424,7 @@ function send_data() {
             if( !('error' in obj) ) {
                 v = JSON.parse(obj.result);
                 //alert(v + "???");
-                update_data();
+                //update_data();
             }
             else {
                 console.log(obj.error);
@@ -424,13 +439,19 @@ function send_data() {
 
 function init() {
     canvas = document.getElementById("my-canvas");
+    canvas.addEventListener('click', function() {
+        if(started) return;
+        start();
+        //level = 0;
+        $("#my-canvas").css("background-image", 'url("../images/bg.jpg")');
+     }, false);
     context = canvas.getContext("2d");
     window.addEventListener('resize', resizeCanvas, false);
     resizeCanvas();
 
     document.getElementById("timeLeft_display").innerText = timeLeft + "";
 
-    jQuery.ajax({
+    /*jQuery.ajax({
         type: "POST",
         url: 'rayman_.php',
         //dataType: 'json',
@@ -450,62 +471,71 @@ function init() {
         error: function(xhr, status, error) {
             alert(error + " ??? " + status);
         }
-    });
+    });*/
 
-    update_list();
+    //update_list();
     //rayman = new Rayman();
     /*for(let i = 0; i <  numOfBlocks; ++i)
         blocks.push(new Block());
     for(let i = 0; i <  numOfCoins; ++i)
         coins.push(new Coin());*/
         let again = false;
-    interval = setInterval(function() {
-    if(game_end() || again) {
         update_list();
-        if(again) again = false;
-        numOfCoins = 0;
-        left = right = false;
-        timeLeft = startTimeLeft;
-        //alert("game end...")
-        for(let i = 0; i < numOfCoins; ++i)
-            coins[i].collected = false;
-        level += 1;
-        document.getElementById("level_display").innerText = level + "";
-        jQuery.ajax({
-            type: "POST",
-            url: 'rayman_.php',
-            //dataType: 'json',
-            data: {functionname: 'rayman_game_data', arguments: level},
-        
-            success: function (obj, textstatus) {
-                if( !('error' in obj) ) {
-                    if(obj.result == false) {
-                        //alert("GAME END");
-                        // upisi poene u bazu
-                        send_data();
-                        level = 0;
-                        started = false;
-                        paused = false;
-                        clearInterval(timeInterval);
-                        time_restart();
-                        again = true;
+    interval = setInterval(function() {
+        if(started && (game_end() || again)) {
+            update_list();
+            if(again) again = false;
+            numOfCoins = 0;
+            left = right = false;
+            timeLeft = startTimeLeft;
+            //alert("game end...")
+            for(let i = 0; i < numOfCoins; ++i)
+                coins[i].collected = false;
+            level += 1;
+            document.getElementById("level_display").innerText = level + "";
+            //alert("daj level: " + (level - 1));
+            jQuery.ajax({
+                type: "POST",
+                url: 'rayman_.php',
+                //dataType: 'json',
+                data: {functionname: 'rayman_game_data', arguments: level - 1},
+            
+                success: function (obj, textstatus) {
+                    if( !('error' in obj) ) {
+                        if(obj.result == false) {
+                            // alert("GAME END" + level);
+                            // upisi poene u bazu
+                            send_data();
+                            level = 1;
+                            started = false;
+                            paused = false;
+                            clearInterval(timeInterval);
+                            time_restart();
+                            again = true;
+                            ended = true;
+                            $("#my-canvas").css("background-image", 'url("../images/bg_start.png")');
+                            update_list();
+                            animate();
+                        } else {
+                            //alert(obj.result);
+                            start_data = JSON.parse(obj.result);
+                            //alert(obj.result);
+                            update_data();
+                            loaded = true;
+                        }
                     }
-                    //alert(obj.result);
-                    start_data = JSON.parse(obj.result);
-                    //alert(start_data);
-                    update_data();
+                    else {
+                        console.log(obj.error);
+                        alert(obj.error + "  " + textstatus);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert("1" + xhr.responseText + " " + error + " " + status);
                 }
-                else {
-                    console.log(obj.error);
-                    alert(obj.error + "  " + textstatus);
-                }
-            },
-            error: function(xhr, status, error) {
-                alert("1" + xhr.responseText + " " + error + " " + status);
-            }
-        });
-    }
-    animate();
+            });
+        }
+        else if(loaded && started && !ended) animate();
+        //else if(started) alert(loaded + " " + started + " " + !ended);
     }, 15);
 }
 

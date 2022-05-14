@@ -1,5 +1,9 @@
 <?php
-    session_start();
+    try {
+        session_start();
+    } catch(Exception $e) {
+        
+    }
     function add_level($numRows, $numCols, $numCoins, $coins, $numFTrees, $fTrees) {
         $result = true;
 
@@ -60,10 +64,10 @@
             $conn->close();
 
         } catch (Exception $e){
-            echo $e->getMessage() . "<br/>";
+            /*echo $e->getMessage() . "<br/>";
             while($e = $e->getPrevious()) {
                 echo 'Previous exception: '.$e->getMessage() . "<br/>";
-            }
+            }*/
         }
 
         return $js;

@@ -412,9 +412,9 @@ function load_map() {
     level++;
     jQuery.ajax({
         type: "POST",
-        url: 'bricks_.php',
+        url: 'flappyBird_.php',
         //dataType: 'json',
-        data: {functionname: 'bricks_game_data', arguments: level},
+        data: {functionname: 'flappyBird_game_data', arguments: level},
     
         success: function (obj, textstatus) {
             if( !('error' in obj) ) {
@@ -427,7 +427,7 @@ function load_map() {
                     clearInterval(timeInterval);
                     $("#my-canvas").css("background-image", 'url("../images/bg_start.png")');
                 } else {
-                    //alert(obj.result);
+                    //alert("Level: " + level + "   " + obj.result);
                     start_data = JSON.parse(obj.result);
                     r = start_data.rows;
                     c = start_data.cols;
@@ -488,11 +488,11 @@ function create_map() {
 
 function update_list() {
     var maxLvlPts;
-
+    //alert("update_list");
     // get max level and points
     jQuery.ajax({
         type: "POST",
-        url: 'bricks_.php',
+        url: 'flappyBird_.php',
         //dataType: 'json',
         data: {functionname: 'max_level_and_points', arguments: 2},
         //data: {functionname: 'save_data', arguments: points},
@@ -562,7 +562,7 @@ function update_list() {
 function send_data() {
     jQuery.ajax({
         type: "POST",
-        url: 'bricks_.php',
+        url: 'flappyBird_.php',
         //dataType: 'json',
         data: {functionname: 'save_data', arguments: [time, points, level - 1]},
         //data: {functionname: 'save_data', arguments: points},

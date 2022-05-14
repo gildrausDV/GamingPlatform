@@ -18,7 +18,7 @@
                 <nav class="navbar navbar-expand-sm bg-dark n">
                     <div class="levo">
                         <a href="#" class="navbar-brand logo_link">
-                            <img src="images/superMario.jpg" alt="logo" id="logo" class="rounded-pill">
+                            <img src="../images/superMario.jpg" alt="logo" id="logo" class="rounded-pill">
                         </a>
                         <ul class="navbar-nav">
                             <li class="nav-item">
@@ -77,13 +77,13 @@
             <div class="offset-md-4 col-md-4 mt-4">
                 <nav class="navbar navbar-expand-sm c bg-dark games">
                     <a href="#" class="navbar-brand">
-                        <img src="images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
+                        <img src="../images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
                     </a>
                     <a href="#" class="navbar-brand">
-                        <img src="images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
+                        <img src="../images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
                     </a>
                     <a href="#" class="navbar-brand">
-                        <img src="images/pikachu.png" alt="logo" id="logo3" class="rounded-pill">
+                        <img src="../images/pikachu.png" alt="logo" id="logo3" class="rounded-pill">
                     </a>
                 </nav>
             </div>
@@ -115,7 +115,7 @@
                 type: "POST",
                 url: 'topPlayers_.php',
                 //dataType: 'json',
-                data: {functionname: 'get_topPlayers', arguments: 1},
+                data: {functionname: 'get_topPlayers', arguments: 2},
             
                 success: function (obj, textstatus) {
                     if( !('error' in obj) ) {

@@ -62,7 +62,7 @@
     align-items: center;
 }
 .bg-clouds {
-    background-image: url('images/cloud.png');
+    background-image: url('../images/cloud.png');
     height: 1000px;
     /*width: 100%;
     margin: 0px;
