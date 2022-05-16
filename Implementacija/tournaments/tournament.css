@@ -1,94 +1,124 @@
 /* Autor: Dimitrije Vujčić */
 
-body {
-    background-image: url('../images/cloud.png');
-}
-
-#notification {
+#tournament_form {
+    text-align: center;
     background-color: black;
+    width: 50%;
+    margin-left: 25%;
+    height: 450px;
     opacity: 0.8;
     color: white;
-    text-align: center;
+    border: 5px solid white;
 }
 
-.notification {
+#tournament_form:hover {
+    border: 5px solid gray;
+}
+
+.izbor {
     background-color: black;
-    opacity: 0.8;
-    width: 100%;
-    height: 37px;
 }
 
-.center {
-    width: 100%;
-    /*height: 655px;*/
+.izbor:hover {
+    background-color: blue;
 }
 
-#header_t {
-    width: 100%;
-    border: 4px solid black;
-}
-
-#header_t h1 {
-    text-align: center;
-}
-
-.tournaments {
-    width: 80%;
+.izbor:hover {
     background-color: black;
-    opacity: 0.8;
+}
+
+.izbor li a {
     color: white;
-    position: relative;
-    left: 10%;
+    text-decoration: none;
 }
 
-.tournament {
+.izbor li:hover {
+    background-color: blue;
+}
+
+.izbor li a:hover {
+    font: bold;
+    text-decoration: none;
+}
+
+
+#logo, #logo1, #logo2, #logo3 {
+    width: 50px;
+    height: 50px;
+    border: 5px solid black;
+}
+#logo1, #logo2, #logo3 {
+    max-width: 60px;
+    max-height: 60px;
+    border: 5px solid black;
+    /*margin-left: 15px;*/
+}
+#logo:hover, #logo1:hover, #logo2:hover, #logo3:hover {
+    border: 0px;
+}
+.logo_link {
+    margin-left: 15px;
+}
+.nav-link {
+    color: white;
+}
+.n {
     display: flex;
     justify-content: space-between;
+}
+.levo {
+    display: flex;
+    float: left;
+    align-items: center;
+}
+.desno {
+    display: flex;
+    float: right;
+    align-items: center;
+}
+.bg-clouds {
+    background-image: url('../images/cloud.png');
+    height: 1000px;
+    /*width: 100%;
+    margin: 0px;
+    padding: 0 !important;*/
+}
+.game-info {
     text-align: center;
-    border: 2px solid white;
+    color: white;
+    background-color: black;
+    opacity: 0.8;
+    border: 5px solid lightgray;
+    /*margin-top: 50px;*/
+    min-height: 500px;
 }
-
-.span2 {
-    width: 5%;
-    height: 60px;
+.game-info:hover {
+    border: 5px solid gray;
 }
-
-.span2 button {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    margin: 10px 0px 0px -20px;
+.no-padding {
+    padding: 0 !important;
+}
+.games {
+    text-align: center;
+    justify-content: center;
+    /*background-color: lightgray;*/
+    /*opacity: 0.8;*/
+    border: 5px solid lightgray;
+    height: 80px;
+    margin-bottom: 10px;
+    /*min-width: 150px;*/
+}
+#bg-start {
+    margin-left: 5%;
+    width: 90%;
+    /*height: 500px;*/
+    border: 5px solid lightgray;
 }
 
 #addTournament {
-    width: 10%;
-    height: 50px;
-    text-shadow: 1cm;
-    font-weight: bold;
-    background-color: goldenrod;
-    position: relative;
-    left: 45%;
+    border: 2px solid white;
 }
 
-.footer {
-    /*background-color: lightblue;*/
-    width: 100%;
-    height: 50px;
-    position: relative;
-    top: 50%;
-    margin: 80px 0px 0px 0px;
-}
-
-.footer button {
-    width: 7%;
-    height: 50px;
-    margin: 0px 0px 0px 0px;
-}
-
-#back {
-    float: left;
-}
-
-#signOut {
-    float: right;
+#addTournament:hover {
+    border: 2px solid gray;
 }
