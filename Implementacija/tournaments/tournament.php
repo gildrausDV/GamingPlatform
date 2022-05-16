@@ -1,4 +1,4 @@
-<!-- Autor: Dimitrije Vujčić -->
+<!-- Autor: Bogdan Jovanović -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,32 +6,116 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tournament</title>
+    <title>Top players</title>
+    <link rel="stylesheet" href="../bootstrap/bootstrap-5.1.3-dist/css/bootstrap.min.css">
+    <script src="../bootstrap/bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="tournament.css">
 </head>
 <body>
-    <div class="center">
-        <div class="notification"><h1 id="notification"></h1></div>
-        <!--<div class="notification"><h1 id="notification1"></h1></div>-->
-        <br>
-        <div id="header_t"><h1>Tournaments:</h1></div>
-        <br>
-        <div class="tournaments" id="tournaments">
-            <!--<div class="tournament">
-                <span class="span1"><h1>&nbsp;&nbsp;Bricks</h1></span>
-                <span class="span2"><button onclick="join()">Join</button></span>
-            </div>-->
+    <div class="container-fluid bg-clouds">
+        <div class="row no-padding">
+            <div class="col-sm-12 no-padding">
+                <nav class="navbar navbar-expand-sm bg-dark n">
+                    <div class="levo">
+                        <a href="#" class="navbar-brand logo_link">
+                            <img src="../images/superMario.jpg" alt="logo" id="logo" class="rounded-pill">
+                        </a>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    Tournaments
+                                </a>
+                            </li>
+                            <li class="nav-item" style="width: 85px;">
+                                <a href="#" class="nav-link">
+                                    Add level
+                                </a>
+                            </li>
+                            <li class="nav-item" style="width: 135px;">
+                                <a href="#" class="nav-link">
+                                    Account settings
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    Allow/block
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    History
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" style="width: 75px;">
+                                    Roles
+                                </a>
+                            </li>
+                            <li>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">Top players lists</button>
+                                    <ul class="dropdown-menu izbor">
+                                        <li class="dropdown-item">
+                                            <a href="#">Top players (global)</a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a href="#">Top players for game</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="desno">
+                        <button type="button" class="btn btn- bg-danger" style="margin-right: 10px;">Sign out</button>
+                    </div>
+                </nav>
+            </div>
         </div>
-        <br><br><br>
-        <button id="addTournament" onclick="addTournament()">Add tournament</button>
-    </div>
-    <div class="footer">
-        <button id="back" onclick="back()">Back</button>
-        <button id="signOut" onclick="signOut_page()">Sign out</button>
+        <div class="row">
+            <div class="offset-md-4 col-md-4 mt-4">
+                <nav class="navbar navbar-expand-sm c bg-dark games">
+                    <a href="#" class="navbar-brand">
+                        <img src="../images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
+                    </a>
+                    <a href="#" class="navbar-brand">
+                        <img src="../images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
+                    </a>
+                    <a href="#" class="navbar-brand">
+                        <img src="../images/pikachu.png" alt="logo" id="logo3" class="rounded-pill">
+                    </a>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-sm-2 col-sm-8 mt-2" style="text-align: center">
+                <!--<table style="width: 100%">
+                    
+                </table>-->
+                <br>
+                <!--<div class="tournaments" id="tournaments">-->
+                    <!--<div class="tournament">
+                        <span class="span1"><h1>&nbsp;&nbsp;Bricks</h1></span>
+                        <span class="span2"><button onclick="join()">Join</button></span>
+                    </div>-->
+                    <table style="width: 100%">
+
+                    </table>
+                <!--</div>-->
+                <br><br><br>
+                <button id="addTournament" onclick="addTournament()" class="btn btn-secondary">Add tournament</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <br><br><br><br>
+            </div>
+        </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
-
         var start_data;
 
         jQuery.ajax({
@@ -56,7 +140,33 @@
         });
 
         function update_data() {
-            for(let i = 1; i <= start_data.list.length; ++i) {
+            for(let i = 0; i < start_data.list.length; ++i) {
+
+                let row = $("<tr></tr>").css({"width": "100%", 
+                                        "height": "90px", 
+                                        "display": "flex",
+                                        "justify-content": "space-around",
+                                        "text-align": "center",
+                                        "border": "3px solid white",
+                                        "background-color": "black",
+                                        "opacity": "0.8",
+                                        "color": "white",
+                                        "position": "relative"
+                                    });
+                row.hover(function () { $(this).css("border", "3px solid gray") }, function () { $(this).css("border", "3px solid white") });
+                let col = $("<td><h1>" + start_data.list[i].name + "</h1></td>").css("margin-top", "1%");
+                row.append(col);
+                
+                col = $("<td><h1>" + start_data.list[i].date + "</h1></td>").css("margin-top", "1%");
+                row.append(col);
+                
+                col = $("<td><h1>" + start_data.list[i].timeStart + "</h1></td>").css("margin-top", "1%");
+                row.append(col);
+                
+                col = $("<td><h1>" + start_data.list[i].timeEnd + "</h1></td>").css("margin-top", "1%");
+                row.append(col);
+
+                $("table").append(row);
 
                 /*
                 <div class="tournament">
@@ -65,13 +175,13 @@
                 </div>
                 */
 
-                document.getElementById("tournaments").innerHTML += "<div class='tournament'>\
+                /*document.getElementById("tournaments").innerHTML += "<div class='tournament'>\
                         <span class='span1'><h1>&nbsp;&nbsp;" + start_data.list[i - 1].name + "</h1></span>\
                         <span class='span1'><h1>&nbsp;&nbsp;" + start_data.list[i - 1].date + "</h1></span>\
                         <span class='span1'><h1>&nbsp;&nbsp;" + start_data.list[i - 1].timeStart + "</h1></span>\
                         <span class='span1'><h1>&nbsp;&nbsp;" + start_data.list[i - 1].timeEnd + "</h1></span>\
                         <span class='span2'><button onclick='join(" + start_data.list[i - 1].id + ")'>Join</button></span>\
-                    </div>"
+                    </div>"*/
                 
             } 
         }
@@ -136,6 +246,5 @@
             });
         }
     </script>
-    <!--<script type="text/javascript" src="addTournament.js"></script>-->
 </body>
 </html>
