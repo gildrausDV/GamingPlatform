@@ -1,0 +1,49 @@
+/* Autor: Bogdan Jovanović */
+
+body {
+    background-image: url("/images/cloud.png");
+}
+
+.notification {
+    background-color: black;
+    opacity: 0.8;
+    width: 100%;
+    height: 37px;
+    margin-top: 10px;
+}
+
+.form:hover {
+    border: 5px solid gray;
+}
+
+.input_footer1 {
+    color: white;
+}
+
+.input_footer2 {
+    color: white;
+}
+
+.links {
+    display: flex;
+    justify-content: space-around;
+}
+
+.form {
+    font-weight: bold;
+    background-color: black;
+    opacity: 0.8;
+    height: 450px;
+    color: white;
+    text-align: center;
+    min-width: 250px;
+    border: 5px solid white;
+}
+
+.btn {
+    border: 2px solid white;
+}
+
+.btn:hover{
+    border: 2px solid gray;
+}
