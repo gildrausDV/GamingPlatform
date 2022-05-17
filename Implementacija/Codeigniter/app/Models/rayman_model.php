@@ -5,6 +5,7 @@ class Blog_model extends CI_Model {
 
     public $maxLevel;
     public $maxPoints;
+    public $top10 = [];
 
     public function get_max_level_and_points($id_user, $id_game) {
         $this->db->select_max('level');
@@ -19,7 +20,7 @@ class Blog_model extends CI_Model {
     }
 
     public function get_top_10() {
-        
+        $this->db->get('playedgame', 10);
     }
 
 }
