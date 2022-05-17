@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\Controller;
 use App\Models\Login_model;
 
 class Home extends BaseController
@@ -19,9 +20,13 @@ class Home extends BaseController
     public function process() {
 
         //$this->load->model('Login_model');
+        //$this->$db      = \Config\Database::connect();
+        //$builder = $this->$db->table('user');
         $a = new Login_model();
-
-        return view('Rayman/rayman');
+        if($a->login()) {
+            return view('Rayman/rayman');
+        }
+        return view('login');
     }
 
 }

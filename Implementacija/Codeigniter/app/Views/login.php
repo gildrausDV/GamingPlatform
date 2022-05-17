@@ -1,7 +1,5 @@
 <!-- Autor: Bogdan Jovanović -->
-<?php
-    session_start();
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +18,7 @@
             <div class="col-sm-12 notification">
                 <h1 id="notification">
                 <?php
-                    if(array_key_exists('button1', $_POST)) {
+                    /*if(array_key_exists('button1', $_POST)) {
                         require __DIR__ . '/sign_.php';
                         $username = $_REQUEST['username'];
                         $password = $_REQUEST['password'];
@@ -29,7 +27,7 @@
                         } else {
                         header("Location:play.php");
                         }
-                    }
+                    }*/
                 ?>
                 </h1>
             </div>
