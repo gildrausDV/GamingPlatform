@@ -1,4 +1,30 @@
 <?php
+
+
+class Blog_model extends CI_Model {
+
+    public $maxLevel;
+    public $maxPoints;
+
+    public function get_max_level_and_points($id_user, $id_game) {
+        $this->db->select_max('level');
+        $this->db->where('ID_user', $id_user);
+        $this->db->where('ID_game', $id_game);
+        $maxLevel = $this->db->get('playedgame');
+
+        $this->db->select_max('points');
+        $this->db->where('ID_user', $id_user);
+        $this->db->where('ID_game', $id_game);
+        $maxPoints = $this->db->get('playedgame');
+    }
+
+    public function get_top_10() {
+        
+    }
+
+}
+
+/*
     session_start();
 
     function max_level_and_points($game_id) {
@@ -164,4 +190,4 @@
 
     echo json_encode($aResult);
 
-?>
+?>*/
