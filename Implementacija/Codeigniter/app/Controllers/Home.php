@@ -1,9 +1,11 @@
 <?php
 
+
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Models\Login_model;
+use App\Config\autoload;
 
 class Home extends BaseController
 {
@@ -14,19 +16,21 @@ class Home extends BaseController
     }
 
     public function login() {
-        return view("login");
+        helper('form');
+        $data['log'] = '0';
+        return view('login', $data);
     }
 
     public function process() {
-
-        //$this->load->model('Login_model');
-        //$this->$db      = \Config\Database::connect();
-        //$builder = $this->$db->table('user');
-        $a = new Login_model();
-        if($a->login()) {
-            return view('Rayman/rayman');
+        $model = new Login_model();
+        $res = $model->login();
+        //print_r($res);
+        $data['log'] = "".$res;
+        if($res == 0) {
+            return view('Rayman/rayman', $data);
         }
-        return view('login');
+        
+        return view('login', $data);
     }
 
 }

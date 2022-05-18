@@ -17,18 +17,10 @@
         <div class="row">
             <div class="col-sm-12 notification">
                 <h1 id="notification">
-                <?php
-                    /*if(array_key_exists('button1', $_POST)) {
-                        require __DIR__ . '/sign_.php';
-                        $username = $_REQUEST['username'];
-                        $password = $_REQUEST['password'];
-                        if(!signIn($username, $password)) {
-                            echo "Username or password is incorrect!";
-                        } else {
-                        header("Location:play.php");
-                        }
-                    }*/
-                ?>
+                    <?php 
+                    if(esc($log) == '2') echo "Username or password is not valid!";
+                    else if(esc($log) == '1') echo "Access denied!";
+                    ?>
                 </h1>
             </div>
         </div>
@@ -41,7 +33,8 @@
                 <br><br>
                 <form method="post" action="<?php echo site_url('Home/process'); ?>">
                     <label for="fname">Username:</label>
-                    <input type="text" id="username" name="username"><br><br>
+                    <input type="text" id="username" name="username">
+                    <br><br>
                     <label for="lname">Password:&nbsp;</label>
                     <input type="password" id="password" name="password"><br><br>
                     <button class="btn btn-secondary" type="submit"> Sign in</button>
