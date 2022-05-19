@@ -31,7 +31,7 @@
                 <h1>Sign in</h1>
                 <hr>
                 <br><br>
-                <form method="post" action="<?php echo site_url('Home/process'); ?>">
+                <form method="post" action="<?php echo site_url('Home/login_'); ?>">
                     <label for="fname">Username:</label>
                     <input type="text" id="username" name="username">
                     <br><br>
