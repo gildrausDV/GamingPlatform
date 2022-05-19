@@ -47,7 +47,7 @@
                         </a>
                     </div>
                     <div class="register">
-                        <a class="input_footer2" href="register.html">
+                        <a class="input_footer2" href="<?php echo base_url()."/Home/register"  ?>">
                             Register
                         </a>
                     </div>
