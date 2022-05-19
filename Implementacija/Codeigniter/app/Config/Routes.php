@@ -29,10 +29,19 @@ $routes->setAutoRoute(true);
  * --------------------------------------------------------------------
  */
 
+$route['default_controller'] = 'welcome';
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
+
+$route['ajax-request'] = 'Games/index';
+$route['ajax-requestPost']['post'] = 'Games/ajaxRequestPost';
+
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-
+$routes->get('/rayman', 'Games::game/Rayman');
+$routes->get('/flappyBird', 'Games::game/FlappyBird');
+$routes->get('/updateList', 'Games::game/getList');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

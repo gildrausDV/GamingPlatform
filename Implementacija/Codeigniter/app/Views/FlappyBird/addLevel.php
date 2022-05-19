@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add level</title>
-    <link rel="stylesheet" href="../bootstrap/bootstrap-5.1.3-dist/css/bootstrap.min.css">
-    <script src="../bootstrap/bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="flappyBird_addLevel.css">
+    <link rel="stylesheet" href="<?= base_url() ?>/assets/style/bootstrap.min.css">
+    <script src="<?= base_url() ?>/assets/scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="<?= base_url() ?>/assets/style/flappyBird_addLevel.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
@@ -20,7 +20,7 @@
                 <nav class="navbar navbar-expand-sm bg-dark n">
                     <div class="levo">
                         <a href="#" class="navbar-brand logo_link">
-                            <img src="../images/superMario.jpg" alt="logo" id="logo" class="rounded-pill">
+                            <img src="<?= base_url() ?>/images/superMario.jpg" alt="logo" id="logo" class="rounded-pill">
                         </a>
                         <ul class="navbar-nav">
                             <li class="nav-item">
@@ -79,13 +79,13 @@
             <div class="offset-md-4 col-md-4 mt-4">
                 <nav class="navbar navbar-expand-sm c bg-dark games">
                     <a href="#" class="navbar-brand">
-                        <img src="../images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
+                        <img src="<?= base_url() ?>/images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
                     </a>
                     <a href="#" class="navbar-brand">
-                        <img src="../images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
+                        <img src="<?= base_url() ?>/images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
                     </a>
                     <a href="#" class="navbar-brand">
-                        <img src="../images/pikachu.png" alt="logo" id="logo3" class="rounded-pill">
+                        <img src="<?= base_url() ?>/images/pikachu.png" alt="logo" id="logo3" class="rounded-pill">
                     </a>
                 </nav>
             </div>
@@ -109,7 +109,7 @@
                                 <table>
                                     <tr>
                                         <td>Number of rows: 5</td>
-                                        <td rowspan="4"><img src="../images/level_map.png"></td>
+                                        <td rowspan="4"><img src="<?= base_url() ?>/images/level_map.png"></td>
                                     </tr>
                                     <tr>
                                         <td>Number of columns: 5</td>
@@ -121,17 +121,6 @@
                                         <td>Positions of floating trees: [1,down], [3,up], [4,down]</td>
                                     </tr>
                                 </table>
-                                <!--<span>
-                                    <p>
-                                    Number of rows: 5 <br>
-                                    Number of columns: 10 <br>
-                                    Number of coins: 1 <br>
-                                    Positions of coins:  [2, 5] <br>
-                                    Number of fire balls: 3 <br>
-                                    Positions of floating trees: [1,down], [3,up], [4,down] <br><br><br>
-                                    </p>
-                                </span>
-                                <span><img src="../images/level_map.png"></span>-->
                             </div>
                         </div>
                     </div>
@@ -141,7 +130,7 @@
                 <div>
                     <div class="right">
                         <div class="form">
-                            <form method="post">
+                            <div>
                                 <label for="numRows"> Number of rows:</label>
                                 <input type="text" id="numRows" name="numRows" value="5"><br><br>
                                 <label for="numCols"> Number of columns:</label>
@@ -155,7 +144,7 @@
                                 <label for="fTrees"> Positions of fire balls:</label>
                                 <textarea name="posFT" id="fTrees" cols="30" rows="5">[1,down], [3,up], [4,down]</textarea><br><br>
                                 <input type="submit" value="Add level" class="submit" id="myButton" name="button1">
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -165,27 +154,55 @@
             <div class="col-sm-12 no-padding">
                 <nav class="navbar navbar-expand-sm bg-dark n" style="color: white; height: 50px; margin-top: 42px;">
                     <div style="width: 100%; text-align: center; color: white; margin-top:" class="notification">
-                        <h3 style="min-height: 35px;"><?php
-                                if(array_key_exists('button1', $_POST)) {
-                                    require __DIR__ . '/flappyBird_addLevel_.php';
-                                    $numC = $_REQUEST['numC'];
-                                    $posC = $_REQUEST['posC'];
-                                    $numFT = $_REQUEST['numFT'];
-                                    $posFT = $_REQUEST['posFT'];
-                                    $numRows = $numC = $_REQUEST['numRows'];
-                                    $numCols = $numC = $_REQUEST['numCols'];
-                                    if($numRows == "" || $numCols == "" || $numC == "" || $posC == "" || $numC == "" || $posFT == "") {
-                                        echo "Zasto :(...";
-                                    } else {
-                                        add_level($numRows, $numCols, $numC, $posC, $numFT, $posFT);
-                                        echo "New level added succesfully!";
-                                    } 
-                                }
-                        ?></h3>
+                        <h3 id="write" style="min-height: 35px;"></h3>
                     </div>
                 </nav>
             </div>
         </div>
     </div>
+    <script>
+
+        $(document).ready(function () {
+            
+            $("#myButton").click(function () {
+
+                let regexNum = /^[0-9]+$/;
+                let regexCoinsPos = /^(\[\d,\d\],)+$/;
+                let regexFTPos = /^(\[\d,\d\])+$/;
+
+                let numRows = $("#numRows").val();
+                let numCols = $("#numCols").val();
+                let numCoins = $("#numC").val();
+                let posCoins = $("#posC").val();
+                let numFB = $("#numFT").val();
+                let posFT = $("#fTrees").val();
+
+                posCoins = posCoins.replace(/\s/g, '');
+                posCoins += ',';
+                posFT = posFT.replace(/\s/g, '');
+                posFT += ',';
+                alert(numRows + " " + numCols + " " + numCoins + " " + posCoins + " " + numFB + " " + posFT);
+
+                alert(regexCoinPos.test(posCoins) + " " + regexFTPos.test(posFT));
+
+                if(numRows == "") {
+                    $("#write").text("Please enter number of rows!");
+                } else if(numCols == "") {
+                    $("#write").text("Please enter number of columns!");
+                } else if(numCoins == "") {
+                    $("#write").text("Please enter number of coins!");
+                } else if(posCoins == "") {
+                    $("#write").text("Please enter position of coins!");
+                } else if(numFB == "") {
+                    $("#write").text("Please enter number of fire balls!");
+                } else if(posFT == "") {
+                    $("#write").text("Please enter position of fire balls!");
+                }
+
+            });
+
+        }); 
+
+    </script>
 </body>
 </html>

@@ -21,16 +21,16 @@ var coin;
 var coins = [];
 
 var img_p = new Image();
-img_p.src = "../images/drvce.png";
+img_p.src = "/images/drvce.png";
 var img = new Image();
-img.src = "../images/bird3.png";
+img.src = "/images/bird3.png";
 var img_c = new Image();
-img_c.src = "../images/coin.png";
+img_c.src = "/images/coin.png";
 var img_fb1 = new Image();
-img_fb1.src = "../images/fireBall_up.png";
+img_fb1.src = "/images/fireBall_up.png";
 var img_fb2 = new Image();
-img_fb2.src = "../images/fireBall_down.png";
-var audio = new Audio("../images/coinCollect.mp3");
+img_fb2.src = "/images/fireBall_down.png";
+var audio = new Audio("/images/coinCollect.mp3");
 var cnt = 0;
 var interval;
 
@@ -410,25 +410,25 @@ function game_end() {
 
 function load_map() {
     level++;
-    jQuery.ajax({
-        type: "POST",
-        url: 'flappyBird_.php',
+    $.ajax({
+        method: "GET",
+        url: window.location.origin + "/Games/getLevel/flappyBird",
         //dataType: 'json',
-        data: {functionname: 'flappyBird_game_data', arguments: level},
-    
+        data: {arguments: level},
         success: function (obj, textstatus) {
-            if( !('error' in obj) ) {
-                if(obj.result == false) {
+            //alert(obj);
+            if( 1 ) {
+                if(obj == "" || obj.result == false) {
                     //alert("GAME END");
                     end = true;
                     send_data();
                     update_list();
                     animate();
                     clearInterval(timeInterval);
-                    $("#my-canvas").css("background-image", 'url("../images/bg_start.png")');
+                    $("#my-canvas").css("background-image", 'url("/images/bg_start.png")');
                 } else {
                     //alert("Level: " + level + "   " + obj.result);
-                    start_data = JSON.parse(obj.result);
+                    start_data = JSON.parse(JSON.parse(obj).result.level_desc);
                     r = start_data.rows;
                     c = start_data.cols;
                     numOfCoins = start_data.coins.length;
@@ -490,17 +490,18 @@ function update_list() {
     var maxLvlPts;
     //alert("update_list");
     // get max level and points
-    jQuery.ajax({
-        type: "POST",
-        url: 'flappyBird_.php',
+    $.ajax({
+        method: "GET",
+        url: window.location.origin + "/Games/getList/flappyBird",
         //dataType: 'json',
-        data: {functionname: 'max_level_and_points', arguments: 2},
+        // data: {arguments: 2},
         //data: {functionname: 'save_data', arguments: points},
 
         success: function (obj, textstatus) {
-            if( !('error' in obj) ) {
+            //alert(obj);
+            if( 1 ) {
                 //alert("update_list: " + obj.result);
-                maxLvlPts = JSON.parse(obj.result);
+                maxLvlPts = JSON.parse(obj).result;
                 //alert(1);
                 //alert(JSON.stringify(obj.result));
                 //alert(2);
@@ -560,22 +561,23 @@ function update_list() {
 }
 
 function send_data() {
-    jQuery.ajax({
-        type: "POST",
-        url: 'flappyBird_.php',
+    $.ajax({
+        method: "POST",
+        url: window.location.origin + "/Games/save_data/flappyBird",
         //dataType: 'json',
-        data: {functionname: 'save_data', arguments: [time, points, level - 1]},
+        data: {arguments: [time, points, level - 1]},
         //data: {functionname: 'save_data', arguments: points},
     
         success: function (obj, textstatus) {
-            if( !('error' in obj) ) {
-                v = JSON.parse(obj.result);
+            //alert(obj + " " + textstatus);
+            if( !(obj == "" || obj.error == "true") ) {
+                let v = JSON.parse(obj).result;
                 //alert(v + "???");
                 //update_data();
             }
             else {
                 console.log(obj.error);
-                alert(obj.error + " ? " + textstatus);
+                //alert(obj + " ? " + textstatus);
             }
         },
         error: function(xhr, status, error) {

@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flappy bird</title>
-    <link rel="stylesheet" href="../bootstrap/bootstrap-5.1.3-dist/css/bootstrap.min.css">
-    <script src="../bootstrap/bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="flappyBird.css">
+    <link rel="stylesheet" href="<?= base_url() ?>/assets/style/bootstrap.min.css">
+    <script src="<?= base_url() ?>/assets/scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="<?= base_url() ?>/assets/style/flappyBird.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="flappyBird.js"></script>
+    <script src="<?= base_url() ?>/assets/scripts/flappyBird.js"></script>
 </head>
 <body onload="init()">
     <div class="container-fluid bg-clouds">
@@ -21,7 +21,7 @@
                 <nav class="navbar navbar-expand-sm bg-dark n">
                     <div class="levo">
                         <a href="#" class="navbar-brand logo_link">
-                            <img src="../images/superMario.jpg" alt="logo" id="logo" class="rounded-pill">
+                            <img src="<?= base_url() ?>/images/superMario.jpg" alt="logo" id="logo" class="rounded-pill">
                         </a>
                         <ul class="navbar-nav">
                             <li class="nav-item">
@@ -80,13 +80,13 @@
             <div class="offset-md-4 col-md-4 mt-4">
                 <nav class="navbar navbar-expand-sm c bg-dark games">
                     <a href="#" class="navbar-brand">
-                        <img src="../images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
+                        <img src="<?= base_url() ?>/images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
                     </a>
                     <a href="#" class="navbar-brand">
-                        <img src="../images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
+                        <img src="<?= base_url() ?>/images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
                     </a>
                     <a href="#" class="navbar-brand">
-                        <img src="../images/pikachu.png" alt="logo" id="logo3" class="rounded-pill">
+                        <img src="<?= base_url() ?>/images/pikachu.png" alt="logo" id="logo3" class="rounded-pill">
                     </a>
                 </nav>
             </div>

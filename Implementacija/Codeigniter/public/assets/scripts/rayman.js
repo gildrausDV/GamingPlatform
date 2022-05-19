@@ -374,13 +374,14 @@ var maxLvlPts;
 function update_data() {
     let w = canvas.width;
     let h = canvas.height;
+    
     let rows = start_data.rows;
     let cols = start_data.cols;
     r = rows;
     c = cols;
     cell_w = w / cols;
     cell_h = h / rows;
-
+    
     nextX = 10;
     nextY = canvas.height - 150;
     rayman = new Rayman();
@@ -413,21 +414,21 @@ function update_data() {
 
 function send_data() {
     let t = ss + (mm + hh * 60) * 60;
-    jQuery.ajax({
-        type: "POST",
-        url: 'rayman_.php',
+    $.ajax({
+        method: "POST",
+        url: window.location.origin + "/Games/save_data",
         //dataType: 'json',
-        data: {functionname: 'save_data', arguments: [t, points, level - 1]},
+        data: {arguments: [t, points, level - 1]},
         //data: {functionname: 'save_data', arguments: points},
     
         success: function (obj, textstatus) {
             if( !('error' in obj) ) {
-                v = JSON.parse(obj.result);
-                //alert(v + "???");
+                let v = JSON.parse(obj.result);
+                alert(v + "???");
                 //update_data();
             }
             else {
-                console.log(obj.error);
+                //console.log(obj.error);
                 alert(obj.error + " ? " + textstatus);
             }
         },
@@ -494,16 +495,17 @@ function init() {
             level += 1;
             document.getElementById("level_display").innerText = level + "";
             //alert("daj level: " + (level - 1));
-            jQuery.ajax({
-                type: "POST",
-                url: 'rayman_.php',
+            $.ajax({
+                method: "GET",
+                url: window.location.origin + "/Games/getLevel/Rayman",
                 //dataType: 'json',
-                data: {functionname: 'rayman_game_data', arguments: level - 1},
+                data: {arguments: (level - 1)},
             
                 success: function (obj, textstatus) {
-                    if( !('error' in obj) ) {
-                        if(obj.result == false) {
-                            // alert("GAME END" + level);
+                    alert("ZASTO-0-->" + obj + " " + textstatus);
+                    if( 1 ) {
+                        if(JSON.parse(obj).error == 'true') {
+                             alert("GAME END" + level);
                             // upisi poene u bazu
                             send_data();
                             level = 1;
@@ -517,9 +519,9 @@ function init() {
                             update_list();
                             animate();
                         } else {
-                            //alert(obj.result);
-                            start_data = JSON.parse(obj.result);
-                            //alert(obj.result);
+                            alert("PLS: "+JSON.parse(obj).result.level_desc);
+                            start_data = JSON.parse(JSON.parse(obj).result.level_desc);
+                            //alert(start_data);
                             update_data();
                             loaded = true;
                         }
@@ -538,19 +540,30 @@ function init() {
         //else if(started) alert(loaded + " " + started + " " + !ended);
     }, 15);
 }
+/*
+$.ajax({
+    url: "<?php echo base_url();?>" + "/Games/getList",
+    method: "GET",
+    success: f
+});
 
+function f(response) {
+    alert(response);
+}
+*/
 function update_list() {
     // get max level and points
-    jQuery.ajax({
-        type: "POST",
-        url: 'rayman_.php',
+    $.ajax({
+        method: "GET",
+        url: window.location.origin + "/Games/getList/Rayman",
         //dataType: 'json',
-        data: {functionname: 'max_level_and_points', arguments: 1},
+        //data: {functionname: 'max_level_and_points', arguments: 1},
         //data: {functionname: 'save_data', arguments: points},
-    
         success: function (obj, textstatus) {
-            if( !('error' in obj) ) {
-                maxLvlPts = JSON.parse(obj.result);
+            //alert(obj);
+            if(1) {
+                maxLvlPts = JSON.parse(obj).result;
+                //alert(maxLvlPts + " LIST LENGTH: " + maxLvlPts.list.length);
                 //alert(1);
                 //alert(JSON.stringify(obj.result));
                 //alert(2);
