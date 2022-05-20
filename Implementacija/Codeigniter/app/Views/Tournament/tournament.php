@@ -6,17 +6,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rayman</title>
+    <title>Tournament</title>
     <link rel="stylesheet" href="<?= base_url() ?>/assets/style/bootstrap.min.css">
     <script src="<?= base_url() ?>/assets/scripts/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="<?= base_url() ?>/assets/style/rayman.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-    <script src="<?= base_url() ?>/assets/scripts/rayman.js"></script>
-    
+    <link rel="stylesheet" href="<?= base_url() ?>/assets/style/tournament.css">
 </head>
-<body onload="init()">
+<body>
     <div class="container-fluid bg-clouds">
         <div class="row no-padding">
             <div class="col-sm-12 no-padding">
@@ -98,68 +93,107 @@
                 </nav>
             </div>
         </div>
-        <br>
         <div class="row">
-            <div class="col-sm-2 game-info">
-                <div class="list">
-                    <br>
-                    <h1>TOP 10</h1>
-                    <table class="lista_poena" id="lista_poena">
+            <div class="offset-sm-2 col-sm-8 mt-2" style="text-align: center">
+                <!--<table style="width: 100%">
+                    
+                </table>-->
+                <br>
+                <!--<div class="tournaments" id="tournaments">-->
+                    <!--<div class="tournament">
+                        <span class="span1"><h1>&nbsp;&nbsp;Bricks</h1></span>
+                        <span class="span2"><button onclick="join()">Join</button></span>
+                    </div>-->
+                    <table style="width: 100%">
+
                     </table>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <!--<img src="../images/bg_start.png" alt="bg-start" id="bg-start">-->
-                <canvas id="my-canvas"></canvas>
-            </div>
-            <div class="col-sm-2 game-info">
-                <div class="points">
-                    <br>
-                    <h3>GAME STATISTICS</h3>
-                    <br><br>
-                    <div>
-                        <span class="level">Level: </span>
-                        <span class="level" id="level_display">1</span>
-                    </div>
-                    <br>
-                    <div>
-                        <span class="time">Time: </span>
-                        <span class="time" id="time_display">00:00:00</span>
-                    </div>
-                    <br>
-                    <div>
-                        <span class="points">Points: </span>
-                        <span class="points" id="point_display">0</span>
-                    </div>
-                    <br><br>
-                    <div>
-                        <span class="timeLeft" style="color: red">Time left: </span>
-                        <span class="timeLeft" id="timeLeft_display" style="color: red">0</span>
-                    </div>
-                    <br><br>
-                    <div>
-                        <span class="maxLevel">Max level reached: </span>
-                        <span class="maxLevel" id="maxLevel_display">0</span>
-                    </div>
-                    <br>
-                    <div>
-                        <span class="maxPoints">Max points achieved: </span>
-                        <span class="maxPoints" id="maxPoints_display">0</span>
-                    </div>
-                </div>
+                <!--</div>-->
+                <br><br><br>
+                <button id="addTournament" onclick="addTournament()" class="btn btn-secondary">Add tournament</button>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12" style="min-height: 200px;">
+            <div class="col-sm-12">
                 <br><br><br><br>
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
+
         $(document).ready(function () {
+
+            $("#addTournament").click(function () {
+                location.href = window.location.origin + "/Tournament/addTournament";
+            });
+
             $("#signOut").click(function () {
                 location.href = window.location.origin + "/Home/Login";
             });
+
+            $.ajax({
+                method: "GET",
+                url: window.location.origin + "/Tournament/getTournaments",
+                success: function (obj, textstatus) {
+                    //alert(obj);
+                    if(obj == "") return;
+                    let start_data = JSON.parse(obj);
+                    for(let i = 0; i < start_data.list.length; ++i) {
+                
+                        let row = $("<tr></tr>").css({"width": "100%", 
+                                        "height": "90px", 
+                                        "display": "flex",
+                                        "justify-content": "space-around",
+                                        "text-align": "center",
+                                        "border": "3px solid white",
+                                        "background-color": "black",
+                                        "opacity": "0.8",
+                                        "color": "white",
+                                        "position": "relative"
+                                    });
+                        row.hover(function () { $(this).css("border", "3px solid gray") }, function () { $(this).css("border", "3px solid white") });
+                        let col = $("<td><h1>" + start_data.list[i].name + "</h1></td>").css("margin-top", "1%");
+                        row.append(col);
+                        
+                        col = $("<td><h1>" + start_data.list[i].date + "</h1></td>").css("margin-top", "1%");
+                        row.append(col);
+                        
+                        col = $("<td><h1>" + start_data.list[i].timeStart + "</h1></td>").css("margin-top", "1%");
+                        row.append(col);
+                        
+                        col = $("<td><h1>" + start_data.list[i].timeEnd + "</h1></td>").css("margin-top", "1%");
+                        row.append(col);
+
+                        col = $("<td><button id='"+ i +"' class='btn btn-primary'>" + 'Join' + "</button></td>").css("margin-top", "2%");
+                        row.append(col);
+                        
+                        $("table").append(row);
+
+                        $("#" + i).click(function () {
+                            joinTournament(start_data.list[i].id);
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert(xhr.responseText + " " + error + " " + status);
+                }
+            });
+
+            function joinTournament(id) {
+                $.ajax({
+                    method: "POST",
+                    url: window.location.origin + "/Tournament/joinTournament",
+                    data: {argument: id},
+                    success: function (obj, textstatus) {
+                        //alert(obj + " " + textstatus);
+                    },
+                    error: function(xhr, status, error) {
+                        alert(xhr.responseText + " " + error + " " + status);
+                    }
+                });
+            }
+
         });
     </script>
 </body>

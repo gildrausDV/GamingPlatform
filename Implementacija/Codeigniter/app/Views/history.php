@@ -6,22 +6,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rayman</title>
+    <title>Gaming history</title>
     <link rel="stylesheet" href="<?= base_url() ?>/assets/style/bootstrap.min.css">
     <script src="<?= base_url() ?>/assets/scripts/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="<?= base_url() ?>/assets/style/rayman.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-    <script src="<?= base_url() ?>/assets/scripts/rayman.js"></script>
-    
+    <link rel="stylesheet" href="<?= base_url() ?>/assets/style/history.css">
 </head>
-<body onload="init()">
+<body>
     <div class="container-fluid bg-clouds">
         <div class="row no-padding">
             <div class="col-sm-12 no-padding">
                 <nav class="navbar navbar-expand-sm bg-dark n">
-                <div class="levo">
+                    <div class="levo">
                         <a href="#" class="navbar-brand logo_link">
                             <img src="<?= base_url() ?>/images/superMario.jpg" alt="logo" id="logo" class="rounded-pill">
                         </a>
@@ -52,7 +47,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url() ?>/Games/history/None" class="nav-link">
+                                <a href="" class="nav-link">
                                     History
                                 </a>
                             </li>
@@ -85,11 +80,18 @@
         </div>
         <div class="row">
             <div class="offset-md-4 col-md-4 mt-4">
+                <div id="chooseGame" class="bg-dark">
+                    <h4>Please choose game: </h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-md-4 col-md-4 mt-4">
                 <nav class="navbar navbar-expand-sm c bg-dark games">
-                    <a href="#" class="navbar-brand">
+                    <a href="<?= base_url() ?>/Games/history/Rayman" class="navbar-brand">
                         <img src="<?= base_url() ?>/images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
                     </a>
-                    <a href="#" class="navbar-brand">
+                    <a href="<?= base_url() ?>/Games/history/FlappyBird" class="navbar-brand">
                         <img src="<?= base_url() ?>/images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
                     </a>
                     <a href="#" class="navbar-brand">
@@ -98,68 +100,94 @@
                 </nav>
             </div>
         </div>
-        <br>
         <div class="row">
-            <div class="col-sm-2 game-info">
-                <div class="list">
-                    <br>
-                    <h1>TOP 10</h1>
-                    <table class="lista_poena" id="lista_poena">
-                    </table>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <!--<img src="../images/bg_start.png" alt="bg-start" id="bg-start">-->
-                <canvas id="my-canvas"></canvas>
-            </div>
-            <div class="col-sm-2 game-info">
-                <div class="points">
-                    <br>
-                    <h3>GAME STATISTICS</h3>
-                    <br><br>
-                    <div>
-                        <span class="level">Level: </span>
-                        <span class="level" id="level_display">1</span>
-                    </div>
-                    <br>
-                    <div>
-                        <span class="time">Time: </span>
-                        <span class="time" id="time_display">00:00:00</span>
-                    </div>
-                    <br>
-                    <div>
-                        <span class="points">Points: </span>
-                        <span class="points" id="point_display">0</span>
-                    </div>
-                    <br><br>
-                    <div>
-                        <span class="timeLeft" style="color: red">Time left: </span>
-                        <span class="timeLeft" id="timeLeft_display" style="color: red">0</span>
-                    </div>
-                    <br><br>
-                    <div>
-                        <span class="maxLevel">Max level reached: </span>
-                        <span class="maxLevel" id="maxLevel_display">0</span>
-                    </div>
-                    <br>
-                    <div>
-                        <span class="maxPoints">Max points achieved: </span>
-                        <span class="maxPoints" id="maxPoints_display">0</span>
-                    </div>
-                </div>
+            <div class="offset-sm-2 col-sm-8 mt-2">
+                <table style="width: 100%">
+                    
+                </table>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12" style="min-height: 200px;">
+            <div class="col-sm-12">
                 <br><br><br><br>
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
+            
             $("#signOut").click(function () {
                 location.href = window.location.origin + "/Home/Login";
             });
+
+            let game = '<?php echo esc($game); ?>';
+            $("#chooseGame").css("display", "none");
+            if(game == "None") {
+                $("#chooseGame").css("display", "inline-block");
+                return;
+            }
+
+            $.ajax({
+                method: "GET",
+                url: window.location.origin + "/Games/getHistory/"+game,
+                success: function (obj, textstatus) {
+                    //alert(obj);
+                    if(obj == "") return;
+                    let start_data = JSON.parse(obj);
+                    
+                    for(let i = 0; i < start_data.list.length; ++i) {
+                        let row = $("<tr></tr>").css({"width": "100%", 
+                                                "height": "80px", 
+                                                "display": "flex",
+                                                "justify-content": "space-around",
+                                                "text-align": "center",
+                                                "border": "3px solid white",
+                                                "background-color": "black",
+                                                "opacity": "0.8",
+                                                "color": "white",
+                                                "position": "relative"
+                                            });
+                        row.hover(function () { $(this).css("border", "3px solid gray") }, function () { $(this).css("border", "3px solid white") });
+                        let col = $("<td><h1>" + start_data.list[i].name + "</h1></td>").css("margin-left", "10%").css("margin-top", "1%");
+                        row.append(col);
+
+                        let time = start_data.list[i].timePlayed;
+                        let ss = time % 60;
+                        if(ss < 10) ss = "0" + ss;
+                        time = Math.floor(time / 60);
+                        let mm = time % 60;
+                        if(mm < 10) mm = "0" + mm;
+                        time = Math.floor(time / 60);
+                        let hh = time % 60;
+                        if(hh < 10) hh = "0" + hh;
+                        time = hh + ":" + mm + ":" + ss;
+                        
+                        col = $("<td><h1>" + time + "</h1></td>").css("margin-top", "1%");
+                        row.append(col);
+                        
+                        
+                        let points = start_data.list[i].points;
+                        
+                        if(points < 10) 
+                            points = $("<h1>Points: 0" + points + "<\h1>").css("margin-top", "1%");
+                        else if(points < 100) 
+                            points = $("<h1>Points: &nbsp;" + points + "<\h1>").css("margin-top", "1%");
+                        else 
+                            points = $("<h1>Points: " + points + "<\h1>").css("margin-top", "1%");
+                        
+                        row.append(points);
+                        
+                        $("table").append(row);
+                    }
+
+                },
+                error: function(xhr, status, error) {
+                    alert("2 " + xhr.responseText + " " + error + " " + status);
+                }
+            });
+
         });
     </script>
 </body>

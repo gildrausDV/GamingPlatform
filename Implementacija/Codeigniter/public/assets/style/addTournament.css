@@ -77,7 +77,7 @@
     align-items: center;
 }
 .bg-clouds {
-    background-image: url('../images/cloud.png');
+    background-image: url('/images/cloud.png');
     height: 1000px;
     /*width: 100%;
     margin: 0px;
@@ -115,10 +115,10 @@
     border: 5px solid lightgray;
 }
 
-#addTournament {
+#myButton {
     border: 2px solid white;
 }
 
-#addTournament:hover {
+#myButton:hover {
     border: 2px solid gray;
 }

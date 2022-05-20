@@ -5,12 +5,30 @@ namespace App\Controllers;
 use App\Models\PlayedGame_model;
 use App\Models\Level_model;
 use App\Models\Game_model;
+use App\Models\Login_model;
 
 class Games extends BaseController
 {
     public function index()
     {
         return view('welcome_message'); // ovde treba da vodi na default stranicu za biranje igrica
+    }
+
+    public function history($game) {
+        $data['game'] = $game;
+        return view('history', $data);
+    }
+
+    public function getHistory($game) {
+        $model = new PlayedGame_model();
+        $id_user = 1;
+        $ret['list'] = $model->getHistory($game, $id_user, 20);
+        echo json_encode($ret);
+    }
+
+    public function topPlayers($game) {
+        $data['game'] = $game;
+        return view('topPlayers', $data);
     }
 
     public function game($game) {
@@ -21,11 +39,27 @@ class Games extends BaseController
         }
     }
 
+    public function addLevel_default() {
+        return view('addLevel');
+    }
+
     public function addLevel($game) {
         if($game == "Rayman") {
             return view('Rayman/addLevel');
         } else if($game == "FlappyBird") {
             return view('FlappyBird/addLevel');
+        }
+    }
+
+    public function getTopPlayers($game) {
+        if($game == "Global") {
+            $model = new Login_model();
+            $ret['list'] = $model->getTopPlayers(20);
+            echo json_encode($ret);
+        } else {
+            $model = new PlayedGame_model();
+            $ret['list'] = $model->getTopPlayers($game, 20);
+            echo json_encode($ret);
         }
     }
 
@@ -87,6 +121,18 @@ class Games extends BaseController
         $ret['result'] = $result;
         echo json_encode($ret);
         return;
+    }
+
+    public function add_level($game) {
+        if(!isset($_POST['arguments'])) {
+            return;
+        }
+
+        $game_model = new Game_model();
+        $id_game = $game_model->getID($game);
+
+        $model = new Level_model();
+        $model->addLevel($id_game, $_POST['arguments']);
     }
 
 }

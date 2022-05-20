@@ -1,18 +1,10 @@
 /* Autor: Dimitrije Vujčić */
 
-#tournament_form {
-    text-align: center;
-    background-color: black;
-    width: 50%;
-    margin-left: 25%;
-    height: 450px;
-    opacity: 0.8;
+#chooseGame {
+    border: 5px solid lightgray;
     color: white;
-    border: 5px solid white;
-}
-
-#tournament_form:hover {
-    border: 5px solid gray;
+    width: 100%;
+    text-align: center;
 }
 
 .izbor {
@@ -77,7 +69,7 @@
     align-items: center;
 }
 .bg-clouds {
-    background-image: url('../images/cloud.png');
+    background-image: url('/images/cloud.png');
     height: 1000px;
     /*width: 100%;
     margin: 0px;
@@ -113,12 +105,4 @@
     width: 90%;
     /*height: 500px;*/
     border: 5px solid lightgray;
-}
-
-#myButton {
-    border: 2px solid white;
-}
-
-#myButton:hover {
-    border: 2px solid gray;
 }

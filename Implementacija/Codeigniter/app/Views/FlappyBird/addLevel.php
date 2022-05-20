@@ -13,23 +13,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
-<body onload="init()">
+<body>
     <div class="container-fluid bg-clouds">
         <div class="row no-padding">
             <div class="col-sm-12 no-padding">
                 <nav class="navbar navbar-expand-sm bg-dark n">
-                    <div class="levo">
+                <div class="levo">
                         <a href="#" class="navbar-brand logo_link">
                             <img src="<?= base_url() ?>/images/superMario.jpg" alt="logo" id="logo" class="rounded-pill">
                         </a>
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
+                                    Play
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>/Tournament/tournament" class="nav-link">
                                     Tournaments
                                 </a>
                             </li>
                             <li class="nav-item" style="width: 85px;">
-                                <a href="#" class="nav-link">
+                                <a href="<?= base_url() ?>/Games/addLevel_default" class="nav-link">
                                     Add level
                                 </a>
                             </li>
@@ -44,12 +49,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="<?= base_url() ?>/Games/history/None" class="nav-link">
                                     History
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" style="width: 65px;">
+                                <a href="#" class="nav-link" style="width: 75px;">
                                     Roles
                                 </a>
                             </li>
@@ -58,10 +63,10 @@
                                     <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">Top players lists</button>
                                     <ul class="dropdown-menu izbor">
                                         <li class="dropdown-item">
-                                            <a href="#">Top players (global)</a>
+                                            <a href="<?= base_url() ?>/Games/topPlayers/Global">Top players (global)</a>
                                         </li>
                                         <li class="dropdown-item">
-                                            <a href="#">Top players for game</a>
+                                            <a href="<?= base_url() ?>/Games/topPlayers/None">Top players for game</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -70,7 +75,7 @@
                     </div>
                     
                     <div class="desno">
-                        <button type="button" class="btn btn- bg-danger" style="margin-right: 10px;">Sign out</button>
+                        <button id="signOut" type="button" class="btn btn- bg-danger" style="margin-right: 10px;">Sign out</button>
                     </div>
                 </nav>
             </div>
@@ -78,10 +83,10 @@
         <div class="row">
             <div class="offset-md-4 col-md-4 mt-4">
                 <nav class="navbar navbar-expand-sm c bg-dark games">
-                    <a href="#" class="navbar-brand">
+                    <a href="<?= base_url() ?>/Games/addLevel/Rayman" class="navbar-brand">
                         <img src="<?= base_url() ?>/images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
                     </a>
-                    <a href="#" class="navbar-brand">
+                    <a href="<?= base_url() ?>/Games/addLevel/FlappyBird" class="navbar-brand">
                         <img src="<?= base_url() ?>/images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
                     </a>
                     <a href="#" class="navbar-brand">
@@ -163,12 +168,16 @@
     <script>
 
         $(document).ready(function () {
-            
+
+            $("#signOut").click(function () {
+                location.href = window.location.origin + "/Home/Login";
+            });
+
             $("#myButton").click(function () {
 
                 let regexNum = /^[0-9]+$/;
-                let regexCoinsPos = /^(\[\d,\d\],)+$/;
-                let regexFTPos = /^(\[\d,\d\])+$/;
+                let regexCoinsPos = /^(\[\d+,\d+\],)+$/;
+                let regexFTPos = /^((\[\d+,down\]|\[\d+,up\]),)+$/;
 
                 let numRows = $("#numRows").val();
                 let numCols = $("#numCols").val();
@@ -178,26 +187,96 @@
                 let posFT = $("#fTrees").val();
 
                 posCoins = posCoins.replace(/\s/g, '');
-                posCoins += ',';
+                let _posCoins = posCoins + ',';
                 posFT = posFT.replace(/\s/g, '');
-                posFT += ',';
-                alert(numRows + " " + numCols + " " + numCoins + " " + posCoins + " " + numFB + " " + posFT);
+                let _posFT = posFT + ',';
+                //alert(numRows + " " + numCols + " " + numCoins + " " + posCoins + " " + numFB + " " + posFT);
 
-                alert(regexCoinPos.test(posCoins) + " " + regexFTPos.test(posFT));
+                let b = true;
+                b &= regexCoinsPos.test(_posCoins);
+                b &= regexFTPos.test(_posFT);
+                b &= regexNum.test(numRows);
+                b &= regexNum.test(numCols);
+                b &= regexNum.test(numCoins);
+                b &= regexNum.test(numFB);
 
                 if(numRows == "") {
                     $("#write").text("Please enter number of rows!");
+                    return;
                 } else if(numCols == "") {
                     $("#write").text("Please enter number of columns!");
+                    return;
                 } else if(numCoins == "") {
                     $("#write").text("Please enter number of coins!");
+                    return;
                 } else if(posCoins == "") {
                     $("#write").text("Please enter position of coins!");
+                    return;
                 } else if(numFB == "") {
                     $("#write").text("Please enter number of fire balls!");
+                    return;
                 } else if(posFT == "") {
                     $("#write").text("Please enter position of fire balls!");
+                    return;
                 }
+
+                if(!b) {
+                    $("#write").text("Data not entered correctly!");
+                    return;
+                }
+
+                $("#write").text("");
+                /*
+{"rows": 5,"cols": 10,"wood": [{"y": 1, "direction": "down"}, {"y": 3, "direction": "up"}, {"y": 4, "direction": "down"}], "coins": [{"x": 1, "y": 1}]}
+                */
+                let wood = [];
+                let arr = posFT.split("],[");
+                for(let i = 0; i < arr.length; ++i) {
+                    let str = arr[i].replace('[', '').replace(']', '');
+                    let x = str.split(",");
+                    alert(x);
+                    if(x.length != 2) continue;
+                    let d = {
+                        "y" : x[0],
+                        "direction" : x[1]
+                    };
+                    wood.push(d);
+                }
+                
+                let coins = [];
+                arr = posCoins.split("],[");
+                for(let i = 0; i < arr.length; ++i) {
+                    let str = arr[i].replace('[', '').replace(']', '');
+                    let x = str.split(",");
+                    alert(x);
+                    if(x.length != 2) continue;
+                    let d = {
+                        "x" : x[0],
+                        "y" : x[1]
+                    };
+                    coins.push(d);
+                }
+                alert(JSON.stringify(coins));
+
+                let data = {
+                    "rows" : numRows,
+                    "cols" : numCols,
+                    "wood" : wood,
+                    "coins": coins
+                };
+
+                alert(data);
+                $.ajax({
+                    method: "POST",
+                    url: window.location.origin + "/Games/add_level/FlappyBird",
+                    data: {arguments: JSON.stringify(data)},
+                    success: function (obj, textstatus) {
+
+                    },
+                    error: function(xhr, status, error) {
+                        alert("1" + xhr.responseText + " " + error + " " + status);
+                    }
+                });
 
             });
 

@@ -27,4 +27,11 @@ class Login_model extends Model {
         }
     }
 
+    public function getTopPlayers($cnt) {
+        $res = $this->table('user')->select('username, NP')
+            ->orderBy('NP', 'desc')
+            ->paginate($cnt);
+        return $res;
+    }
+
 }

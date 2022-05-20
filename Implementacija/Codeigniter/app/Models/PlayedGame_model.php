@@ -14,6 +14,19 @@ class PlayedGame_model extends Model {
         ->where('password', $pass)->paginate(2);
     */
 
+    public function getHistory($game, $id_user, $cnt) {
+        $result = new \stdClass();
+
+        $game_model = new Game_model();
+        $id_game = $game_model->getID($game);
+        
+        $res = $this->table('playedgame')->select('name, timePlayed, points')
+            ->join('game', 'game.ID = playedgame.ID_game', 'left')
+            ->where('ID_user', $id_user)
+            ->where('ID_game', $id_game)->paginate($cnt);
+        return $res;
+    }
+
     public function get_max_level_and_points($id_user, $game) {
         $result = new \stdClass();
 
@@ -43,8 +56,13 @@ class PlayedGame_model extends Model {
         return $result;
     }
 
-    public function get_top_10() {
-        $this->db->get('playedgame', 10);
+    public function getTopPlayers($game, $cnt) {
+        $game_model = new Game_model();
+        $id_game = $game_model->getID($game);
+        $res = $this->table('playedgame')->select('ID_game, username, timePlayed, points')
+            ->join('user', 'playedgame.ID_user = user.ID', 'left')
+            ->where('ID_game', $id_game)->paginate($cnt);
+        return $res;
     }
 
     public function save_data($time, $points, $level, $id_user, 

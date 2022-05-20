@@ -42,6 +42,7 @@ $routes->get('/', 'Home::index');
 $routes->get('/rayman', 'Games::game/Rayman');
 $routes->get('/flappyBird', 'Games::game/FlappyBird');
 $routes->get('/updateList', 'Games::game/getList');
+//$routes->get('/history', 'Games::history/None');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

@@ -416,13 +416,13 @@ function send_data() {
     let t = ss + (mm + hh * 60) * 60;
     $.ajax({
         method: "POST",
-        url: window.location.origin + "/Games/save_data",
+        url: window.location.origin + "/Games/save_data/Rayman",
         //dataType: 'json',
         data: {arguments: [t, points, level - 1]},
         //data: {functionname: 'save_data', arguments: points},
     
         success: function (obj, textstatus) {
-            if( !('error' in obj) ) {
+            if( !(obj == "") ) {
                 let v = JSON.parse(obj.result);
                 alert(v + "???");
                 //update_data();
@@ -504,7 +504,7 @@ function init() {
                 success: function (obj, textstatus) {
                     alert("ZASTO-0-->" + obj + " " + textstatus);
                     if( 1 ) {
-                        if(JSON.parse(obj).error == 'true') {
+                        if(obj == "" || JSON.parse(obj).error == 'true') {
                              alert("GAME END" + level);
                             // upisi poene u bazu
                             send_data();
