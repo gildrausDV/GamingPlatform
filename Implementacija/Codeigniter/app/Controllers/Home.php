@@ -6,6 +6,7 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\Login_model;
 use App\Models\Register_model;
+use App\Models\Allow_model;
 use App\Config\autoload;
 
 class Home extends BaseController
@@ -45,6 +46,23 @@ class Home extends BaseController
         $res = $model->register();
         $data['reg'] = "".$res;
         return view('register', $data);
+    }
+
+    public function home() {
+        return view('home');
+    }
+
+    public function allow() {
+        helper('form');
+        $data['allow'] = '0';
+        return view('allow', $data);
+    }
+
+    public function allow_() {
+        $model = new Allow_model();
+        $res = $model->allow();
+        $data['allow'] = "".$res;
+        return view('allow', $data);
     }
 
 }
