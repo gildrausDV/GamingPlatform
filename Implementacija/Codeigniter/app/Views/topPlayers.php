@@ -17,12 +17,12 @@
             <div class="col-sm-12 no-padding">
                 <nav class="navbar navbar-expand-sm bg-dark n">
                     <div class="levo">
-                        <a href="#" class="navbar-brand logo_link">
+                        <a href="<?= base_url() ?>/Home/settings" class="navbar-brand logo_link">
                             <img src="<?= base_url() ?>/images/superMario.jpg" alt="logo" id="logo" class="rounded-pill">
                         </a>
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="<?= base_url() ?>/Home/home" class="nav-link">
                                     Play
                                 </a>
                             </li>
@@ -37,12 +37,12 @@
                                 </a>
                             </li>
                             <li class="nav-item" style="width: 135px;">
-                                <a href="#" class="nav-link">
+                                <a href="<?= base_url() ?>/Home/settings" class="nav-link">
                                     Account settings
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="<?= base_url() ?>/Home/allow" class="nav-link">
                                     Allow/block
                                 </a>
                             </li>
@@ -52,7 +52,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" style="width: 75px;">
+                                <a href="<?= base_url() ?>/Home/roles" class="nav-link" style="width: 75px;">
                                     Roles
                                 </a>
                             </li>

@@ -70,7 +70,7 @@
 }
 
 .bg-clouds {
-    background-image: url('images/cloud.png');
+    background-image: url('/images/cloud.png');
 }
 
 .game-info {

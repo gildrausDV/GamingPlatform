@@ -16,37 +16,42 @@
                 <div class="col-sm-12 no-padding">
                     <nav class="navbar navbar-expand-sm bg-dark n">
                         <div class="levo">
-                            <a href="#" class="navbar-brand logo_link">
-                                <img src="/images/superMario.jpg" alt="logo" id="logo" class="rounded-pill">
+                            <a href="<?= base_url() ?>/Home/settings" class="navbar-brand logo_link">
+                                <img src="<?= base_url() ?>/images/superMario.jpg" alt="logo" id="logo" class="rounded-pill">
                             </a>
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="<?= base_url() ?>/Home/home" class="nav-link">
+                                        Play
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url() ?>/Tournament/tournament" class="nav-link">
                                         Tournaments
                                     </a>
                                 </li>
                                 <li class="nav-item" style="width: 85px;">
-                                    <a href="#" class="nav-link">
+                                    <a href="<?= base_url() ?>/Games/addLevel_default" class="nav-link">
                                         Add level
                                     </a>
                                 </li>
                                 <li class="nav-item" style="width: 135px;">
-                                    <a href="#" class="nav-link">
+                                    <a href="<?= base_url() ?>/Home/settings" class="nav-link">
                                         Account settings
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="<?= base_url() ?>/Home/allow" class="nav-link">
                                         Allow/block
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="<?= base_url() ?>/Games/history/None" class="nav-link">
                                         History
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" style="width: 65px;">
+                                    <a href="<?= base_url() ?>/Home/roles" class="nav-link" style="width: 75px;">
                                         Roles
                                     </a>
                                 </li>
@@ -55,10 +60,10 @@
                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">Top players lists</button>
                                         <ul class="dropdown-menu izbor">
                                             <li class="dropdown-item">
-                                                <a href="#">Top players (global)</a>
+                                                <a href="<?= base_url() ?>/Games/topPlayers/Global">Top players (global)</a>
                                             </li>
                                             <li class="dropdown-item">
-                                                <a href="#">Top players for game</a>
+                                                <a href="<?= base_url() ?>/Games/topPlayers/None">Top players for game</a>
                                             </li>
                                         </ul>
                                     </div>
