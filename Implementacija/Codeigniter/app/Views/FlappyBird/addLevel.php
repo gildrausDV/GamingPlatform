@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="<?= base_url() ?>/assets/style/bootstrap.min.css">
     <script src="<?= base_url() ?>/assets/scripts/bootstrap.min.js"></script>
     <link rel="stylesheet" href="<?= base_url() ?>/assets/style/flappyBird_addLevel.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
+    <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>-->
+    <script src="<?= base_url() ?>/assets/scripts/jquery-1.11.3.min.js"></script>
 </head>
 <body>
     <div class="container-fluid bg-clouds">
@@ -170,6 +171,18 @@
         $(document).ready(function () {
 
             $("#signOut").click(function () {
+
+                $.ajax({
+                    method: "POST",
+                    url: window.location.origin + "/Home/SignOut",
+                    success: function (obj, textstatus) {
+                        //alert(obj + " " + textstatus);
+                    },
+                    error: function (msg) {
+                        alert("error");
+                    }
+                });
+
                 location.href = window.location.origin + "/Home/Login";
             });
 

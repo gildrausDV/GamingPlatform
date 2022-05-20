@@ -118,11 +118,28 @@
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
+    <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>-->
+    <script src="<?= base_url() ?>/assets/scripts/jquery-1.11.3.min.js"></script>
     <script>
 
         $(document).ready(function () {
+
+            $("$signOut").click(function () {
+                $.ajax({
+                    method: "POST",
+                    url: window.location.origin + "/Home/SignOut",
+                    success: function (obj, textstatus) {
+                        alert(obj + " " + textstatus);
+                    },
+                    error: function (msg) {
+                        alert("error");
+                    }
+                });
+
+                location.href = window.location.origin + "/Home/Login";
+                });
+            });
 
             $("#addTournament").click(function () {
                 location.href = window.location.origin + "/Tournament/addTournament";

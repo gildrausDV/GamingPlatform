@@ -39,10 +39,14 @@ $route['ajax-requestPost']['post'] = 'Games/ajaxRequestPost';
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/rayman', 'Games::game/Rayman');
-$routes->get('/flappyBird', 'Games::game/FlappyBird');
-$routes->get('/updateList', 'Games::game/getList');
+//$routes->get('/rayman', 'Games::game/Rayman');
+//$routes->get('/flappyBird', 'Games::game/FlappyBird');
+//$routes->get('/updateList', 'Games::game/getList');
 //$routes->get('/history', 'Games::history/None');
+
+$routes->match(['get', 'post'], 'Games', 'Games::addLevel_default', ['filter' => 'auth']);
+$routes->get('Games', 'Games::addLevel_default', ['filter' => 'auth']);
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

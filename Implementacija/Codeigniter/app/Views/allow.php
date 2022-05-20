@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="<?= base_url() ?>/assets/style/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/style/allow.css">
     <script src="<?= base_url() ?>/assets/scripts/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="<?= base_url() ?>/assets/scripts/jquery-1.11.3.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
 </head>
 <body>
     <div class="container-fluid no-padding">
@@ -75,7 +76,7 @@
                         </div>
                         
                         <div class="desno">
-                            <button type="button" class="btn btn- bg-danger" style="margin-right: 10px;">Sign out</button>
+                            <button id="signOut" type="button" class="btn btn- bg-danger" style="margin-right: 10px;">Sign out</button>
                         </div>
                     </nav>
                 </div>
@@ -124,6 +125,24 @@
     </div>
 
     <script>
+
+        $(document).ready(function () {
+            $("#signOut").click(function () {
+                $.ajax({
+                    method: "POST",
+                    url: window.location.origin + "/Home/SignOut",
+                    success: function (obj, textstatus) {
+                        alert(obj + " " + textstatus);
+                    },
+                    error: function (msg) {
+                        alert("error");
+                    }
+                });
+
+                location.href = window.location.origin + "/Home/Login";
+            });
+        });
+
         var started = false;
         var ended = false;
 
@@ -153,12 +172,6 @@
             }, 1500);
         }
 
-        function back() {
-            location.href = "play.html"
-        }
-        function signOut_page() {
-            location.href = "sign.html";
-        }
     </script>
 </body>
 </html>

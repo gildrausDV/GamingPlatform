@@ -18,6 +18,15 @@ class Home extends BaseController
         return view('welcome_message');
     }
 
+    public function signOut() {
+        $session = session();
+        $ses_data = [
+            'id' => -1,
+            'isLoggedIn' => false
+        ];
+        $session->set($ses_data);
+    }
+
     public function login() {
         helper('form');
         $data['log'] = '0';
@@ -30,9 +39,22 @@ class Home extends BaseController
         //print_r($res);
         $data['log'] = "".$res;
         if($res == 0) {
+            $session = session();
+            $ses_data = [
+                'id' => $model->getID($_POST['username']),
+                'isLoggedIn' => true
+            ];
+            $session->set($ses_data);
             return view('Rayman/rayman', $data);
         }
-        
+        $session = session();
+        $ses_data = [
+            /*'id' => $data['id'],
+            'name' => $data['name'],
+            'email' => $data['email'],*/
+            'isLoggedIn' => false
+        ];
+        $session->set($ses_data);
         return view('login', $data);
     }
 
