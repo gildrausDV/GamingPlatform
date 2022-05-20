@@ -37,7 +37,7 @@ class Register_model extends Model {
         $data = [
             'username' => $user,
             'password'  => $pass,
-            'role'  => 1,
+            'role'  => 0,
             'blocked' => 0,
             'NP' => 0,
             'name' => $forename,

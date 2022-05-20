@@ -7,6 +7,7 @@ use CodeIgniter\Controller;
 use App\Models\Login_model;
 use App\Models\Register_model;
 use App\Models\Allow_model;
+use App\Models\Roles_model;
 use App\Config\autoload;
 
 class Home extends BaseController
@@ -63,6 +64,25 @@ class Home extends BaseController
         $res = $model->allow();
         $data['allow'] = "".$res;
         return view('allow', $data);
+    }
+
+    public function settings() {
+        helper('form');
+        $data['settings'] = '0';
+        return view('settings', $data);
+    }
+
+    public function roles() {
+        helper('form');
+        $data['roles'] = '0';
+        return view('roles', $data);
+    }
+
+    public function roles_() {
+        $model = new Roles_model();
+        $res = $model->roles();
+        $data['roles'] = "".$res;
+        return view('roles', $data);
     }
 
 }
