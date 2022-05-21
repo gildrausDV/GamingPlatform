@@ -21,7 +21,7 @@ class Home extends BaseController
     public function signOut() {
         $session = session();
         $ses_data = [
-            'id' => -1,
+            'ID' => -1,
             'isLoggedIn' => false
         ];
         $session->set($ses_data);
@@ -41,7 +41,7 @@ class Home extends BaseController
         if($res == 0) {
             $session = session();
             $ses_data = [
-                'id' => $model->getID($_POST['username']),
+                'ID' => $model->getID($_POST['username']),
                 'isLoggedIn' => true
             ];
             $session->set($ses_data);
@@ -49,9 +49,7 @@ class Home extends BaseController
         }
         $session = session();
         $ses_data = [
-            /*'id' => $data['id'],
-            'name' => $data['name'],
-            'email' => $data['email'],*/
+            'ID' => -1,
             'isLoggedIn' => false
         ];
         $session->set($ses_data);
@@ -78,6 +76,7 @@ class Home extends BaseController
     public function allow() {
         helper('form');
         $data['allow'] = '0';
+        //echo session()->get('ID');
         return view('allow', $data);
     }
 

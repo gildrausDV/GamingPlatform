@@ -49,7 +49,6 @@ class PlayedGame_model extends Model {
         $list = [];
         $list = $this->table('playedgame')->select('username, points')
             ->join('user', 'playedgame.ID_user=user.ID', 'left')
-            ->where('ID_user', $id_user)
             ->where('ID_game', $id_game)->orderBy('points', 'desc')->paginate(10);
         $result->list = $list;
 

@@ -97,11 +97,11 @@ document.addEventListener('keydown', (event) => {
     var name = event.key;
     if(name == "ArrowLeft") {
         if(left) return;
-        img.src = "../images/bird3.png";
+        img.src = "/images/bird3.png";
         left = true;
     } else if(name == "ArrowRight") {
         if(right) return;
-        img.src = "../images/bird3.png";
+        img.src = "/images/bird3.png";
         right = true;
     } else if(name == "ArrowUp") {
         //curr_limit += limit;
@@ -359,7 +359,7 @@ function init() {
     canvas = document.getElementById("my-canvas");
     canvas.addEventListener('click', function() { 
         start();
-        $("#my-canvas").css("background-image", 'url("../images/bg.jpg")');
+        $("#my-canvas").css("background-image", 'url("/images/bg.jpg")');
      }, false);
     context = canvas.getContext("2d");
     window.addEventListener('resize', resizeCanvas, false);
@@ -665,7 +665,7 @@ function checkFireBalls() {
 
         if(bool_x && bool_y) {
             end = true;
-            send_data();
+            //send_data();
             update_list();
             animate();
             clearInterval(timeInterval);

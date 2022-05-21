@@ -124,36 +124,31 @@
     <script>
 
         $(document).ready(function () {
-
-            $("$signOut").click(function () {
+            alert();
+            $("#signOut").click(function () {
                 $.ajax({
                     method: "POST",
                     url: window.location.origin + "/Home/SignOut",
                     success: function (obj, textstatus) {
                         alert(obj + " " + textstatus);
                     },
-                    error: function (msg) {
-                        alert("error");
+                    error: function(xhr, status, error) {
+                        alert(xhr.responseText + " " + error + " " + status);
                     }
                 });
 
                 location.href = window.location.origin + "/Home/Login";
-                });
             });
 
             $("#addTournament").click(function () {
                 location.href = window.location.origin + "/Tournament/addTournament";
             });
 
-            $("#signOut").click(function () {
-                location.href = window.location.origin + "/Home/Login";
-            });
-
             $.ajax({
                 method: "GET",
                 url: window.location.origin + "/Tournament/getTournaments",
                 success: function (obj, textstatus) {
-                    //alert(obj);
+                    alert(obj);
                     if(obj == "") return;
                     let start_data = JSON.parse(obj);
                     for(let i = 0; i < start_data.list.length; ++i) {
@@ -210,7 +205,7 @@
                     }
                 });
             }
-
+            alert();
         });
     </script>
 </body>

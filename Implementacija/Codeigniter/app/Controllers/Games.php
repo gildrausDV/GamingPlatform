@@ -20,8 +20,9 @@ class Games extends BaseController
     }
 
     public function getHistory($game) {
+        $session = session();
         $model = new PlayedGame_model();
-        $id_user = 1;
+        $id_user = $session->get('ID');
         $ret['list'] = $model->getHistory($game, $id_user, 20);
         echo json_encode($ret);
     }
@@ -66,7 +67,8 @@ class Games extends BaseController
     public function getList($game) {
         header('Content-Type: application/json');
         
-        $id_user = 1;
+        $session = session();
+        $id_user = $session->get('ID');
 
         $model = new PlayedGame_model();
         $result = $model->get_max_level_and_points($id_user, $game);
@@ -83,7 +85,8 @@ class Games extends BaseController
         $on_tournament = 0;
         // dodaj proveru da li je na takmicenju
 
-        $id_user = 1;
+        $session = session();
+        $id_user = $session->get('ID');
         $game_model = new Game_model();
         $id_game = $game_model->getID($game);
 

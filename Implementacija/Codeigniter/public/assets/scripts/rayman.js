@@ -67,12 +67,12 @@ var nextY = 515;
 var rayman;
 
 var img = new Image();
-img.src = "images/rayman01.png";
+img.src = "/images/rayman01.png";
 var img_c = new Image();
-img_c.src = "images/coin.png";
+img_c.src = "/images/coin.png";
 var img_f = new Image();
-img_f.src = "images/drvce.png";
-var audio = new Audio("images/coinCollect.mp3");
+img_f.src = "/images/drvce.png";
+var audio = new Audio("/images/coinCollect.mp3");
 var cnt = 0;
 var tInterval;
 var timeIntervalLeft;
@@ -141,11 +141,11 @@ document.addEventListener('keydown', (event) => {
     var name = event.key;
     if(name == "ArrowLeft") {
         if(left) return;
-        img.src = "images/rayman02.png";
+        img.src = "/images/rayman02.png";
         left = true;
     } else if(name == "ArrowRight") {
         if(right) return;
-        img.src = "images/rayman01.png";
+        img.src = "/images/rayman01.png";
         right = true;
     } else if(name == "ArrowUp") {
         if(jump) return;
@@ -444,7 +444,7 @@ function init() {
         if(started) return;
         start();
         //level = 0;
-        $("#my-canvas").css("background-image", 'url("../images/bg.jpg")');
+        $("#my-canvas").css("background-image", 'url("/images/bg.jpg")');
      }, false);
     context = canvas.getContext("2d");
     window.addEventListener('resize', resizeCanvas, false);
@@ -515,7 +515,7 @@ function init() {
                             time_restart();
                             again = true;
                             ended = true;
-                            $("#my-canvas").css("background-image", 'url("../images/bg_start.png")');
+                            $("#my-canvas").css("background-image", 'url("/images/bg_start.png")');
                             update_list();
                             animate();
                         } else {

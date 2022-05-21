@@ -35,7 +35,8 @@ class Tournament extends BaseController
 
     public function joinTournament() {
         if(!isset($_POST['argument'])) return;
-        $id_user = 1;
+        $session = session();
+        $id_user = $session->get('ID');
         $model = new Participation_model();
         $model->joinTournament($_POST['argument'], $id_user);
         $res['list'] = "abc";

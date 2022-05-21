@@ -147,7 +147,6 @@
                 });
 
                 location.href = window.location.origin + "/Home/Login";
-                });
             });
 
             $("#myButton").click(function () {
