@@ -10,6 +10,7 @@
     <script src="<?= base_url() ?>/assets/scripts/bootstrap.min.js"></script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
     <script src="<?= base_url() ?>/assets/scripts/jquery-1.11.3.min.js"></script>
+    <script src="<?= base_url() ?>/assets/scripts/settings.js"></script>
 </head>
 <body>
     <div class="container-fluid no-padding">

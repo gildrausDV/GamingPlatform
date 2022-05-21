@@ -2,13 +2,13 @@
 
 use CodeIgniter\Model;
 
-class Register_model extends Model {
+class Settings_model extends Model {
 
     protected $table = 'user';
 
     protected $allowedFields = ['username', 'password', 'role', 'blocked', 'NP', 'name', 'surname', 'email', 'picture'];
     
-    public function register() {
+    public function settings() {
 
         $forename = $_POST['forename'];
         $surname = $_POST['surname'];
@@ -50,6 +50,16 @@ class Register_model extends Model {
         //$this->table('user')->insert($data);
 
         return 5;
+    }
+
+    public function settingsLoadData($id) {
+        $data = $this->table('user')->select()->where('ID', $id + 0)->paginate(1);
+        if (count($data) > 0) {
+            return 2;
+        }
+        $res['pass'] = $data[0]['password'];
+        $res['picture'] = $data[0]['picture'];
+        return $res;
     }
 
 }
