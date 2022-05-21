@@ -1,5 +1,12 @@
 <!-- Autor: Dimitrije Vujčić -->
 
+<?php
+    if($_SESSION['role'] < 1) {
+        header('Location: '.base_url()."/Home/home");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -124,7 +131,7 @@
                     method: "POST",
                     url: window.location.origin + "/Home/SignOut",
                     success: function (obj, textstatus) {
-                        alert(obj + " " + textstatus);
+                        //alert(obj + " " + textstatus);
                     },
                     error: function (msg) {
                         alert("error");

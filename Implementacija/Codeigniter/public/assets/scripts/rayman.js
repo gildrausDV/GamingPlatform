@@ -414,11 +414,12 @@ function update_data() {
 
 function send_data() {
     let t = ss + (mm + hh * 60) * 60;
+    let date = new Date();
     $.ajax({
         method: "POST",
         url: window.location.origin + "/Games/save_data/Rayman",
         //dataType: 'json',
-        data: {arguments: [t, points, level - 1]},
+        data: {arguments: [t, points, level - 1, date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()]},
         //data: {functionname: 'save_data', arguments: points},
     
         success: function (obj, textstatus) {

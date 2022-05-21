@@ -561,11 +561,12 @@ function update_list() {
 }
 
 function send_data() {
+    let date = new Date();
     $.ajax({
         method: "POST",
         url: window.location.origin + "/Games/save_data/flappyBird",
         //dataType: 'json',
-        data: {arguments: [time, points, level - 1]},
+        data: {arguments: [time, points, level - 1, date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()]},
         //data: {functionname: 'save_data', arguments: points},
     
         success: function (obj, textstatus) {

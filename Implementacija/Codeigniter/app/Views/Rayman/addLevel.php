@@ -1,5 +1,12 @@
 <!-- Autor: Dimitrije Vujčić -->
 
+<?php
+    if($_SESSION['role'] < 1) {
+        header('Location: '.base_url()."/Home/home");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -175,7 +182,7 @@
                     method: "POST",
                     url: window.location.origin + "/Home/SignOut",
                     success: function (obj, textstatus) {
-                        alert(obj + " " + textstatus);
+                        //alert(obj + " " + textstatus);
                     },
                     error: function (msg) {
                         alert("error");
@@ -247,7 +254,7 @@
                 for(let i = 0; i < arr.length; ++i) {
                     let str = arr[i].replace('[', '').replace(']', '');
                     let x = str.split(",");
-                    alert(x);
+                    //alert(x);
                     if(x.length != 3) continue;
                     let d = {
                         "x" : x[0],
@@ -262,7 +269,7 @@
                 for(let i = 0; i < arr.length; ++i) {
                     let str = arr[i].replace('[', '').replace(']', '');
                     let x = str.split(",");
-                    alert(x);
+                    //alert(x);
                     if(x.length != 2) continue;
                     let d = {
                         "x" : x[0],
@@ -270,7 +277,7 @@
                     };
                     coins.push(d);
                 }
-                alert(JSON.stringify(coins));
+                //alert(JSON.stringify(coins));
 
                 let data = {
                     "rows" : numRows,
@@ -279,7 +286,7 @@
                     "coins": coins
                 };
 
-                alert(data);
+                //alert(data);
                 $.ajax({
                     method: "POST",
                     url: window.location.origin + "/Games/add_level/Rayman",

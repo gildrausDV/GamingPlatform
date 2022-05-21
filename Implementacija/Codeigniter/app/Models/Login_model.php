@@ -22,6 +22,7 @@ class Login_model extends Model {
         $ses_data = [
             'ID' => $this->getID($user),
             'role' => $this->getRole($user),
+            'seenTournaments' => 0,
             'isLoggedIn' => true
         ];
         $session->set($ses_data);

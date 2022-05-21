@@ -52,7 +52,7 @@ class Auth implements FilterInterface
 
         $metod = explode("/", $request->uri->getPath())[1];
         $arr = explode("/",current_url());
-        if($arr[count($arr) - 1] == "login" || $arr[count($arr) - 1] == "login_"|| $arr[count($arr) - 1] == "register") {
+        if($arr[count($arr) - 1] == "login" || $arr[count($arr) - 1] == "login_"|| $arr[count($arr) - 1] == "register" || $arr[count($arr) - 1] == "register_") {
             return;
         }
 

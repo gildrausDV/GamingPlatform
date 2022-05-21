@@ -1,5 +1,13 @@
 <!-- Autor: Bogdan Jovanović -->
 
+<?php
+    //echo (strcmp("13:00:00", "13:00:15"));
+    if($_SESSION['role'] < 0) {
+        header('Location: '.base_url()."/Home/home");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,15 +130,26 @@
     <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>-->
     <script src="<?= base_url() ?>/assets/scripts/jquery-1.11.3.min.js"></script>
     <script>
+                /*let date = new Date();
+                $.ajax({
+                    method: "POST",
+                    url: window.location.origin + "/Games/test",
+                    data: {arguments: [date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()]},
+                    success: function (obj, textstatus) {
+                        alert(obj + " " + textstatus);
+                    },
+                    error: function(xhr, status, error) {
+                        alert(xhr.responseText + " " + error + " " + status);
+                    }
+                });*/
 
         $(document).ready(function () {
-            alert();
             $("#signOut").click(function () {
                 $.ajax({
                     method: "POST",
                     url: window.location.origin + "/Home/SignOut",
                     success: function (obj, textstatus) {
-                        alert(obj + " " + textstatus);
+                        //alert(obj + " " + textstatus);
                     },
                     error: function(xhr, status, error) {
                         alert(xhr.responseText + " " + error + " " + status);
@@ -144,16 +163,31 @@
                 location.href = window.location.origin + "/Tournament/addTournament";
             });
 
+            let joined = [];
+            $.ajax({
+                method: "GET",
+                url: window.location.origin + "/Tournament/getJoined",
+                success: function (obj, textstatus) {
+                    obj = JSON.parse(obj);
+                    for(let i = 0; i < obj.list.length; ++i) {
+                        joined.push(obj.list[i]['ID_tournament']);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert(xhr.responseText + " " + error + " " + status);
+                }
+            });
+
             $.ajax({
                 method: "GET",
                 url: window.location.origin + "/Tournament/getTournaments",
                 success: function (obj, textstatus) {
-                    alert(obj);
+                    //alert(obj);
                     if(obj == "") return;
                     let start_data = JSON.parse(obj);
                     for(let i = 0; i < start_data.list.length; ++i) {
                 
-                        let row = $("<tr></tr>").css({"width": "100%", 
+                        let row = $("<tr id=r"+i+"></tr>").css({"width": "100%", 
                                         "height": "90px", 
                                         "display": "flex",
                                         "justify-content": "space-around",
@@ -176,15 +210,29 @@
                         
                         col = $("<td><h1>" + start_data.list[i].timeEnd + "</h1></td>").css("margin-top", "1%");
                         row.append(col);
-
-                        col = $("<td><button id='"+ i +"' class='btn btn-primary'>" + 'Join' + "</button></td>").css("margin-top", "2%");
+                        
+                        if(joined.indexOf(start_data.list[i].id) == -1) {
+                            col = $("<td><button id='"+ i +"' class='btn btn-primary'>" + 'Join' + "</button></td>").css("margin-top", "2%").css("width", "100px");
+                        } else {
+                            col = $("<td><button id='"+ i +"' class='btn btn-secondary'>" + 'Joined' + "</button></td>").css("margin-top", "2%").css("width", "100px");
+                        }
                         row.append(col);
                         
                         $("table").append(row);
+                        /*let txt = $("#1").text();
+                        alert(txt);*/
 
                         $("#" + i).click(function () {
-                            joinTournament(start_data.list[i].id);
+                            //alert("join tournament");
+                            joinTournament(start_data.list[i].id, i);
+                            event.stopPropagation();
                         });
+
+                        $("#r"+i).click(function () {
+                            //alert("player list");
+                            window.location.href = '<?php base_url() ?>' + "/Tournament/playerList/" + start_data.list[i].id;
+                        });
+
                     }
                 },
                 error: function(xhr, status, error) {
@@ -192,20 +240,29 @@
                 }
             });
 
-            function joinTournament(id) {
+            function joinTournament(id, index) {
+                let btn = $("#" + index);
                 $.ajax({
                     method: "POST",
                     url: window.location.origin + "/Tournament/joinTournament",
                     data: {argument: id},
                     success: function (obj, textstatus) {
+                        //alert($("#" + index).text());
                         //alert(obj + " " + textstatus);
+                        /*if(btn.text() == "Joined") {
+                            btn.removeClass("btn-secondary");
+                            btn.addClass("btn-primary");
+                        } else*/ if(btn.text() == "Join") {
+                            btn.removeClass("btn-primary");
+                            btn.addClass("btn-secondary");
+                        }
                     },
                     error: function(xhr, status, error) {
                         alert(xhr.responseText + " " + error + " " + status);
                     }
                 });
             }
-            alert();
+            //alert();
         });
     </script>
 </body>

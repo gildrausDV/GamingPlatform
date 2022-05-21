@@ -1,5 +1,12 @@
 <!-- Autor: Dimitrije Vujčić -->
 
+<?php
+    if($_SESSION['role'] < 1) {
+        header('Location: '.base_url()."/Home/home");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -247,7 +254,7 @@
                 for(let i = 0; i < arr.length; ++i) {
                     let str = arr[i].replace('[', '').replace(']', '');
                     let x = str.split(",");
-                    alert(x);
+                    //alert(x);
                     if(x.length != 2) continue;
                     let d = {
                         "y" : x[0],
@@ -261,7 +268,7 @@
                 for(let i = 0; i < arr.length; ++i) {
                     let str = arr[i].replace('[', '').replace(']', '');
                     let x = str.split(",");
-                    alert(x);
+                    //alert(x);
                     if(x.length != 2) continue;
                     let d = {
                         "x" : x[0],
@@ -269,7 +276,7 @@
                     };
                     coins.push(d);
                 }
-                alert(JSON.stringify(coins));
+                //alert(JSON.stringify(coins));
 
                 let data = {
                     "rows" : numRows,
@@ -278,7 +285,7 @@
                     "coins": coins
                 };
 
-                alert(data);
+                //alert(data);
                 $.ajax({
                     method: "POST",
                     url: window.location.origin + "/Games/add_level/FlappyBird",

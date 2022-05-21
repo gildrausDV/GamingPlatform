@@ -1,5 +1,12 @@
 <!-- Autor: Bogdan Jovanović -->
 
+<?php
+    if($_SESSION['role'] < 1) {
+        header('Location: '.base_url()."/Tournament/tournament");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -139,7 +146,7 @@
                     method: "POST",
                     url: window.location.origin + "/Home/SignOut",
                     success: function (obj, textstatus) {
-                        alert(obj + " " + textstatus);
+                        //alert(obj + " " + textstatus);
                     },
                     error: function (msg) {
                         alert("error");
@@ -160,19 +167,19 @@
                 /*if(game == "" || max_players == "" || date == "" || timeStart == "" || timeEnd == "") {
                     return;
                 }*/
-                alert();
+                //alert();
                 $.ajax({
                     method: "POST",
                     url: window.location.origin + "/Tournament/add_tournament",
                     data: {arguments: [game, max_players, date, timeStart, timeEnd]},
                     success: function (obj, textstatus) {
-                        alert(obj + " " + textstatus);
+                        //alert(obj + " " + textstatus);
                     },
                     error: function(xhr, status, error) {
                         alert(xhr.responseText + " " + error + " " + status);
                     }
                 });
-                alert();
+                //alert();
             });
 
         });
