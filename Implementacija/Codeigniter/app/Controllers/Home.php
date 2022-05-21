@@ -23,6 +23,7 @@ class Home extends BaseController
         $session = session();
         $ses_data = [
             'ID' => -1,
+            'role' => -1,
             'isLoggedIn' => false
         ];
         $session->set($ses_data);
@@ -40,20 +41,20 @@ class Home extends BaseController
         //print_r($res);
         $data['log'] = "".$res;
         if($res == 0) {
-            $session = session();
+            /*$session = session();
             $ses_data = [
                 'ID' => $model->getID($_POST['username']),
                 'isLoggedIn' => true
             ];
-            $session->set($ses_data);
+            $session->set($ses_data);*/
             return view('Rayman/rayman', $data);
         }
-        $session = session();
+        /*$session = session();
         $ses_data = [
             'ID' => -1,
             'isLoggedIn' => false
         ];
-        $session->set($ses_data);
+        $session->set($ses_data);*/
         return view('login', $data);
     }
 
