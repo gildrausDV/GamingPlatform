@@ -8,6 +8,7 @@ use App\Models\Login_model;
 use App\Models\Register_model;
 use App\Models\Allow_model;
 use App\Models\Roles_model;
+use App\Models\Settings_model;
 use App\Config\autoload;
 
 class Home extends BaseController
@@ -92,6 +93,21 @@ class Home extends BaseController
         helper('form');
         $data['settings'] = '0';
         return view('settings', $data);
+    }
+
+    public function settingsLoadData() {
+        $model = new Settings_model();
+        //$id = session()->get('id');
+        $id = session()->get('id');
+        $proba = [
+            'bogdan' => 'dimitrije'
+        ];
+        echo json_encode($id['ID']);
+        return;
+        $res = $model->settingsLoadData($id);
+        //$res['pass'] = $data[0]['password'];
+        //$res['picture'] = $data[0]['picture'];
+        echo json_encode($res);
     }
 
     public function roles() {
