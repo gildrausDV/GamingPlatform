@@ -47,6 +47,7 @@ class Home extends BaseController
                 'isLoggedIn' => true
             ];
             $session->set($ses_data);*/
+            $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
             return view('Rayman/rayman', $data);
         }
         /*$session = session();

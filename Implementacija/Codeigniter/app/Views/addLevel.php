@@ -131,7 +131,7 @@
             let role = <?php echo $_SESSION['role'];?>;
             //alert(role);
             if(role == 2) {
-                return;
+                
             }  if(role == 1) {
                 $(".removeForModerators").css("display", "none");
             } if(role == 0) {

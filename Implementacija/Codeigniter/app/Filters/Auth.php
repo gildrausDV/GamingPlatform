@@ -48,8 +48,6 @@ class Auth implements FilterInterface
         //$_SESSION['x'] = 1;
         print_r($_SESSION);*/ // za debagovanje!!!
 
-        if(!isset($_SESSION['role'])) $_SESSION['role'] = -1;
-
         $metod = explode("/", $request->uri->getPath())[1];
         $arr = explode("/",current_url());
         if($arr[count($arr) - 1] == "login" || $arr[count($arr) - 1] == "login_"|| $arr[count($arr) - 1] == "register" || $arr[count($arr) - 1] == "register_") {
@@ -63,7 +61,7 @@ class Auth implements FilterInterface
 
         $session = Services::session();
         
-        if($_SESSION['role'] == -1 && !in_array($metod, $guest)) {
+        if(!isset($_SESSION['role']) || isset($_SESSION['role']) && $_SESSION['role'] == -1 && !in_array($metod, $guest)) {
             return redirect()->to('Home/login');
         }
 

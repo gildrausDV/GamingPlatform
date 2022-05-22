@@ -42,7 +42,7 @@
                 <br><br><br>
                 <div class="links">
                     <div class="play">
-                        <a class="input_footer1" href="play.php">
+                        <a class="input_footer1" href="<?php echo base_url()."/Home/home" ?>">
                             Quick play
                         </a>
                     </div>
