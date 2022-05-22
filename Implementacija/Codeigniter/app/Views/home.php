@@ -78,7 +78,7 @@
                         <!--<a href="#" class="nav-link" id="signOut">
                             Sign out
                         </a>-->
-                        <button id="signOut" type="button" class="btn btn- bg-danger" style="margin-right: 10px;">Sign out</button>
+                        <button id="signOut" type="button" class="btn" style="margin-right: 10px;">Sign out</button>
                     </div>
                 </nav>
             </div>
@@ -123,7 +123,7 @@
                     method: "POST",
                     url: window.location.origin + "/Home/SignOut",
                     success: function (obj, textstatus) {
-                        alert(obj + " " + textstatus);
+                        //alert(obj + " " + textstatus);
                     },
                     error: function (msg) {
                         alert("error");
@@ -145,6 +145,26 @@
                 $(".removeForGuests").css("display", "none");
             }
             //alert(role);
+
+            if(role == -1) {
+                $("#signOut").text("Log in")
+                    .removeClass("btn-danger")
+                    .addClass("btn-success");
+            } else {
+                $("#signOut").text("Log out")
+                    .removeClass("btn-success")
+                    .addClass("btn-danger");
+            }
+
+            if(role == -1) {
+                $("#signOut").text("Log in")
+                    .removeClass("btn-danger")
+                    .addClass("btn-success");
+            } else {
+                $("#signOut").text("Log out")
+                    .removeClass("btn-success")
+                    .addClass("btn-danger");
+            }
 
         });
     </script>

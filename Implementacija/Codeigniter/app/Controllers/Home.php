@@ -48,7 +48,7 @@ class Home extends BaseController
             ];
             $session->set($ses_data);*/
             $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
-            return view('Rayman/rayman', $data);
+            return view('home', $data);
         }
         /*$session = session();
         $ses_data = [

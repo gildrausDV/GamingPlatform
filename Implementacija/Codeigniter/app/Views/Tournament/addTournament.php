@@ -82,7 +82,7 @@
                     </div>
                     
                     <div class="desno">
-                        <button id="signOut" type="button" class="btn btn- bg-danger" style="margin-right: 10px;">Sign out</button>
+                        <button id="signOut" type="button" class="btn" style="margin-right: 10px;">Sign out</button>
                     </div>
                 </nav>
             </div>
@@ -155,6 +155,16 @@
                 $(".removeForGuests").css("display", "none");
             }
             //alert(role);
+
+            if(role == -1) {
+                $("#signOut").text("Log in")
+                    .removeClass("btn-danger")
+                    .addClass("btn-success");
+            } else {
+                $("#signOut").text("Log out")
+                    .removeClass("btn-success")
+                    .addClass("btn-danger");
+            }
             
             $("#signOut").click(function () {
                 $.ajax({
