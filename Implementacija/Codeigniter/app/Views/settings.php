@@ -97,7 +97,7 @@
             <div class="row">
                 <div class="offset-md-1 col-md-4 mt-4 picture">
                     <h2>Your profile picture</h2>
-                    <img id="profilePicture" src="/images/superMario.jpg">
+                    <img id="profilePicture" src="<?= base_url() ?>/Home/settingsLoadData2">
                 </div>
                 <div class="offset-md-2 col-md-4 mt-4 form">
                     <form>
@@ -109,7 +109,7 @@
                                 </td>
                                 <td>
                                     <span id="passwordGreska"></span><br>
-                                    <input type="password" id="pass" value="123">
+                                    <input type="text" id="pass" value="123">
                                 </td>
                             </tr>
                             <tr>

@@ -62,6 +62,14 @@
                         </tr>
                         <tr>
                             <td>
+                                <label for="date">Datum rodjenja:</label>
+                            </td>
+                            <td>
+                                <input type="date" id="date" name="date">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <label for="username">Username:</label>
                             </td>
                             <td>

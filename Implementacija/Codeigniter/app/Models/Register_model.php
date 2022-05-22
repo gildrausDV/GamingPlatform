@@ -6,7 +6,7 @@ class Register_model extends Model {
 
     protected $table = 'user';
 
-    protected $allowedFields = ['username', 'password', 'role', 'blocked', 'NP', 'name', 'surname', 'email', 'picture'];
+    protected $allowedFields = ['username', 'password', 'role', 'blocked', 'NP', 'name', 'surname', 'email', 'picture', 'date'];
     
     public function register() {
 
@@ -15,9 +15,10 @@ class Register_model extends Model {
         $email = $_POST['email'];
         $user = $_POST['username'];
         $pass = $_POST['password'];
+        $date = $_POST['date'];
         $confirmPass = $_POST['confirmPassword'];
         if ($forename == "" || $surname == "" || $email == "" || $user == "" || $pass == "" ||
-        $confirmPass == "") {
+        $confirmPass == "" || $date == "") {
             return 1;
         }
 
@@ -37,13 +38,16 @@ class Register_model extends Model {
         $data = [
             'username' => $user,
             'password'  => $pass,
+            'date' => $date,
             'role'  => 0,
             'blocked' => 0,
             'NP' => 0,
             'name' => $forename,
             'surname' => $surname,
             'email' => $email,
-            'picture' => file_get_contents("C:\\xampp\htdocs\GamingPlatform\Implementacija\Codeigniter\public\images\kirby.jpg")
+            'picture' => file_get_contents(base_url("/images/superMario.jpg"))
+            //'picture' => NULL
+            /*'picture' => file_get_contents("C:\\xampp\htdocs\GamingPlatform\Implementacija\Codeigniter\public\images\kirby.jpg")*/
         ];
 
         $this->insert($data);

@@ -89,25 +89,40 @@ class Home extends BaseController
         return view('allow', $data);
     }
 
+    /*public function settings() {
+        helper('form');
+        $data['settings'] = '0';
+        return view('settings', $data);
+    }*/
+
     public function settings() {
         helper('form');
         $data['settings'] = '0';
         return view('settings', $data);
     }
 
-    public function settingsLoadData() {
+    public function settingsLoadData1() {
         $model = new Settings_model();
-        //$id = session()->get('id');
-        $id = session()->get('id');
-        $proba = [
-            'bogdan' => 'dimitrije'
+        $id = session()->get('ID');
+        $res = $model->settingsLoadData1($id);
+        $res_ = [
+            'password' => $res['password'],
+            'date' => $res['date']
         ];
-        echo json_encode($id['ID']);
-        return;
-        $res = $model->settingsLoadData($id);
-        //$res['pass'] = $data[0]['password'];
-        //$res['picture'] = $data[0]['picture'];
-        echo json_encode($res);
+        echo json_encode($res_);
+    }
+
+    public function settingsLoadData2() {
+        $model = new Settings_model();
+        $id = session()->get('ID');
+        $res = $model->settingsLoadData2($id);
+        echo $res;
+    }
+
+    public function settingsStoreData() {
+        $model = new Settings_model();
+        $res = $model->settingsStoreData();
+        return $res;
     }
 
     public function roles() {
