@@ -18,7 +18,9 @@
                 <nav class="navbar navbar-expand-sm bg-dark n">
                     <div class="levo">
                         <a href="<?= base_url() ?>/Home/settings" class="navbar-brand logo_link">
-                            <img src="<?= base_url() ?>/images/superMario.jpg" alt="logo" id="logo" class="rounded-pill">
+                            <img src="<?php 
+                                    echo esc($picture);
+                                ?>" alt="logo" id="logo" class="rounded-pill">
                         </a>
                         <ul class="navbar-nav">
                             <li class="nav-item">

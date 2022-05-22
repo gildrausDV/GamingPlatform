@@ -19,7 +19,10 @@
                     <nav class="navbar navbar-expand-sm bg-dark n">
                         <div class="levo">
                             <a href="<?= base_url() ?>/Home/settings" class="navbar-brand logo_link">
-                                <img src="<?= base_url() ?>/images/superMario.jpg" alt="logo" id="logo" class="rounded-pill">
+                                <img src="
+                                <?php 
+                                    echo esc($picture);
+                                ?>" alt="logo" id="logo" class="rounded-pill">
                             </a>
                             <ul class="navbar-nav">
                                 <li class="nav-item">
@@ -97,7 +100,9 @@
             <div class="row">
                 <div class="offset-md-1 col-md-4 mt-4 picture">
                     <h2>Your profile picture</h2>
-                    <img id="profilePicture" src="<?= base_url() ?>/Home/settingsLoadData2">
+                    <img id="profilePicture" src="<?php 
+                                    echo esc($picture);
+                                ?>">
                 </div>
                 <div class="offset-md-2 col-md-4 mt-4 form">
                     <form>
@@ -109,20 +114,25 @@
                                 </td>
                                 <td>
                                     <span id="passwordGreska"></span><br>
-                                    <input type="text" id="pass" value="123">
+                                    <input type="text" id="pass" value="<?php 
+                                    echo esc($passInput);
+                                ?>">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <label for="date">Date(mm/dd/yyyy):</label> 
                                 </td>
-                                <td><input id="date" type="date" value="2022-03-03"></td>
+                                <td><input id="date" type="date" value="<?php 
+                                    echo esc($dateInput);
+                                ?>"></td>
                             </tr>
                             <tr>
                                 <td>Picture: </td>
                                 <td>
                                     <label id="labelFile" for="file">Click here to import</label>
-                                    <input class="hidden box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple /></td>
+                                    <input type="file" id="file">
+                                    <!--<input class="hidden box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple /></td>-->
                             </tr>
                             <tr>
                                 <td colspan="2">

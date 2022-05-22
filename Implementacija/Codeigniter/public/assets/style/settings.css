@@ -303,6 +303,10 @@ td {
     border: 2px solid gray;
 }
 
+#file {
+    display: none;
+}
+
 .hidden {
     display: none;
 }

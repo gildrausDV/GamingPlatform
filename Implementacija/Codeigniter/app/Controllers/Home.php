@@ -72,12 +72,20 @@ class Home extends BaseController
     }
 
     public function home() {
-        return view('home');
+        $role = session()->get('role');
+        $id = session()->get('ID');
+        if ($role == -1 || isset($_SESSION['role']) == false) {
+            $data['picture'] = "/usersImages/guest.png";
+            return view('home', $data);
+        }
+        $data['picture'] = (new Settings_model())->settingsLoadPicture($id);
+        return view('home', $data);
     }
 
     public function allow() {
         helper('form');
         $data['allow'] = '0';
+        $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
         //echo session()->get('ID');
         return view('allow', $data);
     }
@@ -86,6 +94,7 @@ class Home extends BaseController
         $model = new Allow_model();
         $res = $model->allow();
         $data['allow'] = "".$res;
+        $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
         return view('allow', $data);
     }
 
@@ -98,26 +107,37 @@ class Home extends BaseController
     public function settings() {
         helper('form');
         $data['settings'] = '0';
+        $id = session()->get('ID');
+        $model = new Settings_model();
+        $res = $model->settingsLoadData($id);
+        $data['passInput'] = $res['password'];
+        $data['dateInput'] = $res['date'];
+        $data['picture'] = $res['profilePicture'];
         return view('settings', $data);
     }
 
-    public function settingsLoadData1() {
+    public function settingsLoadData() {
         $model = new Settings_model();
         $id = session()->get('ID');
-        $res = $model->settingsLoadData1($id);
+        $res = $model->settingsLoadData($id);
         $res_ = [
             'password' => $res['password'],
-            'date' => $res['date']
+            'date' => $res['date'],
+            'profilePicture' => $res['profilePicture']
         ];
         echo json_encode($res_);
     }
 
-    public function settingsLoadData2() {
+    /*public function loadPicture() {
+        $role = session()->get('role');
+        if ($role == -1 || isset($_SESSION['role']) == false) {
+            return;
+        }
         $model = new Settings_model();
         $id = session()->get('ID');
-        $res = $model->settingsLoadData2($id);
+        $res = $model->settingsLoadPicture($id);
         echo $res;
-    }
+    }*/
 
     public function settingsStoreData() {
         $model = new Settings_model();
@@ -128,6 +148,7 @@ class Home extends BaseController
     public function roles() {
         helper('form');
         $data['roles'] = '0';
+        $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
         return view('roles', $data);
     }
 
@@ -135,6 +156,7 @@ class Home extends BaseController
         $model = new Roles_model();
         $res = $model->roles();
         $data['roles'] = "".$res;
+        $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
         return view('roles', $data);
     }
 

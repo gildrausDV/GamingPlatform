@@ -45,7 +45,7 @@ class Register_model extends Model {
             'name' => $forename,
             'surname' => $surname,
             'email' => $email,
-            'picture' => file_get_contents(base_url("/images/superMario.jpg"))
+            'picture' => "/images/kirby.jpg"
             //'picture' => NULL
             /*'picture' => file_get_contents("C:\\xampp\htdocs\GamingPlatform\Implementacija\Codeigniter\public\images\kirby.jpg")*/
         ];

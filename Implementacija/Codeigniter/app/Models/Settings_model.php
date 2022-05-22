@@ -37,18 +37,21 @@ class Settings_model extends Model {
         return 5;
     }
 
-    public function settingsLoadData1($id) {
+    public function settingsLoadData($id) {
         $data = $this->table('user')->select()->where('ID', $id)->paginate(1);
         /*if (count($data) == 0) {
             return -1;
         }*/
         $res['password'] = $data[0]['password'];
         $res['date'] = $data[0]['date'];
+        $res['profilePicture'] = $data[0]['picture'];
         return $res;
     }
 
-    public function settingsLoadData2($id) {
+    public function settingsLoadPicture($id) {
         $data = $this->table('user')->select()->where('ID', $id)->paginate(1);
+        $res['profilePicture'] = $data[0]['picture'];
+        //return $res;
         return $data[0]['picture'];
     }
 

@@ -3,6 +3,7 @@
 use App\Models\Tournament_model;
 use App\Models\Participation_model;
 use App\Models\Game_model;
+use App\Models\Settings_model;
 
 class Tournament extends BaseController
 {
@@ -11,14 +12,17 @@ class Tournament extends BaseController
     }
 
     public function tournament() {
-        return view('Tournament/tournament');
+        $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
+        return view('Tournament/tournament', $data);
     }
 
     public function addTournament() {
-        return view('Tournament/addTournament');
+        $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
+        return view('Tournament/addTournament', $data);
     }
 
     public function playerList($id_tournament) {
+        $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
         $data['id_tournament'] = $id_tournament;
         return view('Tournament/playerList', $data);
     }

@@ -7,6 +7,7 @@ use App\Models\Level_model;
 use App\Models\Game_model;
 use App\Models\Login_model;
 use App\Models\Tournament_model;
+use App\Models\Settings_model;
 use App\Models\Participation_model;
 
 class Games extends BaseController
@@ -18,6 +19,7 @@ class Games extends BaseController
 
     public function history($game) {
         $data['game'] = $game;
+        $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
         return view('history', $data);
     }
 
@@ -31,26 +33,36 @@ class Games extends BaseController
 
     public function topPlayers($game) {
         $data['game'] = $game;
+        $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
         return view('topPlayers', $data);
     }
 
     public function game($game) {
+        $role = session()->get('role');
+        if ($role == -1 || isset($_SESSION['role']) == false) {
+            $data['picture'] = "/usersImages/guest.png";
+        }
+        else {
+            $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
+        }
         if($game == "Rayman") {
-            return view('Rayman/rayman');
+            return view('Rayman/rayman', $data);
         } else if($game == "FlappyBird") {
-            return view('flappyBird/flappyBird');
+            return view('flappyBird/flappyBird', $data);
         }
     }
 
     public function addLevel_default() {
-        return view('addLevel');
+        $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
+        return view('addLevel', $data);
     }
 
     public function addLevel($game) {
+        $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
         if($game == "Rayman") {
-            return view('Rayman/addLevel');
+            return view('Rayman/addLevel', $data);
         } else if($game == "FlappyBird") {
-            return view('FlappyBird/addLevel');
+            return view('FlappyBird/addLevel', $data);
         }
     }
 

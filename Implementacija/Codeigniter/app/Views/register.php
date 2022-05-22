@@ -62,7 +62,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="date">Datum rodjenja:</label>
+                                <label for="date">Date of birth:</label>
                             </td>
                             <td>
                                 <input type="date" id="date" name="date">

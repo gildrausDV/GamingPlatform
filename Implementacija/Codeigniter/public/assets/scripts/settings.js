@@ -6,18 +6,20 @@ $(document).ready(function() {
     $("#profilePicture").attr("src", "/images/superMario.jpg");
   }*/
 
-    $.ajax({
+    /*$.ajax({
         method: "GET",
-        url: window.location.origin + "/Home/settingsLoadData1",
+        url: window.location.origin + "/Home/settingsLoadData",
         success: function (obj, textstatus) {
             obj_ = JSON.parse(obj);
             $("#pass").val(obj_['password']);
             $("#date").val(obj_['date']);
+            //$("#profilePicture").attr("src", obj_['profilePicture']);
+            //$("#logo").attr("src", obj_['profilePicture']);
         },
         error: function(xhr, status, error) {
             alert(xhr.responseText + " " + error + " " + status);
         }
-      });
+      });*/
 
       /*$.ajax({
         method: "GET",
