@@ -26,38 +26,38 @@
                                     Play
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item removeForGuests">
                                 <a href="<?= base_url() ?>/Tournament/tournament" class="nav-link">
                                     Tournaments
                                 </a>
                             </li>
-                            <li class="nav-item" style="width: 85px;">
+                            <li class="nav-item removeForGuests removeForUsers" style="width: 85px;">
                                 <a href="<?= base_url() ?>/Games/addLevel_default" class="nav-link">
                                     Add level
                                 </a>
                             </li>
-                            <li class="nav-item" style="width: 135px;">
+                            <li class="nav-item removeForGuests" style="width: 135px;">
                                 <a href="<?= base_url() ?>/Home/settings" class="nav-link">
                                     Account settings
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item removeForGuests removeForUsers removeForModerators">
                                 <a href="<?= base_url() ?>/Home/allow" class="nav-link">
                                     Allow/block
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item removeForGuests">
                                 <a href="<?= base_url() ?>/Games/history/None" class="nav-link">
                                     History
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item removeForGuests removeForUsers removeForModerators">
                                 <a href="<?= base_url() ?>/Home/roles" class="nav-link" style="width: 75px;">
                                     Roles
                                 </a>
                             </li>
                             <li>
-                                <div class="dropdown">
+                                <div class="dropdown" style="margin-left: 10px;">
                                     <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">Top players lists</button>
                                     <ul class="dropdown-menu izbor">
                                         <li class="dropdown-item">
@@ -100,7 +100,8 @@
             <div class="col-sm-2 game-info">
                 
             </div>
-            <div class="col-sm-8">
+            
+            <div class="col-sm-8 mt-2"><br>
                 <img src="/images/welcome.png" alt="bg-start" id="bg-start">
             </div>
             <div class="col-sm-2 game-info">
@@ -129,6 +130,20 @@
 
                 location.href = window.location.origin + "/Home/Login";
             });
+
+            let role = <?php echo $_SESSION['role'];?>;
+            //alert(role);
+            if(role == 2) {
+                return;
+            }  if(role == 1) {
+                $(".removeForModerators").css("display", "none");
+            } if(role == 0) {
+                $(".removeForUsers").css("display", "none");
+            } if(role == -1) {
+                $(".removeForGuests").css("display", "none");
+            }
+            //alert(role);
+
         });
     </script>
 </body>
