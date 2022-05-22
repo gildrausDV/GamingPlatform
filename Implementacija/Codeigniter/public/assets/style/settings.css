@@ -273,6 +273,7 @@ body {
 #profilePicture {
     border: 10px solid white;
     margin-top: 10px;
+    width: 300px;
 }
 
 #profilePicture:hover {

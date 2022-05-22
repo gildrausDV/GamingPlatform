@@ -117,7 +117,7 @@ class Home extends BaseController
         return view('settings', $data);
     }
 
-    public function settingsLoadData() {
+    /*public function settingsLoadData() {
         $model = new Settings_model();
         $id = session()->get('ID');
         $res = $model->settingsLoadData($id);
@@ -127,7 +127,7 @@ class Home extends BaseController
             'profilePicture' => $res['profilePicture']
         ];
         echo json_encode($res_);
-    }
+    }*/
 
     /*public function loadPicture() {
         $role = session()->get('role');
@@ -140,10 +140,26 @@ class Home extends BaseController
         echo $res;
     }*/
 
-    public function settingsStoreData() {
+    public function settings_() {
         $model = new Settings_model();
-        $res = $model->settingsStoreData();
-        return $res;
+        //if (!isset($_POST['save'])) return 1;
+        $file = "";
+        $targetDir = "usersImages";
+        if (is_array($_FILES)) {
+            if (is_uploaded_file($_FILES['file']['tmp_name'])) {
+                if (move_uploaded_file($_FILES['file']['tmp_name'], "$targetDir/".$_FILES['file']['name'])) {
+                    $file = "/$targetDir/".$_FILES['file']['name'];
+                }
+            }
+        }
+        $id = session()->get('ID');
+        $res1 = $model->settingsStoreData($id, $file);
+        $res2 = $model->settingsLoadData($id);
+        $data['settings'] = $res1;
+        $data['passInput'] = $res2['password'];
+        $data['dateInput'] = $res2['date'];
+        $data['picture'] = $res2['profilePicture'];
+        return view('settings', $data);
     }
 
     public function roles() {

@@ -105,7 +105,7 @@
                                 ?>">
                 </div>
                 <div class="offset-md-2 col-md-4 mt-4 form">
-                    <form>
+                    <form method="post" action="<?php echo site_url('Home/settings_'); ?>" enctype="multipart/form-data">
                         <table>
                             <tr>
                                 <td>
@@ -113,8 +113,13 @@
                                     <label for="pass">Password:</label>
                                 </td>
                                 <td>
-                                    <span id="passwordGreska"></span><br>
-                                    <input type="text" id="pass" value="<?php 
+                                    <span id="passwordGreska">
+                                    <?php 
+                                        if(esc($settings) == '2') echo "Changes saved!";
+                                        else if(esc($settings) == '1') echo "Password too short!";
+                                    ?>
+                                    </span><br>
+                                    <input type="text" id="pass" name="pass" value="<?php 
                                     echo esc($passInput);
                                 ?>">
                                 </td>
@@ -123,7 +128,7 @@
                                 <td>
                                     <label for="date">Date(mm/dd/yyyy):</label> 
                                 </td>
-                                <td><input id="date" type="date" value="<?php 
+                                <td><input name="date" id="date" type="date" value="<?php 
                                     echo esc($dateInput);
                                 ?>"></td>
                             </tr>
@@ -131,12 +136,12 @@
                                 <td>Picture: </td>
                                 <td>
                                     <label id="labelFile" for="file">Click here to import</label>
-                                    <input type="file" id="file">
+                                    <input type="file" id="file" name="file">
                                     <!--<input class="hidden box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple /></td>-->
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <button id="save" type="submit" class="btn btn-secondary">Save</button>
+                                    <button id="save" type="submit" class="btn btn-secondary" name="save">Save</button>
                                 </td>
                             </tr>
                         </table>

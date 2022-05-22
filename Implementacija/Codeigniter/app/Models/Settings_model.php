@@ -8,33 +8,36 @@ class Settings_model extends Model {
 
     protected $allowedFields = ['password', 'picture', 'date'];
     
-    public function settingsStoreData() {
+    public function settingsStoreData($id, $file) {
 
-        $pass = $_POST['password'];
+        $pass = $_POST['pass'];
         $date = $_POST['date'];
-        $picture = $_POST['files[]'];
+        //$picture = $_POST['file'];
 
-        $exists = $this->table('user')->select()->where('username', $user)->paginate(1);
-        if(count($exists) == 1) {
-            return 2;
-        }
-
+        $exists = $this->table('user')->select()->where('ID', $id)->paginate(1);
+        
         if (strlen($pass) < 5) {
-            return 3;
+            return 1;
         }    
 
-        if ($pass != $confirmPass) {
-            return 4;
-        }
-
         $data = [
-            
+            'password' => $pass,
+            'date' => $date
         ];
+        if ($file != "") {
+            $data['picture'] = $file;
+        }
+        /*if (!isset($_POST['save'])) return;
+        if (is_array($_FILES)) {
+            if (is_uploaded_file($_FILES['file']['tmp_name'])) {
+                if (move_uploaded_file($_FILES['file']['tmp_name'], "$targerDir/".$_FILES['file']['name'])) {
+                    $data['picture'] = "$targerDir/".$FILES['file']['name'];
+                }
+            }
+        }*/
+        $this->update($exists[0]['ID'], $data);
 
-        $this->insert($data);
-        //$this->table('user')->insert($data);
-
-        return 5;
+        return 2;
     }
 
     public function settingsLoadData($id) {
