@@ -153,10 +153,13 @@
                 
             }  if(role == 1) {
                 $(".removeForModerators").css("display", "none");
+                $("#addTournament").css("display", "none");
             } if(role == 0) {
                 $(".removeForUsers").css("display", "none");
+                $("#addTournament").css("display", "none");
             } if(role == -1) {
                 $(".removeForGuests").css("display", "none");
+                $("#addTournament").css("display", "none");
             }
             //alert(role);
 
@@ -216,6 +219,7 @@
                         let row = $("<tr id=r"+i+"></tr>").css({"width": "100%", 
                                         "height": "90px", 
                                         "display": "flex",
+                                        "align-items": "center",
                                         "justify-content": "space-around",
                                         "text-align": "center",
                                         "border": "3px solid white",
@@ -225,22 +229,30 @@
                                         "position": "relative"
                                     });
                         row.hover(function () { $(this).css("border", "3px solid gray") }, function () { $(this).css("border", "3px solid white") });
-                        let col = $("<td><h1>" + start_data.list[i].name + "</h1></td>").css("margin-top", "1%");
+                        let col = $("<td><h1>" + start_data.list[i].name + "</h1></td>");//.css("margin-top", "1%");
                         row.append(col);
                         
-                        col = $("<td><h1>" + start_data.list[i].date + "</h1></td>").css("margin-top", "1%");
+                        col = $("<td><h1>" + start_data.list[i].date + "</h1></td>");//css("margin-top", "1%");
                         row.append(col);
                         
-                        col = $("<td><h1>" + start_data.list[i].timeStart + "</h1></td>").css("margin-top", "1%");
+                        col = $("<td><h1>" + start_data.list[i].timeStart + "</h1></td>");//css("margin-top", "1%");
                         row.append(col);
                         
-                        col = $("<td><h1>" + start_data.list[i].timeEnd + "</h1></td>").css("margin-top", "1%");
+                        col = $("<td><h1>" + start_data.list[i].timeEnd + "</h1></td>");//css("margin-top", "1%");
                         row.append(col);
                         
-                        if(joined.indexOf(start_data.list[i].id) == -1) {
-                            col = $("<td><button id='"+ i +"' class='btn btn-primary'>" + 'Join' + "</button></td>").css("margin-top", "2%").css("width", "100px");
+                        let date = new Date();
+                        let txt = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+                        if(start_data.list[i].timeEnd < txt) {
+                            if(role == 2 && !start_data.list[i].ended) {
+                                col = $("<td><button id='"+ i +"' class='btn btn-success'>" + 'End' + "</button></td>");//css("margin-top", "2%").css("width", "100px");
+                            } else {
+                                col = $("<td><button id='"+ i +"' class='btn btn-danger'>" + 'Ended' + "</button></td>");//css("margin-top", "2%").css("width", "100px");
+                            }
+                        } else if(joined.indexOf(start_data.list[i].id) == -1) {
+                            col = $("<td><button id='"+ i +"' class='btn btn-primary'>" + 'Join' + "</button></td>");//css("margin-top", "2%").css("width", "100px");
                         } else {
-                            col = $("<td><button id='"+ i +"' class='btn btn-secondary'>" + 'Joined' + "</button></td>").css("margin-top", "2%").css("width", "100px");
+                            col = $("<td><button id='"+ i +"' class='btn btn-secondary'>" + 'Joined' + "</button></td>");//css("margin-top", "2%").css("width", "100px");
                         }
                         row.append(col);
                         
@@ -277,29 +289,47 @@
             });
 
             function joinTournament(id, index) {
+                alert();
                 let btn = $("#" + index);
-                if(btn.text() != "Join") return;
-                $.ajax({
-                    method: "POST",
-                    url: window.location.origin + "/Tournament/joinTournament",
-                    data: {argument: id},
-                    success: function (obj, textstatus) {
-                        //alert($("#" + index).text());
-                        //alert(obj + " " + textstatus);
-                        /*if(btn.text() == "Joined") {
-                            btn.removeClass("btn-secondary");
-                            btn.addClass("btn-primary");
-                        } else*/ 
-                        if(btn.text() == "Join") {
-                            btn.removeClass("btn-primary");
-                            btn.addClass("btn-secondary");
-                            btn.text("Joined");
+                if(btn.text() == "Join") {
+                    $.ajax({
+                        method: "POST",
+                        url: window.location.origin + "/Tournament/joinTournament",
+                        data: {argument: id},
+                        success: function (obj, textstatus) {
+                            //alert($("#" + index).text());
+                            //alert(obj + " " + textstatus);
+                            /*if(btn.text() == "Joined") {
+                                btn.removeClass("btn-secondary");
+                                btn.addClass("btn-primary");
+                            } else*/ 
+                            if(btn.text() == "Join") {
+                                btn.removeClass("btn-primary");
+                                btn.addClass("btn-secondary");
+                                btn.text("Joined");
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            alert(xhr.responseText + " " + error + " " + status);
                         }
-                    },
-                    error: function(xhr, status, error) {
-                        alert(xhr.responseText + " " + error + " " + status);
-                    }
-                });
+                    });
+                } else if(btn.text() == "End") {
+                    $.ajax({
+                        method: "POST",
+                        url: window.location.origin + "/Tournament/endTournament",
+                        data: {argument: id},
+                        success: function (obj, textstatus) {
+                            alert(obj + " " + textstatus);
+                            //btn.css("display": "none");
+                            btn.text("Ended");
+                            btn.removeClass("btn-success");
+                            btn.addClass("btn-danger");
+                        },
+                        error: function(xhr, status, error) {
+                            alert(xhr.responseText + " " + error + " " + status);
+                        }
+                    });
+                }
             }
             //alert();
         });

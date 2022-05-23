@@ -75,6 +75,9 @@
                     </div>
                     
                     <div class="desno">
+                        <div style="color: white; width: 100px;">
+                            <?php if(isset($_SESSION['username']) && $_SESSION['username'] != "") echo "Hi, ".$_SESSION['username']; ?>
+                        </div>
                         <!--<a href="#" class="nav-link" id="signOut">
                             Sign out
                         </a>-->
@@ -99,15 +102,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-2 game-info">
-                
+            <div class="col-sm-2 game-info" style="display: flex; align-items: center;">
+                <br><br><br>
+                <hr>
+                <p>Click on the game icon for the game you want to play.</p>
+                <hr>
             </div>
-            
             <div class="col-sm-8 mt-2"><br>
                 <img src="/images/welcome.png" alt="bg-start" id="bg-start">
             </div>
             <div class="col-sm-2 game-info">
-                
+                <br><br><br>
             </div>
         </div>
         <div class="row">
@@ -118,6 +123,7 @@
     </div>
     <script>
         $(document).ready(function () {
+
             $("#signOut").click(function () {
                 $.ajax({
                     method: "POST",

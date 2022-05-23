@@ -119,7 +119,7 @@ function init() {
 
         interval = setInterval(function () {
             if(game_end) {
-                alert("GAME END: " + level);
+                //alert("GAME END: " + level);
                 clear();
                 $("#my-canvas").css("background-image", 'url("/images/bg_start_flappyBird.png")');
                 started = false;
@@ -639,8 +639,8 @@ function update_list() {
                 cell2.innerHTML = "Points";*/
 
                 var row = $("<th></th>");
-                var cell1 = $("<td>Username</td>").css("float", "left");
-                var cell2 = $("<td>Points</td>").css("float", "right");
+                var cell1 = $("<td>Username</td>").css("float", "left").css("font-weight", "normal");
+                var cell2 = $("<td>Points</td>").css("float", "right").css("font-weight", "normal");
                 row.append(cell1).append(cell2);
                 $("#lista_poena").append(row);
 

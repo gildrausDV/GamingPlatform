@@ -34,10 +34,10 @@ class PlayedGame_model extends Model {
         $id_game = $game_model->getID($game);
 
         $maxLevel = $this->table('playedgame')->select('maxLevel')->where('ID_user', $id_user)
-            ->where('ID_game', $id_game)->paginate(2);
+            ->where('ID_game', $id_game)->orderBy('maxLevel', 'desc')->paginate(2);
 
         $maxPoints = $this->table('playedgame')->select('points')
-            ->where('ID_user', $id_user)->where('ID_game', $id_game)->paginate(2);
+            ->where('ID_user', $id_user)->where('ID_game', $id_game)->orderBy('points', 'desc')->paginate(2);
 
         $result->level = $maxLevel;
         if(count($result->level) > 0) $result->level = $result->level[0]['maxLevel'];

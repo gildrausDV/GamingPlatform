@@ -27,6 +27,17 @@ class Tournament extends BaseController
         return view('Tournament/playerList', $data);
     }
 
+    public function endTournament() {
+        if(!isset($_POST['argument'])) return;
+        $id_tournament = $_POST['argument'];
+        $top5 = (new Participation_model)->getTop5($id_tournament);
+        for($top5 as $player) {
+            // dodaj poene
+            // dodeli ulogu moderatora
+        }
+        echo json_encode($top5);
+    }
+
     public function isActive($game) {
         $session = session();
         $id_user = $session->get('ID');

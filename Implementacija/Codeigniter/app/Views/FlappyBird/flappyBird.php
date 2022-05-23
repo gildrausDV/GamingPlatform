@@ -108,6 +108,15 @@
                     <table class="lista_poena" id="lista_poena">
                     </table>
                 </div>
+                <br><br>
+                <hr>
+                <div class="controlls">
+                    <h1>Controlls</h1>
+                    <p>
+                        Use <kbd>↑</kbd>,<kbd>←</kbd>,<kbd>→</kbd> to move.
+                        Try to collect all coins to get to next level.
+                    </p>
+                </div>
             </div>
             <div class="col-sm-8">
                 <!--<img src="../images/bg_start.png" alt="bg-start" id="bg-start">-->
@@ -146,6 +155,13 @@
                     <div>
                         <span class="maxPoints">Max points achived: </span>
                         <span class="maxPoints" id="maxPoints_display">0</span>
+                    </div>
+                    <br><br>
+                    <hr>
+                    <div>
+                        <p>
+                            You have 15 seconds per level. Time left resets when you collect all coins. 
+                        </p>
                     </div>
                 </div>
             </div>

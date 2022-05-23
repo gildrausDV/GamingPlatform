@@ -14,6 +14,7 @@ class Tournament_model extends Model {
             ->where('tournament.ID', $id_tournament)
             ->join('playedgame', 'tournament.ID = playedgame.on_tournament', 'left')
             ->join('user', 'playedgame.ID_user = user.ID', 'left')
+            ->orderBy('points', 'desc')
             ->paginate();
         return $res;
     }
@@ -34,7 +35,8 @@ class Tournament_model extends Model {
             "maxNumOfPlayers" => $arr[1],
             "date" => $arr[2],
             "timeStart" => $arr[3],
-            "timeEnd" => $arr[4]
+            "timeEnd" => $arr[4],
+            "ended" => false
         ];
         $this->insert($data);
     }

@@ -23,6 +23,7 @@ class Home extends BaseController
         $session = session();
         $ses_data = [
             'ID' => -1,
+            'username' => "",
             'role' => -1,
             'isLoggedIn' => false
         ];
