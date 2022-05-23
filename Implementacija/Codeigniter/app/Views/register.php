@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="<?= base_url() ?>/assets/style/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/style/register.css">
     <script src="<?= base_url() ?>/assets/scripts/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>/assets/scripts/jquery-1.11.3.min.js"></script>
+    <script src="<?= base_url() ?>/assets/scripts/register.js"></script>
 </head>
 <body>
 <body>
@@ -74,6 +76,7 @@
                             </td>
                             <td>
                                 <input type="text" id="username" name="username">
+                                <img class="togglePassword_" src="/images/eye.png">
                             </td>
                         </tr>
                         <tr>
@@ -81,7 +84,10 @@
                                 <label for="password">Password:</label>
                             </td>
                             <td>
-                                <input type="password" id="password" name="password">
+                                <div>
+                                <input type="password" id="password" name="password" class="toggle">
+                                <img id="togglePassword1" src="/images/eye_.png">
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -89,7 +95,8 @@
                                 <label for="confirmPassword">Confirm password:</label>
                             </td>
                             <td>
-                                <input type="password" id="confirmPassword" name="confirmPassword">
+                                <input type="password" id="confirmPassword" name="confirmPassword" class="toggle">
+                                <img id="togglePassword2" src="/images/eye_.png">
                             </td>
                         </tr>
                         <tr>
