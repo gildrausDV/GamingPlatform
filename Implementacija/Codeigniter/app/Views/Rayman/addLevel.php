@@ -123,17 +123,17 @@
                                 <br>
                                 <table>
                                   <tr>
-                                      <td>Number of rows: 7</td>
-                                      <td rowspan="4"><img src="<?= base_url() ?>/images/level_map.png"></td>
+                                      <td>Number of rows: 5</td>
+                                      <td rowspan="4"><img src="<?= base_url() ?>/images/level_map_rayman.png"></td>
                                   </tr>
                                   <tr>
-                                      <td>Number of columns: 7</td>
+                                      <td>Number of columns: 5</td>
                                   </tr>
                                   <tr>
-                                      <td>Positions of coins:  [3, 2], [4, 3]</td>
+                                      <td>Positions of coins:  [1, 1], [2, 2]</td>
                                   </tr>
                                   <tr>
-                                      <td>Positions of floating trees: [1,1,2], [3,3,2], [4,1,2], [5,5,2]</td>
+                                      <td>Positions of floating trees: [1,1,2], [2,2,2], [3,3,1]</td>
                                   </tr>
                                 </table>
                             </div>
@@ -155,9 +155,9 @@
                                 <label for="posC"> Positions of coins:</label>
                                 <textarea name="posC" id="posC" cols="30" rows="5">[1,1], [2,2]</textarea><br><br>
                                 <label for="numFT"> Number of floating trees:</label>
-                                <input type="text" id="numFT" name="numFT" value="2"><br><br>
+                                <input type="text" id="numFT" name="numFT" value="3"><br><br>
                                 <label for="fTrees"> Positions of floating trees:</label>
-                                <textarea name="posFT" id="fTrees" cols="30" rows="5">[1,1,2], [2,2,2]</textarea><br><br>
+                                <textarea name="posFT" id="fTrees" cols="30" rows="5">[1,1,2], [2,2,2], [3,3,1]</textarea><br><br>
                                 <input type="submit" value="Add level" class="submit" id="myButton" name="button1">
                             </div>
                         </div>
@@ -281,8 +281,8 @@
                     //alert(x);
                     if(x.length != 3) continue;
                     let d = {
-                        "x" : x[0],
-                        "y" : x[1],
+                        "y" : x[0],
+                        "x" : x[1],
                         "len" : x[2]
                     };
                     wood.push(d);
@@ -296,8 +296,8 @@
                     //alert(x);
                     if(x.length != 2) continue;
                     let d = {
-                        "x" : x[0],
-                        "y" : x[1]
+                        "y" : x[0],
+                        "x" : x[1]
                     };
                     coins.push(d);
                 }
@@ -316,10 +316,15 @@
                     url: window.location.origin + "/Games/add_level/Rayman",
                     data: {arguments: JSON.stringify(data)},
                     success: function (obj, textstatus) {
-
+                        if(textstatus == "success") {
+                            $("#write").text("New level added successfully!");
+                        } else {
+                            $("#write").text("Error!");
+                        }
                     },
                     error: function(xhr, status, error) {
                         alert("1" + xhr.responseText + " " + error + " " + status);
+                        $("#write").text("Error!");
                     }
                 });
 

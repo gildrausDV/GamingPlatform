@@ -111,9 +111,9 @@
                     <div class="left">
                         <div class="top">
                             <h1>Instructions: </h1>
-                            <p>Rayman is trying to collect as many coins as possible. Create a map by entering number of coins(at least 1, less than 5), their positions like in the example below, number of fire balls and their positions like in the example below. <br>
+                            <p>Flappy bird is trying to collect as many coins as possible. Create a map by entering number of coins(at least 1, less than 5), their positions like in the example below, number of fire balls and their positions like in the example below. <br>
                             <h3 style="color: red">Coin position format: [pos_x, pos_y]<br> Fire ball position format: [pos_y, direction]</h3><hr>
-                                Note: Rayman always spawns in the 0th column centered by height and can move in all directions.
+                                Note: The bird always spawns in the 0th column centered by height and can move in all directions.
                             </p>
                             <br><br><br>
                         </div>
@@ -124,16 +124,16 @@
                                 <table>
                                     <tr>
                                         <td>Number of rows: 5</td>
-                                        <td rowspan="4"><img src="<?= base_url() ?>/images/level_map.png"></td>
+                                        <td rowspan="4"><img src="<?= base_url() ?>/images/level_map_flappyBird.png"></td>
                                     </tr>
                                     <tr>
-                                        <td>Number of columns: 5</td>
+                                        <td>Number of columns: 10</td>
                                     </tr>
                                     <tr>
-                                        <td>Positions of coins:  [2, 5]</td>
+                                        <td>Positions of coins:  [1,1], [2,4], [0,9]</td>
                                     </tr>
                                     <tr>
-                                        <td>Positions of floating trees: [1,down], [3,up], [4,down]</td>
+                                        <td>Positions of floating trees: [1,down], [3,up], [4,down], [7, down]</td>
                                     </tr>
                                 </table>
                             </div>
@@ -296,8 +296,8 @@
                     //alert(x);
                     if(x.length != 2) continue;
                     let d = {
-                        "x" : x[0],
-                        "y" : x[1]
+                        "y" : x[0],
+                        "x" : x[1]
                     };
                     coins.push(d);
                 }
@@ -316,7 +316,11 @@
                     url: window.location.origin + "/Games/add_level/FlappyBird",
                     data: {arguments: JSON.stringify(data)},
                     success: function (obj, textstatus) {
-
+                        if(textstatus == "success") {
+                            $("#write").text("New level added successfully!");
+                        } else {
+                            $("#write").text("Error!");
+                        }
                     },
                     error: function(xhr, status, error) {
                         alert("1" + xhr.responseText + " " + error + " " + status);
