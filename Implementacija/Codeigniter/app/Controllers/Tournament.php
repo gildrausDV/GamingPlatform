@@ -4,6 +4,7 @@ use App\Models\Tournament_model;
 use App\Models\Participation_model;
 use App\Models\Game_model;
 use App\Models\Settings_model;
+use App\Models\Login_model;
 
 class Tournament extends BaseController
 {
@@ -31,10 +32,14 @@ class Tournament extends BaseController
         if(!isset($_POST['argument'])) return;
         $id_tournament = $_POST['argument'];
         $top5 = (new Participation_model)->getTop5($id_tournament);
-        for($top5 as $player) {
-            // dodaj poene
-            // dodeli ulogu moderatora
+        $cnt = 5;
+        $model = new Login_model();
+        foreach($top5 as $player) {
+            $model->addPoints($player['ID'], $cnt);
+            $cnt = $cnt - 1;
+            $model->setModerator($player['ID']);
         }
+        (new Tournament_model())->endTournament($id_tournament);
         echo json_encode($top5);
     }
 

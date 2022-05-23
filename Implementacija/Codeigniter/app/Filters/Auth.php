@@ -45,9 +45,11 @@ class Auth implements FilterInterface
         if($session->has('ID')) {
             echo "   IMA ID!!!   ";
         }  else echo "NEMA ID";
-        //$_SESSION['x'] = 1;
+        //
         print_r($_SESSION);*/ // za debagovanje!!!
-
+        //$_SESSION['x'] = 1;
+        //$session = session();
+        //print_r($_SESSION);
         /*$metod = explode("/", $request->uri->getPath())[1];
         //echo $metod;
         $arr = explode("/",current_url());

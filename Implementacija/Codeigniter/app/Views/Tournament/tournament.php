@@ -18,6 +18,18 @@
     <link rel="stylesheet" href="<?= base_url() ?>/assets/style/bootstrap.min.css">
     <script src="<?= base_url() ?>/assets/scripts/bootstrap.min.js"></script>
     <link rel="stylesheet" href="<?= base_url() ?>/assets/style/tournament.css">
+    <style>
+        .noti-count {
+            position:absolute;
+            background-color:lightblue;
+            color:#fff;
+            border-radius: 8px;
+            width: 8px;
+            height: 8px;
+            text-align:center;
+            margin-left: 90px;
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid bg-clouds">
@@ -38,6 +50,7 @@
                             </li>
                             <li class="nav-item removeForGuests">
                                 <a href="<?= base_url() ?>/Tournament/tournament" class="nav-link">
+                                <div id="noti" class=""></div>
                                     Tournaments
                                 </a>
                             </li>
@@ -81,7 +94,9 @@
                             </li>
                         </ul>
                     </div>
-                    
+                    <div id="newTournament">
+                            
+                        </div>
                     <div class="desno">
                         <button id="signOut" type="button" class="btn" style="margin-right: 10px;">Sign out</button>
                     </div>
@@ -147,6 +162,39 @@
 
         $(document).ready(function () {
 
+            let newTournament = '<?php
+                if(!isset($_SESSION['ID'])) {
+                    echo 'false';
+                } else {
+                    if(!isset($_SESSION['newTournamentUsers'])) {
+                        echo 'false';
+                    } else {
+                        if(in_array($_SESSION['ID'], $_SESSION['newTournamentUsers'])) {
+                            $arr = $_SESSION['newTournamentUsers'];
+                            if (($key = array_search($_SESSION['ID'], $arr)) !== false) {
+                                unset($arr[$key]);
+                            }
+                            
+                            $session = session();
+                            $ses_data = [
+                                'newTournamentUsers' => $arr
+                            ];
+                            $session->set($ses_data);
+
+                            echo 'true';
+                        } else {
+                            echo 'false';
+                        }
+                    }
+                }
+            ?>';
+            //alert(newTournament);
+            if(newTournament == 'true') {
+                //alert('Novo takmicenje');
+                $("#newTournament").text("Check out new tournament!").css("color", "white").css("margin-right", "100px").css("font-weight", "bold");
+                $("#noti").addClass("noti-count");
+            }
+
             let role = <?php echo $_SESSION['role'];?>;
             //alert(role);
             if(role == 2) {
@@ -206,7 +254,7 @@
                     alert(xhr.responseText + " " + error + " " + status);
                 }
             });
-
+            //alert(("00:45:00" < "00:39:46"));
             $.ajax({
                 method: "GET",
                 url: window.location.origin + "/Tournament/getTournaments",
@@ -243,8 +291,63 @@
                         
                         let date = new Date();
                         let txt = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-                        if(start_data.list[i].timeEnd < txt) {
-                            if(role == 2 && !start_data.list[i].ended) {
+                        let m = date.getMonth() + 1;
+                        if(m < 10) m = "0" + m;
+                        let d = date.getFullYear() + "-" + m + "-" + date.getDate();
+                        //alert(start_data.list[i].timeEnd + " < " + txt + " = " + (start_data.list[i].timeEnd < txt));
+
+                        let jnd = (joined.indexOf(start_data.list[i].id) != -1);
+                        let ended = (start_data.list[i].date < d || start_data.list[i].date == d && start_data.list[i].timeEnd < txt);
+                        let admin = (role == 2);
+                        let closed = (start_data.list[i].ended == 1);
+                                
+                        //alert("joined: " + jnd + " ended: " + ended + " admin:" + admin);
+
+                        if(!admin) {
+                            if(ended) {
+                                col = $("<td><button id='"+ i +"' class='btn btn-danger'>" + 'Ended' + "</button></td>");
+                            } else if(jnd) {
+                                col = $("<td><button id='"+ i +"' class='btn btn-secondary'>" + 'Joined' + "</button></td>");
+                            } else {
+                                col = $("<td><button id='"+ i +"' class='btn btn-primary'>" + 'Join' + "</button></td>");
+                            }
+                        } else {
+                            if(closed) {
+                                col = $("<td><button id='"+ i +"' class='btn btn-danger'>" + 'Ended' + "</button></td>");
+                            } else {
+                                col = $("<td><button id='"+ i +"' class='btn btn-success'>" + 'End' + "</button></td>");
+                            }
+                        }
+
+                        /*if(start_data.list[i].date > d) {
+                            if(joined.indexOf(start_data.list[i].id) == -1) {
+                                col = $("<td><button id='"+ i +"' class='btn btn-primary'>" + 'Join' + "</button></td>");
+                            } else {
+                                col = $("<td><button id='"+ i +"' class='btn btn-secondary'>" + 'Joined' + "</button></td>");
+                            }
+                        } else if(start_data.list[i].date == d) {
+                            if(txt > start_data.list[i].timeEnd && role != 2) {
+                                if(joined.indexOf(start_data.list[i].id) == -1) {
+                                    col = $("<td><button id='"+ i +"' class='btn btn-primary'>" + 'Join' + "</button></td>");
+                                } else {
+                                    //alert(txt + " > " + start_data.list[i].timeEnd);
+                                    col = $("<td><button id='"+ i +"' class='btn btn-secondary'>" + 'Joined' + "</button></td>");
+                                }
+                            } else if(txt > start_data.list[i].timeEnd && role == 2) {
+                                if(start_data.list[i].ended == 0) {
+                                    col = $("<td><button id='"+ i +"' class='btn btn-success'>" + 'End' + "</button></td>");
+                                } else {
+                                    col = $("<td><button id='"+ i +"' class='btn btn-danger'>" + 'Ended' + "</button></td>");
+                                }
+                            } else {
+                                col = $("<td><button id='"+ i +"' class='btn btn-danger'>" + 'Ended' + "</button></td>");
+                            }
+                        } else {
+                            col = $("<td><button id='"+ i +"' class='btn btn-danger'>" + 'Ended' + "</button></td>");
+                        }*/
+
+                        /*if(start_data.list[i].date == d && start_data.list[i].timeEnd < txt) {
+                            if(role == 2 && start_data.list[i].ended == 0) {
                                 col = $("<td><button id='"+ i +"' class='btn btn-success'>" + 'End' + "</button></td>");//css("margin-top", "2%").css("width", "100px");
                             } else {
                                 col = $("<td><button id='"+ i +"' class='btn btn-danger'>" + 'Ended' + "</button></td>");//css("margin-top", "2%").css("width", "100px");
@@ -253,7 +356,7 @@
                             col = $("<td><button id='"+ i +"' class='btn btn-primary'>" + 'Join' + "</button></td>");//css("margin-top", "2%").css("width", "100px");
                         } else {
                             col = $("<td><button id='"+ i +"' class='btn btn-secondary'>" + 'Joined' + "</button></td>");//css("margin-top", "2%").css("width", "100px");
-                        }
+                        }*/
                         row.append(col);
                         
                         $("table").append(row);
@@ -289,7 +392,7 @@
             });
 
             function joinTournament(id, index) {
-                alert();
+                //alert();
                 let btn = $("#" + index);
                 if(btn.text() == "Join") {
                     $.ajax({

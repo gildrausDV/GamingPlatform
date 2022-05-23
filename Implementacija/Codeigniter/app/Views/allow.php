@@ -12,6 +12,18 @@
     <script src="<?= base_url() ?>/assets/scripts/bootstrap.min.js"></script>
     <script src="<?= base_url() ?>/assets/scripts/jquery-1.11.3.min.js"></script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
+    <style>
+        .noti-count {
+            position:absolute;
+            background-color:lightblue;
+            color:#fff;
+            border-radius: 8px;
+            width: 8px;
+            height: 8px;
+            text-align:center;
+            margin-left: 90px;
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid no-padding">
@@ -33,6 +45,7 @@
                                 </li>
                                 <li class="nav-item removeForGuests">
                                     <a href="<?= base_url() ?>/Tournament/tournament" class="nav-link">
+                                        <div id="noti" class=""></div>
                                         Tournaments
                                     </a>
                                 </li>
@@ -76,7 +89,9 @@
                                 </li>
                             </ul>
                         </div>
-                        
+                        <div id="newTournament">
+                            
+                        </div>
                         <div class="desno">
                             <button id="signOut" type="button" class="btn" style="margin-right: 10px;">Sign out</button>
                         </div>
@@ -128,6 +143,39 @@
     <script>
 
         $(document).ready(function () {
+
+            let newTournament = '<?php
+                if(!isset($_SESSION['ID'])) {
+                    echo 'false';
+                } else {
+                    if(!isset($_SESSION['newTournamentUsers'])) {
+                        echo 'false';
+                    } else {
+                        if(in_array($_SESSION['ID'], $_SESSION['newTournamentUsers'])) {
+                            $arr = $_SESSION['newTournamentUsers'];
+                            if (($key = array_search($_SESSION['ID'], $arr)) !== false) {
+                                unset($arr[$key]);
+                            }
+                            
+                            $session = session();
+                            $ses_data = [
+                                'newTournamentUsers' => $arr
+                            ];
+                            $session->set($ses_data);
+
+                            echo 'true';
+                        } else {
+                            echo 'false';
+                        }
+                    }
+                }
+            ?>';
+            //alert(newTournament);
+            if(newTournament == 'true') {
+                //alert('Novo takmicenje');
+                $("#newTournament").text("Check out new tournament!").css("color", "white").css("margin-right", "100px").css("font-weight", "bold");
+                $("#noti").addClass("noti-count");
+            }
 
             let role = <?php echo $_SESSION['role'];?>;
             //alert(role);

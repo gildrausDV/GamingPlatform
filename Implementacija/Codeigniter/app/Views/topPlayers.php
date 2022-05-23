@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="<?= base_url() ?>/assets/style/bootstrap.min.css">
     <script src="<?= base_url() ?>/assets/scripts/bootstrap.min.js"></script>
     <link rel="stylesheet" href="<?= base_url() ?>/assets/style/topPlayers.css">
+    <style>
+        .noti-count {
+            position:absolute;
+            background-color:lightblue;
+            color:#fff;
+            border-radius: 8px;
+            width: 8px;
+            height: 8px;
+            text-align:center;
+            margin-left: 90px;
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid bg-clouds">
@@ -30,6 +42,7 @@
                             </li>
                             <li class="nav-item removeForGuests">
                                 <a href="<?= base_url() ?>/Tournament/tournament" class="nav-link">
+                                    <div id="noti" class=""></div>
                                     Tournaments
                                 </a>
                             </li>
@@ -73,7 +86,9 @@
                             </li>
                         </ul>
                     </div>
-                    
+                    <div id="newTournament">
+                            
+                    </div>
                     <div class="desno">
                         <button id="signOut" type="button" class="btn" style="margin-right: 10px;">Sign out</button>
                     </div>
@@ -120,6 +135,39 @@
     <script src="<?= base_url() ?>/assets/scripts/jquery-1.11.3.min.js"></script>
     <script>
         $(document).ready(function () {
+
+            let newTournament = '<?php
+                if(!isset($_SESSION['ID'])) {
+                    echo 'false';
+                } else {
+                    if(!isset($_SESSION['newTournamentUsers'])) {
+                        echo 'false';
+                    } else {
+                        if(in_array($_SESSION['ID'], $_SESSION['newTournamentUsers'])) {
+                            $arr = $_SESSION['newTournamentUsers'];
+                            if (($key = array_search($_SESSION['ID'], $arr)) !== false) {
+                                unset($arr[$key]);
+                            }
+                            
+                            $session = session();
+                            $ses_data = [
+                                'newTournamentUsers' => $arr
+                            ];
+                            $session->set($ses_data);
+
+                            echo 'true';
+                        } else {
+                            echo 'false';
+                        }
+                    }
+                }
+            ?>';
+            //alert(newTournament);
+            if(newTournament == 'true') {
+                //alert('Novo takmicenje');
+                $("#newTournament").text("Check out new tournament!").css("color", "white").css("margin-right", "100px").css("font-weight", "bold");
+                $("#noti").addClass("noti-count");
+            }
 
             let role = <?php echo $_SESSION['role'];?>;
             //alert(role);
@@ -187,18 +235,19 @@
             function topPlayersG() {
                 for(let i = 0; i < start_data.list.length; ++i) {
                     let row = $("<tr></tr>").css({"width": "100%", 
-                                            "height": "80px", 
-                                            "display": "flex",
-                                            "justify-content": "space-around",
-                                            "text-align": "center",
-                                            "border": "3px solid white",
-                                            "background-color": "black",
-                                            "opacity": "0.8",
-                                            "color": "white",
-                                            "position": "relative"
-                                        });
+                                        "height": "90px", 
+                                        "display": "flex",
+                                        "align-items": "center",
+                                        "justify-content": "space-around",
+                                        "text-align": "center",
+                                        "border": "3px solid white",
+                                        "background-color": "black",
+                                        "opacity": "0.8",
+                                        "color": "white",
+                                        "position": "relative"
+                                });
                     row.hover(function () { $(this).css("border", "3px solid gray") }, function () { $(this).css("border", "3px solid white") });
-                    let col = $("<td><h1>" + start_data.list[i].username + "</h1></td>").css("margin-left", "10%").css("margin-top", "1%");
+                    let col = $("<td><h1>" + start_data.list[i].username + "</h1></td>");//css("margin-left", "10%").css("margin-top", "1%");
                     row.append(col);
 
                     /*let time = start_data.list[i].timePlayed;
@@ -219,11 +268,11 @@
                     let points = start_data.list[i].NP;
                     
                     if(points < 10) 
-                        points = $("<h1>Points: 0" + points + "<\h1>").css("margin-top", "1%");
+                        points = $("<td><h1>Points: 0" + points + "</h1></td>");//css("margin-top", "1%");
                     else if(points < 100) 
-                        points = $("<h1>Points: &nbsp;" + points + "<\h1>").css("margin-top", "1%");
+                        points = $("<td><h1>Points: &nbsp;" + points + "</h1></td>");//css("margin-top", "1%");
                     else 
-                        points = $("<h1>Points: " + points + "<\h1>").css("margin-top", "1%");
+                        points = $("<td><h1>Points: " + points + "</h1></td>");//css("margin-top", "1%");
                     
                     row.append(points);
                     
@@ -234,18 +283,19 @@
             function topPlayers() {
                 for(let i = 0; i < start_data.list.length; ++i) {
                     let row = $("<tr></tr>").css({"width": "100%", 
-                                            "height": "80px", 
-                                            "display": "flex",
-                                            "justify-content": "space-around",
-                                            "text-align": "center",
-                                            "border": "3px solid white",
-                                            "background-color": "black",
-                                            "opacity": "0.8",
-                                            "color": "white",
-                                            "position": "relative"
-                                        });
+                                        "height": "90px", 
+                                        "display": "flex",
+                                        "align-items": "center",
+                                        "justify-content": "space-around",
+                                        "text-align": "center",
+                                        "border": "3px solid white",
+                                        "background-color": "black",
+                                        "opacity": "0.8",
+                                        "color": "white",
+                                        "position": "relative"
+                                    });
                     row.hover(function () { $(this).css("border", "3px solid gray") }, function () { $(this).css("border", "3px solid white") });
-                    let col = $("<td><h1>" + start_data.list[i].username + "</h1></td>").css("margin-left", "10%").css("margin-top", "1%");
+                    let col = $("<td><h1>" + start_data.list[i].username + "</h1></td>");//css("margin-left", "10%").css("margin-top", "1%");
                     row.append(col);
 
                     let time = start_data.list[i].timePlayed;
@@ -259,18 +309,18 @@
                     if(hh < 10) hh = "0" + hh;
                     time = hh + ":" + mm + ":" + ss;
                     
-                    col = $("<td><h1>" + time + "</h1></td>").css("margin-top", "1%");
+                    col = $("<td><h1>" + time + "</h1></td>");//css("margin-top", "1%");
                     row.append(col);
                     
                     
                     let points = start_data.list[i].points;
                     
                     if(points < 10) 
-                        points = $("<h1>Points: 0" + points + "<\h1>").css("margin-top", "1%");
+                        points = $("<td><h1>Points: 0" + points + "</h1></td>");//css("margin-top", "1%");
                     else if(points < 100) 
-                        points = $("<h1>Points: &nbsp;" + points + "<\h1>").css("margin-top", "1%");
+                        points = $("<td><h1>Points: &nbsp;" + points + "</h1></td>");//css("margin-top", "1%");
                     else 
-                        points = $("<h1>Points: " + points + "<\h1>").css("margin-top", "1%");
+                        points = $("<td><h1>Points: " + points + "</h1></td>");//css("margin-top", "1%");
                     
                     row.append(points);
                     

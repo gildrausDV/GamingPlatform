@@ -21,8 +21,11 @@ class Home extends BaseController
 
     public function signOut() {
         $session = session();
+        $newTournamentUsers = [];
+        if(isset($_SESSION['newTournamentUsers'])) $newTournamentUsers = $_SESSION['newTournamentUsers'];
         $ses_data = [
             'ID' => -1,
+            'newTournamentUsers' => $newTournamentUsers,
             'username' => "",
             'role' => -1,
             'isLoggedIn' => false

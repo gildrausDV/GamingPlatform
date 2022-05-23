@@ -11,7 +11,7 @@ class Participation_model extends Model {
     public function getTop5($id_tournament) {
         $top5 = $this->table('participation')
             //->distinct()
-            ->select('playedgame.ID_user, sum(playedgame.points) as points, sum(playedgame.timePlayed) as time')
+            ->select('playedgame.ID_user as ID, sum(playedgame.points) as points, sum(playedgame.timePlayed) as time')
             ->where('ID_tournament', $id_tournament)
             ->join('playedgame', 'playedgame.ID_user = participation.ID_user', 'left')
             ->where('playedgame.on_tournament', $id_tournament)

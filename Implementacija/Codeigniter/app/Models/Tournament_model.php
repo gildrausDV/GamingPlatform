@@ -2,11 +2,13 @@
 
 use CodeIgniter\Model;
 
+use App\Models\Login_model;
+
 class Tournament_model extends Model {
 
     protected $table = 'tournament';
 
-    protected $allowedFields = ['ID_game', 'maxNumOfPlayers', 'date', 'timeStart', 'timeEnd', 'numOfPlayers'];
+    protected $allowedFields = ['ID_game', 'maxNumOfPlayers', 'date', 'timeStart', 'timeEnd', 'numOfPlayers', 'ended'];
 
     public function getPlayersList($id_tournament) {
         $res = $this->table('tournament')
@@ -21,7 +23,7 @@ class Tournament_model extends Model {
 
     public function getTournaments() {
         $res = $this->table('tournament')
-            ->select('tournament.ID as id, name, date, timeStart, timeEnd, numOfPlayers, maxNumOfPlayers')
+            ->select('tournament.ID as id, name, date, timeStart, timeEnd, numOfPlayers, maxNumOfPlayers, ended')
             ->join('game', 'tournament.ID_game = game.ID', 'left')
             ->paginate();
         return $res;
@@ -39,6 +41,14 @@ class Tournament_model extends Model {
             "ended" => false
         ];
         $this->insert($data);
+        
+        $users = (new Login_model())->getAllUsers();
+        $session = session();
+        $ses_data = [
+            'newTournamentUsers' => $users
+        ];
+        $session->set($ses_data);
+
     }
 
     public function getActiveTournaments($id_game, $year, $month, $day, $hours, $minutes, $seconds) {
@@ -59,6 +69,10 @@ class Tournament_model extends Model {
             array_push($ret, $tournament);
         }
         return $ret;
+    }
+
+    public function endTournament($id_tournament) {
+        $this->update($id_tournament, ['ended' => true]);
     }
 
     public function addPlayer($id_tournament) {
