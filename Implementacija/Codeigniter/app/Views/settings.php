@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>/assets/style/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/style/settings.css">
     <script src="<?= base_url() ?>/assets/scripts/bootstrap.min.js"></script>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">-->
     <script src="<?= base_url() ?>/assets/scripts/jquery-1.11.3.min.js"></script>
     <script src="<?= base_url() ?>/assets/scripts/settings.js"></script>
 </head>
@@ -119,9 +119,10 @@
                                         else if(esc($settings) == '1') echo "Password too short!";
                                     ?>
                                     </span><br>
-                                    <input type="text" id="pass" name="pass" value="<?php 
+                                    <input type="password" id="pass" name="pass" value="<?php 
                                     echo esc($passInput);
                                 ?>">
+                                    <img id="togglePassword" src="/images/eye_.png">
                                 </td>
                             </tr>
                             <tr>
@@ -188,6 +189,19 @@
                 });
 
                 location.href = window.location.origin + "/Home/Login";
+            });
+
+            let hidden = true;
+            $("#togglePassword").click(function() {
+                if (hidden == true) {
+                    $(this).attr("src", "/images/eye.png");
+                    $("#pass").attr("type", "text");
+                }
+                else {
+                    $(this).attr("src", "/images/eye_.png");
+                    $("#pass").attr("type", "password");
+                }
+                hidden = !hidden;
             });
         });
     </script>

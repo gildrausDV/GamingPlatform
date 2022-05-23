@@ -327,3 +327,9 @@ td {
 h2 {
     font-weight: bold;
 }
+
+#togglePassword {
+    width: 22px;
+    margin-left: -30px;
+    cursor: pointer;
+}

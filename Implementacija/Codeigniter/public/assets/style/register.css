@@ -64,3 +64,29 @@ td {
 label {
     float: left;
 }
+
+#togglePassword1 {
+    width: 22px;
+    margin-left: -27px;
+    cursor: pointer;
+}
+
+#togglePassword2 {
+    width: 22px;
+    margin-left: -27px;
+    cursor: pointer;
+}
+
+.togglePassword_ {
+    width: 22px;
+    margin-left: -27px;
+    opacity: 0;
+}
+
+.toggle {
+    margin-left: 1px;
+}
+
+#username {
+    margin-left: 1px;
+}
