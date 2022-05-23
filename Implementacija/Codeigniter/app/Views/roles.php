@@ -104,29 +104,37 @@
                 <div class="form">
                     <form method="post" action="<?php echo site_url('Home/roles_'); ?>">
                         <div class="left">
+                            <br>
                             <span id="greskaRoles">
                             <?php 
                                 if(esc($roles) == '2') echo "Changes saved successfully!";
                                 else if(esc($roles) == '1') echo "Username does not exist!";
                             ?>
-                            </span><br>
+                            </span>
+                            <div>
                             <label for="username">Enter username:</label> 
-                            <input type="text" id="username" name="username"><br><br>
+                            <input type="text" id="username" name="username">
+                            </div>
+                            <br>
                             <button type="submit" class="btn btn-secondary" id="ok">OK</button>
                         </div>
                         <div class="right">
                             <h1>Set role: </h1><br>
+                            <div>
                             <label for="setAdmin">Administrator:</label>
                             <input type="radio" name ="roles" id="setAdmin" checked value="setAdmin">
                             <label for="setModerator">Moderator:</label>
                             <input type="radio" name ="roles" id="setModerator" value="setModerator">
+                            </div>
                             <br><br>
                             <hr>
                             <h1>Remove role:</h1><br>
+                            <div>
                             <label for="removeAdmin">Administrator:</label>
                             <input type="radio" name ="roles" id="removeAdmin" value="removeAdmin">
                             <label for="removeModerator">Moderator:</label>
                             <input type="radio" name ="roles" id="removeModerator" value="removeModerator">
+                            </div>
                             <!--<button type="submit" class="save btn btn-secondary" onclick="save()">Administrator</button>
                             <button type="submit" class="save btn btn-secondary" onclick="save()">Moderator</button>
                             <br><br>
