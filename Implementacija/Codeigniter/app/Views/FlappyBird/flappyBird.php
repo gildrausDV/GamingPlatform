@@ -160,7 +160,12 @@
         
         $(document).ready(function () {
 
-            let role = <?php echo $_SESSION['role'];?>;
+            let role = <?php
+                $role = isset($_SESSION['role']);
+                if($role) $role = $_SESSION['role'];
+                else $role = -1;
+                echo $role;
+            ?>;
             //alert(role);
             if(role == 2) {
                 
@@ -201,19 +206,21 @@
                 location.href = window.location.origin + "/Home/Login";
             });
 
-            $.ajax({
-                method: "POST",
-                url: window.location.origin + "/Tournament/isActive/FlappyBird",
-                data: {arguments: [date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()]},
-                success: function (obj, textstatus) {
-                    if(obj == 'true') {
-                        $("#my-canvas").css("border", "5px solid gold");
+            if(role != -1) {
+                $.ajax({
+                    method: "POST",
+                    url: window.location.origin + "/Tournament/isActive/FlappyBird",
+                    data: {arguments: [date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()]},
+                    success: function (obj, textstatus) {
+                        if(obj == 'true') {
+                            $("#my-canvas").css("border", "5px solid gold");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert(xhr.responseText + " " + error + " " + status);
                     }
-                },
-                error: function(xhr, status, error) {
-                    alert(xhr.responseText + " " + error + " " + status);
-                }
-            });
+                });
+            }
 
         });
     </script>

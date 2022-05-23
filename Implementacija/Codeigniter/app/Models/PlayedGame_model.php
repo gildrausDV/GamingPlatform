@@ -60,6 +60,7 @@ class PlayedGame_model extends Model {
         $id_game = $game_model->getID($game);
         $res = $this->table('playedgame')->select('ID_game, username, timePlayed, points')
             ->join('user', 'playedgame.ID_user = user.ID', 'left')
+            ->orderBy('points', 'desc')
             ->where('ID_game', $id_game)->paginate($cnt);
         return $res;
     }

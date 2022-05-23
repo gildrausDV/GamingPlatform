@@ -6,7 +6,7 @@ class Tournament_model extends Model {
 
     protected $table = 'tournament';
 
-    protected $allowedFields = ['ID_game', 'maxNumOfPlayers', 'date', 'timeStart', 'timeEnd'];
+    protected $allowedFields = ['ID_game', 'maxNumOfPlayers', 'date', 'timeStart', 'timeEnd', 'numOfPlayers'];
 
     public function getPlayersList($id_tournament) {
         $res = $this->table('tournament')
@@ -20,7 +20,7 @@ class Tournament_model extends Model {
 
     public function getTournaments() {
         $res = $this->table('tournament')
-            ->select('tournament.ID as id, name, date, timeStart, timeEnd')
+            ->select('tournament.ID as id, name, date, timeStart, timeEnd, numOfPlayers, maxNumOfPlayers')
             ->join('game', 'tournament.ID_game = game.ID', 'left')
             ->paginate();
         return $res;
@@ -57,6 +57,15 @@ class Tournament_model extends Model {
             array_push($ret, $tournament);
         }
         return $ret;
+    }
+
+    public function addPlayer($id_tournament) {
+        $num = $this->table('tournament')->select()->where('ID', $id_tournament)->paginate(1);
+        if(count($num) != 1) return;
+        $data = [
+            'numOfPlayers' => $num[0]['numOfPlayers'] + 1
+        ];
+        $this->update($id_tournament, $data);
     }
 
 }

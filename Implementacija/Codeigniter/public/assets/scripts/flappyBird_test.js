@@ -1,15 +1,23 @@
 
 var numOfFireBalls = 0;
+var numOfCoins = 0;
+var num = 0;
 var fireBalls = [];
+
+var arr_x = [];
+var arr_y = [];
+var arr_r = [];
+
+var r = 0;
+var c = 0;
+
+var canvas;// = document.getElementById("my-canvas");
+var context;// = canvas.getContext("2d");
 
 var nextX = 0;
 var nextY = 275;
 var rayman;
-
-var r = 5;
-var c = 5;
-
-var numOfCoins = 0;
+var coin;
 var coins = [];
 
 var img_p = new Image();
@@ -24,30 +32,65 @@ var img_fb2 = new Image();
 img_fb2.src = "/images/fireBall_down.png";
 var audio = new Audio("/images/coinCollect.mp3");
 var cnt = 0;
-var interval = null;
-var timeInterval = null;
+var interval;
+
+var left = false;
+var right = false;
+var up = false;
+var down = false;
+var num_c = 0;
+
+var cell_w;
+var cell_h;
+
+var level = 0;
+var start_data;
+
+var started = false;
+var points = 0;
+var time = 0;
+var end = false;
+var lost = false;
 
 let cnt_jump = 0;
 let limit = 25;
 let curr_limit = 0;
 
-var context;
-var canvas;
+var timeInterval;
 
-var started = false;
+//document.getElementById("my-canvas").addEventListener('click', function() { alert(); }, false);
 
-var timeLeft_start = 15;
-var hh = 0, mm = 0, ss = 0, timeLeft = timeLeft_start;
-var level = 1, points = 0;
+//document.getElementsByClassName("game-info").addEventListener('click', function() { alert(); }, false);
 
-var left = right = down = up = fall = jump = false;
-var cnt = 0;
+/*document.getElementById("my-canvas").click(function () {
+    alert();
+    //document.getElementById("my-canvas").style.backgroundImage = "../images/bg.png";
+    //load_map();
+});*/
 
-var game_end = false, loaded = false, next_level = false;
-
-function print_time(txt) {
-    document.getElementById("time_display").innerHTML = txt;
-    document.getElementById("timeLeft_display").innerHTML = timeLeft + "";
+function start() {
+    started = true;
+    end = false;
+    points = 0;
+    level = 0;
+    time = 0;
+    document.getElementById("time_display").innerText = "00:00:00";
+    
+    timeInterval = setInterval(function () {
+        time++;
+        let t = time;
+        let ss = t % 60;
+        t = Math.floor(t / 60);
+        let mm = t % 60;
+        t = Math.floor(t / 60);
+        let hh = t % 60;
+        if(ss < 10) ss = "0" + ss;
+        if(mm < 10) mm = "0" + mm;
+        if(hh < 10) hh = "0" + hh;
+        let txt = hh + ":" + mm + ":" + ss;
+        //alert(txt);
+        document.getElementById("time_display").innerText = txt;
+    }, 1000);
 }
 
 document.addEventListener('keydown', (event) => {
@@ -83,192 +126,14 @@ document.addEventListener('keyup', (event) => {
     }*/
 }, false);
 
-function init() {
-    update_list();
-    canvas = document.getElementById("my-canvas");
-
-    context = canvas.getContext("2d");
-    window.addEventListener('resize', resizeCanvas, false);
-    resizeCanvas();
-
-    canvas.addEventListener('click', function() {
-        if(started) return;
-        $("#my-canvas").css("background-image", 'url("/images/bg.jpg")');
-        started = next_level = true;
-        game_end = loaded = false;
-        hh = mm = ss = points = 0; timeLeft = timeLeft_start;
-        left = right = down = up = fall = jump = false; cnt = 0;
-
-        document.getElementById("time_display").innerHTML = "00:00:00";
-        document.getElementById("timeLeft_display").innerHTML = timeLeft + "";
-        
-        timeInterval = setInterval(function () {
-            ss++;
-            timeLeft--;
-            if(timeLeft == 0) game_end = true;
-            if(ss == 60) { ss = 0; mm++; }
-            if(mm == 60) { mm = 0; hh++; }
-            if(hh < 10) s_hh = "0" + hh;
-            else s_hh = hh + "";
-            if(mm < 10) s_mm = "0" + mm;
-            else s_mm = mm + "";
-            if(ss < 10) s_ss = "0" + ss;
-            else s_ss = "" + ss;
-            print_time(s_hh + ":" + s_mm + ":" + s_ss);
-        }, 1000);
-
-        interval = setInterval(function () {
-            if(game_end) {
-                alert("GAME END: " + level);
-                clear();
-                $("#my-canvas").css("background-image", 'url("/images/bg_start_flappyBird.png")');
-                started = false;
-
-                send_data();
-                update_list();
-
-                level = 1;
-
-                clearInterval(interval);
-                clearInterval(timeInterval);
-            } else if(started && next_level) {
-                next_level = false;
-                load_map();
-            } else if(started && loaded) {
-                checkCoin();
-                animate();
-                if(allCoinsCollected()) {
-                    level++;
-                    next_level = true;
-                    loaded = false;
-                    timeLeft = timeLeft_start;
-                    document.getElementById("timeLeft_display").innerHTML = timeLeft + "";
-                    left = right = down = up = fall = jump = false; cnt = 0;
-                }
-                checkFireBalls();
-            }
-        }, 15);
-
-     }, false);
-}
-
-function checkCoin() {
-    for(let i = 0; i < numOfCoins; ++i) {
-        let coin = coins[i];
-        let coin_x_start = coin.x * cell_w;
-        let coin_x_end = coin_x_start + cell_w / 1.3;
-        let coin_y_start = coin.y * cell_h;
-        let coin_y_end = coin_y_start + cell_h / 1.3;
-        if(coin.collected) continue;
-        //alert(coin_x_start + " " + rayman.x + " " + coin_x_end);
-        // context.drawImage(img_c, this.x * cell_w + cell_w / 4, this.y * cell_h + cell_h / 5, cell_w / 1.5, cell_h / 1.5);
-        /*if(coin_x_start <= rayman.x && rayman.x <= coin_x_end) 
-            alert(coin_x_start + " " + coin_x_end + " " + coin.x + " " + coin.y);
-        if(coin_y_start <= rayman.y + 100 && rayman.y + 100 <= coin_y_end)
-            alert(coin_x_start + " " + coin_x_end);
-        if(coin_x_start <= rayman.x + 0.6 * rayman.width && rayman.x + 0.6 * rayman.width <= coin_x_end && coin_y_start <= rayman.y + 0.6 * rayman.height && rayman.y + 0.6 * rayman.height <= coin_y_end) {
-            coin.collected = true;
-            points += 5;
-            document.getElementById("point_display").innerText = points;
-            audio.play();
-            return true;
-        }*/
-        let rayman_x_start = rayman.x + rayman.width / 2;
-        let rayman_x_end = rayman.x + rayman.width / 2;
-        let rayman_y_start = rayman.y + rayman.height / 2;
-        let rayman_y_end = rayman.y + rayman.height / 2;
-        //if(coin_x_start <= rayman_x_start && rayman_x_start <= coin_x_end || coin_x_start <= rayman_x_end && rayman_x_end <= coin_x_end) 
-        //    alert(coin_x_start + " " + coin_x_end + " " + rayman_x_start + " " + rayman_x_end);
-        //if(coin_y_start <= rayman_y_start && rayman_y_start <= coin_y_end || coin_y_start <= rayman_y_end && rayman_y_end <= coin_y_end)
-        //    alert(coin_x_start + " " + coin_x_end);
-        let bool_x = coin_x_start <= rayman_x_start && rayman_x_start <= coin_x_end || coin_x_start <= rayman_x_end && rayman_x_end <= coin_x_end;
-        let bool_y = coin_y_start <= rayman_y_start && rayman_y_start <= coin_y_end || coin_y_start <= rayman_y_end && rayman_y_end <= coin_y_end;
-        if(bool_x && bool_y) {
-            coin.collected = true;
-            points += 5;
-            document.getElementById("point_display").innerText = points;
-            audio.play();
-            return true;
-        }
-    }
-    return false;
-}
-
-function checkFireBalls() {
-    for(let i = 0; i < numOfFireBalls; ++i) {
-        let coin = fireBalls[i];
-
-        /*let coin_x_start = coin.x + cell_w / 2 - coin.width;
-        let coin_x_end = coin.x + cell_w / 2 + coin.width;
-        let coin_y_start = coin.y + cell_h / 2 - coin.height / 2;
-        let coin_y_end = coin.y + cell_h / 2 + coin.height / 2;*/
-
-        /*let coin_x_start = coin.x * cell_w + cell_w;
-        let coin_x_end = coin_x_start + 150;
-        let coin_y_start = coin.y;
-        let coin_y_end = coin_y_start + 125;*/
-
-        let coin_x_start = coin.x * cell_w;
-        let coin_x_end = coin_x_start + cell_w / 1.3;
-        let coin_y_start = coin.y + cell_h / 3;
-        let coin_y_end = coin_y_start + cell_h / 1.2;
-
-        let rayman_x_start = rayman.x + rayman.width / 2;
-        let rayman_x_end = rayman.x + rayman.width / 2;
-        let rayman_y_start = rayman.y + rayman.height / 2;
-        let rayman_y_end = rayman.y + rayman.height / 2;
-        //if(coin_x_start <= rayman_x_start && rayman_x_start <= coin_x_end || coin_x_start <= rayman_x_end && rayman_x_end <= coin_x_end) 
-        //    alert(coin_x_start + " " + coin_x_end + " " + rayman_x_start + " " + rayman_x_end);
-        //if(coin_y_start <= rayman_y_start && rayman_y_start <= coin_y_end || coin_y_start <= rayman_y_end && rayman_y_end <= coin_y_end)
-        //    alert(coin_x_start + " " + coin_x_end);
-        let bool_x = coin_x_start <= rayman_x_start && rayman_x_start <= coin_x_end || coin_x_start <= rayman_x_end && rayman_x_end <= coin_x_end;
-        //if(bool_x) 
-        //    alert(coin_y_start + " " + coin_y_end);
-        let bool_y = coin_y_start <= rayman_y_start && rayman_y_start <= coin_y_end || coin_y_start <= rayman_y_end && rayman_y_end <= coin_y_end;
-
-        //if(bool_y)
-        //    alert(coin_y_start + " < " + rayman_y_start + ", " + rayman_y_end + " < " + coin_y_end);
-
-        if(bool_x && bool_y) {
-            game_end = true;
-            //send_data();
-            //update_list();
-            //animate();
-            //clearInterval(timeInterval);
-            return true;
-        }
-
-        //alert(coin_x_start + " " + rayman.x + " " + coin_x_end);
-        //if(coin_x_start <= rayman.x && rayman.x <= coin_x_end)
-        //    alert(coin.x + " " + coin.y);
-        //if(coin_y_start <= rayman.y + 100 && rayman.y + 100 <= coin_y_end)
-        //    alert("321");
-        /*if(coin_x_start <= rayman.x + 0.6 * rayman.width && rayman.x + 0.6 * rayman.width <= coin_x_end && coin_y_start <= rayman.y + 0.6 * rayman.height && rayman.y + 0.6 * rayman.height <= coin_y_end) {
-            //alert("FireBall")
-            end = true;
-            send_data();
-            update_list();
-            animate();
-            clearInterval(timeInterval);
-            return true;
-        }*/
-    }
-    return false;
-}
-
-function allCoinsCollected() {
-    for(let i = 0; i < coins.length; ++i) {
-        if(!coins[i].collected) return false;
-    }
-    return true;
-}
-
 function Coin(x, y) {
     this.x = x;
     this.y = y;
     this.width = 80;
     this.height = 100;
     this.radius = 30;
+
+    num_c++;
 
     this.collected = false;
 
@@ -292,7 +157,7 @@ function FireBall(x, dir) {
     //this.y = arr_y[num];
     //this.y = parseInt(Math.random() * 500);
     this.y = 100;
-    //this.radius = arr_r[num];
+    this.radius = arr_r[num];
     //this.inc = 0.5 - Math.random();
     //if(this.inc < 0) this.inc = -5;
     //else this.inc = 5; fireBalls.push(new FireBall(cell_w * start_data.wood[i].y + cell_w, start_data.wood[i].direction));
@@ -380,14 +245,13 @@ function Rayman() {
         }
         if(nextY > window.innerHeight - 100) {
             nextY = window.innerHeight - 100;
-            game_end = true;
-            //clear();
-            //clearInterval(timeInterval);
-            //next_level = true;
-            loaded = false;
-            timeLeft = timeLeft_start;
-            document.getElementById("timeLeft_display").innerHTML = timeLeft + "";
-            left = right = down = up = fall = jump = false; cnt = 0;
+            end = true;
+            clear();
+            $("#my-canvas").css("background-image", 'url("/images/bg_start.png")');
+            send_data();
+            update_list();
+            animate();
+            clearInterval(timeInterval);
         }
     }
 
@@ -404,34 +268,25 @@ function clear() {
 }
 
 function update() {
-    if(rayman) rayman.move();
+    rayman.move();
     for(let i = 0; i < numOfFireBalls; ++i)
         fireBalls[i].move();
 }
 
-function animate() {
-    clear();
-    if(!started) return;
-    update();
-    draw();
-}
-
 function draw() {
-    if(rayman) rayman.draw();
+    rayman.draw();
     for(let i = 0; i < numOfCoins; ++i) 
         coins[i].draw();
     for(let i = 0; i < numOfFireBalls; ++i)
         fireBalls[i].draw();
 
-    if(rayman) {
-        context.fillStyle = "gold";
-        context.beginPath();
-        //context.drawImage(img_c, this.x * cell_w + cell_w / 4, this.y * cell_h + cell_h / 5, this.width, this.height);
-        context.drawImage(img_p, -cell_w, window.innerHeight - 200 + rayman.height / 2.5, cell_w * 2, cell_h);
-        //context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-        context.closePath();
-        context.fill();
-    }
+    context.fillStyle = "gold";
+    context.beginPath();
+    //context.drawImage(img_c, this.x * cell_w + cell_w / 4, this.y * cell_h + cell_h / 5, this.width, this.height);
+    context.drawImage(img_p, -cell_w, window.innerHeight - 200 + rayman.height / 2.5, cell_w * 2, cell_h);
+    //context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+    context.closePath();
+    context.fill();
 
     let w = canvas.width;
     let h = canvas.height;
@@ -469,35 +324,94 @@ function draw() {
     context.fill(); */
 }
 
-function send_data() {
-    let t = ss + (mm + hh * 60) * 60;
-    let date = new Date();
-    $.ajax({
-        method: "POST",
-        url: window.location.origin + "/Games/save_data/flappyBird",
-        //dataType: 'json',
-        data: {arguments: [t, points, level, date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()]},
-        //data: {functionname: 'save_data', arguments: points},
+function animate() {
+    clear();
+    if(end) return;
+    update(); 
+    draw();
+}
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let w = canvas.width;
+    let h = canvas.height;
+    let rows = r;
+    let cols = c;
+    cell_w = w / cols;
+    cell_h = h / rows;
+
+    if(rayman != undefined) {
+        rayman.width = cell_w * 1.5;
+        rayman.height = cell_h * 1.5;
+    }
+    for(let i = 0; i < numOfFireBalls; ++i) {
+        fireBalls[i].width = cell_w;
+        fireBalls[i].height = cell_h * 1.5;
+    }
     
-        success: function (obj, textstatus) {
-            //alert(obj + " " + textstatus);
-            if( !(obj == "" || obj.error == "true") ) {
-                let v = JSON.parse(obj).result;
-                //alert(v + "???");
-                //update_data();
-            }
-            else {
-                console.log(obj.error);
-                //alert(obj + " ? " + textstatus);
-            }
-        },
-        error: function(xhr, status, error) {
-            alert("2 " + xhr.responseText + " " + error + " " + status);
+}
+
+var loaded = false;
+var wait = false;
+
+function init() {
+    update_list();
+    canvas = document.getElementById("my-canvas");
+    canvas.addEventListener('click', function() { 
+        start();
+        $("#my-canvas").css("background-image", 'url("/images/bg.jpg")');
+     }, false);
+    context = canvas.getContext("2d");
+    window.addEventListener('resize', resizeCanvas, false);
+    resizeCanvas();
+
+    interval = setInterval(function() {
+        if(started || game_end()) {
+            //alert("nova mapa");
+            started = false;
+            for(let i = 0; i < coins.length; ++i)
+                coins[i].collected = false;
+            load_map();
+            document.getElementById("level_display").innerText = level;
+            wait = true;
+            setTimeout(function() {wait = false; up = false;}, 500);
         }
-    });
+        else if(!end && loaded && !wait) animate();
+    }, 15);
+}
+
+function game_end() {
+
+    if(!loaded) return false;
+
+    checkCoin();
+
+    if(numOfFireBalls > 0 && checkFireBalls()) {
+        loaded = false;
+        return true;
+    }
+
+    let allCollected = true;
+    for(let i = 0; i < numOfCoins; ++i) {
+        if(coins[i].collected == false) {
+            allCollected = false;
+            break;
+        }
+    }
+
+    if(numOfCoins > 0 && allCollected) {
+        //alert("No coins...");
+        loaded = false;
+        return true;
+    }
+
+    return false;
 }
 
 function load_map() {
+    level++;
     $.ajax({
         method: "GET",
         url: window.location.origin + "/Games/getLevel/flappyBird",
@@ -508,11 +422,12 @@ function load_map() {
             if( 1 ) {
                 if(obj == "" || obj.result == false) {
                     //alert("GAME END");
-                    game_end = true;
-                    //send_data();
-                    //update_list();
-                    //animate();
-                    //clearInterval(timeInterval);
+                    end = true;
+                    send_data();
+                    update_list();
+                    animate();
+                    $("#my-canvas").css("background-image", 'url("/images/bg_start.png")');
+                    clearInterval(timeInterval);
                 } else {
                     //alert("Level: " + level + "   " + obj.result);
                     start_data = JSON.parse(JSON.parse(obj).result.level_desc);
@@ -571,27 +486,6 @@ function create_map() {
     
     //alert(fireBalls.length);
     //alert("created");
-}
-
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let w = canvas.width;
-    let h = canvas.height;
-    let rows = r;
-    let cols = c;
-    cell_w = w / cols;
-    cell_h = h / rows;
-
-    if(rayman != undefined) {
-        rayman.width = cell_w * 1.5;
-        rayman.height = cell_h * 1.5;
-    }
-    for(let i = 0; i < numOfFireBalls; ++i) {
-        fireBalls[i].width = cell_w;
-        fireBalls[i].height = cell_h * 1.5;
-    }   
 }
 
 function update_list() {
@@ -666,4 +560,135 @@ function update_list() {
             alert("5 " + xhr.responseText + " " + error + " " + status);
         }
     });
+}
+
+function send_data() {
+    let date = new Date();
+    $.ajax({
+        method: "POST",
+        url: window.location.origin + "/Games/save_data/flappyBird",
+        //dataType: 'json',
+        data: {arguments: [time, points, level - 1, date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()]},
+        //data: {functionname: 'save_data', arguments: points},
+    
+        success: function (obj, textstatus) {
+            //alert(obj + " " + textstatus);
+            if( !(obj == "" || obj.error == "true") ) {
+                let v = JSON.parse(obj).result;
+                //alert(v + "???");
+                //update_data();
+            }
+            else {
+                console.log(obj.error);
+                //alert(obj + " ? " + textstatus);
+            }
+        },
+        error: function(xhr, status, error) {
+            alert("2 " + xhr.responseText + " " + error + " " + status);
+        }
+    });
+}
+
+function checkCoin() {
+    for(let i = 0; i < numOfCoins; ++i) {
+        let coin = coins[i];
+        let coin_x_start = coin.x * cell_w;
+        let coin_x_end = coin_x_start + cell_w / 1.3;
+        let coin_y_start = coin.y * cell_h;
+        let coin_y_end = coin_y_start + cell_h / 1.3;
+        if(coin.collected) continue;
+        //alert(coin_x_start + " " + rayman.x + " " + coin_x_end);
+        // context.drawImage(img_c, this.x * cell_w + cell_w / 4, this.y * cell_h + cell_h / 5, cell_w / 1.5, cell_h / 1.5);
+        /*if(coin_x_start <= rayman.x && rayman.x <= coin_x_end) 
+            alert(coin_x_start + " " + coin_x_end + " " + coin.x + " " + coin.y);
+        if(coin_y_start <= rayman.y + 100 && rayman.y + 100 <= coin_y_end)
+            alert(coin_x_start + " " + coin_x_end);
+        if(coin_x_start <= rayman.x + 0.6 * rayman.width && rayman.x + 0.6 * rayman.width <= coin_x_end && coin_y_start <= rayman.y + 0.6 * rayman.height && rayman.y + 0.6 * rayman.height <= coin_y_end) {
+            coin.collected = true;
+            points += 5;
+            document.getElementById("point_display").innerText = points;
+            audio.play();
+            return true;
+        }*/
+        let rayman_x_start = rayman.x + rayman.width / 2;
+        let rayman_x_end = rayman.x + rayman.width / 2;
+        let rayman_y_start = rayman.y + rayman.height / 2;
+        let rayman_y_end = rayman.y + rayman.height / 2;
+        //if(coin_x_start <= rayman_x_start && rayman_x_start <= coin_x_end || coin_x_start <= rayman_x_end && rayman_x_end <= coin_x_end) 
+        //    alert(coin_x_start + " " + coin_x_end + " " + rayman_x_start + " " + rayman_x_end);
+        //if(coin_y_start <= rayman_y_start && rayman_y_start <= coin_y_end || coin_y_start <= rayman_y_end && rayman_y_end <= coin_y_end)
+        //    alert(coin_x_start + " " + coin_x_end);
+        let bool_x = coin_x_start <= rayman_x_start && rayman_x_start <= coin_x_end || coin_x_start <= rayman_x_end && rayman_x_end <= coin_x_end;
+        let bool_y = coin_y_start <= rayman_y_start && rayman_y_start <= coin_y_end || coin_y_start <= rayman_y_end && rayman_y_end <= coin_y_end;
+        if(bool_x && bool_y) {
+            coin.collected = true;
+            points += 5;
+            document.getElementById("point_display").innerText = points;
+            audio.play();
+            return true;
+        }
+    }
+    return false;
+}
+
+function checkFireBalls() {
+    for(let i = 0; i < numOfFireBalls; ++i) {
+        let coin = fireBalls[i];
+
+        /*let coin_x_start = coin.x + cell_w / 2 - coin.width;
+        let coin_x_end = coin.x + cell_w / 2 + coin.width;
+        let coin_y_start = coin.y + cell_h / 2 - coin.height / 2;
+        let coin_y_end = coin.y + cell_h / 2 + coin.height / 2;*/
+
+        /*let coin_x_start = coin.x * cell_w + cell_w;
+        let coin_x_end = coin_x_start + 150;
+        let coin_y_start = coin.y;
+        let coin_y_end = coin_y_start + 125;*/
+
+        let coin_x_start = coin.x * cell_w;
+        let coin_x_end = coin_x_start + cell_w / 1.3;
+        let coin_y_start = coin.y + cell_h / 3;
+        let coin_y_end = coin_y_start + cell_h / 1.2;
+
+        let rayman_x_start = rayman.x + rayman.width / 2;
+        let rayman_x_end = rayman.x + rayman.width / 2;
+        let rayman_y_start = rayman.y + rayman.height / 2;
+        let rayman_y_end = rayman.y + rayman.height / 2;
+        //if(coin_x_start <= rayman_x_start && rayman_x_start <= coin_x_end || coin_x_start <= rayman_x_end && rayman_x_end <= coin_x_end) 
+        //    alert(coin_x_start + " " + coin_x_end + " " + rayman_x_start + " " + rayman_x_end);
+        //if(coin_y_start <= rayman_y_start && rayman_y_start <= coin_y_end || coin_y_start <= rayman_y_end && rayman_y_end <= coin_y_end)
+        //    alert(coin_x_start + " " + coin_x_end);
+        let bool_x = coin_x_start <= rayman_x_start && rayman_x_start <= coin_x_end || coin_x_start <= rayman_x_end && rayman_x_end <= coin_x_end;
+        //if(bool_x) 
+        //    alert(coin_y_start + " " + coin_y_end);
+        let bool_y = coin_y_start <= rayman_y_start && rayman_y_start <= coin_y_end || coin_y_start <= rayman_y_end && rayman_y_end <= coin_y_end;
+
+        //if(bool_y)
+        //    alert(coin_y_start + " < " + rayman_y_start + ", " + rayman_y_end + " < " + coin_y_end);
+
+        if(bool_x && bool_y) {
+            end = true;
+            //send_data();
+            update_list();
+            animate();
+            clearInterval(timeInterval);
+            return true;
+        }
+
+        //alert(coin_x_start + " " + rayman.x + " " + coin_x_end);
+        //if(coin_x_start <= rayman.x && rayman.x <= coin_x_end)
+        //    alert(coin.x + " " + coin.y);
+        //if(coin_y_start <= rayman.y + 100 && rayman.y + 100 <= coin_y_end)
+        //    alert("321");
+        /*if(coin_x_start <= rayman.x + 0.6 * rayman.width && rayman.x + 0.6 * rayman.width <= coin_x_end && coin_y_start <= rayman.y + 0.6 * rayman.height && rayman.y + 0.6 * rayman.height <= coin_y_end) {
+            //alert("FireBall")
+            end = true;
+            send_data();
+            update_list();
+            animate();
+            clearInterval(timeInterval);
+            return true;
+        }*/
+    }
+    return false;
 }

@@ -87,6 +87,7 @@
                 </nav>
             </div>
         </div>
+        <br><br><br>
         <div class="row">
             <div class="offset-md-4 col-md-4 mt-4">
                 <nav class="navbar navbar-expand-sm c bg-dark games">
@@ -112,6 +113,7 @@
                     <label for="tournament_game">Choose game:</label>
                     <select name="games" id="games">
                         <option value="Rayman">Rayman</option>
+                        <option value="FlappyBird">FlappyBird</option>
                     </select>
                     <br><br>
                     <label for="max_players"> Number of players:</label>
@@ -128,6 +130,13 @@
                     <br><br>
                     <input type="submit" value="Add tournament" class="submit btn btn-secondary" id="myButton">
                 </div>
+            </div><br><br><br>
+            <div class="col-sm-12 no-padding" style="margin-top: 125px">
+                <nav class="navbar navbar-expand-sm bg-dark n" style="color: white; height: 50px;">
+                    <div style="width: 100%; text-align: center; color: white; margin-top:" class="notification">
+                        <h3 id="write" style="min-height: 35px;"></h3>
+                    </div>
+                </nav>
             </div>
         </div>
         <div class="row">
@@ -136,6 +145,15 @@
             </div>
         </div>
     </div>
+    <!--<div class="row no-padding">
+        <div class="col-sm-12 no-padding">
+            <nav class="navbar navbar-expand-sm bg-dark n" style="color: white; height: 50px;">
+                <div style="width: 100%; text-align: center; color: white; margin-top:" class="notification">
+                    <h3 id="write" style="min-height: 35px;"></h3>
+                </div>
+            </nav>
+        </div>
+    </div>-->
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
     <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>-->
     <script src="<?= base_url() ?>/assets/scripts/jquery-1.11.3.min.js"></script>
@@ -189,9 +207,10 @@
                 let timeStart = $("#timeStart").val();
                 let timeEnd = $("#timeEnd").val();
 
-                /*if(game == "" || max_players == "" || date == "" || timeStart == "" || timeEnd == "") {
+                if(game == "" || max_players == "" || date == "" || timeStart == "" || timeEnd == "") {
+                    $("#write").text("Please fill all fields!");
                     return;
-                }*/
+                }
                 //alert();
                 $.ajax({
                     method: "POST",
@@ -199,6 +218,8 @@
                     data: {arguments: [game, max_players, date, timeStart, timeEnd]},
                     success: function (obj, textstatus) {
                         //alert(obj + " " + textstatus);
+                        $("#write").text("Tournament added successfully!");
+                        setTimeout(function () {$("#write").text("")}, 2000);
                     },
                     error: function(xhr, status, error) {
                         alert(xhr.responseText + " " + error + " " + status);

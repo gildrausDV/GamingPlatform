@@ -109,7 +109,9 @@ class Games extends BaseController
         if(!isset($_POST['arguments'])) return;
 
         $session = session();
+        if(!isset($_SESSION['ID'])) return;
         $id_user = $session->get('ID');
+        if($id_user == -1) return;
         $game_model = new Game_model();
         $id_game = $game_model->getID($game);
 

@@ -133,7 +133,12 @@
                 location.href = window.location.origin + "/Home/Login";
             });
 
-            let role = <?php echo $_SESSION['role'];?>;
+            let role = <?php
+                $role = isset($_SESSION['role']);
+                if($role) $role = $_SESSION['role'];
+                else $role = -1;
+                echo $role;
+            ?>;
             //alert(role);
             if(role == 2) {
                 

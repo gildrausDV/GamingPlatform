@@ -70,7 +70,7 @@
 }
 .bg-clouds {
     background-image: url('/images/cloud.png');
-    height: 1000px;
+    min-height: 1000px;
     /*width: 100%;
     margin: 0px;
     padding: 0 !important;*/

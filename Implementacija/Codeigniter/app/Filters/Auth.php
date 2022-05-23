@@ -48,9 +48,10 @@ class Auth implements FilterInterface
         //$_SESSION['x'] = 1;
         print_r($_SESSION);*/ // za debagovanje!!!
 
-        $metod = explode("/", $request->uri->getPath())[1];
+        /*$metod = explode("/", $request->uri->getPath())[1];
+        //echo $metod;
         $arr = explode("/",current_url());
-        if($arr[count($arr) - 1] == "login" || $arr[count($arr) - 1] == "login_"|| $arr[count($arr) - 1] == "register" || $arr[count($arr) - 1] == "register_") {
+        if($arr[count($arr) - 1] == "login" || $arr[count($arr) - 1] == "login_"|| $arr[count($arr) - 1] == "register" || $arr[count($arr) - 1] == "register_" || $arr[count($arr) - 1] == "home" || $arr[count($arr) - 1] == "game" || $arr[count($arr) - 1] == "getLevel" || $arr[count($arr) - 1] == "getList" || $arr[count($arr) - 1] == "save_data") {
             return;
         }
 
@@ -63,7 +64,7 @@ class Auth implements FilterInterface
         
         if(!isset($_SESSION['role']) || isset($_SESSION['role']) && $_SESSION['role'] == -1 && !in_array($metod, $guest)) {
             return redirect()->to('Home/login');
-        }
+        }*/
 
         /*$role = -1;
         if(isset($_SESSION['role'])) {

@@ -86,7 +86,7 @@ function init() {
         interval = setInterval(function () {
             if(game_end) {
                 clear();
-                $("#my-canvas").css("background-image", 'url("/images/bg_start.png")');
+                $("#my-canvas").css("background-image", 'url("/images/bg_start_rayman.png")');
                 started = false;
 
                 send_data();
@@ -127,7 +127,11 @@ function send_data() {
     
         success: function (obj, textstatus) {
             if( !(obj == "") ) {
-                let v = JSON.parse(obj.result);
+                try {
+                    let v = JSON.parse(obj.result);
+                } catch(Exception) {
+                    return;
+                }
                 //alert(v + "???");
                 //update_data();
             }
@@ -149,7 +153,11 @@ function update_list() {
         url: window.location.origin + "/Games/getList/Rayman",
         success: function (obj, textstatus) {
             //alert(obj);
-            maxLvlPts = JSON.parse(obj).result;
+            try {
+                maxLvlPts = JSON.parse(obj).result;
+            } catch(Exception) {
+                return;
+            }
             //alert(maxLvlPts + " LIST LENGTH: " + maxLvlPts.list.length);
             //alert(1);
             //alert(JSON.stringify(obj.result));
@@ -214,6 +222,7 @@ function load_map() {
             if(obj == "") {
                 game_end = true;
             }  else {
+                //alert(obj);
                 start_data = JSON.parse(JSON.parse(obj).result.level_desc);
                 update_data();
                 loaded = true;

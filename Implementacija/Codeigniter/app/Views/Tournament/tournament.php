@@ -248,6 +248,16 @@
                         /*let txt = $("#1").text();
                         alert(txt);*/
 
+                        let isFull = false;
+                        if(start_data.list[i].maxNumOfPlayers == start_data.list[i].numOfPlayers) {
+                            let b = $("#" + i);
+                            if(b.text() == "Join") {
+                                b.removeClass("btn-primary");
+                                b.text("Full");
+                                b.addClass("btn-danger");
+                            }
+                        }
+
                         $("#" + i).click(function () {
                             //alert("join tournament");
                             joinTournament(start_data.list[i].id, i);
@@ -268,6 +278,7 @@
 
             function joinTournament(id, index) {
                 let btn = $("#" + index);
+                if(btn.text() != "Join") return;
                 $.ajax({
                     method: "POST",
                     url: window.location.origin + "/Tournament/joinTournament",
@@ -278,9 +289,11 @@
                         /*if(btn.text() == "Joined") {
                             btn.removeClass("btn-secondary");
                             btn.addClass("btn-primary");
-                        } else*/ if(btn.text() == "Join") {
+                        } else*/ 
+                        if(btn.text() == "Join") {
                             btn.removeClass("btn-primary");
                             btn.addClass("btn-secondary");
+                            btn.text("Joined");
                         }
                     },
                     error: function(xhr, status, error) {
