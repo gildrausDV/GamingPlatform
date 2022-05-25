@@ -125,7 +125,56 @@
                 <hr>
             </div>
             <div class="col-sm-8 mt-2"><br>
-                <img src="/images/welcome.png" alt="bg-start" id="bg-start">
+                <!--<img src="/images/welcome.png" alt="bg-start" id="bg-start">-->
+                <div id="bg-start" style="width: 90%; height: 94%; background-image: url('/images/welcome.png'); background-size: 100% 100%;">
+                    <table>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div class="col-sm-2 game-info" style="display: flex; align-items: center;">
                 <br><br><br>
