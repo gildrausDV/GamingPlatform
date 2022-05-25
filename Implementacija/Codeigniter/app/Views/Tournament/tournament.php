@@ -290,7 +290,10 @@
                         row.append(col);
                         
                         let date = new Date();
-                        let txt = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+                        let hh = date.getHours(); if(hh < 10) hh = "0" + hh;
+                        let mm = date.getMinutes(); if(mm < 10) mm = "0" + mm;
+                        let ss = date.getSeconds(); if(ss < 10) ss = "0" + ss;
+                        let txt = hh + ":" + mm + ":" + ss;
                         let m = date.getMonth() + 1;
                         if(m < 10) m = "0" + m;
                         let d = date.getFullYear() + "-" + m + "-" + date.getDate();
@@ -302,6 +305,7 @@
                         let closed = (start_data.list[i].ended == 1);
                                 
                         //alert("joined: " + jnd + " ended: " + ended + " admin:" + admin);
+                        //alert(start_data.list[i].timeEnd + " < " + txt + " = " + (start_data.list[i].date < txt));
 
                         if(!admin) {
                             if(ended) {
@@ -312,10 +316,18 @@
                                 col = $("<td><button id='"+ i +"' class='btn btn-primary'>" + 'Join' + "</button></td>");
                             }
                         } else {
-                            if(closed) {
-                                col = $("<td><button id='"+ i +"' class='btn btn-danger'>" + 'Ended' + "</button></td>");
+                            if(!ended) {
+                                if(jnd) {
+                                col = $("<td><button id='"+ i +"' class='btn btn-secondary'>" + 'Joined' + "</button></td>");
+                                } else {
+                                    col = $("<td><button id='"+ i +"' class='btn btn-primary'>" + 'Join' + "</button></td>");
+                                }
                             } else {
-                                col = $("<td><button id='"+ i +"' class='btn btn-success'>" + 'End' + "</button></td>");
+                                if(closed) {
+                                    col = $("<td><button id='"+ i +"' class='btn btn-danger'>" + 'Ended' + "</button></td>");
+                                } else {
+                                    col = $("<td><button id='"+ i +"' class='btn btn-success'>" + 'End' + "</button></td>");
+                                }
                             }
                         }
 

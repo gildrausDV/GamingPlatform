@@ -287,7 +287,8 @@ function checkCoin() {
             coin.collected = true;
             points += 5;
             document.getElementById("point_display").innerText = points;
-            audio.play();
+            //audio.play();
+            new Audio("/images/coinCollect.mp3").play();
             return true;
         }
     }
@@ -297,25 +298,30 @@ function checkCoin() {
 document.addEventListener('keyup', (event) => {
     var name = event.key;
     if(name == "ArrowLeft") {
+        event.preventDefault();
         left = false;
     } else if(name == "ArrowRight") {
+        event.preventDefault();
         right = false;
     } else if(name == "ArrowUp") {
-
+        event.preventDefault();
     }
 }, false);
 
 document.addEventListener('keydown', (event) => {
     var name = event.key;
     if(name == "ArrowLeft") {
+        event.preventDefault();
         if(left) return;
         img.src = "/images/rayman02.png";
         left = true;
     } else if(name == "ArrowRight") {
+        event.preventDefault();
         if(right) return;
         img.src = "/images/rayman01.png";
         right = true;
     } else if(name == "ArrowUp") {
+        event.preventDefault();
         if(jump) return;
         if(up) return;
         up = true;

@@ -53,15 +53,18 @@ function print_time(txt) {
 document.addEventListener('keydown', (event) => {
     var name = event.key;
     if(name == "ArrowLeft") {
+        event.preventDefault();
         if(left) return;
         img.src = "/images/bird3.png";
         left = true;
     } else if(name == "ArrowRight") {
+        event.preventDefault();
         if(right) return;
         img.src = "/images/bird3.png";
         right = true;
     } else if(name == "ArrowUp") {
         //curr_limit += limit;
+        event.preventDefault();
         cnt_jump = 0;
         up = true;
     }/* else if(name == "ArrowDown") {
@@ -73,14 +76,16 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('keyup', (event) => {
     var name = event.key;
     if(name == "ArrowLeft") {
+        event.preventDefault();
         left = false;
     } else if(name == "ArrowRight") {
+        event.preventDefault();
         right = false;
-    } /*else if(name == "ArrowUp") {
-        up = false;
-    }*//* else if(name == "ArrowDown") {
-        down = false;
-    }*/
+    } else if(name == "ArrowUp") {
+        event.preventDefault();
+    } else if(name == "ArrowDown") {
+        event.preventDefault();
+    }
 }, false);
 
 function init() {
@@ -187,7 +192,8 @@ function checkCoin() {
             coin.collected = true;
             points += 5;
             document.getElementById("point_display").innerText = points;
-            audio.play();
+            //audio.play();
+            new Audio("/images/coinCollect.mp3").play();
             return true;
         }
     }
