@@ -27,8 +27,8 @@
 <div class="container-fluid bg-clouds">
     <div class="row no-padding">
             <div class="col-sm-12 no-padding">
-                <nav class="navbar navbar-expand-sm bg-dark n" id="pls">
-                    <div class="levo" id="pls1">
+                <nav class="navbar navbar-expand-sm bg-dark n">
+                    <div class="levo">
                         <a href="<?= base_url() ?>/Home/settings" class="navbar-brand logo_link">
                             <img src="<?php 
                                     echo esc($picture);
@@ -61,12 +61,12 @@
                                     Allow/block
                                 </a>
                             </li>
-                            <li class="nav-item removeForGuests" id="htr">
+                            <li class="nav-item removeForGuests">
                                 <a href="<?= base_url() ?>/Games/history/None" class="nav-link">
                                     History
                                 </a>
                             </li>
-                            <li class="nav-item removeForGuests removeForUsers removeForModerators" id="rls">
+                            <li class="nav-item removeForGuests removeForUsers removeForModerators">
                                 <a href="<?= base_url() ?>/Home/roles" class="nav-link" style="width: 75px;">
                                     Roles
                                 </a>
@@ -87,7 +87,7 @@
                         </ul>
                     </div>
                     
-                    <div class="desno" id="pls2">
+                    <div class="desno">
                         <div id="newTournament">
                             
                         </div>
@@ -126,9 +126,53 @@
             </div>
             <div class="col-sm-8 mt-2"><br>
                 <!--<img src="/images/welcome.png" alt="bg-start" id="bg-start">-->
-                <div id="bg-start" style="width: 90%; height: 94%; background-image: url('/images/welcome.png'); background-size: 100% 100%;">
-                    <table id="tbl">
-                        
+                <div id="bg-start" style="width: 90%; height: 94%; background-image: url('/images/welcome2.jpg'); background-size: 100% 100%;">
+                    <table>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -146,47 +190,8 @@
         </div>
     </div>
     <script>
-
-        function setTable() {
-
-            let tbl = $("#tbl");
-            let w = $("#bg-start").width() - 5;
-            let h = $("#bg-start").height() - 5;
-            let x = 25;
-            let t_w = w / x;
-            let t_h = h / x;
-
-            for(let i = 0; i < t_h; ++i) {
-                let row = $("<tr></tr>");
-                for(let j = 0; j < t_w; ++j) {
-                    row.append($("<td></td>").css({
-                        "width": x + "px",
-                        "height": x + "px"
-                    }));
-                }
-                tbl.append(row);
-            }
-
-        }
-
         $(document).ready(function () {
             
-            setTable();
-
-            $(window).resize(function() {
-                //alert();
-                if(window.innerWidth < $("#pls1").width() + $("#pls2").width()) {
-                    //alert("window-width: " + window.innerWidth + " navbar-width: " + ($("#pls1").width() + $("#pls2").width()));
-                    $("#pls").width(($("#pls1").width() + $("#pls2").width()) + "px");
-                    //alert();
-                } else {
-                    $("#pls").width(window.innerWidth + "px");
-                }
-            });
-
-
-            //alert($("#pls1").width() + $("#pls2").width());
-
             let newTournament = '<?php
                 if(!isset($_SESSION['ID'])) {
                     echo 'false';
