@@ -251,6 +251,8 @@
                 }
                 hidden = !hidden;
             });
+
+            
         });
     </script>
 </body>

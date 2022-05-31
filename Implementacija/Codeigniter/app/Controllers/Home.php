@@ -72,8 +72,9 @@ class Home extends BaseController
     public function register_() {
         $model = new Register_model();
         $res = $model->register();
-        $data['reg'] = "".$res;
-        return view('register', $data);
+        echo $res;
+        //$data['reg'] = "".$res;
+        //return view('register', $data);
     }
 
     public function home() {

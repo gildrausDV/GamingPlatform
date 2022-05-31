@@ -36,14 +36,14 @@
                 <h1>Register</h1>
                 <hr>
                 <br><br>
-                <form method="post" action="<?php echo site_url('Home/register_'); ?>">
+                <form>
                     <table>
                         <tr>
                             <td>
                                 <label for="forename">Forename:</label>
                             </td>
                             <td>
-                                <input type="text" id="forename" name="forename">
+                                <input required type="text" id="forename" name="forename">
                             </td>
                         </tr>
                         <tr>
@@ -51,7 +51,7 @@
                                 <label for="surname">Surname:</label>
                             </td>
                             <td>
-                                <input type="text" id="surname" name="surname">
+                                <input required type="text" id="surname" name="surname">
                             </td>
                         </tr>
                         <tr>
@@ -59,7 +59,7 @@
                                 <label for="email">Email:</label>
                             </td>
                             <td>
-                                <input type="text" id="email" name="email">
+                                <input required type="text" id="email" name="email">
                             </td>
                         </tr>
                         <tr>
@@ -67,7 +67,7 @@
                                 <label for="date">Date of birth:</label>
                             </td>
                             <td>
-                                <input type="date" id="date" name="date">
+                                <input required type="date" id="date" name="date">
                             </td>
                         </tr>
                         <tr>
@@ -75,7 +75,7 @@
                                 <label for="username">Username:</label>
                             </td>
                             <td>
-                                <input type="text" id="username" name="username">
+                                <input required type="text" id="username" name="username">
                                 <img class="togglePassword_" src="/images/eye.png">
                             </td>
                         </tr>
@@ -85,7 +85,7 @@
                             </td>
                             <td>
                                 <div>
-                                <input type="password" id="password" name="password" class="toggle">
+                                <input required type="password" id="password" name="password" class="toggle">
                                 <img id="togglePassword1" src="/images/eye_.png">
                                 </div>
                             </td>
@@ -95,13 +95,13 @@
                                 <label for="confirmPassword">Confirm password:</label>
                             </td>
                             <td>
-                                <input type="password" id="confirmPassword" name="confirmPassword" class="toggle">
+                                <input required type="password" id="confirmPassword" name="confirmPassword" class="toggle">
                                 <img id="togglePassword2" src="/images/eye_.png">
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <input type="submit" value="Register" class="btn btn-secondary">
+                                <input value="Register" class="btn btn-secondary" id="submit">
                             </td>
                         </tr>
                     </table>
@@ -122,13 +122,13 @@
                 <br><br><br>
                 <div class="links">
                     <div class="play">
-                        <a class="input_footer1" href="<?php echo base_url()."/Home/home" ?>">
+                        <a class="input_footer1" href="<?php echo base_url()."/Home/home"  ?>">
                             Quick play
                         </a>
                     </div>
                     <div class="register">
                         <a class="input_footer2" href="<?php echo base_url()."/Home/login"  ?>">
-                            Sign in
+                            Log in
                         </a>
                     </div>
                 </div>

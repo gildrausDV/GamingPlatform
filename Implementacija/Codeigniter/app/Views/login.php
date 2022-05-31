@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in</title>
+    <title>Log in</title>
     <link rel="stylesheet" href="<?= base_url() ?>/assets/style/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/style/login.css">
     <script src="<?= base_url() ?>/assets/scripts/bootstrap.min.js"></script>
@@ -28,7 +28,7 @@
         <div class="row">
             <div class="form offset-sm-4 col-sm-4 mt-5">
                 <br>
-                <h1>Sign in</h1>
+                <h1>Log in</h1>
                 <hr>
                 <br><br>
                 <form method="post" action="<?php echo site_url('Home/login_'); ?>">
@@ -37,7 +37,7 @@
                     <br><br>
                     <label for="lname">Password:&nbsp;</label>
                     <input type="password" id="password" name="password"><br><br>
-                    <button class="btn btn-secondary" type="submit"> Sign in</button>
+                    <button class="btn btn-secondary" type="submit"> Log in</button>
                 </form>
                 <br><br><br>
                 <div class="links">
