@@ -124,7 +124,7 @@
             <div class="col-sm-2 game-info" style="display: flex; align-items: center;">
                 <br><br><br>
                 <hr>
-                <p>Click on the game icon for the game you want to play.</p>
+                <p>Click on the game icon for the game you want to play. <br /><br />Go to the account settings or click on your picture in upper left corner to set your profile picture. </p>
                 <hr>
             </div>
             <div class="col-sm-8 mt-2"><br>
@@ -181,9 +181,11 @@
             </div>
             <div class="col-sm-2 game-info" style="display: flex; align-items: center;">
                 <br><br><br>
-                <hr>
-                <p>Check the tournaments page to compete with other players and get rewards.</p>
-                <hr>
+                <p>Check the tournaments page to compete with other players and get rewards. If you reach top 5 at the end of the tournament you will get NP points which are used
+                    to rank all the players. <br />
+                    If you get more than 50 NP points you will get the role of moderator. <br /><br />
+                    Go to Top Players Global list to check your points!
+                </p>
             </div>
         </div>
         <div class="row">

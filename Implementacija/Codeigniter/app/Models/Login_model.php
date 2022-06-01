@@ -29,7 +29,7 @@ class Login_model extends Model {
         if(count($NP) != 1) return;
         $role = $NP[0]['role'];
         $NP = $NP[0]['NP'];
-        if($NP < 10 || $role != 0) return;
+        if($NP < 50 || $role != 0) return;
         $this->table('user')->update($id_user, ['role' => 1]);
     }
 

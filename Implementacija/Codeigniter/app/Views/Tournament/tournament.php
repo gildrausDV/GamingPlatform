@@ -386,6 +386,7 @@
                         } else {
                             col = $("<td><button id='"+ i +"' class='btn btn-secondary'>" + 'Joined' + "</button></td>");//css("margin-top", "2%").css("width", "100px");
                         }*/
+                        //col.css("width", "50px");
                         row.append(col);
                         
                         $("table").append(row);
