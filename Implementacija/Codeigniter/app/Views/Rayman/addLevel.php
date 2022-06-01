@@ -1,7 +1,7 @@
 <!-- Autor: Dimitrije Vujčić -->
 
 <?php
-    if($_SESSION['role'] < 1) {
+    if(!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] == false || $_SESSION['role'] < 1) {
         header('Location: '.base_url()."/Home/home");
         exit();
     }

@@ -1,5 +1,12 @@
 /* Autor: Dimitrije Vujčić */
 
+.notification {
+    background-color: black;
+    opacity: 0.8;
+    width: 100%;
+    color: white;
+}
+
 #tournament_form {
     text-align: center;
     background-color: black;

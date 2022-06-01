@@ -29,6 +29,22 @@ class Tournament_model extends Model {
         return $res;
     }
 
+    public function alreadyExists($game, $date, $timeStart, $timeEnd) {
+        $game_model = new Game_model();
+        $id_game = $game_model->getID($game);
+        $res = $this->table('tournament')
+            ->select('timeStart, timeEnd')
+            ->where("ID_game", $id_game)
+            ->where('date', $date)
+            ->paginate();
+        foreach($res as $tournament) {
+            if(strcmp($tournament['timeStart'], $timeStart) < 0 && strcmp($timeStart, $tournament['timeEnd']) < 0) return true;
+            if(strcmp($tournament['timeStart'], $timeEnd) < 0 && strcmp($timeEnd, $tournament['timeEnd']) < 0) return true;
+            if(strcmp($tournament['timeStart'], $timeEnd) + strcmp($timeEnd, $tournament['timeEnd']) == 0) return true;
+        }
+        return false;
+    }
+
     public function addTournament($arr) {
         $game_model = new Game_model();
         $id_game = $game_model->getID($arr[0]);

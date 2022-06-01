@@ -89,6 +89,10 @@ class Tournament extends BaseController
             return;
         }
         $model = new Tournament_model();
+        if($model->alreadyExists($_POST['arguments'][0], $_POST['arguments'][2], $_POST['arguments'][3], $_POST['arguments'][4])) {
+            echo "error";
+            return;
+        }
         $model->addTournament($_POST['arguments']);
         $res['list'] = "abc";
         echo json_encode($res);

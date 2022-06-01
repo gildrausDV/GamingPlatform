@@ -217,8 +217,9 @@
                     //alert(obj);
                     start_data = JSON.parse(obj);
                     if(start_data.list[0].username == undefined) return;
-                     
-                    for(let i = 0; i < start_data.list.length; ++i) {
+                    let l = start_data.list.length;
+                    if(l > 10) l = 10;
+                    for(let i = 0; i < l; ++i) {
                         let row = $("<tr></tr>").css({"width": "100%", 
                                                 "height": "80px", 
                                                 "display": "flex",

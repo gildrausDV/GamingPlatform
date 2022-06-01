@@ -135,6 +135,13 @@
                 <!--</div>-->
                 <br><br><br>
                 <button id="addTournament" onclick="addTournament()" class="btn btn-secondary">Add tournament</button>
+            </div><br><br><br><br><br><br>
+            <div class="col-sm-12 no-padding" style="margin-top: 125px">
+                <nav class="navbar navbar-expand-sm bg-dark n" style="color: white; height: 50px;">
+                    <div style="width: 100%; text-align: center; color: white; margin-top:" class="notification">
+                        <h3 id="write" style="min-height: 35px;"></h3>
+                    </div>
+                </nav>
             </div>
         </div>
         <div class="row">
@@ -406,7 +413,14 @@
             function joinTournament(id, index) {
                 //alert();
                 let btn = $("#" + index);
-                if(btn.text() == "Join") {
+                if(btn.text() == "Joined") {
+                    //alert("1");
+                    $("#write").text("");
+                } else if(btn.text() == "Full") {
+                    //alert("2");
+                    $("#write").text("Tournament full!");
+                } else if(btn.text() == "Join") {
+                    //alert("3");
                     $.ajax({
                         method: "POST",
                         url: window.location.origin + "/Tournament/joinTournament",

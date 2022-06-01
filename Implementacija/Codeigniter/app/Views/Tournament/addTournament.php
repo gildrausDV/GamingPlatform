@@ -255,8 +255,10 @@
                 let timeStart = $("#timeStart").val();
                 let timeEnd = $("#timeEnd").val();
 
-                if(game == "" || max_players == "" || date == "" || timeStart == "" || timeEnd == "") {
-                    $("#write").text("Please fill all fields!");
+                let valid = false;
+                valid = (/^\d+$/.test(max_players) && /^\d\d:\d\d:\d\d$/.test(timeStart) && /^\d\d:\d\d:\d\d$/.test(timeEnd));
+                if(!valid || game == "" || max_players == "" || date == "" || timeStart == "" || timeEnd == "") {
+                    $("#write").text("Please provide necessary information.");
                     return;
                 }
                 //alert();
@@ -266,8 +268,11 @@
                     data: {arguments: [game, max_players, date, timeStart, timeEnd]},
                     success: function (obj, textstatus) {
                         //alert(obj + " " + textstatus);
-                        $("#write").text("Tournament added successfully!");
-                        setTimeout(function () {$("#write").text("")}, 2000);
+                        if(obj == "error") {
+                            $("#write").text("Tournament already exists!");
+                        } else {
+                            $("#write").text("You have successfully added a tournament!");
+                        }
                     },
                     error: function(xhr, status, error) {
                         alert(xhr.responseText + " " + error + " " + status);

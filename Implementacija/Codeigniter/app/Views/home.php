@@ -29,7 +29,10 @@
             <div class="col-sm-12 no-padding">
                 <nav class="navbar navbar-expand-sm bg-dark n">
                     <div class="levo">
-                        <a href="<?= base_url() ?>/Home/settings" class="navbar-brand logo_link">
+                        <a href="<?php 
+                            if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn']) echo base_url()."/Home/settings";
+                            else  echo base_url()."/Home/Login";
+                        ?>" class="navbar-brand logo_link">
                             <img src="<?php 
                                     echo esc($picture);
                                 ?>" alt="logo" id="logo" class="rounded-pill">
@@ -191,7 +194,7 @@
     </div>
     <script>
         $(document).ready(function () {
-            
+
             let newTournament = '<?php
                 if(!isset($_SESSION['ID'])) {
                     echo 'false';
