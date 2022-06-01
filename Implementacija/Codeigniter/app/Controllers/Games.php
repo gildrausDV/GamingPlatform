@@ -120,6 +120,13 @@ class Games extends BaseController
         }
     }
 
+    public function myNPoints() {
+        $session = session();
+        $id_user = $session->get('ID');
+        $model = new Login_model();
+        echo $model->getNPoints($id_user);
+    }
+
     /**
      * Funkcija koja preko model-a iz baze dohvata najbolje igrače za igricu $game
      * (getTopPlayers se poziva metodom iz ajax bliblioteke kojoj se rezultat vraća korišćenjem echo funkcije)

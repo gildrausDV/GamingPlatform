@@ -87,4 +87,10 @@ class Login_model extends Model {
         return $res[0]['role'];
     }
 
+    public function getNPoints($id_user) {
+        $ret = $this->table('user')->select("NP")->paginate(1);
+        if(count($ret) == 0) return 0;
+        return $ret[0]['NP'];
+    }
+
 }

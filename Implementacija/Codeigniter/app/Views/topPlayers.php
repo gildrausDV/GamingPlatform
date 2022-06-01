@@ -86,8 +86,12 @@
                             </li>
                         </ul>
                     </div>
-                    <div id="newTournament">
-                            
+                    <div id="write" style="color: white; font-weight: bolder;">
+                        
+                    </div>
+                    <div style="width: 50px;"></div>
+                    <div id="newTournament" style="color: white;">
+                        
                     </div>
                     <div class="desno">
                         <button id="signOut" type="button" class="btn" style="margin-right: 10px;">Sign out</button>
@@ -223,6 +227,7 @@
                     start_data = JSON.parse(obj);
                     if(game == "Global") {
                         topPlayersG();
+                        myNPoints();
                     } else {
                         topPlayers();
                     }
@@ -232,8 +237,24 @@
                 }
             });
 
+            function myNPoints() {
+                $.ajax({
+                method: "GET",
+                url: window.location.origin + "/Games/myNPoints",
+                success: function (obj, textstatus) {
+                    //alert(obj);
+                    $("#write").text("NPoints: " + obj).css("color", "white").css("font-weight", "bold");
+                },
+                error: function(xhr, status, error) {
+                    alert("2 " + xhr.responseText + " " + error + " " + status);
+                }
+            });
+            }
+
             function topPlayersG() {
-                for(let i = 0; i < start_data.list.length; ++i) {
+                let x = start_data.list.length;
+                if(x > 10) x = 10;
+                for(let i = 0; i < x; ++i) {
                     let row = $("<tr></tr>").css({"width": "100%", 
                                         "height": "90px", 
                                         "display": "flex",
@@ -268,11 +289,11 @@
                     let points = start_data.list[i].NP;
                     
                     if(points < 10) 
-                        points = $("<td><h1>Points: 0" + points + "</h1></td>");//css("margin-top", "1%");
+                        points = $("<td><h1>NPoints: 0" + points + "</h1></td>");//css("margin-top", "1%");
                     else if(points < 100) 
-                        points = $("<td><h1>Points: &nbsp;" + points + "</h1></td>");//css("margin-top", "1%");
+                        points = $("<td><h1>NPoints: &nbsp;" + points + "</h1></td>");//css("margin-top", "1%");
                     else 
-                        points = $("<td><h1>Points: " + points + "</h1></td>");//css("margin-top", "1%");
+                        points = $("<td><h1>NPoints: " + points + "</h1></td>");//css("margin-top", "1%");
                     
                     row.append(points);
                     
@@ -281,7 +302,9 @@
             }
 
             function topPlayers() {
-                for(let i = 0; i < start_data.list.length; ++i) {
+                let x = start_data.list.length;
+                if(x > 10) x = 10;
+                for(let i = 0; i < x; ++i) {
                     let row = $("<tr></tr>").css({"width": "100%", 
                                         "height": "90px", 
                                         "display": "flex",

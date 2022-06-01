@@ -108,7 +108,7 @@
         </div>
         <br><br><br>
         <div class="row">
-            <div class="offset-md-4 col-md-4 mt-4">
+            <div class="offset-md-4 col-md-4 mt-2">
                 <nav class="navbar navbar-expand-sm c bg-dark games">
                     <a href="<?= base_url() ?>/Games/game/Rayman" class="navbar-brand">
                         <img src="/images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
@@ -136,16 +136,16 @@
                     </select>
                     <br><br>
                     <label for="max_players"> Number of players:</label>
-                    <input type="text" id="max_players" name="may_players">
+                    <input type="text" id="max_players" name="may_players" value="10">
                     <br><br>
                     <label for="date"> Date:</label>
                     <input type="date" id="date" name="date">
                     <br><br>
                     <label for="timeStart"> Starting time:</label>
-                    <input type="text" id="timeStart" name="timeStart">
+                    <input type="text" id="timeStart" name="timeStart" value="13:00:00">
                     <br><br>
                     <label for="timeEnd"> Ending time:</label>
-                    <input type="text" id="timeEnd" name="timeEnd">
+                    <input type="text" id="timeEnd" name="timeEnd" value="14:00:00">
                     <br><br>
                     <input type="submit" value="Add tournament" class="submit btn btn-secondary" id="myButton">
                 </div>
@@ -164,15 +164,6 @@
             </div>
         </div>
     </div>
-    <!--<div class="row no-padding">
-        <div class="col-sm-12 no-padding">
-            <nav class="navbar navbar-expand-sm bg-dark n" style="color: white; height: 50px;">
-                <div style="width: 100%; text-align: center; color: white; margin-top:" class="notification">
-                    <h3 id="write" style="min-height: 35px;"></h3>
-                </div>
-            </nav>
-        </div>
-    </div>-->
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
     <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>-->
     <script src="<?= base_url() ?>/assets/scripts/jquery-1.11.3.min.js"></script>
@@ -286,70 +277,6 @@
             });
 
         });
-
-        /*var started = false;
-        var ended = false;
-
-        function addTournament1() {
-            alert();
-            if(ended = true) {
-                ended = false;
-                started = false;
-            }
-            if(started == true) {
-                return;
-            }
-            started = true;
-            let end = false;
-            if(document.getElementById("games").value == "" || document.getElementById("max_players").value == "" || document.getElementById("date").value == "" || document.getElementById("timeStart").value == "" || document.getElementById("timeEnd").value == "") {
-                document.getElementById("notification").innerText = "Please provide necessary information.";
-                end = true;
-            }
-            alert();
-            //if(end) return;
-
-            add_tournament();
-
-        }
-
-        function add_tournament() {
-            alert();
-            let game = document.getElementById("games").value;
-            let numPlayers = document.getElementById("max_players").value;
-            let date = document.getElementById("date").value;
-            let timeStart = document.getElementById("timeStart").value;
-            let timeEnd = document.getElementById("timeEnd").value;
-            //alert(game + " " + numPlayers + " " + date + " " + timeStart + " " + timeEnd);
-
-            alert("sending...");
-            jQuery.ajax({
-                type: "POST",
-                url: 'tournament_.php',
-                //dataType: 'json',
-                data: {functionname: 'add_tournament', arguments: [game, numPlayers, date, timeStart, timeEnd]},
-
-                success: function (obj, textstatus) {
-                    if( !('error' in obj) ) {
-                        alert("success");
-                    }
-                    else {
-                        console.log(obj.error);
-                        alert(obj.error + " ??? " + textstatus);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    alert(xhr.responseText + " " + error + " ??? " + status);
-                }
-            });
-            alert("sent");
-        }
-
-        function back() {
-            location.href = "tournament.html";
-        }
-        function signOut_page() {
-            location.href = "index.html";
-        }*/
     </script>
 </body>
 </html>
