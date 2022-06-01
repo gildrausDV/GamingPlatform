@@ -19,6 +19,13 @@ class Login_model extends Model {
      */
     protected $allowedFields = ['NP', 'ID', 'role'];
 
+    /**
+     * Funkcija dodaje $points NP poena korisniku $id_user
+     * 
+     * @param Integer $id_user
+     * @param Integer $points
+     * 
+     */
     public function addPoints($id_user, $points) {
         $NP = $this->table('user')->select('NP')->where('ID', $id_user)->paginate(1);
         if(count($NP) != 1) return;
@@ -26,6 +33,12 @@ class Login_model extends Model {
         $this->table('user')->update($id_user, ['NP' => $NP + $points]);
     }
 
+    /**
+     * Funkcija vraca sve korisnike
+     * 
+     * @return arr[]    // niz [ID]
+     * 
+     */
     public function getAllUsers() {
         $users = $this->select('ID')->paginate();
         $ret = [];
@@ -35,6 +48,12 @@ class Login_model extends Model {
         return $ret;
     }
 
+    /**
+     * Funkcija proverava da li $id_user ima preko 50 NP poena i ako ima dodeljuje tom korisniku ulogu moderatora
+     * 
+     * @param Integer $id_user
+     * 
+     */
     public function setModerator($id_user) {
         $NP = $this->table('user')->select('NP, role')->where('ID', $id_user)->paginate(1);
         if(count($NP) != 1) return;
