@@ -2,10 +2,21 @@
 
 use CodeIgniter\Model;
 
+/**
+ * Login_model - model za rad sa bazom prilikom logovanja korisnika
+ * 
+ * @version 1.0
+ */
 class Login_model extends Model {
 
+    /**
+     * @var String $table // naziv tabele kojoj se pristupa
+     */
     protected $table = 'user';
     
+    /**
+     * @var arr[String] $allowedFields // polja koja se ažuriraju u ovoj klasi
+     */
     protected $allowedFields = ['NP', 'ID', 'role'];
 
     public function addPoints($id_user, $points) {
@@ -33,15 +44,15 @@ class Login_model extends Model {
         $this->table('user')->update($id_user, ['role' => 1]);
     }
 
+    /**
+     * Funkcija koja upoređuje podatke unete u login formi sa podacima iz baze
+     * 
+     * @return Integer // idenrifikator greške/uspešnosti
+     */
     public function login() {
-        //if($this->input == NULL) return 0;
-        $user = $_POST['username'];//$this->session->userdata('username'); 
+        $user = $_POST['username'];
         $pass = $_POST['password'];
 
-        //$this->db->select('*');
-        //$this->db->from('user');
-        //$this->db->where('username', $user);
-        //$this->db->where('password', $pass);
         $exists = $this->table('user')->select('blocked')->where('username', $user)
         ->where('password', $pass)->paginate(2);
 

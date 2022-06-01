@@ -10,7 +10,7 @@ use CodeIgniter\Model;
 class PlayedGame_model extends Model {
 
     /**
-     * @var String $table   // naziv baze kojoj se pristupa
+     * @var String $table   // naziv tabele kojoj se pristupa
      */
     protected $table = 'playedgame';
 

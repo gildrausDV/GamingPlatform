@@ -2,12 +2,30 @@
 
 use CodeIgniter\Model;
 
+/**
+ * Roles_model - model za rad sa bazom prilikom dodeljivanja/oduzimanja uloge 
+ * administratora/moderatora
+ * 
+ * @version 1.0
+ */
 class Roles_model extends Model {
 
+    /**
+     * @var String $table // naziv tabele kojoj se pristupa
+     */
     protected $table = 'user';
 
+    /**
+     * @var arr[String] $allowedFields // polja koja se ažuriraju u ovoj klasi
+     */
     protected $allowedFields = ['role'];
     
+    /**
+     * Funkcija koja ažurira polje 'role' u tabeli 'user' u zavisnosti od toga da li
+     * se korisniku postavlja/oduzima uloga administratora/moderatora
+     * 
+     * @return Integer // identifikator greške/uspešnosti
+     */
     public function roles() {
 
         $user = $_POST['username'];

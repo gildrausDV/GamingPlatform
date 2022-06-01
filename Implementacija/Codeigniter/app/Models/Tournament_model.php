@@ -12,7 +12,7 @@ use App\Models\Login_model;
 class Tournament_model extends Model {
 
     /**
-     * @var String $table   // naziv baze kojoj se pristupa
+     * @var String $table   // naziv tabele kojoj se pristupa
      * 
      */
     protected $table = 'tournament';

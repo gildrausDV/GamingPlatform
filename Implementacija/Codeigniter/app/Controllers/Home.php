@@ -1,5 +1,6 @@
 <?php
 
+// Autor: Bogdan Jovanović 2019/0335
 
 namespace App\Controllers;
 
@@ -11,14 +12,25 @@ use App\Models\Roles_model;
 use App\Models\Settings_model;
 use App\Config\autoload;
 
+/**
+ * Home - kontroler za rad sa registracijom, logovanjem, podešavanjem naloga,
+ * dozvolom/zabranom pristupa nalogu i dodeljivanjem/oduzimanjem uloge 
+ * moderatora/administratora
+ * 
+ * @version 1.0
+ */
+
 class Home extends BaseController
 {
 
     public function index()
     {
-        return view('welcome_message');
+        return view('Home/home');
     }
 
+    /**
+     * Funckcija koja odjavljuje korisnika
+     */
     public function signOut() {
         $session = session();
         $newTournamentUsers = [];
@@ -33,50 +45,59 @@ class Home extends BaseController
         $session->set($ses_data);
     }
 
+    /**
+     * Funkcija koja prikazuje stranicu za logovanje
+     * 
+     * @return view
+     */
     public function login() {
         helper('form');
         $data['log'] = '0';
         return view('login', $data);
     }
 
+    /**
+     * Funcija koja preko model-a proverava podatke unete sa login forme i ukoliko
+     * su podaci validni preusmerava korisnika na home stranicu
+     * 
+     * @return view
+     */
     public function login_() {
         $model = new Login_model();
         $res = $model->login();
-        //print_r($res);
         $data['log'] = "".$res;
         if($res == 0) {
-            /*$session = session();
-            $ses_data = [
-                'ID' => $model->getID($_POST['username']),
-                'isLoggedIn' => true
-            ];
-            $session->set($ses_data);*/
             $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
             return view('home', $data);
         }
-        /*$session = session();
-        $ses_data = [
-            'ID' => -1,
-            'isLoggedIn' => false
-        ];
-        $session->set($ses_data);*/
         return view('login', $data);
     }
 
+    /**
+     * Funkcija koja prikazuje stranicu za registrovanje
+     * 
+     * @return view
+     */
     public function register() {
         helper('form');
         $data['reg'] = '0';
         return view('register', $data);
     }
 
+    /**
+     * Funkcija koja preko model-a proverava validnost unetih podataka sa register forme
+     */
     public function register_() {
         $model = new Register_model();
         $res = $model->register();
         echo $res;
-        //$data['reg'] = "".$res;
-        //return view('register', $data);
     }
 
+    /**
+     * Funkcija koja prikazuje početnu (home) stranicu
+     * 
+     * @return view
+     */
     public function home() {
         $role = session()->get('role');
         $id = session()->get('ID');
@@ -88,14 +109,24 @@ class Home extends BaseController
         return view('home', $data);
     }
 
+    /**
+     * Funkcija koja prikazuje stranicu za dozvolu/zabranu pristupa nalogu
+     * 
+     * @return view
+     */
     public function allow() {
         helper('form');
         $data['allow'] = '0';
         $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
-        //echo session()->get('ID');
         return view('allow', $data);
     }
 
+    /**
+     * Funkcija koja preko model-a radi dozvolu/zabranu pristupa nalogu
+     * određenom korisniku
+     * 
+     * @return view
+     */
     public function allow_() {
         $model = new Allow_model();
         $res = $model->allow();
@@ -104,12 +135,11 @@ class Home extends BaseController
         return view('allow', $data);
     }
 
-    /*public function settings() {
-        helper('form');
-        $data['settings'] = '0';
-        return view('settings', $data);
-    }*/
-
+    /**
+     * Funkcija koja prikazuje stranicu za podešavanje naloga
+     * 
+     * @return view
+     */
     public function settings() {
         helper('form');
         $data['settings'] = '0';
@@ -122,32 +152,14 @@ class Home extends BaseController
         return view('settings', $data);
     }
 
-    /*public function settingsLoadData() {
-        $model = new Settings_model();
-        $id = session()->get('ID');
-        $res = $model->settingsLoadData($id);
-        $res_ = [
-            'password' => $res['password'],
-            'date' => $res['date'],
-            'profilePicture' => $res['profilePicture']
-        ];
-        echo json_encode($res_);
-    }*/
-
-    /*public function loadPicture() {
-        $role = session()->get('role');
-        if ($role == -1 || isset($_SESSION['role']) == false) {
-            return;
-        }
-        $model = new Settings_model();
-        $id = session()->get('ID');
-        $res = $model->settingsLoadPicture($id);
-        echo $res;
-    }*/
-
+    /**
+     * Funkcija koja preko model-a čuva promene unete od strane korisnika sa forme
+     * za podešavanje naloga
+     * 
+     * @return view
+     */
     public function settings_() {
         $model = new Settings_model();
-        //if (!isset($_POST['save'])) return 1;
         $file = "";
         $targetDir = "usersImages";
         if (is_array($_FILES)) {
@@ -167,6 +179,11 @@ class Home extends BaseController
         return view('settings', $data);
     }
 
+    /**
+     * Funkcija koja prikazuje stranicu za dodavanje/oduzimanje uloge administratora/moderatora
+     * 
+     * @return view
+     */
     public function roles() {
         helper('form');
         $data['roles'] = '0';
@@ -174,6 +191,12 @@ class Home extends BaseController
         return view('roles', $data);
     }
 
+    /**
+     * Funkcija koja preko model-a čuva promene unete na stranici za dozvolu
+     * zabranu pristupa
+     * 
+     * @return view
+     */
     public function roles_() {
         $model = new Roles_model();
         $res = $model->roles();

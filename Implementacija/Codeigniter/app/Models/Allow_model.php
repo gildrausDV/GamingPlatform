@@ -2,12 +2,29 @@
 
 use CodeIgniter\Model;
 
+/**
+ * Allow_model - model za rad sa bazom kod dozvole/zabrane pristupa
+ * 
+ * @version 1.0
+ */
 class Allow_model extends Model {
 
+    /**
+     * @var String $table // naziv tabele kojoj se pristupa
+     */
     protected $table = 'user';
 
+    /**
+     * @var arr[String] $allowedFields // polja koja se ažuriraju u ovoj klasi
+     */
     protected $allowedFields = ['blocked'];
     
+    /**
+     * Funkcija koja ažurira polje 'blocked' u tabeli 'user' u zavisnosti od toga 
+     * da li se korisniku dozvoljava/zabranjuje pristup
+     * 
+     * @return Integer      // identifikator greške/uspešnosti 
+     */
     public function allow() {
 
         $user = $_POST['username'];
