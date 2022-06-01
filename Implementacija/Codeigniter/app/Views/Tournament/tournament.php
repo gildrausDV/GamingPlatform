@@ -149,8 +149,13 @@
             </div>-->
         </div>
         <div class="row">
-            <div class="col-sm-12">
-                <br><br><br><br>
+            <div class="offset-md-4 col-md-4 mt-4">
+                <div style="width: 100%; height: 75px; border: 5px solid white; background-color: black; opacity: 0.8; color: white; font-weight: bold;
+                        display: flex; justify-content: center; align-items: center;">
+                    <p style="margin-top: 2%;">
+                        Click on the tournament to see score.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -319,13 +324,13 @@
                                 
                         //alert("joined: " + jnd + " ended: " + ended + " admin:" + admin);
                         //alert(start_data.list[i].timeEnd + " < " + txt + " = " + (start_data.list[i].date < txt));
-                        //if(i == 4) {
+                        //if(i == 0) {
                             //alert("joined: " + jnd + " ended: " + ended + " admin:" + admin);
                             //alert(start_data.list[i].timeEnd + " < " + txt + " = " + (start_data.list[i].date < txt));
                             //alert(start_data.list[i].date + " " + d + " " + start_data.list[i].date.length + " " + d.length);
                         //}
                         if(!admin) {
-                            if(!ended) {
+                            if(ended) {
                                 col = $("<td><button id='"+ i +"' class='btn btn-danger'>" + 'Ended' + "</button></td>");
                             } else if(jnd) {
                                 col = $("<td><button id='"+ i +"' class='btn btn-secondary'>" + 'Joined' + "</button></td>");

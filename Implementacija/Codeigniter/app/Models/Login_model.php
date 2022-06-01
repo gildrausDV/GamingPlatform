@@ -77,6 +77,14 @@ class Login_model extends Model {
         }
     }
 
+    /**
+     * Funkcija koja dohvata $cnt najboljih igrača sortiranih po NP poenima
+     * 
+     * @param Integer $cnt
+     * 
+     * @return arr[]    // niz struktura {username, NP}
+     * 
+     */
     public function getTopPlayers($cnt) {
         $res = $this->table('user')->select('username, NP')
             ->orderBy('NP', 'desc')
@@ -84,6 +92,14 @@ class Login_model extends Model {
         return $res;
     }
 
+    /**
+     * Funkcija koja dohvata ID za korisnika sa imenom $user
+     * 
+     * @param String $user
+     * 
+     * @return Integer $res[0]['ID']    // ID korisnika
+     * 
+     */
     public function getID($user) {
         $res = $this->table('user')->select('ID')
             ->where('username', $user)->paginate(1);
@@ -91,6 +107,14 @@ class Login_model extends Model {
         return $res[0]['ID'];
     }
 
+    /**
+     * Funkcija koja vraća ulogu korisnika sa imenom $user
+     * 
+     * @param String $user
+     * 
+     * @return Integer $res[0]['role']  // 0 -gost, 1 -registrovani korisnik, 2 -moderator i 3 -administrator
+     * 
+     */
     public function getRole($user) {
         $res = $this->table('user')->select('role')
             ->where('username', $user)->paginate(1);
@@ -98,6 +122,14 @@ class Login_model extends Model {
         return $res[0]['role'];
     }
 
+    /**
+     * Funkcija koja vraća broj NP poena za korisnika sa id-em $id_user
+     * 
+     * @param Integer $id_user
+     * 
+     * @return Integer $res[0]['NP']    // broj NP poena
+     * 
+     */
     public function getNPoints($id_user) {
         $ret = $this->table('user')->select("NP")->paginate(1);
         if(count($ret) == 0) return 0;
