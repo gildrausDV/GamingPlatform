@@ -1,3 +1,5 @@
+// <!-- Autor: Dimitrije Vujčić 2019/0341 -->
+
 var canvas;
 var context;
 

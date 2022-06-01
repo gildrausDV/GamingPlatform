@@ -2,12 +2,31 @@
 
 use CodeIgniter\Model;
 
+/**
+ * Level_model - model za rad sa nivoima u bazi
+ * 
+ * @version 1.0
+ */
 class Level_model extends Model {
 
+    /**
+     * @var String $table   // naziv baze kojoj se pristupa
+     */
     protected $table = 'level';
 
+    /**
+     * @var arr[String] $allowedFields  // Polja koja se ažuriraju u ovoj klasi
+     */
     protected $allowedFields = ['level_desc', 'ID_game', 'lvl'];
 
+    /**
+     * Funkcija koja dohvata nivo $lvl za igricu $id_game
+     * 
+     * @param Integer $lvl
+     * @param Integer $id_game
+     * 
+     * @return $result      // opis nivoa 
+     */
     public function getLevel($lvl, $id_game) {
         $result = new \stdClass();
 
@@ -26,6 +45,12 @@ class Level_model extends Model {
         return $result;
     }
 
+    /**
+     * Funkcija koja dodaje nivo $level_desc za igricu $id_game
+     * 
+     * @param Integer $id_game
+     * @param Integer $level_desc
+     */
     public function addLevel($id_game, $level_desc) {
 
         $lvl = 1;

@@ -1,4 +1,4 @@
-<!-- Autor: Bogdan Jovanović -->
+<!-- Autor: Dimitrije Vujčić 2019/0341 -->
 
 <?php
     //echo (strcmp("13:00:00", "13:00:15"));

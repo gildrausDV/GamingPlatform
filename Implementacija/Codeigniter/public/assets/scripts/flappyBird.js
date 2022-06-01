@@ -1,3 +1,4 @@
+// <!-- Autor: Dimitrije Vujčić 2019/0341 -->
 
 var numOfFireBalls = 0;
 var fireBalls = [];

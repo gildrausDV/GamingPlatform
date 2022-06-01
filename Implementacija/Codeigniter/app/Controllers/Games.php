@@ -1,5 +1,7 @@
 <?php
 
+// Autor: Dimitrije Vujčić 2019/0341
+
 namespace App\Controllers;
 
 use App\Models\PlayedGame_model;
@@ -10,19 +12,41 @@ use App\Models\Tournament_model;
 use App\Models\Settings_model;
 use App\Models\Participation_model;
 
+/**
+ * Games - kontroler za rad sa igricama
+ * 
+ * @version 1.0
+ */
 class Games extends BaseController
 {
     public function index()
     {
-        return view('welcome_message'); // ovde treba da vodi na default stranicu za biranje igrica
+        return view('home');
     }
 
+    /**
+     * Funkcija koja prikazuje stranicu za pregled istorije za igricu $game
+     * 
+     * @param String $game
+     * 
+     * @return view
+     * 
+     */
     public function history($game) {
         $data['game'] = $game;
         $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
         return view('history', $data);
     }
 
+    /**
+     * Funkcija koja preko model-a iz baze dohvata istoriju odigranih igara za ulogovanog korisnika
+     * (getHistory se poziva metodom iz ajax bliblioteke kojoj se rezultat vraća korišćenjem echo funkcije)
+     * 
+     * @param String $game
+     * 
+     * @return void
+     * 
+     */
     public function getHistory($game) {
         $session = session();
         $model = new PlayedGame_model();
@@ -31,12 +55,28 @@ class Games extends BaseController
         echo json_encode($ret);
     }
 
+    /**
+     * Funkcija koja prikazuje stranicu sa najboljim igračima za igricu $game
+     * 
+     * @param String $game
+     * 
+     * @return view
+     * 
+     */
     public function topPlayers($game) {
         $data['game'] = $game;
         $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
         return view('topPlayers', $data);
     }
 
+    /**
+     * Funkcija koja prikazuje stranicu za igranje igrice $game
+     * 
+     * @param String $game
+     * 
+     * @return view
+     * 
+     */
     public function game($game) {
         $role = session()->get('role');
         if ($role == -1 || isset($_SESSION['role']) == false) {
@@ -52,11 +92,25 @@ class Games extends BaseController
         }
     }
 
+    /**
+     * Funkcija koja prikazuje stranicu na kojoj se bira konkretna igrica za dodavanje nivoa
+     * 
+     * @return view
+     * 
+     */
     public function addLevel_default() {
         $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
         return view('addLevel', $data);
     }
 
+    /**
+     * Funkcija koja prikazuje stranicu za dodavanje nivoa za igricu $game
+     * 
+     * @param String $game
+     * 
+     * @return view
+     * 
+     */
     public function addLevel($game) {
         $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
         if($game == "Rayman") {
@@ -66,6 +120,15 @@ class Games extends BaseController
         }
     }
 
+    /**
+     * Funkcija koja preko model-a iz baze dohvata najbolje igrače za igricu $game
+     * (getTopPlayers se poziva metodom iz ajax bliblioteke kojoj se rezultat vraća korišćenjem echo funkcije)
+     * 
+     * @param String $game
+     * 
+     * @return void
+     * 
+     */
     public function getTopPlayers($game) {
         if($game == "Global") {
             $model = new Login_model();
@@ -78,6 +141,16 @@ class Games extends BaseController
         }
     }
 
+    /**
+     * Funkcija koja preko model-a iz baze dohvata 10 najboljih igrača za igricu $game i najviše osvojenih poena i 
+     * najviši dostignut nivo na toj igrici za ulogovanog igraca
+     * (getList se poziva metodom iz ajax bliblioteke kojoj se rezultat vraća korišćenjem echo funkcije)
+     * 
+     * @param String $game
+     * 
+     * @return void
+     * 
+     */
     public function getList($game) {
         header('Content-Type: application/json');
         
@@ -105,6 +178,14 @@ class Games extends BaseController
         echo json_encode($ret);
     }
 
+    /**
+     * Funkcija koja u pozivanjem metode iz model-a u bazi čuva podatke o odigranoj igrici
+     * (pre čuvanja podataka o odigranoj igri se proverava da li je igra odigrana na takmičenju i u zavisnosti od toga
+     *      se postavlja vrednost $on_tournament promenljive)
+     * 
+     * @param String $game
+     * 
+     */
     public function save_data($game) {
         if(!isset($_POST['arguments'])) return;
 
@@ -123,7 +204,7 @@ class Games extends BaseController
         $seconds = $_POST['arguments'][8];
 
         $on_tournament = 0;
-        // dodaj proveru da li je na takmicenju... dohvati sve trenutne turnire i proveri da li je joined($id_tournament, $id_user);
+
         // PROVERA DA LI JE NA TAKMICENJU
         $activeTournaments = (new Tournament_model())->getActiveTournaments($id_game, $year, $month, $day, $hours, $minutes, $seconds);
         $participation_model = new Participation_model();
@@ -145,6 +226,12 @@ class Games extends BaseController
 
     }
 
+    /**
+     * Funkcija dohvata sledeći nivo za igricu $game
+     * 
+     * @param String $game
+     * 
+     */
     public function getLevel($game) {
         if(!isset($_GET['arguments'])) {
             echo "asd";
@@ -171,6 +258,12 @@ class Games extends BaseController
         return;
     }
 
+    /**
+     * Funkcija dodaje novi nivo igrici $game
+     * 
+     * @param String $game
+     * 
+     */
     public function add_level($game) {
         if(!isset($_POST['arguments'])) {
             return;

@@ -4,12 +4,32 @@ use CodeIgniter\Model;
 
 use App\Models\Login_model;
 
+/**
+ * Tournament_model - model za rad sa takmičenjima
+ * 
+ * @version 1.0
+ */
 class Tournament_model extends Model {
 
+    /**
+     * @var String $table   // naziv baze kojoj se pristupa
+     * 
+     */
     protected $table = 'tournament';
 
+    /**
+     * @var arr[String] $allowedFields  // Polja koja se ažuriraju u ovoj klasi
+     */
     protected $allowedFields = ['ID_game', 'maxNumOfPlayers', 'date', 'timeStart', 'timeEnd', 'numOfPlayers', 'ended'];
 
+    /**
+     * Funkcija koja dohvata podatke o odigranim partijama na takmičenju $id_tournament
+     * 
+     * @param $id_tournament
+     * 
+     * @return arr[]    // niz struktura [ID, username, points, maxLevel]
+     * 
+     */
     public function getPlayersList($id_tournament) {
         $res = $this->table('tournament')
             ->select('tournament.ID as id, user.username as username, points, maxLevel')
@@ -21,6 +41,12 @@ class Tournament_model extends Model {
         return $res;
     }
 
+    /**
+     * Funkcija koja dohvata sva takmičenja
+     * 
+     * @return arr[]   // niz struktura {ID, name, date, timeStart, timeEnd, numOfPlayers, maxNumOfPlayers, ended}
+     * 
+     */
     public function getTournaments() {
         $res = $this->table('tournament')
             ->select('tournament.ID as id, name, date, timeStart, timeEnd, numOfPlayers, maxNumOfPlayers, ended')
@@ -29,6 +55,17 @@ class Tournament_model extends Model {
         return $res;
     }
 
+    /**
+     * Funkcija koja proverava da li postoji takmičenje u datom terminu
+     * 
+     * @param String $game
+     * @param String $date
+     * @param String $timeStart
+     * @param String $timeEnd
+     * 
+     * @return Boolean
+     * 
+     */
     public function alreadyExists($game, $date, $timeStart, $timeEnd) {
         $game_model = new Game_model();
         $id_game = $game_model->getID($game);
@@ -45,6 +82,12 @@ class Tournament_model extends Model {
         return false;
     }
 
+    /**
+     * Funkcija koja dodaje novo takmičenje u bazu
+     * 
+     * @param arr[] $arr    // $arr = [ID, maxNumOfPlayers, date, timeStart, timeEnd, ended] 
+     * 
+     */
     public function addTournament($arr) {
         $game_model = new Game_model();
         $id_game = $game_model->getID($arr[0]);
@@ -67,6 +110,20 @@ class Tournament_model extends Model {
 
     }
 
+    /**
+     * Funkcija koja dohvata sva aktivna takmičenja u datom terminu za igricu $id_game
+     * 
+     * @param Integer $id_game
+     * @param String $year
+     * @param Integer $month
+     * @param Integer $day
+     * @param Integer $hours
+     * @param Integer $minutes
+     * @param Integer $seconds
+     * 
+     * @return arr[]    // niz struktura [ID, date, timeStart, timeEnd, maxNumOfPlayers, numOfPlayers, ID_game, ended]
+     * 
+     */
     public function getActiveTournaments($id_game, $year, $month, $day, $hours, $minutes, $seconds) {
         if($month < 10) $month = "0".$month;
         if($day < 10) $day = "0".$day;
@@ -87,10 +144,22 @@ class Tournament_model extends Model {
         return $ret;
     }
 
+    /**
+     * Funkcija koja u bazi beleži završetak takmičenja $id_tournament
+     * 
+     * @param $id_tournament
+     * 
+     */
     public function endTournament($id_tournament) {
         $this->update($id_tournament, ['ended' => true]);
     }
 
+    /**
+     * Funkcija koja inkrementira broj učesnika na takmičenju $id_tournament
+     * 
+     * @param Integer $id_tournament
+     * 
+     */
     public function addPlayer($id_tournament) {
         $num = $this->table('tournament')->select()->where('ID', $id_tournament)->paginate(1);
         if(count($num) != 1) return;

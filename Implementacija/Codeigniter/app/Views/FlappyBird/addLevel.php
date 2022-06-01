@@ -1,4 +1,4 @@
-<!-- Autor: Dimitrije Vujčić -->
+<!-- Autor: Dimitrije Vujčić 2019/0341 -->
 
 <?php
     if(!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] == false || $_SESSION['role'] < 1) {

@@ -1,4 +1,4 @@
-<!-- Autor: Bogdan Jovanović -->
+<!-- Autor: Dimitrije Vujčić 2019/0341 -->
 
 <?php
     if($_SESSION['role'] < 1) {
