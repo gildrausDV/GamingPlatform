@@ -94,9 +94,13 @@
                             </li>
                         </ul>
                     </div>
-                    <div id="newTournament">
-                            
-                        </div>
+                    <div id="write" style="color: white; font-weight: bolder;">
+                        
+                    </div>
+                    <div style="width: 50px;"></div>
+                    <div id="newTournament" style="color: white;">
+                        
+                    </div>
                     <div class="desno">
                         <button id="signOut" type="button" class="btn" style="margin-right: 10px;">Sign out</button>
                     </div>
@@ -106,14 +110,14 @@
         <div class="row">
             <div class="offset-md-4 col-md-4 mt-4">
                 <nav class="navbar navbar-expand-sm c bg-dark games">
-                    <a href="#" class="navbar-brand">
-                        <img src="<?= base_url() ?>/images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
+                    <a href="<?= base_url() ?>/Games/game/Rayman" class="navbar-brand">
+                        <img src="/images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
+                    </a>
+                    <a href="<?= base_url() ?>/Games/game/FlappyBird" class="navbar-brand">
+                        <img src="/images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
                     </a>
                     <a href="#" class="navbar-brand">
-                        <img src="<?= base_url() ?>/images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
-                    </a>
-                    <a href="#" class="navbar-brand">
-                        <img src="<?= base_url() ?>/images/pikachu.png" alt="logo" id="logo3" class="rounded-pill">
+                        <img src="/images/pikachu.png" alt="logo" id="logo3" class="rounded-pill">
                     </a>
                 </nav>
             </div>
@@ -136,13 +140,13 @@
                 <br><br><br>
                 <button id="addTournament" onclick="addTournament()" class="btn btn-secondary">Add tournament</button>
             </div><br><br><br><br><br><br>
-            <div class="col-sm-12 no-padding" style="margin-top: 125px">
+            <!--<div class="col-sm-12 no-padding" style="margin-top: 125px">
                 <nav class="navbar navbar-expand-sm bg-dark n" style="color: white; height: 50px;">
                     <div style="width: 100%; text-align: center; color: white; margin-top:" class="notification">
-                        <h3 id="write" style="min-height: 35px;"></h3>
+                        <h3 id="write1" style="min-height: 35px;"></h3>
                     </div>
                 </nav>
-            </div>
+            </div>-->
         </div>
         <div class="row">
             <div class="col-sm-12">
@@ -303,7 +307,9 @@
                         let txt = hh + ":" + mm + ":" + ss;
                         let m = date.getMonth() + 1;
                         if(m < 10) m = "0" + m;
-                        let d = date.getFullYear() + "-" + m + "-" + date.getDate();
+                        let ddd = date.getDate();
+                        if(ddd < 10) ddd = "0" + ddd;
+                        let d = date.getFullYear() + "-" + m + "-" + ddd;
                         //alert(start_data.list[i].timeEnd + " < " + txt + " = " + (start_data.list[i].timeEnd < txt));
 
                         let jnd = (joined.indexOf(start_data.list[i].id) != -1);
@@ -313,9 +319,13 @@
                                 
                         //alert("joined: " + jnd + " ended: " + ended + " admin:" + admin);
                         //alert(start_data.list[i].timeEnd + " < " + txt + " = " + (start_data.list[i].date < txt));
-
+                        //if(i == 4) {
+                            //alert("joined: " + jnd + " ended: " + ended + " admin:" + admin);
+                            //alert(start_data.list[i].timeEnd + " < " + txt + " = " + (start_data.list[i].date < txt));
+                            //alert(start_data.list[i].date + " " + d + " " + start_data.list[i].date.length + " " + d.length);
+                        //}
                         if(!admin) {
-                            if(ended) {
+                            if(!ended) {
                                 col = $("<td><button id='"+ i +"' class='btn btn-danger'>" + 'Ended' + "</button></td>");
                             } else if(jnd) {
                                 col = $("<td><button id='"+ i +"' class='btn btn-secondary'>" + 'Joined' + "</button></td>");
@@ -418,7 +428,7 @@
                     $("#write").text("");
                 } else if(btn.text() == "Full") {
                     //alert("2");
-                    $("#write").text("Tournament full!");
+                    $("#write").text("Tournament full!").css("color", "red");
                 } else if(btn.text() == "Join") {
                     //alert("3");
                     $.ajax({
@@ -448,7 +458,7 @@
                         url: window.location.origin + "/Tournament/endTournament",
                         data: {argument: id},
                         success: function (obj, textstatus) {
-                            alert(obj + " " + textstatus);
+                            //alert(obj + " " + textstatus);
                             //btn.css("display": "none");
                             btn.text("Ended");
                             btn.removeClass("btn-success");

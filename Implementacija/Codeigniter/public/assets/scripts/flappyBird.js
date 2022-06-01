@@ -68,10 +68,9 @@ document.addEventListener('keydown', (event) => {
         event.preventDefault();
         cnt_jump = 0;
         up = true;
-    }/* else if(name == "ArrowDown") {
-        if(down) return;
-        down = true;
-    }*/
+    } else if(name == "ArrowDown") {
+        event.preventDefault();
+    }
 }, false);
 
 document.addEventListener('keyup', (event) => {

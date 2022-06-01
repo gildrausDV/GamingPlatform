@@ -101,10 +101,10 @@
             <div class="row">
                 <div class="offset-md-4 col-md-4 mt-4">
                     <nav class="navbar navbar-expand-sm c bg-dark games">
-                        <a href="#" class="navbar-brand">
+                        <a href="<?= base_url() ?>/Games/game/Rayman" class="navbar-brand">
                             <img src="/images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
                         </a>
-                        <a href="#" class="navbar-brand">
+                        <a href="<?= base_url() ?>/Games/game/FlappyBird" class="navbar-brand">
                             <img src="/images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
                         </a>
                         <a href="#" class="navbar-brand">
@@ -205,7 +205,7 @@
                     method: "POST",
                     url: window.location.origin + "/Home/SignOut",
                     success: function (obj, textstatus) {
-                        alert(obj + " " + textstatus);
+                        // + textstatus);
                     },
                     error: function (msg) {
                         alert("error");

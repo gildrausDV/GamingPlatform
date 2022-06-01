@@ -307,6 +307,8 @@ document.addEventListener('keyup', (event) => {
         right = false;
     } else if(name == "ArrowUp") {
         event.preventDefault();
+    } else if(name = "ArrowDown") {
+        event.preventDefault();
     }
 }, false);
 
@@ -329,6 +331,8 @@ document.addEventListener('keydown', (event) => {
         up = true;
         down = false;
         jump = true;
+    } else if(name = "ArrowDown") {
+        event.preventDefault();
     }
 }, false);
 

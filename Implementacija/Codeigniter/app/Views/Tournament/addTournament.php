@@ -93,9 +93,13 @@
                             </li>
                         </ul>
                     </div>
-                    <div id="newTournament">
-                            
-                        </div>
+                    <div id="write" style="color: white; font-weight: bolder;">
+                        
+                    </div>
+                    <div style="width: 50px;"></div>
+                    <div id="newTournament" style="color: white;">
+                        
+                    </div>
                     <div class="desno">
                         <button id="signOut" type="button" class="btn" style="margin-right: 10px;">Sign out</button>
                     </div>
@@ -106,14 +110,14 @@
         <div class="row">
             <div class="offset-md-4 col-md-4 mt-4">
                 <nav class="navbar navbar-expand-sm c bg-dark games">
-                    <a href="#" class="navbar-brand">
-                        <img src="<?= base_url() ?>/images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
+                    <a href="<?= base_url() ?>/Games/game/Rayman" class="navbar-brand">
+                        <img src="/images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
+                    </a>
+                    <a href="<?= base_url() ?>/Games/game/FlappyBird" class="navbar-brand">
+                        <img src="/images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
                     </a>
                     <a href="#" class="navbar-brand">
-                        <img src="<?= base_url() ?>/images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
-                    </a>
-                    <a href="#" class="navbar-brand">
-                        <img src="<?= base_url() ?>/images/pikachu.png" alt="logo" id="logo3" class="rounded-pill">
+                        <img src="/images/pikachu.png" alt="logo" id="logo3" class="rounded-pill">
                     </a>
                 </nav>
             </div>
@@ -146,13 +150,13 @@
                     <input type="submit" value="Add tournament" class="submit btn btn-secondary" id="myButton">
                 </div>
             </div><br><br><br>
-            <div class="col-sm-12 no-padding" style="margin-top: 125px">
+            <!--<div class="col-sm-12 no-padding" style="margin-top: 125px">
                 <nav class="navbar navbar-expand-sm bg-dark n" style="color: white; height: 50px;">
                     <div style="width: 100%; text-align: center; color: white; margin-top:" class="notification">
                         <h3 id="write" style="min-height: 35px;"></h3>
                     </div>
                 </nav>
-            </div>
+            </div>-->
         </div>
         <div class="row">
             <div class="col-sm-12">
@@ -258,7 +262,7 @@
                 let valid = false;
                 valid = (/^\d+$/.test(max_players) && /^\d\d:\d\d:\d\d$/.test(timeStart) && /^\d\d:\d\d:\d\d$/.test(timeEnd));
                 if(!valid || game == "" || max_players == "" || date == "" || timeStart == "" || timeEnd == "") {
-                    $("#write").text("Please provide necessary information.");
+                    $("#write").text("Please provide necessary information.").css("color", "red");
                     return;
                 }
                 //alert();
@@ -269,9 +273,9 @@
                     success: function (obj, textstatus) {
                         //alert(obj + " " + textstatus);
                         if(obj == "error") {
-                            $("#write").text("Tournament already exists!");
+                            $("#write").text("Tournament already exists!").css("color", "red");
                         } else {
-                            $("#write").text("You have successfully added a tournament!");
+                            $("#write").text("You have successfully added a tournament!").css("color", "white");
                         }
                     },
                     error: function(xhr, status, error) {

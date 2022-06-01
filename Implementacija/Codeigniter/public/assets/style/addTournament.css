@@ -82,6 +82,11 @@
     float: right;
     align-items: center;
 }
+
+body {
+    background-image: url('/images/cloud.png');
+}
+
 .bg-clouds {
     background-image: url('/images/cloud.png');
     min-height: 1000px;

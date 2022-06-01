@@ -105,14 +105,14 @@
         <div class="row">
             <div class="offset-md-4 col-md-4 mt-4">
                 <nav class="navbar navbar-expand-sm c bg-dark games">
-                    <a href="<?= base_url() ?>/Games/topPlayers/Rayman" class="navbar-brand">
-                        <img src="<?= base_url() ?>/images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
+                    <a href="<?= base_url() ?>/Games/game/Rayman" class="navbar-brand">
+                        <img src="/images/rayman.png" alt="logo" id="logo1" class="rounded-pill">
                     </a>
-                    <a href="<?= base_url() ?>/Games/topPlayers/FlappyBird" class="navbar-brand">
-                        <img src="<?= base_url() ?>/images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
+                    <a href="<?= base_url() ?>/Games/game/FlappyBird" class="navbar-brand">
+                        <img src="/images/sonic.jpg" alt="logo" id="logo2" class="rounded-pill">
                     </a>
                     <a href="#" class="navbar-brand">
-                        <img src="<?= base_url() ?>/images/pikachu.png" alt="logo" id="logo3" class="rounded-pill">
+                        <img src="/images/pikachu.png" alt="logo" id="logo3" class="rounded-pill">
                     </a>
                 </nav>
             </div>

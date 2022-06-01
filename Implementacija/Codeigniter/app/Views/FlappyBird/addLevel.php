@@ -96,9 +96,13 @@
                             </li>
                         </ul>
                     </div>
-                    <div id="newTournament">
-                            
-                        </div>
+                    <div id="write" style="color: white; font-weight: bolder;">
+                        
+                    </div>
+                    <div style="width: 50px;"></div>
+                    <div id="newTournament" style="color: white;">
+                        
+                    </div>
                     <div class="desno">
                         <button id="signOut" type="button" class="btn" style="margin-right: 10px;">Sign out</button>
                     </div>
@@ -180,7 +184,7 @@
                 </div>
             </div>
         </div>
-        <div class="row no-padding">
+        <!--<div class="row no-padding">
             <div class="col-sm-12 no-padding">
                 <nav class="navbar navbar-expand-sm bg-dark n" style="color: white; height: 50px; margin-top: 42px;">
                     <div style="width: 100%; text-align: center; color: white; margin-top:" class="notification">
@@ -188,7 +192,7 @@
                     </div>
                 </nav>
             </div>
-        </div>
+        </div>-->
     </div>
     <script>
 
@@ -294,27 +298,27 @@
                 b &= regexNum.test(numFB);
 
                 if(numRows == "") {
-                    $("#write").text("Please enter number of rows!");
+                    $("#write").text("Please enter number of rows!").css("color", "red");
                     return;
                 } else if(numCols == "") {
-                    $("#write").text("Please enter number of columns!");
+                    $("#write").text("Please enter number of columns!").css("color", "red");
                     return;
                 } else if(numCoins == "") {
-                    $("#write").text("Please enter number of coins!");
+                    $("#write").text("Please enter number of coins!").css("color", "red");
                     return;
                 } else if(posCoins == "") {
-                    $("#write").text("Please enter position of coins!");
+                    $("#write").text("Please enter position of coins!").css("color", "red");
                     return;
                 } else if(numFB == "") {
-                    $("#write").text("Please enter number of fire balls!");
+                    $("#write").text("Please enter number of fire balls!").css("color", "red");
                     return;
                 } else if(posFT == "") {
-                    $("#write").text("Please enter position of fire balls!");
+                    $("#write").text("Please enter position of fire balls!").css("color", "red");
                     return;
                 }
 
                 if(!b) {
-                    $("#write").text("Data not entered correctly!");
+                    $("#write").text("Data not entered correctly!").css("color", "red");
                     return;
                 }
 
@@ -365,7 +369,7 @@
                     data: {arguments: JSON.stringify(data)},
                     success: function (obj, textstatus) {
                         if(textstatus == "success") {
-                            $("#write").text("New level added successfully!");
+                            $("#write").text("New level added successfully!").css("color", "white");
                         } else {
                             $("#write").text("Error!");
                         }

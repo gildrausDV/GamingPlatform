@@ -83,6 +83,11 @@
     float: right;
     align-items: center;
 }
+
+body {
+    background-image: url('/images/cloud.png');
+}
+
 .bg-clouds {
     background-image: url('/images/cloud.png');
     height: 1000px;
@@ -97,7 +102,7 @@
     opacity: 0.8;
     border: 5px solid lightgray;
     /*margin-top: 50px;*/
-    min-height: 500px;
+    /*min-height: 500px;*/
 }
 .game-info:hover {
     border: 5px solid gray;

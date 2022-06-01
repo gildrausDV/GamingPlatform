@@ -75,11 +75,11 @@ class Tournament_model extends Model {
             ->where('date', $date)
             ->paginate();
         foreach($res as $tournament) {
-            if(strcmp($tournament['timeStart'], $timeStart) < 0 && strcmp($timeStart, $tournament['timeEnd']) < 0) return true;
-            if(strcmp($tournament['timeStart'], $timeEnd) < 0 && strcmp($timeEnd, $tournament['timeEnd']) < 0) return true;
-            if(strcmp($tournament['timeStart'], $timeEnd) + strcmp($timeEnd, $tournament['timeEnd']) == 0) return true;
+            if(strcmp($tournament['timeStart'], $timeStart) < 0 && strcmp($timeStart, $tournament['timeEnd']) < 0) return 1;
+            if(strcmp($tournament['timeStart'], $timeEnd) < 0 && strcmp($timeEnd, $tournament['timeEnd']) < 0) return 1;
+            if(strcmp($tournament['timeStart'], $timeEnd) == 0 && strcmp($timeEnd, $tournament['timeEnd']) == 0) return 1;
         }
-        return false;
+        return 0;
     }
 
     /**
