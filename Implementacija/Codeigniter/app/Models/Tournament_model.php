@@ -1,5 +1,7 @@
 <?php namespace App\Models;
 
+// Autor: Dimitrije Vujčić 2019/0341
+
 use CodeIgniter\Model;
 
 use App\Models\Login_model;

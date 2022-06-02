@@ -144,6 +144,7 @@ function init() {
                 animate();
                 if(allCoinsCollected()) {
                     level++;
+                    $("#level_display").text(level);
                     next_level = true;
                     loaded = false;
                     timeLeft = timeLeft_start;

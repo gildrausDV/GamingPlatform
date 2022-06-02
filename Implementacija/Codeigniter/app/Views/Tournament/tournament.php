@@ -293,16 +293,16 @@
                                         "position": "relative"
                                     });
                         row.hover(function () { $(this).css("border", "3px solid gray") }, function () { $(this).css("border", "3px solid white") });
-                        let col = $("<td><h1>" + start_data.list[i].name + "</h1></td>");//.css("margin-top", "1%");
+                        let col = $("<td><h1>" + start_data.list[i].name + "</h1></td>").css("width", "20%");//.css("margin-top", "1%");
                         row.append(col);
                         
-                        col = $("<td><h1>" + start_data.list[i].date + "</h1></td>");//css("margin-top", "1%");
+                        col = $("<td><h1>" + start_data.list[i].date + "</h1></td>").css("width", "20%");//css("margin-top", "1%");
                         row.append(col);
                         
-                        col = $("<td><h1>" + start_data.list[i].timeStart + "</h1></td>");//css("margin-top", "1%");
+                        col = $("<td><h1>" + start_data.list[i].timeStart + "</h1></td>").css("width", "20%");//css("margin-top", "1%");
                         row.append(col);
                         
-                        col = $("<td><h1>" + start_data.list[i].timeEnd + "</h1></td>");//css("margin-top", "1%");
+                        col = $("<td><h1>" + start_data.list[i].timeEnd + "</h1></td>").css("width", "20%");//css("margin-top", "1%");
                         row.append(col);
                         
                         let date = new Date();
@@ -392,7 +392,7 @@
                             col = $("<td><button id='"+ i +"' class='btn btn-secondary'>" + 'Joined' + "</button></td>");//css("margin-top", "2%").css("width", "100px");
                         }*/
                         //col.css("width", "50px");
-                        row.append(col);
+                        row.append(col.css("width", "20%"));
                         
                         $("table").append(row);
                         /*let txt = $("#1").text();

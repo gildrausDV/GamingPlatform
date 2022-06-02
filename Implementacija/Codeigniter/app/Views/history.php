@@ -235,7 +235,7 @@
                                                 "position": "relative"
                                             });
                         row.hover(function () { $(this).css("border", "3px solid gray") }, function () { $(this).css("border", "3px solid white") });
-                        let col = $("<td><h1>" + start_data.list[i].name + "</h1></td>").css("margin-left", "10%").css("margin-top", "1%");
+                        let col = $("<td><h1>" + start_data.list[i].name + "</h1></td>").css("width", "50%").css("margin-top", "1%");
                         row.append(col);
 
                         let time = start_data.list[i].timePlayed;
@@ -256,13 +256,13 @@
                         let points = start_data.list[i].points;
                         
                         if(points < 10) 
-                            points = $("<h1>Points: 0" + points + "<\h1>").css("margin-top", "1%");
+                            points = $("<td><h1>Points: 0" + points + "<\h1></td>").css("margin-top", "1%");
                         else if(points < 100) 
-                            points = $("<h1>Points: &nbsp;" + points + "<\h1>").css("margin-top", "1%");
+                            points = $("<td><h1>Points: &nbsp;" + points + "<\h1></td>").css("margin-top", "1%");
                         else 
-                            points = $("<h1>Points: " + points + "<\h1>").css("margin-top", "1%");
+                            points = $("<td><h1>Points: " + points + "<\h1></td>").css("margin-top", "1%");
                         
-                        row.append(points);
+                        row.append(points.css("width", "50%"));
                         
                         $("table").append(row);
                     }

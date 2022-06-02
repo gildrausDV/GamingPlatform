@@ -1,5 +1,7 @@
 <?php namespace App\Models;
 
+// Autor: Bogdan Jovanović 2019/0335
+
 use CodeIgniter\Model;
 
 /**

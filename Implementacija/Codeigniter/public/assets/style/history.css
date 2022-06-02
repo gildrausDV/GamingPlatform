@@ -1,5 +1,9 @@
 /* Autor: Dimitrije Vujčić */
 
+body {
+    background-image: url('/images/cloud.png');
+}
+
 #chooseGame {
     border: 5px solid lightgray;
     color: white;

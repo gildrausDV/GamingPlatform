@@ -268,7 +268,7 @@
                                         "position": "relative"
                                 });
                     row.hover(function () { $(this).css("border", "3px solid gray") }, function () { $(this).css("border", "3px solid white") });
-                    let col = $("<td><h1>" + start_data.list[i].username + "</h1></td>");//css("margin-left", "10%").css("margin-top", "1%");
+                    let col = $("<td><h1>" + start_data.list[i].username + "</h1></td>").css("width", "50%");//css("margin-left", "10%").css("margin-top", "1%");
                     row.append(col);
 
                     /*let time = start_data.list[i].timePlayed;
@@ -295,7 +295,7 @@
                     else 
                         points = $("<td><h1>NPoints: " + points + "</h1></td>");//css("margin-top", "1%");
                     
-                    row.append(points);
+                    row.append(points.css("width", "50%"));
                     
                     $("table").append(row);
                 }
@@ -318,7 +318,7 @@
                                         "position": "relative"
                                     });
                     row.hover(function () { $(this).css("border", "3px solid gray") }, function () { $(this).css("border", "3px solid white") });
-                    let col = $("<td><h1>" + start_data.list[i].username + "</h1></td>");//css("margin-left", "10%").css("margin-top", "1%");
+                    let col = $("<td><h1>" + start_data.list[i].username + "</h1></td>").css("width", "33%");//css("margin-left", "10%").css("margin-top", "1%");
                     row.append(col);
 
                     let time = start_data.list[i].timePlayed;
@@ -332,7 +332,7 @@
                     if(hh < 10) hh = "0" + hh;
                     time = hh + ":" + mm + ":" + ss;
                     
-                    col = $("<td><h1>" + time + "</h1></td>");//css("margin-top", "1%");
+                    col = $("<td><h1>" + time + "</h1></td>").css("width", "33%");//css("margin-top", "1%");
                     row.append(col);
                     
                     
@@ -345,7 +345,7 @@
                     else 
                         points = $("<td><h1>Points: " + points + "</h1></td>");//css("margin-top", "1%");
                     
-                    row.append(points);
+                    row.append(points.css("width", "33%"));
                     
                     $("table").append(row);
                 }
