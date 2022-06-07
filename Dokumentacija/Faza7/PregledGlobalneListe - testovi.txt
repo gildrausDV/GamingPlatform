@@ -1,0 +1,4 @@
+T1:	Pregled globalne liste
+	
+	1. Korisnik bira opciju za pregled globalne liste iz menija
+	2. Prikazuje se globalna lista

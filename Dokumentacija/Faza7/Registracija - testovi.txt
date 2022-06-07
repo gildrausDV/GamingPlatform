@@ -1,0 +1,50 @@
+T1:	Korisnik prekida proces registrovanja i ulazi na sajt kao gost
+
+	1. Korisnik bira opciju "Quick play"
+VT:	2. Korisniku se prikazuje stranica sa opcijama Play, Top player lists i Log in
+
+--------------------------------------------------------------------------------------
+
+T2:	Korisnik ne unosi sve podatke pri registrovanju
+
+	1. Korisnik ne unosi podatke ili u odgovarajuća polja unosi neke od 
+		podataka(ne sve): Forename, Surname, Email, Date of birth, 
+		Username, Password, Confirm password
+	2. Korisnik potvrđuje unete podatke pritiskom na dugme "Register"
+VT:	3. Korisniku se ispisuje poruka "Please provide necessary information!"
+
+--------------------------------------------------------------------------------------
+
+T3:	Korisnik unosi korisničko ime koje već postoji
+
+	1. Korisnik unosi podatke: Forename, Surname, Email, Date of birth, 
+		Username, Password, Confirm password
+	2. Korisnik potvrđuje unete podatke pritiskom na dugme "Register"
+VT:	3. Korisniku se ispisuje poruka "Username already exists!"
+
+--------------------------------------------------------------------------------------
+
+T4:	Korisnik unosi šifru sa manje od 5 karaktera
+
+	1. Korisnik unosi podatke: Forename, Surname, Email, Date of birth, 
+		Username, Password, Confirm password (šifra ima 4 karaktera)
+	2. Korisnik potvrđuje unete podatke pritiskom na dugme "Register"
+VT:	3. Korisniku se ispisuje poruka "Password too short!"
+
+--------------------------------------------------------------------------------------
+
+T5:	Korisnik nije ponovio istu šifru
+	
+	1. Korisnik unosi podatke: Forename, Surname, Email, Date of birth, 
+		Username, Password, Confirm password
+	2. Korisnik potvrđuje unete podatke pritiskom na dugme "Register"
+VT:	3. Korisniku se ispisuje poruka "Passwords do not match!"
+
+--------------------------------------------------------------------------------------
+
+T6:	Korisnik se uspešno registruje
+
+	1. Korisnik unosi podatke: Forename, Surname, Email, Date of birth, 
+		Username, Password, Confirm password
+	2. Korisnik potvrđuje unete podatke pritiskom na dugme "Register"
+VT:	3. Korisniku se ispisuje poruka "Registration successfull"

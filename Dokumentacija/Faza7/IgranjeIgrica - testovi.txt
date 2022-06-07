@@ -1,0 +1,10 @@
+T1:	Igranje Rayman igrice
+	
+	1. Korisnik bira rayman logo sa home stranice
+	2. Korisnik pokreće igricu klikom na canvas
+
+T2:	Igranje FlappyBird igrice
+	
+	1. Korisnik bira flappyBird logo sa home stranice
+	2. Korisnik pokreće igricu klikom na canvas
+

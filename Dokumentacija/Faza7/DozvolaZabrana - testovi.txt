@@ -1,0 +1,37 @@
+T1:	Dozvola korisniku čije korisničko ime ne postoji
+Preduslov:	Akciju izvršava administrator
+	
+	1. Administrator unosi korisničko ime korisnika kome želi da 
+		dozvoli pristup sajtu
+	2. Administrator izvršava akciju klikom na dugme "OK"
+VT:	3. Ispisuje se poruka "Username is not valid!"
+
+----------------------------------------------------------------------------
+
+T2:	Zabrana korisniku čije korisničko ime ne postoji
+Preduslov:	Akciju izvršava administrator
+	
+	1. Administrator unosi korisničko ime korisnika kome želi da 
+		zabrani pristup sajtu
+	2. Administrator izvršava akciju klikom na dugme "OK"
+VT:	3. Ispisuje se poruka "Username is not valid!"
+
+----------------------------------------------------------------------------
+
+T3:	Dozvola pristupa korisniku sa unetim korisničkim imenom
+Preduslov:	Akciju izvršava administrator
+	
+	1. Administrator unosi korisničko ime korisnika kome želi da 
+		dozvoli pristup sajtu
+	2. Administrator izvršava akciju klikom na dugme "OK"
+VT:	3. Ispisuje se poruka "Changes saved!"
+
+----------------------------------------------------------------------------
+
+T4:	Zabrana pristupa korisniku sa unetim korisničkim imenom
+Preduslov:	Akciju izvršava administrator
+	
+	1. Administrator unosi korisničko ime korisnika kome želi da 
+		zabrani pristup sajtu
+	2. Administrator izvršava akciju klikom na dugme "OK"
+VT:	3. Ispisuje se poruka "Changes saved!"

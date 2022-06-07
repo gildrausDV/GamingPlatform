@@ -1,0 +1,54 @@
+T1:	Neuspešno logovanje zbog pogrešne šifre
+	
+	1. Korisnik unosi korisničko ime u polje "Username"
+	2. Korisnik unosi šifru u polje "Password"
+	3. Korisnik potvrđuje formu pritiskom na dugme "Log in"
+VT:	4. Korisniku se ispisuje poruka: "Username or password is not valid!"
+
+-------------------------------------------------------------------------------
+
+T2:	Neuspešno logovanje zbog pogrešnog korisničkog imena
+	
+	1. Korisnik unosi korisničko ime u polje "Username"
+	2. Korisnik unosi šifru u polje "Password"
+	3. Korisnik potvrđuje formu pritiskom na dugme "Log in"
+VT:	4. Korisniku se ispisuje poruka: "Username or password is not valid!"	
+
+-------------------------------------------------------------------------------
+
+T3:	Neuspešno logovanje jer je korisniku zabranjen pristup
+
+	1. Korisnik unosi korisničko ime u polje "Username"
+	2. Korisnik unosi šifru u polje "Password"
+	3. Korisnik potvrđuje formu pritiskom na dugme "Log in"
+VT:	4. Korisniku se ispisuje poruka: "Access denied!"
+
+-------------------------------------------------------------------------------
+
+T4:	Uspešno logovanje administratora
+	
+	1. Korisnik unosi korisničko ime u polje "Username"
+	2. Korisnik unosi šifru u polje "Password"
+	3. Korisnik potvrđuje formu pritiskom na dugme "Log in"
+VT:	4. Korisniku se prikazuje stranica sa opcijom "Allow/block" koju nemaju ostale
+		kategorije korisnika
+
+-------------------------------------------------------------------------------
+
+T4:	Uspešno logovanje moderatora
+	
+	1. Korisnik unosi korisničko ime u polje "Username"
+	2. Korisnik unosi šifru u polje "Password"
+	3. Korisnik potvrđuje formu pritiskom na dugme "Log in"
+VT:	4. Korisniku se prikazuje stranica sa opcijom "Add level" koju nemaju niže
+		kategorije korisnika
+
+-------------------------------------------------------------------------------
+
+T4:	Uspešno logovanje običnog (registrovanog) korisnika
+	
+	1. Korisnik unosi korisničko ime u polje "Username"
+	2. Korisnik unosi šifru u polje "Password"
+	3. Korisnik potvrđuje formu pritiskom na dugme "Log in"
+VT:	4. Korisniku se prikazuje stranica sa opcijom "History" koju nemaju niže
+		kategorije korisnika

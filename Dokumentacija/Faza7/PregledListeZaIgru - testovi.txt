@@ -1,0 +1,33 @@
+T1:	Pregled liste za igricu Rayman
+
+	1. Korisnik bira opciju za pregled liste za igru iz menija
+VT:	2. Korisnik bira igricu Rayman
+	3. Prikazuje se lista poena za igricu Rayman
+
+----------------------------------------------------------------------
+
+T2:	Pregled liste za igricu FlappyBird
+
+	1. Korisnik bira opciju za pregled liste za igru iz menija
+VT:	2. Korisnik bira igricu FlappyBird
+	3. Prikazuje se lista poena za igricu FlappyBird
+
+---------------------------------------------------------------------
+
+T3:	Korisnik prelazi sa liste za igricu Rayman na listu za FlappyBird
+
+	1. Korisnik bira opciju za pregled liste za igru iz menija
+VT:	2. Korisnik bira igricu Rayman
+	3. Prikazuje se lista poena za igricu Rayman
+VT:	4. Korisnik je pritisnuo logo za igricu FlappyBird
+	5. Prikazuje se lista poena za igricu FlappyBird
+
+---------------------------------------------------------------------
+
+T4:	Korisnik prelazi sa liste za igricu FlappyBird na listu za Rayman
+
+	1. Korisnik bira opciju za pregled liste za igru iz menija
+VT:	2. Korisnik bira igricu FlappyBird
+	3. Prikazuje se lista poena za igricu FlappyBird
+VT:	4. Korisnik je pritisnuo logo za igricu Rayman
+	5. Prikazuje se lista poena za igricu Rayman
