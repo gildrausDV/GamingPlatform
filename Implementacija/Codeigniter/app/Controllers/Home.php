@@ -25,7 +25,7 @@ class Home extends BaseController
 
     public function index()
     {
-        return view('Home/home');
+        return view('home');
     }
 
     /**
@@ -117,7 +117,7 @@ class Home extends BaseController
     public function allow() {
         helper('form');
         $data['allow'] = '0';
-        $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
+        if(isset($_SESSION['ID'])) $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
         return view('allow', $data);
     }
 

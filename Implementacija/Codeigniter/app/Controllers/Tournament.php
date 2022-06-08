@@ -91,6 +91,7 @@ class Tournament extends BaseController
         $game_model = new Game_model();
         $id_game = $game_model->getID($game);
         $joined = (new Participation_model())->getJoined();
+        if(!isset($_POST['arguments']) || count($_POST['arguments']) != 6) return;
         $year = $_POST['arguments'][0];
         $month = $_POST['arguments'][1];
         $day = $_POST['arguments'][2];

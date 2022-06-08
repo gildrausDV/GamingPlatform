@@ -78,7 +78,10 @@ class Games extends BaseController
      * 
      */
     public function game($game) {
-        $role = session()->get('role');
+        $role = -1;
+        if(isset($_SESSION['role'])) {
+            $role = session()->get('role');
+        }
         if ($role == -1 || isset($_SESSION['role']) == false) {
             $data['picture'] = "/usersImages/guest.png";
         }
@@ -99,7 +102,11 @@ class Games extends BaseController
      * 
      */
     public function addLevel_default() {
-        $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
+        if(isset($_SESSION['ID'])) {
+            $data['picture'] = (new Settings_model())->settingsLoadPicture(session()->get('ID'));
+        } else {
+            $data['picture'] = "/usersImages/guest.png";
+        }
         return view('addLevel', $data);
     }
 
@@ -159,7 +166,7 @@ class Games extends BaseController
      * 
      */
     public function getList($game) {
-        header('Content-Type: application/json');
+        //header('Content-Type: application/json');
         
         $session = session();
         $id_user = $session->get('ID');
