@@ -27,8 +27,20 @@ final class GamesControllerTest extends CIUnitTestCase {
     
         $this->assertTrue($result->isOK());
     }
+
+    public function provide_ids() {
+        return [
+            [1, 2],
+            [2, 1]
+        ];
+    }
     
-    /*public function testTopPlayersRayman() {
+    /**
+     * @dataProvider provide_ids
+     */
+    public function testTopPlayersRayman($id, $role) {
+        $_SESSION['ID'] = $id;
+        $_SESSION['role'] = $role;
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Games::class)
             ->execute('topPlayers', 'Rayman');
@@ -36,13 +48,18 @@ final class GamesControllerTest extends CIUnitTestCase {
         $this->assertTrue($result->isOK());
     }
 
-    public function testTopPlayersFlappyBird() {
+    /**
+     * @dataProvider provide_ids
+     */
+    public function testTopPlayersFlappyBird($id, $role) {
+        $_SESSION['ID'] = $id;
+        $_SESSION['role'] = $role;
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Games::class)
             ->execute('topPlayers', 'FlappyBird');
     
         $this->assertTrue($result->isOK());
-    }*/
+    }
 
     public function testGames() {
         $result = $this//->withURI('http://localhost:8080/...')
@@ -58,7 +75,17 @@ final class GamesControllerTest extends CIUnitTestCase {
         $this->assertTrue($result->isOK());
     }
 
-    /*public function testAddLevel_default() {
+    public function provide_roles() {
+        return [
+            [-1],
+            [0],
+            [1],
+            [2]
+        ];
+    }
+
+    /*
+    public function testAddLevel_default() {
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Games::class)
             ->execute('addLevel_default');
