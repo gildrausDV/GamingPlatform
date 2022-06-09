@@ -77,8 +77,12 @@ class Settings_model extends Model {
      */
     public function settingsLoadPicture($id) {
         $data = $this->table('user')->select()->where('ID', $id)->paginate(1);
-        $res['profilePicture'] = $data[0]['picture'];
-        return $data[0]['picture'];
+        if(isset($data[0]['picture'])) {
+            $res['profilePicture'] = $data[0]['picture'];
+            return $data[0]['picture'];
+        } else {
+            return '';
+        }
     }
 
 }

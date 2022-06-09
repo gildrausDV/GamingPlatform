@@ -94,12 +94,11 @@ final class GamesControllerTest extends CIUnitTestCase {
     }*/
 
     public function testMyNPoints() {
-        $_SESSION['ID'] = 1;
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Games::class)
             ->execute('myNPoints');
 
-        $this->assertFalse($result->isOK());
+        $this->assertTrue($result->isOK());
     }
 
     public function testGetTopPlayersGlobal() {

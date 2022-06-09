@@ -7,17 +7,21 @@ class GamesSeeder extends Seeder {
 
     public function run() {
 
-        /*$games = [
+        $games = [
             [
-                'ID' => '3',
-                'name' => 'Pokemon'
+                'ID' => '1',
+                'name' => 'Rayman'
+            ],
+            [
+                'ID' => '2',
+                'name' => 'FlappyBird'
             ]
         ];
 
         $builder = $this->db->table('game');
         foreach($games as $game) {
             $builder->insert($game);
-        }*/
+        }
 
     }
 

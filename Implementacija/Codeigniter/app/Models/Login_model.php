@@ -33,6 +33,7 @@ class Login_model extends Model {
         if(count($NP) != 1) return;
         $NP = $NP[0]['NP'];
         $this->table('user')->update($id_user, ['NP' => $NP + $points]);
+        return 0;
     }
 
     /**
@@ -58,11 +59,12 @@ class Login_model extends Model {
      */
     public function setModerator($id_user) {
         $NP = $this->table('user')->select('NP, role')->where('ID', $id_user)->paginate(1);
-        if(count($NP) != 1) return;
+        if(count($NP) != 1) return -1;
         $role = $NP[0]['role'];
         $NP = $NP[0]['NP'];
-        if($NP < 50 || $role != 0) return;
+        if($NP < 50 || $role != 0) return -1;
         $this->table('user')->update($id_user, ['role' => 1]);
+        return 0;
     }
 
     /**

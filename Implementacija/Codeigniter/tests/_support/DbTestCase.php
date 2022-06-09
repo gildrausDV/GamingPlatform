@@ -12,7 +12,7 @@ class DbTestCase extends \CodeIgniter\Test\CIDatabaseTestCase {
 
     protected function regressDatabase() {
         $sql = file_get_contents($this->basePath.'gamingplatform_test.sql');
-        //$this->db->query($sql);
+        $this->db->query($sql);
     }
 
     public function setUp() : void {

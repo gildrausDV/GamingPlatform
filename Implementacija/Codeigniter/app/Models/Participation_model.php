@@ -54,6 +54,7 @@ class Participation_model extends Model {
             'ID_user' => $id_user
         ];
         $this->insert($data);
+        return 0;
     }
 
     /**

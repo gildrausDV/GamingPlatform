@@ -126,6 +126,7 @@ class PlayedGame_model extends Model {
             "on_tournament" => $on_tournament
         ];
         $this->insert($data);
+        return 0;
     }
 
 }

@@ -22,5 +22,14 @@ final class GamesModelTest extends \Tests\Support\DbTestCase
         // Make sure the count is as expected
         $this->assertCount(2, $objects);
     }
+
+    public function testGetID() {
+        $model = new Game_model();
+        
+        $this->assertIsInt($model->getID('Rayman'));
+        $this->assertIsInt($model->getID('FlappyBird'));
+        $this->assertIsInt($model->getID('Pokemon'));
+
+    }
     
 }
