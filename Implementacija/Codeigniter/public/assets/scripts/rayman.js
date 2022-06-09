@@ -95,6 +95,7 @@ function init() {
                 update_list();
 
                 level = 1;
+                $("#level_display").text(level);
 
                 clearInterval(interval);
                 clearInterval(timeInterval);
