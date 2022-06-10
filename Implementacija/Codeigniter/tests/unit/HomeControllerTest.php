@@ -2,6 +2,7 @@
 
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\ControllerTestTrait;
+use Tests\Support\Database\Seeds\MainSeeder;
 use CodeIgniter\Test\DatabaseTestTrait;
 
 /**
@@ -12,6 +13,8 @@ final class HomeControllerTest extends CIUnitTestCase {
     use ControllerTestTrait;
     use DatabaseTestTrait;
 
+    protected $seed = MainSeeder::class;
+
     public function testIndex() {
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Home::class)
@@ -21,16 +24,16 @@ final class HomeControllerTest extends CIUnitTestCase {
             $this->assertTrue($result->isOK());
     }
 
-    /*public function testSignOut() {
+    public function testSignOut() {
         //$_SESSION['newTournamentUsers'] = 1;
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Home::class)
             ->execute('signOut');
     
         //$this->assertTrue($result->see('Log in', 'h1'));
-        $this->assertTrue($result->isOK());
+        $this->assertFalse($result->isOK());
         //$this->assertIsInt($result);
-    }*/
+    }
 
     public function testRegister() {
         $result = $this//->withURI('http://localhost:8080/...')
@@ -51,6 +54,15 @@ final class HomeControllerTest extends CIUnitTestCase {
     }
 
     public function testHome() {
+        $result = $this//->withURI('http://localhost:8080/...')
+        ->controller(\App\Controllers\Home::class)
+        ->execute('home');
+
+        $this->assertTrue($result->isOK());
+
+        $_SESSION['role'] = 0;
+        $_SESSION['ID'] = 1;
+
         $result = $this//->withURI('http://localhost:8080/...')
         ->controller(\App\Controllers\Home::class)
         ->execute('home');
@@ -81,7 +93,18 @@ final class HomeControllerTest extends CIUnitTestCase {
         $this->assertTrue($result->see('Allow/block user', 'h1'));
     }
     
-    public function testSettings() {
+    public function testAllow_() {
+        $_SESSION['ID'] = 1;
+        $_SESSION['role'] = 0;
+
+        $result = $this//->withURI('http://localhost:8080/...')
+        ->controller(\App\Controllers\Home::class)
+        ->execute('allow');
+
+        $this->assertTrue($result->see('Allow/block user', 'h1'));
+    }
+
+    /*public function testSettings() {
         $_SESSION['ID'] = 1;
         //$_SESSION['role'] = 0;
         $result = $this//->withURI('http://localhost:8080/...')
@@ -89,7 +112,7 @@ final class HomeControllerTest extends CIUnitTestCase {
         ->execute('settings');
 
         $this->assertTrue($result->isOK());
-    }
+    }*/
 
     public function provide_ids_roles() {
         return [
@@ -106,6 +129,32 @@ final class HomeControllerTest extends CIUnitTestCase {
         $result = $this//->withURI('http://localhost:8080/...')
         ->controller(\App\Controllers\Home::class)
         ->execute('roles');
+
+        $this->assertTrue($result->isOK());
+    }
+
+    /**
+     * @dataProvider provide_ids_roles
+     */
+    public function testRoles_($id, $role) {
+        $_SESSION['ID'] = $id;
+        $_SESSION['role'] = $role;
+        $_POST['username'] = 'gildraus';
+        $_POST['roles'] = 0;
+        $result = $this//->withURI('http://localhost:8080/...')
+        ->controller(\App\Controllers\Home::class)
+        ->execute('roles_');
+
+        $this->assertTrue($result->isOK());
+    }
+
+    public function testSettings() {
+        $_SESSION['ID'] = 1;
+        $_SESSION['role'] = 0;
+
+        $result = $this//->withURI('http://localhost:8080/...')
+        ->controller(\App\Controllers\Home::class)
+        ->execute('settings');
 
         $this->assertTrue($result->isOK());
     }

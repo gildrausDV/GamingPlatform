@@ -25,7 +25,7 @@ class Home extends BaseController
 
     public function index()
     {
-        return view('home');
+        return view('home', ['picture' => 'usersImages/guest.png']);
     }
 
     /**
