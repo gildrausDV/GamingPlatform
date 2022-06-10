@@ -1,0 +1,155 @@
+T1:			Neuspešno dodavanje nivoa za igricu Rayman jer nije unet broj redova
+Preduslov:	Akciju izvršava administrator ili moderator
+
+			1.Korisnik unosi broj kolona u polje "Number of columns".
+			2.Korisnik unosi broj novčića u polje "Number of coins".
+			3.Korisnik unosi pozicije novčića u polje "Positions of coins".
+			4.Korisnik unosi broj grana u polje "Number of floating trees".
+			5.Korisnik unosi pozicije grana u polje "Positions of floating trees".
+			6.Korisniku potvrđuje formu pritiskom na dugme "Add level".
+VT:			7.Korisniku se ispisuje poruka "Please enter number of rows!".
+
+T2:			Neuspešno dodavanje nivoa za igricu Rayman jer nije unet broj kolona
+Preduslov:	Akciju izvršava administrator ili moderator
+
+			1.Korisnik unosi broj redova u polje "Number of rows".
+			2.Korisnik unosi broj novčića u polje "Number of coins".
+			3.Korisnik unosi pozicije novčića u polje "Positions of coins".
+			4.Korisnik unosi broj grana u polje "Number of floating trees".
+			5.Korisnik unosi pozicije grana u polje "Positions of floating trees".
+			6.Korisniku potvrđuje formu pritiskom na dugme "Add level".
+VT:			7.Korisniku se ispisuje poruka "Please enter number of columns!".
+
+T3:			Neuspešno dodavanje nivoa za igricu Rayman jer nije unet broj novčića
+Preduslov:	Akciju izvršava administrator ili moderator
+
+			1.Korisnik unosi broj redova u polje "Number of rows".
+			2.Korisnik unosi broj kolona u polje "Number of columns".
+			3.Korisnik unosi pozicije novčića u polje "Positions of coins".
+			4.Korisnik unosi broj grana u polje "Number of floating trees".
+			5.Korisnik unosi pozicije grana u polje "Positions of floating trees".
+			6.Korisniku potvrđuje formu pritiskom na dugme "Add level".
+VT:			7.Korisniku se ispisuje poruka "Please enter number of coins!".
+
+T4:			Neuspešno dodavanje nivoa za igricu Rayman jer nisu unete pozicije novčića
+Preduslov:	Akciju izvršava administrator ili moderator
+
+			1.Korisnik unosi broj redova u polje "Number of rows".
+			2.Korisnik unosi broj kolona u polje "Number of columns"
+			3.Korisnik unosi broj novčića u polje "Number of coins".
+			4.Korisnik unosi broj grana u polje "Number of floating trees".
+			5.Korisnik unosi pozicije grana u polje "Positions of floating trees".
+			6.Korisniku potvrđuje formu pritiskom na dugme "Add level".
+VT:			7.Korisniku se ispisuje poruka "Please enter position of coins!".
+
+T5:			Neuspešno dodavanje nivoa za igricu Rayman jer nije unet broj grana
+Preduslov:	Akciju izvršava administrator ili moderator
+
+			1.Korisnik unosi broj redova u polje "Number of rows".
+			2.Korisnik unosi broj kolona u polje "Number of columns"
+			3.Korisnik unosi broj novčića u polje "Number of coins".
+			4.Korisnik unosi pozicije novčića u polje "Positions of coins".
+			5.Korisnik unosi pozicije grana u polje "Positions of floating trees".
+			6.Korisniku potvrđuje formu pritiskom na dugme "Add level".
+VT:			7.Korisniku se ispisuje poruka "Please enter number of floating trees!".
+
+T6:			Neuspešno dodavanje nivoa za igricu Rayman jer nisu unete pozicije grana
+Preduslov:	Akciju izvršava administrator ili moderator
+
+			1.Korisnik unosi broj redova u polje "Number of rows".
+			2.Korisnik unosi broj kolona u polje "Number of columns"
+			3.Korisnik unosi broj novčića u polje "Number of coins".
+			4.Korisnik unosi pozicije novčića u polje "Positions of coins".
+			5.Korisnik unosi broj grana u polje "Number of floating trees".
+			6.Korisniku potvrđuje formu pritiskom na dugme "Add level".
+VT:			7.Korisniku se ispisuje poruka "Please enter position of floating trees!".
+
+T7:			Uspešno dodavanje nivoa za igricu Rayman
+Preduslov:	Akciju izvršava administrator ili moderator
+
+			1.Korisnik unosi broj redova u polje "Number of rows".
+			2.Korisnik unosi broj kolona u polje "Number of columns"
+			3.Korisnik unosi broj novčića u polje "Number of coins".
+			4.Korisnik unosi pozicije novčića u polje "Positions of coins".
+			5.Korisnik unosi broj grana u polje "Number of floating trees".
+			6.Korisnik unosi pozicije grana u polje "Positions of floating trees".
+			7.Korisniku potvrđuje formu pritiskom na dugme "Add level".
+VT:			8.Korisniku se ispisuje poruka "New level added successfully!".
+
+T8:			Neuspešno dodavanje nivoa za igricu FlappyBird jer nije unet broj redova
+Preduslov:	Akciju izvršava administrator ili moderator
+
+			1.Korisnik unosi broj kolona u polje "Number of columns".
+			2.Korisnik unosi broj novčića u polje "Number of coins".
+			3.Korisnik unosi pozicije novčića u polje "Positions of coins".
+			4.Korisnik unosi broj vatrenih lopti u polje "Number of fire balls".
+			5.Korisnik unosi pozicije vatrenih lopti u polje "Positions of fire balls".
+			6.Korisniku potvrđuje formu pritiskom na dugme "Add level".
+VT:			7.Korisniku se ispisuje poruka "Please enter number of rows!".
+
+T9:			Neuspešno dodavanje nivoa za igricu FlappyBird jer nije unet broj kolona
+Preduslov:	Akciju izvršava administrator ili moderator
+
+			1.Korisnik unosi broj redova u polje "Number of rows".
+			2.Korisnik unosi broj novčića u polje "Number of coins".
+			3.Korisnik unosi pozicije novčića u polje "Positions of coins".
+			4.Korisnik unosi broj vatrenih lopti u polje "Number of fire balls".
+			5.Korisnik unosi pozicije vatrenih lopti u polje "Positions of fire balls".
+			6.Korisniku potvrđuje formu pritiskom na dugme "Add level".
+VT:			7.Korisniku se ispisuje poruka "Please enter number of columns!".
+
+T10:		Neuspešno dodavanje nivoa za igricu FlappyBird jer nije unet broj novčića
+Preduslov:	Akciju izvršava administrator ili moderator
+
+			1.Korisnik unosi broj redova u polje "Number of rows".
+			2.Korisnik unosi broj kolona u polje "Number of columns".
+			3.Korisnik unosi pozicije novčića u polje "Positions of coins".
+			4.Korisnik unosi broj vatrenih lopti u polje "Number of fire balls".
+			5.Korisnik unosi pozicije vatrenih lopti u polje "Positions of fire balls".
+			6.Korisniku potvrđuje formu pritiskom na dugme "Add level".
+VT:			7.Korisniku se ispisuje poruka "Please enter number of coins!".
+
+T11:		Neuspešno dodavanje nivoa za igricu FlappyBird jer nisu unete pozicije novčića
+Preduslov:	Akciju izvršava administrator ili moderator
+
+			1.Korisnik unosi broj redova u polje "Number of rows".
+			2.Korisnik unosi broj kolona u polje "Number of columns"
+			3.Korisnik unosi broj novčića u polje "Number of coins".
+			4.Korisnik unosi broj vatrenih lopti u polje "Number of fire balls".
+			5.Korisnik unosi pozicije vatrenih lopti u polje "Positions of fire balls".
+			6.Korisniku potvrđuje formu pritiskom na dugme "Add level".
+VT:			7.Korisniku se ispisuje poruka "Please enter position of coins!".
+
+T12:		Neuspešno dodavanje nivoa za igricu FlappyBird jer nije unet broj vatrenih lopti
+Preduslov:	Akciju izvršava administrator ili moderator
+
+			1.Korisnik unosi broj redova u polje "Number of rows".
+			2.Korisnik unosi broj kolona u polje "Number of columns"
+			3.Korisnik unosi broj novčića u polje "Number of coins".
+			4.Korisnik unosi pozicije novčića u polje "Positions of coins".
+			5.Korisnik unosi pozicije vatrenih lopti u polje "Positions of fire balls".
+			6.Korisniku potvrđuje formu pritiskom na dugme "Add level".
+VT:			7.Korisniku se ispisuje poruka "Please enter number of floating trees!".
+
+T13:		Neuspešno dodavanje nivoa za igricu FlappyBird jer nisu unete pozicije vatrenih lopti
+Preduslov:	Akciju izvršava administrator ili moderator
+
+			1.Korisnik unosi broj redova u polje "Number of rows".
+			2.Korisnik unosi broj kolona u polje "Number of columns"
+			3.Korisnik unosi broj novčića u polje "Number of coins".
+			4.Korisnik unosi pozicije novčića u polje "Positions of coins".
+			4.Korisnik unosi broj vatrenih lopti u polje "Number of fire balls".
+			6.Korisniku potvrđuje formu pritiskom na dugme "Add level".
+VT:			7.Korisniku se ispisuje poruka "Please enter position of floating trees!".
+
+T14:		Uspešno dodavanje nivoa za igricu FlappyBird
+Preduslov:	Akciju izvršava administrator ili moderator
+
+			1.Korisnik unosi broj redova u polje "Number of rows".
+			2.Korisnik unosi broj kolona u polje "Number of columns"
+			3.Korisnik unosi broj novčića u polje "Number of coins".
+			4.Korisnik unosi pozicije novčića u polje "Positions of coins".
+			5.Korisnik unosi broj vatrenih lopti u polje "Number of fire balls".
+			6.Korisnik unosi pozicije vatrenih lopti u polje "Positions of fire balls".
+			7.Korisniku potvrđuje formu pritiskom na dugme "Add level".
+VT:			8.Korisniku se ispisuje poruka "New level added successfully!".

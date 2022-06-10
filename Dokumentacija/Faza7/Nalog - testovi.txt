@@ -1,0 +1,14 @@
+T1:			Neuspešno čuvanje podataka zbog toga što šifra ima manje od 5 karaktera
+Preduslov:	Akciju izvršava ulogovani korisnik
+			
+			1.Korisnik unosi novu šifru (i opciono datum rođenja ili sliku)
+			2.Korisnik potvrđuje formu pritiskom na dugme "Save".
+VT:			3.Korisniku se ispisuje poruka "Password too short!".
+
+T2:			Uspeno čuvanje podataka
+Preduslov:	Akciju izvršava ulogovani korisnik
+			
+			1.Korisnik unosi novu šifru (i opciono datum rođenja ili sliku)
+			2.Korisnik potvrđuje formu pritiskom na dugme "Save".
+VT:			3.Korisniku se ispisuje poruka "Changes saved!".
+			

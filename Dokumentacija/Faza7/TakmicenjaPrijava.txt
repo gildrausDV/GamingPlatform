@@ -1,0 +1,11 @@
+T1:			Neuspešna prijava na takmičenje jer se već maksimalan broj takmičara prijavio
+Preduslov:	Akciju izvršava ulogovani korisnik
+
+			1.Korisnik se prijavljuje na takmičenje koje je popunjeno.
+VT:			2.Korisniku se ispisuje poruka "Tournament full!".
+			
+T2:			Uspešna prijava na takmičenje
+Preduslov:	Akciju izvršava ulogovani korisnik
+
+			1.Korisnik se prijavljuje na takmičenje.
+VT:			2.Korisniku se ispisuje poruka "You have successfully joined the tournament!".

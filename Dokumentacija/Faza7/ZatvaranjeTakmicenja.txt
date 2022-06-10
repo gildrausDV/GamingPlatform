@@ -1,0 +1,5 @@
+T1:			Uspešno zatvaranje takmičenja
+Predusov:	Akciju izvršava administrator
+
+			1.Administrator pritiska dugme za zatvaranje takmičenja.
+VT:			2.Na dugmetu se ispisuje poruka: "Ended".

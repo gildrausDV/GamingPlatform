@@ -12,20 +12,23 @@ final class HomeControllerTest extends CIUnitTestCase {
     use ControllerTestTrait;
     use DatabaseTestTrait;
 
-    /*public function testIndex() {
+    public function testIndex() {
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Home::class)
             ->execute('index');
     
-            $this->assertTrue($result->see('Log in', 'h1'));
-    }*/
+            //$this->assertTrue($result->see('Log in', 'h1'));
+            $this->assertTrue($result->isOK());
+    }
 
     /*public function testSignOut() {
+        //$_SESSION['newTournamentUsers'] = 1;
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Home::class)
             ->execute('signOut');
     
         $this->assertTrue($result->see('Log in', 'h1'));
+        //$this->assertTrue($result->isOK());
     }*/
 
     public function testRegister() {
@@ -76,10 +79,10 @@ final class HomeControllerTest extends CIUnitTestCase {
 
         $this->assertTrue($result->see('Allow/block user', 'h1'));
     }
-    /*
-    public function testSettings() {
+    
+    /*public function testSettings() {
         $_SESSION['ID'] = 1;
-        $_SESSION['role'] = 0;
+        //$_SESSION['role'] = 0;
         $result = $this//->withURI('http://localhost:8080/...')
         ->controller(\App\Controllers\Home::class)
         ->execute('settings');

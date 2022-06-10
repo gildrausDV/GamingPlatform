@@ -1,0 +1,5 @@
+T1:			Uspešan pregled istorije za takmičenje
+Preduslov:	Akciju izvršava ulogovani korisnik
+
+			1.Korisnik odabira takmičenje za koje želi da vidi listu.
+VT:			2.Korisniku se prikazuje lista sa igračima koji imaju najviše poena na takmičenju.

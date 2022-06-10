@@ -1,0 +1,18 @@
+T1:			Neuspešno organizovanje takmičenja jer korisnik nije uneo neki od potrebnih podataka
+Preduslov:	Korisnik je moderator ili administrator
+
+			1.Korisnik unosi potrebne podatke u za to predviđena polja, osim (najmanje) jednog.
+VT:			2.Korisniku se ispisuje poruka: "Please provide necessary information".
+
+T2:			Neuspešno organizovanje takmičenja jer je u isto vreme za istu igricu
+				već organizovano takmičenje
+Preduslov:	Korisnik je moderator ili administrator
+
+			1.Korisnik unosi potrebne podatke u za to predviđena polja.
+VT:			2.Korisniku se ispisuje poruka: "Tournament already exists".
+
+T3:			Uspešno organizovanje takmičenja
+Preduslov:	Korisnik je moderator ili administrator
+
+			1.Korisnik unosi potrebne podatke u za to predviđena polja.
+VT:			2.Korisniku se ispisuje poruka: "You have successfully added a tournament".

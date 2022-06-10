@@ -101,6 +101,7 @@ final class TournamentControllerTest extends CIUnitTestCase {
     }
 
     public function testEndTournament() {
+        $_POST['argument'] = 1;
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Tournament::class)
             ->execute('endTournament');
@@ -108,14 +109,20 @@ final class TournamentControllerTest extends CIUnitTestCase {
         $this->assertTrue($result->isOK());
     }
 
-    /*public function testIsActive() {
+    public function testIsActive() {
+        $_POST['arguments'][0] = 1;
+        $_POST['arguments'][1] = 1;
+        $_POST['arguments'][2] = 1;
+        $_POST['arguments'][3] = 1;
+        $_POST['arguments'][4] = 1;
+        $_POST['arguments'][5] = 1;
         if(!isset($_SESSION['ID'])) $_SESSION['ID'] = 1;
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Tournament::class)
             ->execute('isActive', 'Rayman');
     
         $this->assertTrue($result->isOK());
-    }*/
+    }
 
     public function testGetJoined() {
         if(!isset($_SESSION['ID'])) $_SESSION['ID'] = 1;
@@ -143,6 +150,11 @@ final class TournamentControllerTest extends CIUnitTestCase {
     }
 
     /*public function testAdd_tournament() {
+        $_POST['arguments'][0] = "Rayman";
+        $_POST['arguments'][1] = 5;
+        $_POST['arguments'][2] = "2023-02-02";
+        $_POST['arguments'][3] = "19:00:00";
+        $_POST['arguments'][4] = "21:00:00";
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Tournament::class)
             ->execute('add_tournament');
@@ -150,12 +162,14 @@ final class TournamentControllerTest extends CIUnitTestCase {
         $this->assertTrue($result->isOK());
     }*/
 
-    /*public function testJoinTournament() {
+    public function testJoinTournament() {
+        $_POST['argument'] = 1;
+        $_SESSION['ID'] = 1;
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Tournament::class)
             ->execute('joinTournament');
     
         $this->assertTrue($result->isOK());
-    }*/
+    }
 
 }

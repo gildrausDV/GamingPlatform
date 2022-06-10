@@ -1,0 +1,13 @@
+T1:			Neuspešna promena uloge zbog toga što korisničko ime ne postoji
+Predusov:	Akciju izvršava administrator
+
+			1.Administrator unosi nevalidno korisničko ime korisnika kome želi da dodeli/oduzme ulogu
+			2.Administrator bira koju ulogu dodaje/oduzima korisniku
+VT:			3.Korisniku se ispisuje poruka: "Username does not exist!".
+
+T2:			Uspešna promena uloge
+Predusov:	Akciju izvršava administrator
+
+			1.Administrator unosi validno korisničko ime korisnika kome želi da dodeli/oduzme ulogu
+			2.Administrator bira koju ulogu dodaje/oduzima korisniku
+VT:			3.Korisniku se ispisuje poruka: "Username does not exist!".

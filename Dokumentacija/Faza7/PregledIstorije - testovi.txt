@@ -1,0 +1,11 @@
+T1:			Uspešan pregled istorije za igru Rayman
+Preduslov:	Akciju izvršava ulogovani korisnik
+			
+			1.Korisnik odabira igricu za koju želi da vidi istoriju (u ovom slučaju Rayman).
+VT:			2.Korisniku se prikazuje nova stranica sa listom svih odigranih partija u igri Rayman.
+
+T2:			Uspešan pregled istorije za igru FlappyBird
+Preduslov:	Akciju izvršava ulogovani korisnik
+			
+			1.Korisnik odabira igricu za koju želi da vidi istoriju (u ovom slučaju FlappyBird).
+VT:			2.Korisniku se prikazuje nova stranica sa listom svih odigranih partija u igri FlappyBird.
