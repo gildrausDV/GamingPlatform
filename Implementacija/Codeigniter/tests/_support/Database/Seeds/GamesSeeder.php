@@ -10,11 +10,11 @@ class GamesSeeder extends Seeder {
         $games = [
             [
                 'ID' => '1',
-                'name' => 'Rayman'
+                'Name' => 'Rayman'
             ],
             [
                 'ID' => '2',
-                'name' => 'FlappyBird'
+                'Name' => 'FlappyBird'
             ]
         ];
 

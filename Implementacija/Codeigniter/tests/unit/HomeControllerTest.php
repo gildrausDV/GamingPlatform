@@ -27,8 +27,9 @@ final class HomeControllerTest extends CIUnitTestCase {
             ->controller(\App\Controllers\Home::class)
             ->execute('signOut');
     
-        $this->assertTrue($result->see('Log in', 'h1'));
-        //$this->assertTrue($result->isOK());
+        //$this->assertTrue($result->see('Log in', 'h1'));
+        $this->assertTrue($result->isOK());
+        //$this->assertIsInt($result);
     }*/
 
     public function testRegister() {
@@ -80,7 +81,7 @@ final class HomeControllerTest extends CIUnitTestCase {
         $this->assertTrue($result->see('Allow/block user', 'h1'));
     }
     
-    /*public function testSettings() {
+    public function testSettings() {
         $_SESSION['ID'] = 1;
         //$_SESSION['role'] = 0;
         $result = $this//->withURI('http://localhost:8080/...')
@@ -88,7 +89,7 @@ final class HomeControllerTest extends CIUnitTestCase {
         ->execute('settings');
 
         $this->assertTrue($result->isOK());
-    }*/
+    }
 
     public function provide_ids_roles() {
         return [

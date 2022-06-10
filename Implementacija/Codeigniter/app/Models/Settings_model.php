@@ -81,7 +81,7 @@ class Settings_model extends Model {
             $res['profilePicture'] = $data[0]['picture'];
             return $data[0]['picture'];
         } else {
-            return '';
+            return '/usersImages/guest.png';
         }
     }
 
