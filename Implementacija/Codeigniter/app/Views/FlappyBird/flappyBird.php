@@ -168,7 +168,7 @@
                     </div>
                     <br>
                     <div>
-                        <span class="maxPoints">Max points achived: </span>
+                        <span class="maxPoints">Max points achieved: </span>
                         <span class="maxPoints" id="maxPoints_display">0</span>
                     </div>
                     <br><br>
