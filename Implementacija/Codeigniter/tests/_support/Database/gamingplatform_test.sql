@@ -56,3 +56,11 @@ CREATE TABLE `participation` (
   `ID_tournament` int(11) NOT NULL,
   'ID_user' int(11) NOT NULL
 );
+
+DROP TABLE IF EXISTS 'level';
+CREATE TABLE `level` (
+  `ID` int(11),
+  `level_desc` TEXT NOT NULL,
+  'ID_game' int(11) NOT NULL,
+  'lvl' int(11) NOT NULL
+);

@@ -67,7 +67,7 @@ class Level_model extends Model {
         ];
 
         $this->table('level')->insert($data);
-
+        return 0;
     }
 
 }
