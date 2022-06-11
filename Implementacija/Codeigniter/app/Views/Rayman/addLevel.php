@@ -309,10 +309,10 @@
                     $("#write").text("Please enter position of coins!").css("color", "red");
                     return;
                 } else if(numFT == "") {
-                    $("#write").text("Please enter number of fire balls!").css("color", "red");
+                    $("#write").text("Please enter number of floating trees!").css("color", "red");
                     return;
                 } else if(posFT == "") {
-                    $("#write").text("Please enter position of fire balls!").css("color", "red");
+                    $("#write").text("Please enter position of floating trees!").css("color", "red");
                     return;
                 }
 

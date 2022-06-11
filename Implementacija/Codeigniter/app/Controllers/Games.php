@@ -21,7 +21,7 @@ class Games extends BaseController
 {
     public function index()
     {
-        return view('home');
+        return view('home', ['picture' => 'usersImages/guest.png']);
     }
 
     /**
@@ -127,6 +127,9 @@ class Games extends BaseController
         }
     }
 
+    /**
+     * Funkcija koja vraca broj poena ulogovanog korisnika
+     */
     public function myNPoints() {
         $session = session();
         $id_user = $session->get('ID');
@@ -180,7 +183,7 @@ class Games extends BaseController
         echo json_encode($ret);
     }
 
-    public function test() {
+    /*public function test() {
         $model = new Tournament_model();
         $year = $_POST['arguments'][0];
         $month = $_POST['arguments'][1];
@@ -190,7 +193,7 @@ class Games extends BaseController
         $seconds = $_POST['arguments'][5];
         $ret['list'] = $model->getActiveTournaments(1, $year, $month, $day, $hours, $minutes, $seconds);
         echo json_encode($ret);
-    }
+    }*/
 
     /**
      * Funkcija koja u pozivanjem metode iz model-a u bazi čuva podatke o odigranoj igrici

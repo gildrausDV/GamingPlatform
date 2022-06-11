@@ -3,6 +3,7 @@
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\ControllerTestTrait;
 use CodeIgniter\Test\DatabaseTestTrait;
+use Tests\Support\Database\Seeds\MainSeeder;
 
 /**
  * @internal
@@ -11,14 +12,32 @@ final class GamesControllerTest extends CIUnitTestCase {
 
     use ControllerTestTrait;
     use DatabaseTestTrait;
+
+    protected $seed = MainSeeder::class;
     
-    /*public function testHistory() {
+    public function testIndex() {
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Games::class)
             ->execute('index');
     
         $this->assertTrue($result->isOK());
-    }*/
+    }
+
+    public function testHistory() {
+        $_SESSION['role'] = 0;
+        $result = $this//->withURI('http://localhost:8080/...')
+            ->controller(\App\Controllers\Games::class)
+            ->execute('history', 'Rayman');
+    
+        $this->assertTrue($result->isOK());
+
+        $_SESSION['role'] = -1;
+        $result = $this//->withURI('http://localhost:8080/...')
+            ->controller(\App\Controllers\Games::class)
+            ->execute('history', 'Rayman');
+    
+        $this->assertTrue($result->isOK());
+    }
 
     public function testGetHistory() {
         $result = $this//->withURI('http://localhost:8080/...')
@@ -73,6 +92,13 @@ final class GamesControllerTest extends CIUnitTestCase {
             ->execute('game', 'FlappyBird');
     
         $this->assertTrue($result->isOK());
+
+        $_SESSION['role'] = 0;
+        $result = $this//->withURI('http://localhost:8080/...')
+            ->controller(\App\Controllers\Games::class)
+            ->execute('game', 'FlappyBird');
+    
+        $this->assertTrue($result->isOK());
     }
 
     public function provide_roles() {
@@ -84,8 +110,9 @@ final class GamesControllerTest extends CIUnitTestCase {
         ];
     }
 
-    /*
-    public function testAddLevel_default() {
+    
+    /*public function testAddLevel_default() {
+        $_SESSION['role'] = 0;
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Games::class)
             ->execute('addLevel_default');
@@ -99,7 +126,7 @@ final class GamesControllerTest extends CIUnitTestCase {
             ->controller(\App\Controllers\Games::class)
             ->execute('myNPoints');
 
-        $this->assertFalse($result->isOK());
+        $this->assertTrue($result->isOK());
     }
 
     public function testGetTopPlayersGlobal() {
@@ -152,18 +179,65 @@ final class GamesControllerTest extends CIUnitTestCase {
         $this->assertTrue($result->isOK());
     }
 
-    /*public function testAddLevel() {
+    public function testAddLevel() {
+        $_SESSION['ID'] = 1;
+        
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Games::class)
             ->execute('add_level', 'Rayman');
 
-        $this->assertTrue($result->isOK());
+        $this->assertFalse($result->isOK());
 
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Games::class)
             ->execute('add_level', 'FlappyBird');
 
-        $this->assertTrue($result->isOK());
+        $this->assertFalse($result->isOK());
+
+        $_GET['arguments'] = 1;
+        $result = $this//->withURI('http://localhost:8080/...')
+            ->controller(\App\Controllers\Games::class)
+            ->execute('add_level', 'FlappyBird');
+
+        $this->assertFalse($result->isOK());
+    }
+
+    /*public function testSave_data() {
+        $_SESSION['ID'] = 1;
+
+        $_POST['arguments'][0] = 10;
+        $_POST['arguments'][1] = 10;
+        $_POST['arguments'][2] = 3;
+        $_POST['arguments'][3] = '2022';
+        $_POST['arguments'][4] = '10';
+        $_POST['arguments'][5] = '3';
+        $_POST['arguments'][6] = '00';
+        $_POST['arguments'][7] = '00';
+        $_POST['arguments'][8] = '10';
+
+        $result = $this//->withURI('http://localhost:8080/...')
+            ->controller(\App\Controllers\Games::class)
+            ->execute('save_data', 'Rayman');
+
+        $this->assertFalse($result->isOK());
+    }*/
+
+    /*public function testAddLevel() {
+
+        $result = $this//->withURI('http://localhost:8080/...')
+            ->controller(\App\Controllers\Games::class)
+            ->execute('add_level', 'Rayman');
+
+        $this->assertFalse($result->isOK());
+
+        $_POST['arguments'] = '
+        {"rows":"5","cols":"5","wood":[{"y":"1","x":"1","len":"2"},{"y":"2","x":"2","len":"2"},{"y":"3","x":"3","len":"1"},{"y":"1","x":"0","len":"1"}],"coins":[{"y":"1","x":"1"},{"y":"2","x":"2"},{"y":"1","x":"0"}]}
+        ';
+        $result = $this//->withURI('http://localhost:8080/...')
+            ->controller(\App\Controllers\Games::class)
+            ->execute('add_level', 'Rayman');
+
+        $this->assertFalse($result->isOK());
     }*/
 
 }

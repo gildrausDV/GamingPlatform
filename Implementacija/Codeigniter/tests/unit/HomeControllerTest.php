@@ -44,11 +44,34 @@ final class HomeControllerTest extends CIUnitTestCase {
 
     }
 
+    public function testRegister_() {
+        $result = $this//->withURI('http://localhost:8080/...')
+        ->controller(\App\Controllers\Home::class)
+        ->execute('register_');
+
+        $this->assertFalse($result->isOK());
+    }
 
     public function testLogin() {
         $result = $this//->withURI('http://localhost:8080/...')
         ->controller(\App\Controllers\Home::class)
         ->execute('login');
+
+        $this->assertTrue($result->isOK());
+    }
+
+    public function testLogin_() {
+        $_SESSION['ID'] = 1;
+        $result = $this//->withURI('http://localhost:8080/...')
+        ->controller(\App\Controllers\Home::class)
+        ->execute('login_');
+
+        $this->assertTrue($result->isOK());
+
+        $_SESSION['ID'] = 6;
+        $result = $this//->withURI('http://localhost:8080/...')
+        ->controller(\App\Controllers\Home::class)
+        ->execute('login_');
 
         $this->assertTrue($result->isOK());
     }
@@ -99,20 +122,23 @@ final class HomeControllerTest extends CIUnitTestCase {
 
         $result = $this//->withURI('http://localhost:8080/...')
         ->controller(\App\Controllers\Home::class)
-        ->execute('allow');
+        ->execute('allow_');
 
         $this->assertTrue($result->see('Allow/block user', 'h1'));
     }
 
-    /*public function testSettings() {
+    public function testSettings_() {
         $_SESSION['ID'] = 1;
+        $_FILES['file']['name'] = 'usersImages/guest.png';
+        $_FILES['file']['tmp_name'] = 'usersImages/guest.png';
+        $_SESSION['role'] = 0;
         //$_SESSION['role'] = 0;
         $result = $this//->withURI('http://localhost:8080/...')
         ->controller(\App\Controllers\Home::class)
-        ->execute('settings');
+        ->execute('settings_');
 
         $this->assertTrue($result->isOK());
-    }*/
+    }
 
     public function provide_ids_roles() {
         return [
