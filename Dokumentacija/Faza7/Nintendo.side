@@ -577,77 +577,6 @@
       "value": "History"
     }]
   }, {
-    "id": "eef5bad8-7e64-4b73-8fae-a699774f32ca",
-    "name": "Registracija_T1_Prekid",
-    "commands": [{
-      "id": "faa279a5-7e74-461c-8db3-74461dd6cd36",
-      "comment": "",
-      "command": "open",
-      "target": "http://localhost:8080/Home/register",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "684ef604-a08e-4fc3-b905-8e34a2d2ab2e",
-      "comment": "",
-      "command": "setWindowSize",
-      "target": "1035x1000",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "984cf88a-6bd3-482a-b584-7e9382d9d7d7",
-      "comment": "",
-      "command": "click",
-      "target": "linkText=Quick play",
-      "targets": [
-        ["linkText=Quick play", "linkText"],
-        ["css=.input_footer1", "css:finder"],
-        ["xpath=//a[contains(text(),'Quick play')]", "xpath:link"],
-        ["xpath=//a[@href='http://localhost:8080/Home/home']", "xpath:href"],
-        ["xpath=//a", "xpath:position"],
-        ["xpath=//a[contains(.,'Quick play')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "7ec9244a-40be-4d19-8b2d-13387987ee2a",
-      "comment": "",
-      "command": "verifyText",
-      "target": "linkText=Play",
-      "targets": [
-        ["linkText=Play", "linkText"],
-        ["css=.nav-item:nth-child(1) > .nav-link", "css:finder"],
-        ["xpath=//a[contains(text(),'Play')]", "xpath:link"],
-        ["xpath=//a[@href='http://localhost:8080/Home/home']", "xpath:href"],
-        ["xpath=//li/a", "xpath:position"],
-        ["xpath=//a[contains(.,'Play')]", "xpath:innerText"]
-      ],
-      "value": "Play"
-    }, {
-      "id": "445c3a8e-7d5b-4bda-afab-c714750041bd",
-      "comment": "",
-      "command": "verifyText",
-      "target": "css=.btn-secondary",
-      "targets": [
-        ["css=.btn-secondary", "css:finder"],
-        ["xpath=//button[@type='button']", "xpath:attributes"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'Top players lists')]", "xpath:innerText"]
-      ],
-      "value": "Top players lists"
-    }, {
-      "id": "07744080-52db-4e55-a476-090a8fa83993",
-      "comment": "",
-      "command": "verifyText",
-      "target": "id=signOut",
-      "targets": [
-        ["id=signOut", "id"],
-        ["css=#signOut", "css:finder"],
-        ["xpath=//button[@id='signOut']", "xpath:attributes"],
-        ["xpath=//div[2]/button", "xpath:position"],
-        ["xpath=//button[contains(.,'Log in')]", "xpath:innerText"]
-      ],
-      "value": "Log in"
-    }]
-  }, {
     "id": "7a384312-1c8e-404f-85ff-1dcd78258dab",
     "name": "Registracija_T2_NisuUnetiPodaci",
     "commands": [{
@@ -2601,6 +2530,6 @@
     "timeout": 300,
     "tests": []
   }],
-  "urls": ["http://localhost:8080/index.php/Home/login"],
+  "urls": ["http://localhost:8080/index.php/Home/login", "http://localhost:8080/Home/home"],
   "plugins": []
 }

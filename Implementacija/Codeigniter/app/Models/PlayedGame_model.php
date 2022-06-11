@@ -80,7 +80,8 @@ class PlayedGame_model extends Model {
         $list = [];
         $list = $this->table('playedgame')->select('username, points, timePlayed')
             ->join('user', 'playedgame.ID_user=user.ID', 'left')
-            ->where('ID_game', $id_game)->orderBy('points', 'desc')->orderBy('timePlayed', 'asc')->paginate(10);
+            ->where('ID_game', $id_game)->orderBy('points', 'desc')->orderBy('timePlayed', 'asc')
+            ->orderBy('username', 'asc')->paginate(10);
         $result->list = $list;
 
         return $result;
@@ -99,7 +100,8 @@ class PlayedGame_model extends Model {
         $id_game = $game_model->getID($game);
         $res = $this->table('playedgame')->select('ID_game, username, timePlayed, points')
             ->join('user', 'playedgame.ID_user = user.ID', 'left')
-            ->orderBy('points', 'desc')
+            ->orderBy('points', 'desc')->orderBy('timePlayed', 'asc')
+            ->orderBy('username', 'asc')
             ->where('ID_game', $id_game)->paginate($cnt);
         return $res;
     }

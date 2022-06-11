@@ -69,6 +69,7 @@ function init() {
         hh = mm = ss = points = 0; timeLeft = timeLeft_start;
 
         document.getElementById("timeLeft_display").innerHTML = timeLeft + "";
+        $("#point_display").text('0');
         
         timeInterval = setInterval(function () {
             ss++;

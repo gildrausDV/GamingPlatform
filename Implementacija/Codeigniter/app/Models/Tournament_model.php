@@ -79,7 +79,7 @@ class Tournament_model extends Model {
         foreach($res as $tournament) {
             if(strcmp($tournament['timeStart'], $timeStart) < 0 && strcmp($timeStart, $tournament['timeEnd']) < 0) return 1;
             if(strcmp($tournament['timeStart'], $timeEnd) < 0 && strcmp($timeEnd, $tournament['timeEnd']) < 0) return 1;
-            if(strcmp($tournament['timeStart'], $timeEnd) == 0 && strcmp($timeEnd, $tournament['timeEnd']) == 0) return 1;
+            if(strcmp($tournament['timeStart'], $timeStart) == 0 && strcmp($timeEnd, $tournament['timeEnd']) == 0) return 1;
         }
         return 0;
     }

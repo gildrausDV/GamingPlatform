@@ -106,6 +106,7 @@ function init() {
 
         document.getElementById("time_display").innerHTML = "00:00:00";
         document.getElementById("timeLeft_display").innerHTML = timeLeft + "";
+        $("#point_display").text('0');
         
         timeInterval = setInterval(function () {
             ss++;

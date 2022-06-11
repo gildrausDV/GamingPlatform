@@ -2,7 +2,7 @@
   "id": "fa8e3bdf-d261-4492-9938-521c6e313b43",
   "version": "2.0",
   "name": "GamingPlatformTestovi",
-  "url": "http://localhost:8080/Tournament/tournament",
+  "url": "http://localhost:8080/Home/login",
   "tests": [{
     "id": "e94686db-9c57-4629-8e4a-a8ea74bbf21c",
     "name": "DodavanjeNivoa_T1",
@@ -1742,6 +1742,88 @@
       ],
       "value": "Ended"
     }]
+  }, {
+    "id": "fa678c7d-c3bc-47b4-a0c5-1de4d5cd93a2",
+    "name": "A_logovanjeAdministratora",
+    "commands": [{
+      "id": "0a535a5e-aae7-4560-8366-12d03f1d497e",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/Home/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5feeccc0-7a50-4b8b-b656-6117210815d9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1462x696",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "880f7181-aa66-497c-b603-aa0c82e8e8bf",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a9de5305-3b7a-4b4b-a44e-a5dae37b9839",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "admin"
+    }, {
+      "id": "01b26f37-5730-4c11-8c60-ab95c7ff6167",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a1b9d0ac-4af1-4e3d-9891-81f7bc8d4ea8",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "123123"
+    }, {
+      "id": "b6167300-937e-4cd5-927c-ccbd1f651afb",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Log in')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "d2fc0dd5-fb96-45f5-b4ef-ca142e632155",
@@ -1751,6 +1833,6 @@
     "timeout": 300,
     "tests": []
   }],
-  "urls": ["http://localhost:8080/Games/addLevel/Rayman", "http://localhost:8080/Games/addLevel/FlappyBird", "http://localhost:8080/index.php/Home/settings", "http://localhost:8080/Games/history/None", "http://localhost:8080/Tournament/tournament", "http://localhost:8080/Tournament/addTournament", "http://localhost:8080/Home/roles"],
+  "urls": ["http://localhost:8080/Games/addLevel/Rayman", "http://localhost:8080/Games/addLevel/FlappyBird", "http://localhost:8080/index.php/Home/settings", "http://localhost:8080/Games/history/None", "http://localhost:8080/Tournament/tournament", "http://localhost:8080/Tournament/addTournament", "http://localhost:8080/Home/roles", "http://localhost:8080/Home/login"],
   "plugins": []
 }

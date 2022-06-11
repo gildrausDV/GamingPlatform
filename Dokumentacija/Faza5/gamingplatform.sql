@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2022 at 06:16 PM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 7.4.27
+-- Generation Time: Jun 11, 2022 at 11:33 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -90,7 +90,8 @@ INSERT INTO `participation` (`ID`, `ID_tournament`, `ID_user`) VALUES
 (3, 2, 1),
 (4, 2, 2),
 (5, 3, 1),
-(6, 3, 2);
+(6, 3, 2),
+(7, 4, 6);
 
 -- --------------------------------------------------------
 
@@ -150,7 +151,9 @@ INSERT INTO `playedgame` (`ID`, `timePlayed`, `points`, `ID_user`, `ID_game`, `m
 (35, 18, 75, 1, 2, 4, 3),
 (36, 16, 65, 3, 2, 4, 0),
 (37, 27, 100, 3, 1, 5, 0),
-(38, 22, 80, 3, 2, 5, 0);
+(38, 22, 80, 3, 2, 5, 0),
+(39, 17, 15, 6, 1, 1, 0),
+(40, 2, 5, 6, 2, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -177,8 +180,8 @@ INSERT INTO `tournament` (`ID`, `date`, `timeStart`, `timeEnd`, `maxNumOfPlayers
 (1, '2022-06-01', '19:00:00', '20:00:00', 10, 2, 1, 1),
 (2, '2022-06-02', '17:00:00', '18:00:00', 2, 2, 1, 1),
 (3, '2022-06-02', '18:00:00', '18:10:00', 10, 2, 2, 0),
-(4, '2023-06-02', '17:00:00', '18:00:00', 0, 2, 1, 1),
-(5, '2023-06-02', '17:00:00', '18:00:00', 2, 2, 1, 1);
+(4, '2023-06-02', '17:00:00', '18:00:00', 10, 0, 1, 1),
+(5, '2023-06-02', '17:00:00', '18:00:00', 0, 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -206,8 +209,10 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`ID`, `username`, `password`, `date`, `role`, `blocked`, `NP`, `name`, `surname`, `email`, `picture`) VALUES
 (1, 'admin', '123123', '2022-06-01', 2, 0, 8, 'admin', 'admin', 'admin@gmail.com', '/images/kirby.jpg'),
-(2, 'lily', '12345', '2001-01-12', 0, 0, 47, 'Nikola', 'Vujcic', 'nikola.vujcic.001@gmail.com', '/images/kirby.jpg'),
-(3, 'gildraus', '123123', '2022-06-02', 0, 0, 0, 'Dimitrije', 'Vujcic', 'vujcic.dimitrije@gmail.com', '/usersImages/guest.png');
+(2, 'lily', '12345', '2001-01-12', 1, 0, 47, 'Nikola', 'Vujcic', 'nikola.vujcic.001@gmail.com', '/images/kirby.jpg'),
+(3, 'gildraus', '123123', '2022-06-02', 1, 1, 0, 'Dimitrije', 'Vujcic', 'vujcic.dimitrije@gmail.com', '/usersImages/guest.png'),
+(4, 'niki', '123123', '2022-06-07', 0, 0, 0, 'ime', 'prezime', 'mejl@gmail.com', '/usersImages/guest.png'),
+(5, 'pera', '123123', '2003-02-12', 1, 0, 0, 'Petar', 'Petrovic', 'petar@gmail.com', '/usersImages/guest.png');
 
 --
 -- Indexes for dumped tables
@@ -269,25 +274,25 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT for table `participation`
 --
 ALTER TABLE `participation`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `playedgame`
 --
 ALTER TABLE `playedgame`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `tournament`
 --
 ALTER TABLE `tournament`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
