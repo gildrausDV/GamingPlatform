@@ -3,6 +3,7 @@
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\ControllerTestTrait;
 use CodeIgniter\Test\DatabaseTestTrait;
+use Tests\Support\Database\Seeds\MainSeeder;
 
 /**
  * @internal
@@ -11,6 +12,8 @@ final class TournamentControllerTest extends CIUnitTestCase {
 
     use ControllerTestTrait;
     use DatabaseTestTrait;
+
+    protected $seed = MainSeeder::class;
     
     public function testIndex() {
         
@@ -149,7 +152,7 @@ final class TournamentControllerTest extends CIUnitTestCase {
         $this->assertTrue($result->isOK());
     }
 
-    /*public function testAdd_tournament() {
+    public function testAdd_tournament() {
         $_POST['arguments'][0] = "Rayman";
         $_POST['arguments'][1] = 5;
         $_POST['arguments'][2] = "2023-02-02";
@@ -159,8 +162,8 @@ final class TournamentControllerTest extends CIUnitTestCase {
             ->controller(\App\Controllers\Tournament::class)
             ->execute('add_tournament');
     
-        $this->assertTrue($result->isOK());
-    }*/
+        $this->assertTrue(!$result->isOK());
+    }
 
     public function testJoinTournament() {
         $_POST['argument'] = 1;
