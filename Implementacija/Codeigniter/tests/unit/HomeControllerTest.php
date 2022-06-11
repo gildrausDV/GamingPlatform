@@ -13,6 +13,8 @@ final class HomeControllerTest extends CIUnitTestCase {
     use ControllerTestTrait;
     use DatabaseTestTrait;
 
+    protected $refresh = true;
+
     protected $seed = MainSeeder::class;
 
     public function testIndex() {
@@ -69,6 +71,15 @@ final class HomeControllerTest extends CIUnitTestCase {
         $this->assertTrue($result->isOK());
 
         $_SESSION['ID'] = 6;
+        $result = $this//->withURI('http://localhost:8080/...')
+        ->controller(\App\Controllers\Home::class)
+        ->execute('login_');
+
+        $this->assertTrue($result->isOK());
+
+        $_SESSION['ID'] = 1;
+        $_POST['username'] = 'gildraus';
+        $_POST['password'] = '12345';
         $result = $this//->withURI('http://localhost:8080/...')
         ->controller(\App\Controllers\Home::class)
         ->execute('login_');

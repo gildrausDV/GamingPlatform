@@ -13,6 +13,8 @@ final class TournamentControllerTest extends CIUnitTestCase {
     use ControllerTestTrait;
     use DatabaseTestTrait;
 
+    protected $refresh = true;
+
     protected $seed = MainSeeder::class;
     
     public function testIndex() {
@@ -119,6 +121,17 @@ final class TournamentControllerTest extends CIUnitTestCase {
         $_POST['arguments'][3] = 1;
         $_POST['arguments'][4] = 1;
         $_POST['arguments'][5] = 1;
+
+        if(!isset($_SESSION['ID'])) $_SESSION['ID'] = 1;
+        $result = $this//->withURI('http://localhost:8080/...')
+            ->controller(\App\Controllers\Tournament::class)
+            ->execute('isActive', 'Rayman');
+    
+        $this->assertTrue($result->isOK());
+
+        $_POST['arguments'] = [
+            2021, 3, 4, 13, 30, 0
+        ];
         if(!isset($_SESSION['ID'])) $_SESSION['ID'] = 1;
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Tournament::class)
@@ -153,16 +166,35 @@ final class TournamentControllerTest extends CIUnitTestCase {
     }
 
     public function testAdd_tournament() {
-        $_POST['arguments'][0] = "Rayman";
+        /*$_POST['arguments'][0] = "Rayman";
         $_POST['arguments'][1] = 5;
         $_POST['arguments'][2] = "2023-02-02";
         $_POST['arguments'][3] = "19:00:00";
-        $_POST['arguments'][4] = "21:00:00";
+        $_POST['arguments'][4] = "21:00:00";*/
+
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Tournament::class)
             ->execute('add_tournament');
     
-        $this->assertTrue(!$result->isOK());
+        $this->assertFalse($result->isOK());
+
+        $_POST['arguments'] = [
+            "Rayman", 5, "2023-02-02", "19:00:00", "21:00:00"
+        ];
+        $result = $this//->withURI('http://localhost:8080/...')
+            ->controller(\App\Controllers\Tournament::class)
+            ->execute('add_tournament');
+    
+        $this->assertTrue($result->isOK());
+
+        $_POST['arguments'] = [
+            "Rayman", 5, "2021-03-04", "13:30:00", "13:50:00"
+        ];
+        $result = $this//->withURI('http://localhost:8080/...')
+            ->controller(\App\Controllers\Tournament::class)
+            ->execute('add_tournament');
+    
+        $this->assertTrue($result->isOK());
     }
 
     public function testJoinTournament() {

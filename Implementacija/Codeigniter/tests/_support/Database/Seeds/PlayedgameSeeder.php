@@ -15,7 +15,7 @@ class PlayedgameSeeder extends Seeder {
                 'ID_user' => 1,
                 'ID_game' => 1,
                 'maxLevel' => 3,
-                'on_tournament' => 0
+                'on_tournament' => 1
             ]
         ];
 

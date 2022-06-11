@@ -40,12 +40,12 @@ CREATE TABLE `participation` (
 
 DROP TABLE IF EXISTS 'tournament';
 CREATE TABLE `tournament` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11),
   `date` int(11) NOT NULL,
   'timeStart' int(11) NOT NULL,
   'timeEnd' int(11) NOT NULL,
   'maxNumOfPlayers' int(11) NOT NULL,
-  'numOfPlayers' int(11) NOT NULL,
+  'numOfPlayers' int(11) default 0,
   'ID_game' int(11) NOT NULL,
   'ended' int(11) NOT NULL
 );

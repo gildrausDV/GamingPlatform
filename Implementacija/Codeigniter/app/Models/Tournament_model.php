@@ -154,6 +154,7 @@ class Tournament_model extends Model {
      */
     public function endTournament($id_tournament) {
         $this->update($id_tournament, ['ended' => true]);
+        return 0;
     }
 
     /**
@@ -164,11 +165,12 @@ class Tournament_model extends Model {
      */
     public function addPlayer($id_tournament) {
         $num = $this->table('tournament')->select()->where('ID', $id_tournament)->paginate(1);
-        if(count($num) != 1) return;
+        if(count($num) != 1) return -1;
         $data = [
             'numOfPlayers' => $num[0]['numOfPlayers'] + 1
         ];
         $this->update($id_tournament, $data);
+        return 0;
     }
 
 }
