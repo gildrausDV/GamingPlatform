@@ -112,15 +112,31 @@ final class GamesControllerTest extends CIUnitTestCase {
         ];
     }
 
-    
+    // header greska...
     /*public function testAddLevel_default() {
+        unset($_POST['argument']);
+        unset($_POST['arguments']);
+        unset($_GET['argument']);
+        unset($_GET['arguments']);
         $_SESSION['ID'] = 1;
         $_SESSION['role'] = 0;
+        
         $result = $this//->withURI('http://localhost:8080/...')
             ->controller(\App\Controllers\Games::class)
             ->execute('addLevel_default');
 
         $this->assertTrue($result->isOK());
+    }*/
+
+    // header greska...
+    /*public function testAddLevel() {
+        $_SESSION['ID'] = 1;
+        $_POST['arguments'] = '{"rows":"5","cols":"5","wood":[{"y":"1","x":"1","len":"2"},{"y":"2","x":"2","len":"2"},{"y":"3","x":"3","len":"1"},{"y":"1","x":"0","len":"1"}],"coins":[{"y":"1","x":"1"},{"y":"2","x":"2"},{"y":"1","x":"0"}]}';
+        $result = $this//->withURI('http://localhost:8080/...')
+            ->controller(\App\Controllers\Games::class)
+            ->execute('addLevel', 'Rayman');
+
+        $this->assertFalse($result->isOK());
     }*/
 
     public function testMyNPoints() {
@@ -189,20 +205,11 @@ final class GamesControllerTest extends CIUnitTestCase {
         $this->assertTrue($result->isOK());
     }
 
-    /*public function testAddLevel() {
-        $_POST['arguments'] = '{"rows":"5","cols":"5","wood":[{"y":"1","x":"1","len":"2"},{"y":"2","x":"2","len":"2"},{"y":"3","x":"3","len":"1"},{"y":"1","x":"0","len":"1"}],"coins":[{"y":"1","x":"1"},{"y":"2","x":"2"},{"y":"1","x":"0"}]}';
-        $result = $this//->withURI('http://localhost:8080/...')
-            ->controller(\App\Controllers\Games::class)
-            ->execute('add_level', 'Rayman');
-
-        $this->assertFalse($result->isOK());
-    }*/
-
     public function testSave_data() {
         $_SESSION['ID'] = 1;
 
         $_POST['arguments'] = [
-            10, 10, 3, 2022, 10, 3, 0, 0, 10
+            10, 10, 3, 2021, 3, 4, 13, 30, 0
         ];
 
         $result = $this//->withURI('http://localhost:8080/...')

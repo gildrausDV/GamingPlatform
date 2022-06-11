@@ -45,7 +45,7 @@ class PlayedGame_model extends Model {
         $res = $this->table('playedgame')->select('name, timePlayed, points')
             ->join('game', 'game.ID = playedgame.ID_game', 'left')
             ->where('ID_user', $id_user)
-            ->where('ID_game', $id_game)->paginate($cnt);
+            ->where('ID_game', $id_game)->paginate(/*$cnt*/);
         return $res;
     }
 
@@ -78,9 +78,9 @@ class PlayedGame_model extends Model {
         else $result->points = 0;
 
         $list = [];
-        $list = $this->table('playedgame')->select('username, points')
+        $list = $this->table('playedgame')->select('username, points, timePlayed')
             ->join('user', 'playedgame.ID_user=user.ID', 'left')
-            ->where('ID_game', $id_game)->orderBy('points', 'desc')->paginate(10);
+            ->where('ID_game', $id_game)->orderBy('points', 'desc')->orderBy('timePlayed', 'asc')->paginate(10);
         $result->list = $list;
 
         return $result;
